@@ -16,6 +16,7 @@
 		394F4E8517DF62E5001C5049 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8417DF62E5001C5049 /* Default.png */; };
 		394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8617DF62E5001C5049 /* Default@2x.png */; };
 		394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8817DF62E5001C5049 /* Default-568h@2x.png */; };
+		394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8F17DF6350001C5049 /* Storyboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		394F4E8417DF62E5001C5049 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		394F4E8617DF62E5001C5049 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		394F4E8817DF62E5001C5049 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		394F4E8F17DF6350001C5049 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = ../Storyboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		394F4E6617DF62E5001C5049 = {
 			isa = PBXGroup;
 			children = (
+				394F4E9117DF6383001C5049 /* model */,
 				394F4E7817DF62E5001C5049 /* Heartbeat */,
 				394F4E7117DF62E5001C5049 /* Frameworks */,
 				394F4E7017DF62E5001C5049 /* Products */,
@@ -78,8 +81,7 @@
 		394F4E7817DF62E5001C5049 /* Heartbeat */ = {
 			isa = PBXGroup;
 			children = (
-				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
-				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
+				394F4E8F17DF6350001C5049 /* Storyboard.storyboard */,
 				394F4E7917DF62E5001C5049 /* Supporting Files */,
 			);
 			path = Heartbeat;
@@ -88,6 +90,8 @@
 		394F4E7917DF62E5001C5049 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
+				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
 				394F4E7B17DF62E5001C5049 /* InfoPlist.strings */,
 				394F4E7E17DF62E5001C5049 /* main.m */,
@@ -97,6 +101,14 @@
 				394F4E8817DF62E5001C5049 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		394F4E9117DF6383001C5049 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			path = Heartbeat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +167,7 @@
 				394F4E8517DF62E5001C5049 /* Default.png in Resources */,
 				394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */,
 				394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */,
+				394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
