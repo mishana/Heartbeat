@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C27A86217E128450065ECC0 /* Butterworth.cpp */; };
 		394F4E7317DF62E5001C5049 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7217DF62E5001C5049 /* UIKit.framework */; };
 		394F4E7517DF62E5001C5049 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7417DF62E5001C5049 /* Foundation.framework */; };
 		394F4E7717DF62E5001C5049 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7617DF62E5001C5049 /* CoreGraphics.framework */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C27A86217E128450065ECC0 /* Butterworth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Butterworth.cpp; sourceTree = "<group>"; };
+		2C27A86317E128450065ECC0 /* Butterworth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Butterworth.h; sourceTree = "<group>"; };
 		394F4E6F17DF62E5001C5049 /* Heartbeat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heartbeat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		394F4E7217DF62E5001C5049 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		394F4E7417DF62E5001C5049 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -106,6 +109,8 @@
 		394F4E9117DF6383001C5049 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				2C27A86217E128450065ECC0 /* Butterworth.cpp */,
+				2C27A86317E128450065ECC0 /* Butterworth.h */,
 			);
 			name = model;
 			path = Heartbeat;
@@ -180,6 +185,7 @@
 			files = (
 				394F4E7F17DF62E5001C5049 /* main.m in Sources */,
 				394F4E8317DF62E5001C5049 /* HeartBeatAppDelegate.m in Sources */,
+				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +300,7 @@
 				394F4E8E17DF62E5001C5049 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
