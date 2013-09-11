@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C27A86217E128450065ECC0 /* Butterworth.cpp */; };
+		2CD3957117E133530019F1A5 /* project_script_3 in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3957017E133530019F1A5 /* project_script_3 */; };
 		394F4E7317DF62E5001C5049 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7217DF62E5001C5049 /* UIKit.framework */; };
 		394F4E7517DF62E5001C5049 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7417DF62E5001C5049 /* Foundation.framework */; };
 		394F4E7717DF62E5001C5049 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7617DF62E5001C5049 /* CoreGraphics.framework */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		2C27A86217E128450065ECC0 /* Butterworth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Butterworth.cpp; sourceTree = "<group>"; };
 		2C27A86317E128450065ECC0 /* Butterworth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Butterworth.h; sourceTree = "<group>"; };
+		2CD3957017E133530019F1A5 /* project_script_3 */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = project_script_3; sourceTree = "<group>"; };
 		394F4E6F17DF62E5001C5049 /* Heartbeat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heartbeat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		394F4E7217DF62E5001C5049 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		394F4E7417DF62E5001C5049 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,6 +98,7 @@
 		394F4E7917DF62E5001C5049 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CD3957017E133530019F1A5 /* project_script_3 */,
 				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
@@ -192,6 +195,7 @@
 				394F4E8317DF62E5001C5049 /* HeartBeatAppDelegate.m in Sources */,
 				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
 				39E272A917E12B9F00CF354A /* HelpMethods.m in Sources */,
+				2CD3957117E133530019F1A5 /* project_script_3 in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

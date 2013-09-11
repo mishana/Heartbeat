@@ -1,0 +1,145 @@
+%%
+
+load RGB_100-83bpm.mat;
+numFrames = length(g);% number of frames
+[d,c] = butter(3, 0.2, 'low');% 0.2 support up to 180 bpm
+[b,a] = butter(3, 0.05, 'high');% 0.05 support from 45 bpm
+
+w = 12;% window size to check peak % 12 support up to 135 bpm
+extended_w = 48;
+calib = 150;% calibration window size
+average_window_size = 150;% must be smaller than calib
+is_peak = [];%
+bpm = [];% bpm calculated every frame
+average_bpm = [];% average of average_window_size previous frames
+average_of_average_bpm = [];% average of all previous frames
+kalman_bpm = [];% filtered average_of_average_bpm
+FPS = 30;% frame rate of the iphone camera
+numPeaks = 0;% number of peaks
+is_first_peak = 0;% flag
+first_peak = 0;% first place we find a peak
+
+for i = 1:numFrames
+    
+    if (i <= 2*w || ~is_first_peak)
+        if i <= 2*w
+            is_peak(i) = 0;
+            bpm(i) = 65; % default bpm can be 45-135
+            average_bpm(i) = 65;% default bpm can be 45-135
+            average_of_average_bpm(i) = 65;% default bpm can be 45-135
+            kalman_bpm(i) = 65;% default bpm can be 45-135
+            continue;
+        end
+        
+        if (i <= extended_w)
+            dynamic_window = g(i-2*w : i);
+            zg = filter(b, a, mean(dynamic_window) - dynamic_window);
+            zg = filter(d, c, zg);
+            is_peak(i-w) = isPeak(zg, w) && ~is_peak(i-w-1);%can also check i-w-2
+        else
+            dynamic_window = g(i-extended_w : i);
+            zg = filter(b, a, mean(dynamic_window) - dynamic_window);
+            zg = filter(d, c, zg);
+            is_peak(i-w) = isPeak(zg(extended_w-2*w +1 : extended_w + 1), w) && ~is_peak(i-w-1);%can also check i-w-2
+        end
+        
+        numPeaks = numPeaks+is_peak(i-w);      
+        if (is_peak(i-w))
+            first_peak = i-w;
+            is_first_peak = 1;
+            
+            frames = i-first_peak;
+            bpm(i-w) = (numPeaks/(frames/FPS))*60;
+            average_bpm(i-w) = bpm(i-w);
+            average_of_average_bpm(i-w) = bpm(i-w);
+            kalman_bpm(i-w) = average_of_average_bpm(i-w);
+        end
+        
+        continue;
+    end
+    
+    if (i < calib + (first_peak+w))
+        if (i <= extended_w)
+            dynamic_window = g(i-2*w : i);
+            zg = filter(b, a, mean(dynamic_window) - dynamic_window);
+            zg = filter(d, c, zg);
+            is_peak(i-w) = isPeak(zg, w) && ~is_peak(i-w-1);%can also check i-w-2
+        else
+            dynamic_window = g(i-extended_w : i);
+            zg = filter(b, a, mean(dynamic_window) - dynamic_window);
+            zg = filter(d, c, zg);
+            is_peak(i-w) = isPeak(zg(extended_w-2*w +1 : extended_w + 1), w) && ~is_peak(i-w-1);%can also check i-w-2
+        end
+        
+        numPeaks = numPeaks+is_peak(i-w);
+        
+        frames = i-first_peak;
+        if (frames > calib)
+            frames=calib;
+        end
+        
+        bpm(i-w) = (numPeaks/(frames/FPS))*60;
+        
+        k = i-(first_peak+w);
+        average_bpm(i-w) = (k/(k+1)*bpm(i-w-1) + bpm(i-w)/(k+1));
+        
+        average_of_average_bpm(i-w) = average_bpm(i-w);
+        average_of_average_bpm(i-w) = k/(k+2)*average_of_average_bpm(i-w-1) + 2*average_of_average_bpm(i-w)/(k+2);
+        
+        temp_kalman = kalmanfilt_2(average_of_average_bpm(first_peak+1 : i-w), 0.01, 2);
+        kalman_bpm(i-w) = temp_kalman(i-w-first_peak);
+        
+    else
+        dynamic_window = g(i-extended_w : i);
+        zg = filter(b, a, mean(dynamic_window) - dynamic_window);
+        zg = filter(d, c, zg);
+        is_peak(i-w) = isPeak(zg(extended_w-2*w +1 : extended_w + 1), w) && ~is_peak(i-w-1);%can also check i-w-2
+        numPeaks = numPeaks + is_peak(i-w) - is_peak(i-calib-w);
+        frames = calib;
+        
+        bpm(i-w) = (numPeaks/(frames/FPS))*60;
+        
+        temp_bpm_sum = 0;
+        for j = 1 : average_window_size
+            temp_bpm_sum = temp_bpm_sum + bpm(i-w-average_window_size+j);
+        end
+        average_bpm(i-w) = temp_bpm_sum/average_window_size;
+        
+        k = i-(calib+first_peak+w)+0;%6 simulate the weight of the calibration
+        average_of_average_bpm(i-w) = average_bpm(i-w);
+        average_of_average_bpm(i-w) = k/(k+2)*average_of_average_bpm(i-w-1) + 2*average_of_average_bpm(i-w)/(k+2);
+        
+        temp_kalman = kalmanfilt_2(average_of_average_bpm(i-w-average_window_size+1 : i-w), 0.01, 2);
+        kalman_bpm(i-w) = temp_kalman(average_window_size);
+        
+        realtime_g = g(i-calib : i);
+        %zg = filter(b,a,mean(realtime_g)-realtime_g);
+        %zg = filter(d,c,zg);
+        plot(realtime_g, 'g');
+        title(strcat('Your BPM is: ', int2str(kalman_bpm(i-w))), 'Color', 'b');
+        %pause(1/30);
+        drawnow;
+    end
+end
+
+%%
+
+% xhat=kalmanfilt(average_bpm(50:end),0.002,1);
+% plot(xhat, 'm')
+% hold on
+% xhat=kalmanfilt(average_bpm(50:end),0.003,1);
+% plot(xhat, 'k')
+% xhat=kalmanfilt(average_bpm(50:end),0.0015,1);
+% plot(xhat, 'b')
+% xhat=kalmanfilt(average_bpm(50:end),0.001,1);
+% plot(xhat, 'r')
+% xhat=kalmanfilt(average_bpm(50:end),0.0005,1);
+% plot(xhat, 'g')
+% xhat=kalmanfilt(average_bpm(50:end),0.0001,1);
+% plot(xhat, 'y')
+
+%%
+
+%clear all;
+%clc;
+%close all;
