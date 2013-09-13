@@ -11,7 +11,7 @@
 @implementation HelpMethods
 
 struct pixel {
-    unsigned char r, g, b;
+    unsigned char r, g, b, a;
 };
 
 + (UIColor*) getDominantColor:(UIImage*)image
@@ -30,7 +30,7 @@ struct pixel {
                                                      image.size.width,
                                                      image.size.height,
                                                      8,
-                                                     image.size.width * sizeof(struct pixel), // * 3
+                                                     image.size.width * sizeof(struct pixel), // * 4
                                                      CGImageGetColorSpace(image.CGImage),
                                                      kCGImageAlphaPremultipliedLast
                                                      );
@@ -52,6 +52,7 @@ struct pixel {
                 red += pixels[i].r;
                 green += pixels[i].g;
                 blue += pixels[i].b;
+                NSLog(@"%c" , pixels[i].a); //*
             }
             
             
