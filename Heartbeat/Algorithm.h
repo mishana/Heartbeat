@@ -12,7 +12,7 @@
 
 @property (nonatomic , readwrite) NSUInteger frameRate;// the frame rate of the video
 @property (nonatomic , readwrite) NSUInteger numOfPeaks;// number of peaks in the last calibrationDuration frames
-@property (nonatomic , readwrite) NSUInteger isPeakWindowSize;// size in frames
+@property (nonatomic , readwrite) NSUInteger WindowSize;// size in frames
 @property (nonatomic , readwrite) NSUInteger calibrationDuration;// duration in frames
 @property (nonatomic , readwrite) NSUInteger WindowSizeForAverageCalculation;// size must be <= calibrationDuration
 @property (nonatomic , readwrite) NSUInteger framesCounter;
