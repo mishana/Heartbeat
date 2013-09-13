@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C27A86217E128450065ECC0 /* Butterworth.cpp */; };
 		2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3957317E2F7F70019F1A5 /* Algorithm.mm */; };
+		2CD3957917E37FA50019F1A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957817E37FA50019F1A5 /* AVFoundation.framework */; };
+		2CD3957B17E37FB70019F1A5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957A17E37FB70019F1A5 /* CoreVideo.framework */; };
+		2CD3957F17E37FEC0019F1A5 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */; };
+		2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */; };
+		2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */; };
+		2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957C17E37FC20019F1A5 /* CoreImage.framework */; };
 		394F4E7317DF62E5001C5049 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7217DF62E5001C5049 /* UIKit.framework */; };
 		394F4E7517DF62E5001C5049 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7417DF62E5001C5049 /* Foundation.framework */; };
 		394F4E7717DF62E5001C5049 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7617DF62E5001C5049 /* CoreGraphics.framework */; };
@@ -28,6 +34,14 @@
 		2CD3957017E133530019F1A5 /* project_script_3 */ = {isa = PBXFileReference; explicitFileType = text.script.worksheet; fileEncoding = 4; path = project_script_3; sourceTree = "<group>"; };
 		2CD3957217E2F7F70019F1A5 /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algorithm.h; sourceTree = "<group>"; };
 		2CD3957317E2F7F70019F1A5 /* Algorithm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Algorithm.mm; sourceTree = "<group>"; };
+		2CD3957817E37FA50019F1A5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2CD3957A17E37FB70019F1A5 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		2CD3957C17E37FC20019F1A5 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		2CD3958617E3BCC60019F1A5 /* UIImage+ImageAverageColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageAverageColor.h"; sourceTree = "<group>"; };
+		2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageAverageColor.m"; sourceTree = "<group>"; };
+		2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoManagerViewController.h; sourceTree = "<group>"; };
+		2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoManagerViewController.m; sourceTree = "<group>"; };
 		394F4E6F17DF62E5001C5049 /* Heartbeat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heartbeat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		394F4E7217DF62E5001C5049 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		394F4E7417DF62E5001C5049 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,6 +65,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */,
+				2CD3957F17E37FEC0019F1A5 /* CoreMedia.framework in Frameworks */,
+				2CD3957B17E37FB70019F1A5 /* CoreVideo.framework in Frameworks */,
+				2CD3957917E37FA50019F1A5 /* AVFoundation.framework in Frameworks */,
 				394F4E7317DF62E5001C5049 /* UIKit.framework in Frameworks */,
 				394F4E7517DF62E5001C5049 /* Foundation.framework in Frameworks */,
 				394F4E7717DF62E5001C5049 /* CoreGraphics.framework in Frameworks */,
@@ -63,6 +81,10 @@
 		394F4E6617DF62E5001C5049 = {
 			isa = PBXGroup;
 			children = (
+				2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */,
+				2CD3957C17E37FC20019F1A5 /* CoreImage.framework */,
+				2CD3957A17E37FB70019F1A5 /* CoreVideo.framework */,
+				2CD3957817E37FA50019F1A5 /* AVFoundation.framework */,
 				394F4E7817DF62E5001C5049 /* Heartbeat */,
 				394F4E7117DF62E5001C5049 /* Frameworks */,
 				394F4E7017DF62E5001C5049 /* Products */,
@@ -91,6 +113,10 @@
 			isa = PBXGroup;
 			children = (
 				394F4E8F17DF6350001C5049 /* Storyboard.storyboard */,
+				2CD3958617E3BCC60019F1A5 /* UIImage+ImageAverageColor.h */,
+				2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */,
+				2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */,
+				2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */,
 				394F4E9117DF6383001C5049 /* model */,
 				394F4E7917DF62E5001C5049 /* Supporting Files */,
 			);
@@ -199,6 +225,8 @@
 				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
 				39E272A917E12B9F00CF354A /* HelpMethods.m in Sources */,
 				2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */,
+				2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */,
+				2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +303,7 @@
 		394F4E8D17DF62E5001C5049 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
@@ -286,6 +315,7 @@
 		394F4E8E17DF62E5001C5049 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
