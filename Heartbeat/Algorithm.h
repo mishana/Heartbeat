@@ -32,7 +32,7 @@
 // outside API
 @property (nonatomic , readonly) BOOL isCalibrationOver;
 @property (nonatomic , readonly) BOOL isFinalResultDetermined;
-@property (nonatomic , readonly) NSUInteger bpmFinalResult;
+@property (nonatomic , readonly) NSUInteger bpmLatestResult;
 
 //
 

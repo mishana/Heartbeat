@@ -13,10 +13,12 @@
 @interface Algorithm()
 @property (nonatomic , readwrite) BOOL isCalibrationOver;
 @property (nonatomic , readwrite) BOOL isFinalResultDetermined;
-@property (nonatomic , readwrite) NSUInteger bpmFinalResult;
+@property (nonatomic , readwrite) NSUInteger bpmLatestResult;
 @end
 
 @implementation Algorithm
+
+// Properties
 
 - (NSUInteger)frameRate{
     if (!_frameRate) {
@@ -26,21 +28,60 @@
 }
 
 - (NSUInteger)WindowSize{
-    return 12;
+    if (!_WindowSize) {
+        _WindowSize = 12;
+    }
+    return _WindowSize;
 }
 
 - (NSUInteger)calibrationDuration{
-    return 150;
+    if (!_calibrationDuration) {
+        _calibrationDuration = 150;
+    }
+    return _calibrationDuration;
 }
 
 - (NSUInteger)WindowSizeForAverageCalculation{
-    return 150;
+    if (!_WindowSizeForAverageCalculation) {
+        _WindowSizeForAverageCalculation = 150;
+    }
+    return _WindowSizeForAverageCalculation;
 }
 
 - (double**)buttterworthValues{
-    double frequencyBands[2] = {0.05 , 0.2};
-    return butter(frequencyBands, 3);
+    if (!_buttterworthValues) {
+        double frequencyBands[2] = {0.05 , 0.2};
+        _buttterworthValues = butter(frequencyBands, 3);
+    }
+    return _buttterworthValues;
 }
+
+// outside API
+
+- (BOOL)isCalibrationOver{
+    if (self.framesCounter > self.calibrationDuration) {
+        return _isCalibrationOver = YES;
+    }
+    else {
+        _isCalibrationOver = NO;
+    }
+    return _isCalibrationOver;
+}
+
+#define FINAL_RESULT_MARGIN 1
+
+- (BOOL)isFinalResultDetermined{
+    //* shouldn't be called if bpmAverageValues is empty
+    if (self.bpmLatestResult - [self.bpmAverageValues[0] doubleValue] <= FINAL_RESULT_MARGIN) {
+        return _isFinalResultDetermined = YES;
+    }
+    else {
+        _isFinalResultDetermined = NO;
+    }
+    return _isFinalResultDetermined;
+}
+
+//
 
 - (CGFloat)getColorValueFrom:(UIColor *)color
 {
