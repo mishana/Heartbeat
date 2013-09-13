@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Jor-mS-9rW">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Video Manager View Controller-->
+        <scene sceneID="LZk-dh-zT7">
+            <objects>
+                <viewController id="eLD-vh-euA" customClass="VideoManagerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jfq-ww-kzH">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yOh-vN-5j1"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yOh-vN-5j1" firstAttribute="top" secondItem="jfq-ww-kzH" secondAttribute="top" type="default" id="A4t-2i-UFe"/>
+                            <constraint firstItem="yOh-vN-5j1" firstAttribute="trailing" secondItem="jfq-ww-kzH" secondAttribute="trailing" type="default" id="IBd-Ji-RqM"/>
+                            <constraint firstItem="yOh-vN-5j1" firstAttribute="bottom" secondItem="jfq-ww-kzH" secondAttribute="bottom" type="default" id="Pb6-oN-fqE"/>
+                            <constraint firstItem="yOh-vN-5j1" firstAttribute="leading" secondItem="jfq-ww-kzH" secondAttribute="leading" type="default" id="e2d-AI-IWE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="nif-UI-uGZ"/>
+                    <connections>
+                        <outlet property="imgView" destination="yOh-vN-5j1" id="UzA-zN-REb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fqv-SE-9Fp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="456" y="51"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gJ1-le-FJN">
+            <objects>
+                <navigationController id="Jor-mS-9rW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eI1-r9-4Up">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eLD-vh-euA" kind="relationship" relationship="rootViewController" id="ibw-E1-hQL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gFs-nu-mYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-70" y="51"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="VideoManagerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/VideoManagerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imgView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
