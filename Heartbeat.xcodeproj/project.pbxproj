@@ -19,6 +19,7 @@
 		394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8617DF62E5001C5049 /* Default@2x.png */; };
 		394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8817DF62E5001C5049 /* Default-568h@2x.png */; };
 		394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8F17DF6350001C5049 /* Storyboard.storyboard */; };
+		39A5045617E35CD600451AF7 /* VideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A5045517E35CD600451AF7 /* VideoManager.m */; };
 		39E272A917E12B9F00CF354A /* HelpMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E272A717E12B9F00CF354A /* HelpMethods.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,8 @@
 		394F4E8617DF62E5001C5049 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		394F4E8817DF62E5001C5049 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		394F4E8F17DF6350001C5049 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = ../Storyboard.storyboard; sourceTree = "<group>"; };
+		39A5045417E35CD600451AF7 /* VideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoManager.h; sourceTree = "<group>"; };
+		39A5045517E35CD600451AF7 /* VideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoManager.m; sourceTree = "<group>"; };
 		39E272A717E12B9F00CF354A /* HelpMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpMethods.m; sourceTree = "<group>"; };
 		39E272A817E12B9F00CF354A /* HelpMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpMethods.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				394F4E8F17DF6350001C5049 /* Storyboard.storyboard */,
+				39A5045417E35CD600451AF7 /* VideoManager.h */,
+				39A5045517E35CD600451AF7 /* VideoManager.m */,
 				394F4E9117DF6383001C5049 /* model */,
 				394F4E7917DF62E5001C5049 /* Supporting Files */,
 			);
@@ -199,6 +204,7 @@
 				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
 				39E272A917E12B9F00CF354A /* HelpMethods.m in Sources */,
 				2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */,
+				39A5045617E35CD600451AF7 /* VideoManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +281,7 @@
 		394F4E8D17DF62E5001C5049 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
@@ -286,6 +293,7 @@
 		394F4E8E17DF62E5001C5049 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
