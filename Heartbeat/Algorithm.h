@@ -24,7 +24,7 @@
 @property (nonatomic , strong , readwrite) NSMutableArray *bpmValues;// array of the calculated beats per minute values wrapped by NSNumbers
                                                                      // array size should be approximately WindowSizeForAverageCalculation
 @property (nonatomic , strong , readwrite) NSMutableArray *bpmAverageValues;// array of average values of the bpm wrapped by NSNumbers;
-                                                                            // array size should be approximately WindowSizeForAverageCalculation
+                                                                            // we could save only the latest bpmAverageValue calculated
 @property (nonatomic , strong , readwrite) NSMutableArray *isPeak;// array of the BOOLs represent if the matching point is peak in the graph
 
 //
@@ -32,6 +32,7 @@
 - (CGFloat)getColorValueFrom:(UIColor *)color;
 
 // outside API
+
 @property (nonatomic , readonly) BOOL isCalibrationOver;
 @property (nonatomic , readonly) BOOL isFinalResultDetermined;
 @property (nonatomic , readonly) NSUInteger bpmLatestResult;

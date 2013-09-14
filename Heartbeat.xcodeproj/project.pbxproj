@@ -25,7 +25,6 @@
 		394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8617DF62E5001C5049 /* Default@2x.png */; };
 		394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8817DF62E5001C5049 /* Default-568h@2x.png */; };
 		394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8F17DF6350001C5049 /* Storyboard.storyboard */; };
-		39E272A917E12B9F00CF354A /* HelpMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E272A717E12B9F00CF354A /* HelpMethods.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,8 +55,6 @@
 		394F4E8617DF62E5001C5049 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		394F4E8817DF62E5001C5049 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		394F4E8F17DF6350001C5049 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = ../Storyboard.storyboard; sourceTree = "<group>"; };
-		39E272A717E12B9F00CF354A /* HelpMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpMethods.m; sourceTree = "<group>"; };
-		39E272A817E12B9F00CF354A /* HelpMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpMethods.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +144,6 @@
 				2CD3957317E2F7F70019F1A5 /* Algorithm.mm */,
 				2C27A86217E128450065ECC0 /* Butterworth.cpp */,
 				2C27A86317E128450065ECC0 /* Butterworth.h */,
-				39E272A717E12B9F00CF354A /* HelpMethods.m */,
-				39E272A817E12B9F00CF354A /* HelpMethods.h */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -223,7 +218,6 @@
 				394F4E7F17DF62E5001C5049 /* main.m in Sources */,
 				394F4E8317DF62E5001C5049 /* HeartBeatAppDelegate.m in Sources */,
 				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
-				39E272A917E12B9F00CF354A /* HelpMethods.m in Sources */,
 				2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */,
 				2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */,
 				2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */,
