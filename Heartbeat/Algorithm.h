@@ -20,12 +20,12 @@
 
 @property (nonatomic , readwrite) double ** buttterworthValues;//* should we care of releasing this array?
 
-@property (nonatomic , strong , readwrite) NSArray *points;// represent the array of color values (doubles) wrapped by NSNumbers
-@property (nonatomic , strong , readwrite) NSArray *bpmValues;// array of the calculated beats per minute values wrapped by NSNumbers
-                                                     // array size should be approximately WindowSizeForAverageCalculation
-@property (nonatomic , strong , readwrite) NSArray *bpmAverageValues;// array of average values of the bpm wrapped by NSNumbers;
-// array size should be approximately WindowSizeForAverageCalculation
-@property (nonatomic , strong , readwrite) NSArray *isPeak;// array of the BOOLs represent if the matching point is peak in the graph
+@property (nonatomic , strong , readwrite) NSMutableArray *points;// represent the array of color values (doubles) wrapped by NSNumbers
+@property (nonatomic , strong , readwrite) NSMutableArray *bpmValues;// array of the calculated beats per minute values wrapped by NSNumbers
+                                                                     // array size should be approximately WindowSizeForAverageCalculation
+@property (nonatomic , strong , readwrite) NSMutableArray *bpmAverageValues;// array of average values of the bpm wrapped by NSNumbers;
+                                                                            // array size should be approximately WindowSizeForAverageCalculation
+@property (nonatomic , strong , readwrite) NSMutableArray *isPeak;// array of the BOOLs represent if the matching point is peak in the graph
 
 //
 
@@ -38,6 +38,6 @@
 
 //
 
-- (void)newFrameDetectedWithDominantColor:(UIColor *)color;
+- (void)newFrameDetectedWithAverageColor:(UIColor *)color;
 
 @end

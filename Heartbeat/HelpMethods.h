@@ -10,7 +10,6 @@
 
 @interface HelpMethods : NSObject
 
-+ (UIColor*) getDominantColor:(UIImage*)image;
 + (BOOL)isPeak:(NSArray*)graph :(int)window;
 + (double)mean:(NSArray *)points;
 

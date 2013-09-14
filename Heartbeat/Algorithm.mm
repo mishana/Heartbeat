@@ -72,7 +72,7 @@
 
 - (BOOL)isFinalResultDetermined{
     //* shouldn't be called if bpmAverageValues is empty
-    if (self.bpmLatestResult - [self.bpmAverageValues[0] doubleValue] <= FINAL_RESULT_MARGIN) {
+    if ((fabs(self.bpmLatestResult - [self.bpmAverageValues[0] doubleValue]) <= FINAL_RESULT_MARGIN) && self.isCalibrationOver) {
         return _isFinalResultDetermined = YES;
     }
     else {
@@ -98,11 +98,37 @@
     }
 }
 
-- (void)newFrameDetectedWithDominantColor:(UIColor *)color
+//
+
+#define DEFAULT_BPM_VALUE 72
+
+- (void)newFrameDetectedWithAverageColor:(UIColor *)color
 {
+    if (self.isFinalResultDetermined) {
+        // do nothing
+        return;
+    }
+    
     self.framesCounter++;
     
+    if (self.framesCounter <= 2*self.WindowSize || !self.firstPeakPlace) {
+        if (self.framesCounter <= 2*self.WindowSize) {
+            [self.points addObject:@([self getColorValueFrom:color])];
+            [self.isPeak addObject:@(0)];
+            [self.bpmValues addObject:@(DEFAULT_BPM_VALUE)];
+            [self.bpmAverageValues addObject:@(DEFAULT_BPM_VALUE)];
+            
+            return;
+        }
+        
+        
+    }
+    
     // ...
+    
+    
+    
+    
 }
 
 @end

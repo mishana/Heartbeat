@@ -8,6 +8,7 @@
 
 #import "VideoManagerViewController.h"
 #import "UIImage+ImageAverageColor.h"
+#import "Algorithm.h"
 
 @interface VideoManagerViewController ()
 @property (nonatomic,strong) AVCaptureSession * session;
@@ -15,9 +16,18 @@
 @property (strong) AVCaptureDeviceInput * videoInput;
 @property (strong) AVCaptureVideoDataOutput * frameOutput;
 @property (nonatomic,strong) IBOutlet UIImageView* imgView;
+@property (nonatomic , strong) Algorithm *algorithm;
 @end
 
 @implementation VideoManagerViewController
+
+- (Algorithm *)algorithm
+{
+    if (!_algorithm) {
+        _algorithm = [[Algorithm alloc] init];
+    }
+    return _algorithm;
+}
 
 - (void)viewDidLoad
 {
@@ -51,7 +61,7 @@
     // shouldn't throw away frames
     self.frameOutput.alwaysDiscardsLateVideoFrames = NO;//* maybe we should use times instead of frames number
     
-    dispatch_queue_t queue = dispatch_get_main_queue();//dispatch_queue_create("frameOutputQueue", NULL);
+    dispatch_queue_t queue = dispatch_queue_create("frameOutputQueue", NULL);
     [self.frameOutput setSampleBufferDelegate:self queue:queue];
     
     [self.session addOutput:self.frameOutput];
@@ -88,6 +98,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     [dominantColor getRed:&red green:&green blue:&blue alpha:&alpha];
     NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red*255.0f , green*255.0f , blue*255.0f]);
     
+    [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
     //
     
 }

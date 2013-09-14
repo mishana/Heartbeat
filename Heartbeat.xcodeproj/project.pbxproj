@@ -81,10 +81,6 @@
 		394F4E6617DF62E5001C5049 = {
 			isa = PBXGroup;
 			children = (
-				2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */,
-				2CD3957C17E37FC20019F1A5 /* CoreImage.framework */,
-				2CD3957A17E37FB70019F1A5 /* CoreVideo.framework */,
-				2CD3957817E37FA50019F1A5 /* AVFoundation.framework */,
 				394F4E7817DF62E5001C5049 /* Heartbeat */,
 				394F4E7117DF62E5001C5049 /* Frameworks */,
 				394F4E7017DF62E5001C5049 /* Products */,
@@ -102,6 +98,10 @@
 		394F4E7117DF62E5001C5049 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */,
+				2CD3957C17E37FC20019F1A5 /* CoreImage.framework */,
+				2CD3957A17E37FB70019F1A5 /* CoreVideo.framework */,
+				2CD3957817E37FA50019F1A5 /* AVFoundation.framework */,
 				394F4E7217DF62E5001C5049 /* UIKit.framework */,
 				394F4E7417DF62E5001C5049 /* Foundation.framework */,
 				394F4E7617DF62E5001C5049 /* CoreGraphics.framework */,
