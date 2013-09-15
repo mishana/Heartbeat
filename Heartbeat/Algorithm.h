@@ -11,7 +11,7 @@
 @interface Algorithm : NSObject
 
 @property (nonatomic , readwrite) NSUInteger framesCounter;
-@property (nonatomic , readwrite) NSUInteger frameRate;// the frame rate of the video
+@property (nonatomic , readwrite) CGFloat frameRate;// the frame rate of the video
 @property (nonatomic , readwrite) NSUInteger numOfPeaks;// number of peaks in the last calibrationDuration frames
 @property (nonatomic , readwrite) NSUInteger WindowSize;// size in frames
 @property (nonatomic , readwrite) NSUInteger calibrationDuration;// duration in frames

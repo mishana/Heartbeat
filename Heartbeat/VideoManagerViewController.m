@@ -37,7 +37,7 @@
     self.session = [[AVCaptureSession alloc] init];
     
     // Configure the session to produce lower resolution video frames
-    self.session.sessionPreset = AVCaptureSessionPresetLow;
+    //self.session.sessionPreset = AVCaptureSessionPresetLow;
     
      // Find a suitable AVCaptureDevice
     self.videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -92,13 +92,16 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     
 #warning - incomplete implementation
     
-    UIColor *dominantColor = [image averageColor];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIColor *dominantColor = [image averageColor];
+        
+        CGFloat red , green , blue , alpha;
+        [dominantColor getRed:&red green:&green blue:&blue alpha:&alpha];
+        NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red*255.0f , green*255.0f , blue*255.0f]);
+        
+        [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
+    });
     
-    CGFloat red , green , blue , alpha;
-    [dominantColor getRed:&red green:&green blue:&blue alpha:&alpha];
-    NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red*255.0f , green*255.0f , blue*255.0f]);
-    
-    [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
     //
     
 }

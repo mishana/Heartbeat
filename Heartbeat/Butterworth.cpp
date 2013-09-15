@@ -100,10 +100,17 @@ double *ComputeNumCoeffs(int FilterOrder,double Lcutoff, double Ucutoff, double 
     if( NumCoeffs == NULL ) return( NULL );
     
     NormalizedKernel = (std::complex<double> *)calloc( 2*FilterOrder+1, sizeof(std::complex<double>) );
-    if( NormalizedKernel == NULL ) return( NULL );
+    if( NormalizedKernel == NULL ) {
+        free(NumCoeffs);
+        return( NULL );
+    }
     
     TCoeffs = ComputeHP(FilterOrder);
-    if( TCoeffs == NULL ) return( NULL );
+    if( TCoeffs == NULL ) {
+        free(NormalizedKernel);
+        free(NumCoeffs);
+        return( NULL );
+    }
     
     for(int i = 0; i < FilterOrder; ++i)
     {
@@ -140,6 +147,7 @@ double *ComputeNumCoeffs(int FilterOrder,double Lcutoff, double Ucutoff, double 
         NumCoeffs[c]=(NumCoeffs[c]*den)/b;
     }
     
+    free(NormalizedKernel);
     free(TCoeffs);
     return NumCoeffs;
 }
