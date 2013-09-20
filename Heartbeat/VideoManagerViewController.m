@@ -59,7 +59,7 @@
     self.frameOutput.videoSettings = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:kCVPixelFormatType_32BGRA] forKey:(id)kCVPixelBufferPixelFormatTypeKey];
     
     // shouldn't throw away frames
-    self.frameOutput.alwaysDiscardsLateVideoFrames = NO;//* maybe we should use times instead of frames number
+    self.frameOutput.alwaysDiscardsLateVideoFrames = NO;
     
     dispatch_queue_t queue = dispatch_queue_create("frameOutputQueue", NULL);
     [self.frameOutput setSampleBufferDelegate:self queue:queue];
