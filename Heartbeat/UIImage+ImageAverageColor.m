@@ -31,9 +31,9 @@
 	for (int row = 0; row < imageHeight; row++) {
 		const UInt8 *rowPtr = rawPixelData + bytesPerRow * row;
 		for (int column = 0; column < imageWidth; column++) {
-            red    += rowPtr[0];
+            red    += rowPtr[2];
             green  += rowPtr[1];
-            blue   += rowPtr[2];
+            blue   += rowPtr[0];
 			rowPtr += stride;
             
         }

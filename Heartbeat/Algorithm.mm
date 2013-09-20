@@ -21,6 +21,7 @@
 
 #define FPS 30
 #define WINDOW_SIZE 12
+#define WINDOW_SIZE_FOR_FILTER_CALCULATION 60// should be at least WINDOW_SIZE*2
 #define CALIBRATION_DURATION 120
 #define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 120
 
@@ -137,7 +138,7 @@
     CGFloat green;
     
     if ([color getRed:nil green:&green blue:nil alpha:nil]) {
-        return green;
+        return green*255.0f;
     }
     else {
         //error
@@ -148,17 +149,15 @@
 
 //
 
-- (NSArray *)getLatestPoints:(NSUInteger)numOfPoints{
+- (void)getLatestPoints:(NSUInteger)numOfPoints andSetIntoDoubleArray:(double *)arrayOfDoubles{
     NSRange range;
     range.length = numOfPoints;
     range.location = [self.points count] - range.length;
-    return [self.points objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:range]];
-}
-
-- (void)convertObjectsFromArray:(NSArray *)arrayOfNSNumbers to:(double *)arrayOfDoubles
-{
-    for (int i=0; i<[arrayOfNSNumbers count]; i++) {
-        arrayOfDoubles[i] = [arrayOfNSNumbers[i] doubleValue];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    
+    NSUInteger index = [indexSet firstIndex];
+    for (int i=0; index != NSNotFound ; i++ , index = [indexSet indexGreaterThanIndex: index]) {
+        arrayOfDoubles[i] = [self.points[index] doubleValue];
     }
 }
 
@@ -182,8 +181,6 @@
 
 - (double)mean:(double *)points withSize:(int)n
 {
-    // points is NSArray of NSNumbers of doubles
-    
     double sum = 0;
     for (int i=0 ; i<n ; i++) {
         sum += points[i];
@@ -195,7 +192,7 @@
 {
     for (int i=0 ; i<n ; i++) {
         points[i] -= num;
-        //points[i] *= -1;//*
+        points[i] *= -1;//*
     }
 }
 
@@ -205,93 +202,89 @@
 
 - (void)newFrameDetectedWithAverageColor:(UIColor *)color
 {
+    
     if (self.isFinalResultDetermined) {
         // do nothing
         //return;
     }
+    
     // initial
     self.framesCounter++;
     [self.points addObject:@([self getColorValueFrom:color])];
     [self.isPeak addObject:@(NO)];
     [self.bpmValues addObject:@(DEFAULT_BPM_VALUE)];
     [self.bpmAverageValues addObject:@(DEFAULT_BPM_VALUE)];
-    //
+
     // renaming local parameters
     int i = self.framesCounter;
     int w = self.WindowSize;
+    int calib = self.calibrationDuration;
     
     //
+    if (i <= WINDOW_SIZE_FOR_FILTER_CALCULATION) {
+        return;// continue, nothing to be done yet
+    }
     
-    if (i <= 2*w || !self.firstPeakPlace) {
-
-        if (i <= 2*w) {
-            return;// continue
-        }
+    if (!self.firstPeakPlace) {
         
-        int dynamicWindowSize = w*2+1;
+        int dynamicWindowSize = WINDOW_SIZE_FOR_FILTER_CALCULATION+1;
         double x[dynamicWindowSize] , y[dynamicWindowSize];
-        NSArray *dynamicWindowArray = [self getLatestPoints:dynamicWindowSize];
-        [self convertObjectsFromArray:dynamicWindowArray to:x];
+        [self getLatestPoints:dynamicWindowSize andSetIntoDoubleArray:x];
         [self Substract:[self mean:x withSize:dynamicWindowSize] fromArray:x withSize:dynamicWindowSize];
         filter(2*FILTER_ORDER, self.buttterworthValues[1], self.buttterworthValues[0], dynamicWindowSize, x, y);
         
-        // i-w-1 is i-w in the script
-        self.isPeak[i-w-1] = @([self isPeak:x :w]);
-        
-        self.numOfPeaks += [self.isPeak[i-w-1] intValue];
+        double *z = y+dynamicWindowSize-2*w-1;
+        self.isPeak[i-w-1] = @([self isPeak:z :w]);
+
+        self.numOfPeaks += [self.isPeak[i-w-1] boolValue];
         
         if ([self.isPeak[i-w-1] boolValue]) {
             self.firstPeakPlace = i-w-1;
-            self.bpmValues[i-w-1] = @(100);
-            self.bpmAverageValues[i-w-1] = @(100);
-            
+            self.bpmValues[i-w-1] = @(60*self.frameRate/w);
+            self.bpmAverageValues[i-w-1] = @([self.bpmValues[i-w-1] doubleValue]);
         }
         
         return;// continue
     }
     
-    // left to implement...
-    
-    if (i < self.calibrationDuration + (self.firstPeakPlace + w) -1) {
+    if (i < calib + (self.firstPeakPlace + w + 1)) {
         
-        int dynamicWindowSize = w*2+1;
+        int dynamicWindowSize = WINDOW_SIZE_FOR_FILTER_CALCULATION+1;
         double x[dynamicWindowSize] , y[dynamicWindowSize];
-        NSArray *dynamicWindowArray = [self getLatestPoints:dynamicWindowSize];
-        [self convertObjectsFromArray:dynamicWindowArray to:x];
+        [self getLatestPoints:dynamicWindowSize andSetIntoDoubleArray:x];
         [self Substract:[self mean:x withSize:dynamicWindowSize] fromArray:x withSize:dynamicWindowSize];
         filter(2*FILTER_ORDER, self.buttterworthValues[1], self.buttterworthValues[0], dynamicWindowSize, x, y);
         
-        // i-w-1 is i-w in the script
-        self.isPeak[i-w-1] = @([self isPeak:x :w]);
+        double *z = y+dynamicWindowSize-2*w-1;
+        self.isPeak[i-w-1] = @([self isPeak:z :w] && ![self.isPeak[i-w-2] boolValue]);
         
-        self.numOfPeaks += [self.isPeak[i-w-1] intValue];
+        self.numOfPeaks += [self.isPeak[i-w-1] boolValue];
         
-        NSUInteger frames = i - self.firstPeakPlace;
-        if (frames > self.calibrationDuration) {
-            frames = self.calibrationDuration;
+        NSUInteger frames = i - self.firstPeakPlace-1;
+        if (frames > calib) {
+            frames = calib;
         }
         
         self.bpmValues[i-w-1] = @((self.numOfPeaks/(frames/self.frameRate))*60);
         
-        int k = i-(self.firstPeakPlace+w)-1;
-        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+2) + [self.bpmValues[i-w-1] doubleValue] * 2/(k+2));
+        int k = i-(self.firstPeakPlace+w+1);
+        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+1) + [self.bpmValues[i-w-1] doubleValue] * 1/(k+1));
     }
+    
     else {
         //calibration is over
-        
-        int dynamicWindowSize = w*2+1;
+        int dynamicWindowSize = WINDOW_SIZE_FOR_FILTER_CALCULATION+1;
         double x[dynamicWindowSize] , y[dynamicWindowSize];
-        NSArray *dynamicWindowArray = [self getLatestPoints:dynamicWindowSize];
-        [self convertObjectsFromArray:dynamicWindowArray to:x];
+        [self getLatestPoints:dynamicWindowSize andSetIntoDoubleArray:x];
         [self Substract:[self mean:x withSize:dynamicWindowSize] fromArray:x withSize:dynamicWindowSize];
         filter(2*FILTER_ORDER, self.buttterworthValues[1], self.buttterworthValues[0], dynamicWindowSize, x, y);
         
-        // i-w-1 is i-w in the script
-        self.isPeak[i-w-1] = @([self isPeak:x :w]);
+        double *z = y+dynamicWindowSize-2*w-1;
+        self.isPeak[i-w-1] = @([self isPeak:z :w] && ![self.isPeak[i-w-2] boolValue]);
         
-        self.numOfPeaks += [self.isPeak[i-w-1] intValue] - [self.isPeak[i-w-1-self.calibrationDuration] intValue];
+        self.numOfPeaks += [self.isPeak[i-w-1] boolValue] - [self.isPeak[i-w-1-calib] boolValue];
         
-        NSUInteger frames = self.calibrationDuration;
+        NSUInteger frames = calib;
         
         self.bpmValues[i-w-1] = @((self.numOfPeaks/(frames/self.frameRate))*60);
         
@@ -301,17 +294,22 @@
         }
         double average_bpm = tempSum/self.WindowSizeForAverageCalculation;
         
-        int k = self.calibrationDuration + (self.firstPeakPlace + w) -1 + 1;// 1 simulate the weight of the calibration
+        int calibrationWeight = 3;// simulate the weight of the calibration calculated results.
+                                  // if it's 0, the calibration is worthless
+        int k = i - calib + (self.firstPeakPlace + w + 1) + calibrationWeight;
         
-        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+2) + average_bpm * 2/(k+2));
+        int sensitiveFactor = 3;// adjust this bigger the make the algorithm more sensitive to changes
+        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+sensitiveFactor) + average_bpm * sensitiveFactor/(k+sensitiveFactor));
         
-        if (i == 450) {
-            self.bpmLatestResult;
+        if (i == 600) {
+            int lastAverageResult = [self.bpmAverageValues[i-w-1] intValue];
             
         }
-        
     }
     
+    if ([self.isPeak[i-w-1] boolValue]) {
+        printf("%d\n" , i-w-1);
+    }
     
 }
 
