@@ -23,6 +23,11 @@
 
 @implementation VideoManagerViewController
 
+- (IBAction)turnOffFlash
+{
+    [self.session stopRunning];
+}
+
 - (Algorithm *)algorithm
 {
     if (!_algorithm) {
