@@ -1,35 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Jor-mS-9rW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Jor-mS-9rW">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
+        <!--Welcome Screen View Controller-->
+        <scene sceneID="aBb-ta-hWk">
+            <objects>
+                <viewController id="1Kk-lX-XJb" customClass="WelcomeScreenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z1a-bR-pE8"/>
+                        <viewControllerLayoutGuide type="bottom" id="QJC-pl-pS4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V8W-MT-bPK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to Heartbeat!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BT4-8z-OcF">
+                                <rect key="frame" x="72" y="114" width="176" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYF-yU-Nda">
+                                <rect key="frame" x="95" y="269" width="130" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="I'm feeling the flow"/>
+                                <connections>
+                                    <segue destination="eLD-vh-euA" kind="modal" identifier="Begin Scan" id="W9Y-vq-W4M"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3kv-eo-D9Z"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lrF-up-Oac" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="349" y="51"/>
+        </scene>
         <!--Video Manager View Controller-->
         <scene sceneID="LZk-dh-zT7">
             <objects>
                 <viewController id="eLD-vh-euA" customClass="VideoManagerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C09-bb-6Y8"/>
+                        <viewControllerLayoutGuide type="bottom" id="2AY-KT-EcH"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jfq-ww-kzH">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yOh-vN-5j1"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BPM: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbc-1V-7B1">
+                                <rect key="frame" x="76" y="273" width="108" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.1840618544" green="0.33148645329999998" blue="0.89639945649999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="yOh-vN-5j1" firstAttribute="top" secondItem="jfq-ww-kzH" secondAttribute="top" type="default" id="A4t-2i-UFe"/>
-                            <constraint firstItem="yOh-vN-5j1" firstAttribute="trailing" secondItem="jfq-ww-kzH" secondAttribute="trailing" type="default" id="IBd-Ji-RqM"/>
-                            <constraint firstItem="yOh-vN-5j1" firstAttribute="bottom" secondItem="jfq-ww-kzH" secondAttribute="bottom" type="default" id="Pb6-oN-fqE"/>
-                            <constraint firstItem="yOh-vN-5j1" firstAttribute="leading" secondItem="jfq-ww-kzH" secondAttribute="leading" type="default" id="e2d-AI-IWE"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nif-UI-uGZ"/>
                     <connections>
-                        <outlet property="imgView" destination="yOh-vN-5j1" id="UzA-zN-REb"/>
+                        <outlet property="bpmLabel" destination="tbc-1V-7B1" id="rLR-cX-lHN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqv-SE-9Fp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="456" y="51"/>
+            <point key="canvasLocation" x="786" y="51"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gJ1-le-FJN">
@@ -42,25 +83,14 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="eLD-vh-euA" kind="relationship" relationship="rootViewController" id="ibw-E1-hQL"/>
+                        <segue destination="1Kk-lX-XJb" kind="relationship" relationship="rootViewController" id="WqG-Kt-1TR"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFs-nu-mYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-70" y="51"/>
+            <point key="canvasLocation" x="-51" y="51"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="VideoManagerViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VideoManagerViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imgView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

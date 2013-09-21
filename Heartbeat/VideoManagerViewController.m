@@ -17,6 +17,8 @@
 @property (strong) AVCaptureVideoDataOutput * frameOutput;
 @property (nonatomic,strong) IBOutlet UIImageView* imgView;
 @property (nonatomic , strong) Algorithm *algorithm;
+@property (weak, nonatomic) IBOutlet UILabel *bpmLabel;
+
 @end
 
 @implementation VideoManagerViewController
@@ -79,6 +81,8 @@
     
     // should call [self.session stopRunning]
     // also should close the flash
+    
+    //[self.session stopRunning];
 
 }
 
@@ -100,6 +104,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red*255.0f , green*255.0f , blue*255.0f]);
         
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
+        
+        self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d", self.algorithm.bpmLatestResult];
+        
+        
     });
     
     //

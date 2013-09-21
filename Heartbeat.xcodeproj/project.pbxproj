@@ -25,6 +25,7 @@
 		394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8617DF62E5001C5049 /* Default@2x.png */; };
 		394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8817DF62E5001C5049 /* Default-568h@2x.png */; };
 		394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 394F4E8F17DF6350001C5049 /* Storyboard.storyboard */; };
+		39ABE22017EE38B600CD6815 /* WelcomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,8 @@
 		394F4E8617DF62E5001C5049 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		394F4E8817DF62E5001C5049 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		394F4E8F17DF6350001C5049 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Storyboard.storyboard; path = ../Storyboard.storyboard; sourceTree = "<group>"; };
+		39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeScreenViewController.h; sourceTree = "<group>"; };
+		39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeScreenViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				394F4E8F17DF6350001C5049 /* Storyboard.storyboard */,
+				39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */,
+				39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */,
 				2CD3958617E3BCC60019F1A5 /* UIImage+ImageAverageColor.h */,
 				2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */,
 				2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */,
@@ -221,6 +226,7 @@
 				2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */,
 				2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */,
 				2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */,
+				39ABE22017EE38B600CD6815 /* WelcomeScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

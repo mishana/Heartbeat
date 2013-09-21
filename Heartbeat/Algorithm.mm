@@ -137,8 +137,8 @@
 
 - (NSUInteger)bpmLatestResult
 {
-    if ([self.bpmAverageValues count]) {
-        return [self.bpmAverageValues[self.framesCounter-self.windowSize -1] intValue];
+    if ([self.bpmAverageValues count] > self.calibrationDuration) {
+        return [self.bpmAverageValues[self.framesCounter-self.windowSize - 1] intValue];
     }
     return 0;
 }
