@@ -9,12 +9,48 @@
 #import "SettingsViewController.h"
 #import "Settings.h"
 
-@interface SettingsViewController ()
+@interface SettingsViewController () <UITableViewDelegate>
 @property (strong, nonatomic) Settings *settings;
 
 @end
 
 @implementation SettingsViewController
+
+#pragma - UITableViewDataSource methods
+//
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel *rtlLabel = [[UILabel alloc] init];
+    NSString *text;
+    
+    switch(section) {
+        case 0:
+            text = @"   אפשרויות";
+            break;
+        case 1:
+            text = @"   עזרה";
+            break;
+        case 2:
+            text = @"   פרופיל";
+            break;
+        case 3:
+            text = @"   אודות";
+            break;
+    }
+    rtlLabel.text = text;
+    rtlLabel.textColor = [UIColor grayColor];
+    rtlLabel.backgroundColor = [UIColor clearColor];
+    rtlLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    rtlLabel.textAlignment = NSTextAlignmentRight;
+    
+    return rtlLabel;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 35;
+}
+//
 
 - (Settings *)settings
 {
