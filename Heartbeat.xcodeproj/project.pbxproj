@@ -15,6 +15,9 @@
 		2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */; };
 		2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */; };
 		2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957C17E37FC20019F1A5 /* CoreImage.framework */; };
+		3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3947F74917F1AF5D0026E415 /* SettingsViewController.m */; };
+		3947F74C17F1B0930026E415 /* heart-rate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3947F74B17F1B0930026E415 /* heart-rate.png */; };
+		3947F74E17F1B1410026E415 /* spanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 3947F74D17F1B1410026E415 /* spanner.png */; };
 		394F4E7317DF62E5001C5049 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7217DF62E5001C5049 /* UIKit.framework */; };
 		394F4E7517DF62E5001C5049 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7417DF62E5001C5049 /* Foundation.framework */; };
 		394F4E7717DF62E5001C5049 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 394F4E7617DF62E5001C5049 /* CoreGraphics.framework */; };
@@ -42,6 +45,10 @@
 		2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageAverageColor.m"; sourceTree = "<group>"; };
 		2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoManagerViewController.h; sourceTree = "<group>"; };
 		2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoManagerViewController.m; sourceTree = "<group>"; };
+		3947F74817F1AF5D0026E415 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		3947F74917F1AF5D0026E415 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		3947F74B17F1B0930026E415 /* heart-rate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-rate.png"; sourceTree = "<group>"; };
+		3947F74D17F1B1410026E415 /* spanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spanner.png; sourceTree = "<group>"; };
 		394F4E6F17DF62E5001C5049 /* Heartbeat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heartbeat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		394F4E7217DF62E5001C5049 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		394F4E7417DF62E5001C5049 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -113,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				394F4E8F17DF6350001C5049 /* Storyboard.storyboard */,
+				3947F74817F1AF5D0026E415 /* SettingsViewController.h */,
+				3947F74917F1AF5D0026E415 /* SettingsViewController.m */,
 				39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */,
 				39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */,
 				2CD3958617E3BCC60019F1A5 /* UIImage+ImageAverageColor.h */,
@@ -130,10 +139,12 @@
 			children = (
 				2CD3957017E133530019F1A5 /* project_script_3 */,
 				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
+				3947F74B17F1B0930026E415 /* heart-rate.png */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
 				394F4E7B17DF62E5001C5049 /* InfoPlist.strings */,
 				394F4E7E17DF62E5001C5049 /* main.m */,
+				3947F74D17F1B1410026E415 /* spanner.png */,
 				394F4E8017DF62E5001C5049 /* Heartbeat-Prefix.pch */,
 				394F4E8417DF62E5001C5049 /* Default.png */,
 				394F4E8617DF62E5001C5049 /* Default@2x.png */,
@@ -205,8 +216,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3947F74C17F1B0930026E415 /* heart-rate.png in Resources */,
 				394F4E7D17DF62E5001C5049 /* InfoPlist.strings in Resources */,
 				394F4E8517DF62E5001C5049 /* Default.png in Resources */,
+				3947F74E17F1B1410026E415 /* spanner.png in Resources */,
 				394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */,
 				394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */,
 				394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */,
@@ -223,6 +236,7 @@
 				394F4E7F17DF62E5001C5049 /* main.m in Sources */,
 				394F4E8317DF62E5001C5049 /* HeartBeatAppDelegate.m in Sources */,
 				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
+				3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */,
 				2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */,
 				2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */,
 				2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */,
