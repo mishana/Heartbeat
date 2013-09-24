@@ -294,9 +294,9 @@
         }
         double average_bpm = tempSum/self.windowSizeForAverageCalculation;
         
-        int calibrationWeight = 2;// simulate the weight of the calibration calculated results.
+        int calibrationWeight = 3;// simulate the weight of the calibration calculated results.
         // if it's 0, the calibration is worthless
-        int sensitiveFactor = 2;// adjust this bigger the make the algorithm more sensitive to changes
+        int sensitiveFactor = 3;// adjust this bigger the make the algorithm more sensitive to changes
         CGFloat lastResultFactor = fabs(average_bpm/[self.bpmAverageValues[i-w-2] doubleValue] -1) < 0.1 ? 1 : fabs(1 - fabs(average_bpm-[self.bpmAverageValues[i-w-2] doubleValue])/[self.bpmAverageValues[i-w-2] doubleValue]);
         int k = i - calib + (self.firstPeakPlace + w + 1) + calibrationWeight;
         self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * (1-lastResultFactor*sensitiveFactor/(k+sensitiveFactor)) + average_bpm * lastResultFactor * sensitiveFactor/(k+sensitiveFactor));

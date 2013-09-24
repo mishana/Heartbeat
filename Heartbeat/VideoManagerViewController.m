@@ -16,11 +16,12 @@
 @property (strong) AVCaptureDevice * videoDevice;
 @property (strong) AVCaptureDeviceInput * videoInput;
 @property (strong) AVCaptureVideoDataOutput * frameOutput;
-@property (nonatomic,strong) IBOutlet UIImageView* imgView;
 @property (nonatomic , strong) Algorithm *algorithm;
 @property (weak, nonatomic) IBOutlet UILabel *bpmLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *fingerDetectLabel;
+@property (strong , nonatomic) NSDate *algorithmStartTime;
 @property (strong, nonatomic) Settings *settings;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
 
@@ -32,16 +33,12 @@
     return _settings;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (NSDate *)algorithmStartTime
 {
-    [super viewWillDisappear:animated];
-    
-    self.settings = nil;
-}
-
-- (IBAction)turnOffFlash
-{
-    [self.session stopRunning];
+    if (!_algorithmStartTime) {
+        _algorithmStartTime = [NSDate date];
+    }
+    return _algorithmStartTime;
 }
 
 - (Algorithm *)algorithm
@@ -50,6 +47,31 @@
         _algorithm = [[Algorithm alloc] init];
     }
     return _algorithm;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.settings = nil;
+    self.algorithm = nil;
+    [self.session stopRunning];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
+        [self.videoDevice lockForConfiguration:nil];
+        [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
+        [self.videoDevice setFlashMode:AVCaptureFlashModeOn];
+        [self.videoDevice unlockForConfiguration];
+    }
+    [self.session startRunning];
+}
+
+- (IBAction)turnOffFlash
+{
+    [self.session stopRunning];
 }
 
 - (void)viewDidLoad
@@ -122,7 +144,26 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         CGFloat red , green , blue , alpha;
         [dominantColor getRed:&red green:&green blue:&blue alpha:&alpha];
-        NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red*255.0f , green*255.0f , blue*255.0f]);
+        blue = blue*255.0f;
+        green = green*255.0f;
+        red = red*255.0f;
+        
+        if (red < 210 || green < 4) {
+            //finger isn't on camera
+            self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
+            self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", 0];
+            self.algorithm = nil;
+            self.algorithmStartTime = nil;
+            return;
+            
+        }
+        else {
+            self.fingerDetectLabel.text = @"האלגוריתם התחיל";
+            //show the time since the start
+            self.timeLabel.text = [NSString stringWithFormat:@"time: %.01fs", [[NSDate date] timeIntervalSinceDate:self.algorithmStartTime]];
+        }
+        
+        NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red , green , blue]);
         
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
         
