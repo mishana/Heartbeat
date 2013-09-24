@@ -25,7 +25,7 @@
 
 @property (nonatomic , readonly) BOOL isCalibrationOver;
 @property (nonatomic , readonly) BOOL isFinalResultDetermined;
-@property (nonatomic , readonly) NSUInteger bpmLatestResult;
+@property (nonatomic , readonly) CGFloat bpmLatestResult;
 
 //
 

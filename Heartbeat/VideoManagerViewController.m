@@ -46,7 +46,7 @@
     // Configure the session to produce lower resolution video frames
     self.session.sessionPreset = AVCaptureSessionPreset352x288;
     
-     // Find a suitable AVCaptureDevice
+    // Find a suitable AVCaptureDevice
     self.videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
     // Create a device input with the device and add it to the session.
@@ -57,7 +57,7 @@
         // Handling the error appropriately.
     }
     [self.session addInput:self.videoInput];
-
+    
     // Create a VideoDataOutput and add it to the session
     self.frameOutput = [[AVCaptureVideoDataOutput alloc] init];
     
@@ -88,7 +88,7 @@
     // also should close the flash
     
     //[self.session stopRunning];
-
+    
 }
 
 // Delegate routine that is called when a sample buffer was written
@@ -110,7 +110,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
         
-        self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d", self.algorithm.bpmLatestResult];
+        self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", self.algorithm.bpmLatestResult];
         
         
     });
