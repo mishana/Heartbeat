@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="765" y="51"/>
         </scene>
-        <!--Settings View Controller - Settings-->
+        <!--Settings View Controller - הגדרות-->
         <scene sceneID="sHh-7K-93H">
             <objects>
                 <tableViewController id="TlB-hB-jth" customClass="SettingsViewController" sceneMemberID="viewController">
@@ -69,7 +69,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Options" id="Rgu-C7-bjf">
+                            <tableViewSection headerTitle="אפשרויות" id="Rgu-C7-bjf">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wTf-zu-bMg">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>
@@ -79,14 +79,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ErI-bZ-cd9">
-                                                    <rect key="frame" x="251" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="20" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="changeAutoStopOption:" destination="TlB-hB-jth" eventType="valueChanged" id="i7t-DQ-llM"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Auto stop after 15s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sho-Pm-ikw">
-                                                    <rect key="frame" x="20" y="11" width="147" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="עצירה אוטומטית לאחר 15ש" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sho-Pm-ikw">
+                                                    <rect key="frame" x="114" y="11" width="186" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -166,7 +166,7 @@
                             <outlet property="delegate" destination="TlB-hB-jth" id="2LQ-1H-ifQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="lWe-PW-dr5"/>
+                    <navigationItem key="navigationItem" title="הגדרות" id="lWe-PW-dr5"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPp-Rw-t4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

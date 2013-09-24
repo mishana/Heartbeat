@@ -20,9 +20,14 @@
 #define AUTO_STOP_AFTER_KEY @"autoStopAfter"
 
 
+- (id)asPropertyList
+{
+    return @{ CONTINUOUS_MODE_KEY : @(self.isContinuousMode), AUTO_STOP_AFTER_KEY : @(self.autoStopAfter) };
+}
+
 - (void)synchronize
 {
-    [[NSUserDefaults standardUserDefaults] setObject:self forKey:ALL_SETTINGS_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:[self asPropertyList] forKey:ALL_SETTINGS_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -38,17 +43,18 @@
 
 + (Settings *)currentSettings
 {
-    Settings *settings = (Settings *)[[NSUserDefaults standardUserDefaults] objectForKey:ALL_SETTINGS_KEY];
+    NSDictionary *settingsFromUserDefaulats = [[NSUserDefaults standardUserDefaults] objectForKey:ALL_SETTINGS_KEY];
     
-    if (!settings) {
-        settings = [Settings defaultSettings];
-        [settings synchronize];
-    }
     Settings *currentSettings = [[Settings alloc] init];
     
-    currentSettings.continuousMode = settings.continuousMode;
-    currentSettings.autoStopAfter = settings.autoStopAfter;
-    
+    if (!settingsFromUserDefaulats) {
+        currentSettings = [Settings defaultSettings];
+        [currentSettings synchronize];
+        
+    } else {
+        currentSettings.continuousMode = [settingsFromUserDefaulats[CONTINUOUS_MODE_KEY] boolValue];
+        currentSettings.autoStopAfter = [settingsFromUserDefaulats[AUTO_STOP_AFTER_KEY] unsignedIntegerValue];
+    }
     return currentSettings;
 }
 
