@@ -9,6 +9,7 @@
 #import "VideoManagerViewController.h"
 #import "UIImage+ImageAverageColor.h"
 #import "Algorithm.h"
+#import "Settings.h"
 
 @interface VideoManagerViewController ()
 @property (nonatomic,strong) AVCaptureSession * session;
@@ -19,9 +20,24 @@
 @property (nonatomic , strong) Algorithm *algorithm;
 @property (weak, nonatomic) IBOutlet UILabel *bpmLabel;
 
+@property (strong, nonatomic) Settings *settings;
+
 @end
 
 @implementation VideoManagerViewController
+
+- (Settings *)settings
+{
+    if (!_settings) _settings = [Settings currentSettings];
+    return _settings;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.settings = nil;
+}
 
 - (IBAction)turnOffFlash
 {

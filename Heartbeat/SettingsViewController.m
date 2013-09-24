@@ -7,12 +7,32 @@
 //
 
 #import "SettingsViewController.h"
+#import "Settings.h"
 
 @interface SettingsViewController ()
+@property (strong, nonatomic) Settings *settings;
 
 @end
 
 @implementation SettingsViewController
+
+- (Settings *)settings
+{
+    if (!_settings) _settings = [Settings currentSettings];
+    return _settings;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.settings synchronize];
+}
+
+- (IBAction)changeAutoStopOption:(UISwitch *)sender
+{
+    self.settings.continuousMode = !sender.isOn;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
