@@ -148,7 +148,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         green = green*255.0f;
         red = red*255.0f;
         
-        if (red < 210 || green < 4) {
+        if (red < 210/* || green < 4*/) {
             //finger isn't on camera
             self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
             self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", 0];
