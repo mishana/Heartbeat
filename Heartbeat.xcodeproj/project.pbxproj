@@ -35,6 +35,12 @@
 		397A383417F24AB000BA69F3 /* settings 11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 397A383117F24AB000BA69F3 /* settings 11@2x.png */; };
 		397A383517F24AB000BA69F3 /* settings 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 397A383217F24AB000BA69F3 /* settings 4@2x.png */; };
 		397A383617F24AB000BA69F3 /* settings 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 397A383317F24AB000BA69F3 /* settings 3@2x.png */; };
+		397A383817F3284F00BA69F3 /* blue-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 397A383717F3284F00BA69F3 /* blue-green@2x.png */; };
+		397A383A17F334F100BA69F3 /* green-blue-fade@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 397A383917F334F100BA69F3 /* green-blue-fade@2x.png */; };
+		397A383D17F336EE00BA69F3 /* pink-ios-7-fade@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 397A383B17F336EE00BA69F3 /* pink-ios-7-fade@2x.png */; };
+		397A383E17F336EE00BA69F3 /* ios-7-green-fade@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 397A383C17F336EE00BA69F3 /* ios-7-green-fade@2x.png */; };
+		397A384117F33D4600BA69F3 /* stawberry_iPhone@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 397A383F17F33D4600BA69F3 /* stawberry_iPhone@2x.jpg */; };
+		397A384217F33D4600BA69F3 /* Wall-2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 397A384017F33D4600BA69F3 /* Wall-2@2x.jpg */; };
 		39ABE22017EE38B600CD6815 /* WelcomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +84,12 @@
 		397A383117F24AB000BA69F3 /* settings 11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings 11@2x.png"; sourceTree = "<group>"; };
 		397A383217F24AB000BA69F3 /* settings 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings 4@2x.png"; sourceTree = "<group>"; };
 		397A383317F24AB000BA69F3 /* settings 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings 3@2x.png"; sourceTree = "<group>"; };
+		397A383717F3284F00BA69F3 /* blue-green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue-green@2x.png"; sourceTree = "<group>"; };
+		397A383917F334F100BA69F3 /* green-blue-fade@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-blue-fade@2x.png"; sourceTree = "<group>"; };
+		397A383B17F336EE00BA69F3 /* pink-ios-7-fade@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pink-ios-7-fade@2x.png"; sourceTree = "<group>"; };
+		397A383C17F336EE00BA69F3 /* ios-7-green-fade@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-7-green-fade@2x.png"; sourceTree = "<group>"; };
+		397A383F17F33D4600BA69F3 /* stawberry_iPhone@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "stawberry_iPhone@2x.jpg"; sourceTree = "<group>"; };
+		397A384017F33D4600BA69F3 /* Wall-2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Wall-2@2x.jpg"; sourceTree = "<group>"; };
 		39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeScreenViewController.h; sourceTree = "<group>"; };
 		39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeScreenViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,7 +169,13 @@
 				3947F74B17F1B0930026E415 /* heart-rate.png */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				397A383117F24AB000BA69F3 /* settings 11@2x.png */,
+				397A383B17F336EE00BA69F3 /* pink-ios-7-fade@2x.png */,
+				397A383C17F336EE00BA69F3 /* ios-7-green-fade@2x.png */,
+				397A383917F334F100BA69F3 /* green-blue-fade@2x.png */,
+				397A383717F3284F00BA69F3 /* blue-green@2x.png */,
 				397A383217F24AB000BA69F3 /* settings 4@2x.png */,
+				397A383F17F33D4600BA69F3 /* stawberry_iPhone@2x.jpg */,
+				397A384017F33D4600BA69F3 /* Wall-2@2x.jpg */,
 				397A383317F24AB000BA69F3 /* settings 3@2x.png */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
 				394F4E7B17DF62E5001C5049 /* InfoPlist.strings */,
@@ -240,7 +258,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3947F74C17F1B0930026E415 /* heart-rate.png in Resources */,
+				397A383D17F336EE00BA69F3 /* pink-ios-7-fade@2x.png in Resources */,
+				397A384117F33D4600BA69F3 /* stawberry_iPhone@2x.jpg in Resources */,
+				397A383817F3284F00BA69F3 /* blue-green@2x.png in Resources */,
+				397A384217F33D4600BA69F3 /* Wall-2@2x.jpg in Resources */,
 				394F4E7D17DF62E5001C5049 /* InfoPlist.strings in Resources */,
+				397A383A17F334F100BA69F3 /* green-blue-fade@2x.png in Resources */,
 				394F4E8517DF62E5001C5049 /* Default.png in Resources */,
 				397A382F17F2493B00BA69F3 /* settings 12@2x.png in Resources */,
 				3947F74E17F1B1410026E415 /* spanner.png in Resources */,
@@ -251,6 +274,7 @@
 				397A382E17F2493B00BA69F3 /* info@2x.png in Resources */,
 				397A383517F24AB000BA69F3 /* settings 4@2x.png in Resources */,
 				397A383017F2493B00BA69F3 /* heart +@2x.png in Resources */,
+				397A383E17F336EE00BA69F3 /* ios-7-green-fade@2x.png in Resources */,
 				397A383617F24AB000BA69F3 /* settings 3@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

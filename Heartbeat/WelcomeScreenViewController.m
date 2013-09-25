@@ -27,6 +27,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // background configuration
+    UIImage *backgroundImage = [UIImage imageNamed:@"Wall-2.jpg"];
+    /*UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
+     [self.view addSubview:backgroundView];*/
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    self.view.alpha = 1;
 }
 
 - (void)didReceiveMemoryWarning

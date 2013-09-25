@@ -22,6 +22,7 @@
 @property (strong , nonatomic) NSDate *algorithmStartTime;
 @property (strong, nonatomic) Settings *settings;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
 
 @end
 
@@ -77,6 +78,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // background configuration
+    UIImage *backgroundImage = [UIImage imageNamed:@"stawberry_iPhone.jpg"];
+    /*UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
+    [self.view addSubview:backgroundView];*/
+    
+    self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    self.backgroundView.alpha = 1;
     
     // Create the session
     self.session = [[AVCaptureSession alloc] init];
