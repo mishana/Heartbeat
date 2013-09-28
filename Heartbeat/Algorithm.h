@@ -27,6 +27,8 @@
 @property (nonatomic , readonly) BOOL isFinalResultDetermined;
 @property (nonatomic , readonly) CGFloat bpmLatestResult;
 
+@property (nonatomic, readonly) BOOL isPeakInLastFrame;
+
 //
 
 - (void)newFrameDetectedWithAverageColor:(UIColor *)color;

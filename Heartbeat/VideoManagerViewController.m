@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 
+@property (nonatomic, retain) AVAudioPlayer *playBeepSound;
+
 // tab bar configuration properties
 @property (strong, nonatomic) UIColor *tabBarColor;
 @property (strong, nonatomic) UIColor *tabBarItemColor;
@@ -74,7 +76,7 @@
     [super viewWillAppear:animated];
     
     // tab bar configuration
-    self.tabBarController.tabBar.barTintColor = [UIColor blueColor];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.216 green:0.326 blue:0.690 alpha:1.0];
     self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
     self.tabBarController.tabBar.translucent = NO;
 }
@@ -161,12 +163,6 @@
     //
     
     [self.session startRunning];
-    
-    // should call [self.session stopRunning]
-    // also should close the flash
-    
-    //[self.session stopRunning];
-    
 }
 
 // Delegate routine that is called when a sample buffer was written
@@ -209,7 +205,17 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", self.algorithm.bpmLatestResult];
         
+        if (!self.algorithm.isPeakInLastFrame) return;
         
+        //------------------SOUND BEEP BLOCK-------
+        
+        //NSURL *beepSound = [[NSURL alloc] initFileURLWithPath:@"beep-7.wav"];
+        NSURL *beepSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"beep-7" ofType:@"wav"]];
+        self.playBeepSound = [[AVAudioPlayer alloc] initWithContentsOfURL:beepSound error:nil];
+        self.playBeepSound.volume = 0.03;
+        [self.playBeepSound play];
+        
+        //-----------------------------------------------
     });
     
     //

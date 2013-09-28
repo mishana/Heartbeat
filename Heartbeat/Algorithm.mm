@@ -26,6 +26,8 @@
 @property (nonatomic , readwrite) BOOL isCalibrationOver;
 @property (nonatomic , readwrite) BOOL isFinalResultDetermined;
 
+@property (nonatomic, readwrite) BOOL isPeakInLastFrame;
+
 @end
 
 @implementation Algorithm
@@ -307,6 +309,8 @@
             
         }
     }
+    
+    self.isPeakInLastFrame = [self.isPeak[i-w-1] boolValue];
     
     if ([self.isPeak[i-w-1] boolValue]) {
         printf("%d\n" , i-w-1);

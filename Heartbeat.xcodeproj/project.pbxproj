@@ -15,6 +15,8 @@
 		2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */; };
 		2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */; };
 		2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957C17E37FC20019F1A5 /* CoreImage.framework */; };
+		3924993D17F771FD001928DD /* beep-7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3924993C17F771FD001928DD /* beep-7.wav */; };
+		3924993F17F79359001928DD /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3924993E17F79359001928DD /* heart@2x.png */; };
 		3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3947F74917F1AF5D0026E415 /* SettingsViewController.m */; };
 		3947F74C17F1B0930026E415 /* heart-rate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3947F74B17F1B0930026E415 /* heart-rate.png */; };
 		3947F74E17F1B1410026E415 /* spanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 3947F74D17F1B1410026E415 /* spanner.png */; };
@@ -60,6 +62,8 @@
 		2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageAverageColor.m"; sourceTree = "<group>"; };
 		2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoManagerViewController.h; sourceTree = "<group>"; };
 		2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoManagerViewController.m; sourceTree = "<group>"; };
+		3924993C17F771FD001928DD /* beep-7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-7.wav"; sourceTree = "<group>"; };
+		3924993E17F79359001928DD /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		3947F74817F1AF5D0026E415 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		3947F74917F1AF5D0026E415 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		3947F74B17F1B0930026E415 /* heart-rate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-rate.png"; sourceTree = "<group>"; };
@@ -177,7 +181,9 @@
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				397A383117F24AB000BA69F3 /* settings 11@2x.png */,
 				39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */,
+				3924993E17F79359001928DD /* heart@2x.png */,
 				397A383B17F336EE00BA69F3 /* pink-ios-7-fade@2x.png */,
+				3924993C17F771FD001928DD /* beep-7.wav */,
 				397A383C17F336EE00BA69F3 /* ios-7-green-fade@2x.png */,
 				397A383917F334F100BA69F3 /* green-blue-fade@2x.png */,
 				397A383717F3284F00BA69F3 /* blue-green@2x.png */,
@@ -277,8 +283,10 @@
 				3947F74E17F1B1410026E415 /* spanner.png in Resources */,
 				394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */,
 				394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */,
+				3924993F17F79359001928DD /* heart@2x.png in Resources */,
 				394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */,
 				397A383417F24AB000BA69F3 /* settings 11@2x.png in Resources */,
+				3924993D17F771FD001928DD /* beep-7.wav in Resources */,
 				397A382E17F2493B00BA69F3 /* info@2x.png in Resources */,
 				397A383517F24AB000BA69F3 /* settings 4@2x.png in Resources */,
 				39AC87BC17F66F64003A39B1 /* iphone_JPG@2x.jpg in Resources */,
