@@ -27,6 +27,7 @@
 @property (nonatomic , readwrite) BOOL isFinalResultDetermined;
 
 @property (nonatomic, readwrite) BOOL isPeakInLastFrame;
+@property (nonatomic) NSUInteger lastPeakPlace;
 
 @end
 
@@ -210,6 +211,17 @@
     }
 }
 
+- (BOOL)isMissedPeak
+{
+    double excpectedFramesSinceLastPeak = 1/(self.bpmLatestResult/(60*self.frameRate));
+    double marginFactor = 0.5;
+    if (self.framesCounter - self.windowSize - 1 - self.lastPeakPlace > (1+marginFactor)*excpectedFramesSinceLastPeak) {
+        printf("missed peak\n");
+        return YES;
+    }
+    return NO;
+}
+
 //
 
 #define DEFAULT_BPM_VALUE 72
@@ -282,7 +294,7 @@
     else {
         //calibration is over
         
-        self.isPeak[i-w-1] = @([self isPeak:z :w] && ![self.isPeak[i-w-2] boolValue]);// could also check self.isPeak[i-w-3]
+        self.isPeak[i-w-1] = @(([self isPeak:z :w] && ![self.isPeak[i-w-2] boolValue]) || [self isMissedPeak]);// could also check self.isPeak[i-w-3]
         
         self.numOfPeaks += [self.isPeak[i-w-1] boolValue] - [self.isPeak[i-w-1-calib] boolValue];
         
@@ -310,9 +322,9 @@
         }
     }
     
-    self.isPeakInLastFrame = [self.isPeak[i-w-1] boolValue];
-    
     if ([self.isPeak[i-w-1] boolValue]) {
+        self.isPeakInLastFrame = YES;
+        self.lastPeakPlace = i-w-1;
         printf("%d\n" , i-w-1);
     }
     
