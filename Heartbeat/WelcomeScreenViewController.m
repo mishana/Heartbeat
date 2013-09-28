@@ -28,13 +28,19 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    // background configuration
-    UIImage *backgroundImage = [UIImage imageNamed:@"Wall-2.jpg"];
-    /*UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
-     [self.view addSubview:backgroundView];*/
+    // Status bar configuration
+    //[self.navigationController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-    self.view.alpha = 1;
+    // Hide navigation bar
+    [self.navigationController setNavigationBarHidden:YES];
+    
+    // background configuration
+    UIImage *backgroundImage = [UIImage imageNamed:@"iphone_JPG.jpg"];
+    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
+     [self.view addSubview:backgroundView];
+    
+    //self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    //self.view.alpha = 1;
 }
 
 - (void)didReceiveMemoryWarning

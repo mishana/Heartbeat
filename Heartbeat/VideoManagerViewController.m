@@ -24,6 +24,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 
+// tab bar configuration properties
+@property (strong, nonatomic) UIColor *tabBarColor;
+@property (strong, nonatomic) UIColor *tabBarItemColor;
+@property (nonatomic, getter = isTabBarTranslucent) BOOL tabBarTranslucent;
+
 @end
 
 @implementation VideoManagerViewController
@@ -54,13 +59,30 @@
 {
     [super viewWillDisappear:animated];
     
+    // tab bar configuration
+    self.tabBarController.tabBar.barTintColor = self.tabBarColor;
+    self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
+    self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
+    
     self.settings = nil;
     self.algorithm = nil;
     [self.session stopRunning];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // tab bar configuration
+    self.tabBarController.tabBar.barTintColor = [UIColor blueColor];
+    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.translucent = NO;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
         [self.videoDevice lockForConfiguration:nil];
         [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
@@ -79,6 +101,13 @@
 {
     [super viewDidLoad];
     
+    //------------------DESIGN BLOCK-----------------
+    
+    // tab bar configuration
+    self.tabBarColor = self.tabBarController.tabBar.barTintColor;
+    self.tabBarItemColor = self.tabBarController.tabBar.tintColor;
+    self.tabBarTranslucent = self.tabBarController.tabBar.translucent;
+
     // background configuration
     UIImage *backgroundImage = [UIImage imageNamed:@"stawberry_iPhone.jpg"];
     /*UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
@@ -86,6 +115,8 @@
     
     self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.backgroundView.alpha = 1;
+    
+    //------------------------------------------------
     
     // Create the session
     self.session = [[AVCaptureSession alloc] init];
