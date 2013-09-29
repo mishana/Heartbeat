@@ -286,10 +286,10 @@
             </objects>
             <point key="canvasLocation" x="1340" y="804"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Menu Tab Bar View Controller-->
         <scene sceneID="dGQ-Y1-7nw">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="hJt-S2-Yun" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="hJt-S2-Yun" customClass="MenuTabBarViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="hpY-cz-69E">
@@ -297,8 +297,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="eLD-vh-euA" kind="relationship" relationship="viewControllers" id="yzh-CM-fJo"/>
                         <segue destination="9Ug-15-Cc5" kind="relationship" relationship="viewControllers" id="bdR-cQ-AyC"/>
+                        <segue destination="eLD-vh-euA" kind="relationship" relationship="viewControllers" id="yzh-CM-fJo"/>
                         <segue destination="xim-FG-ShG" kind="relationship" relationship="viewControllers" id="vKg-wh-aTT"/>
                     </connections>
                 </tabBarController>
