@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *beatingHeart;
 @property (nonatomic, retain) AVAudioPlayer *playBeepSound;
 
 // tab bar configuration properties
@@ -216,6 +217,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         [self.playBeepSound play];
         
         //-----------------------------------------------
+        
+        [UIView transitionWithView:self.beatingHeart
+                          duration:0.2
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            self.beatingHeart.tintColor = [UIColor redColor];
+                        } completion:NULL];
+        //self.beatingHeart.tintColor = [UIColor grayColor];
     });
     
     //

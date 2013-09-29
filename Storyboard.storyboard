@@ -52,14 +52,14 @@
             <objects>
                 <tableViewController id="TlB-hB-jth" customClass="SettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="BLZ-du-Sr3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="אפשרויות" id="Rgu-C7-bjf">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wTf-zu-bMg">
-                                        <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" tableViewCell="wTf-zu-bMg" id="Ee4-6L-8Xt">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -87,7 +87,7 @@
                             <tableViewSection headerTitle="עזרה" id="VuA-tW-cKv">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="4MS-8L-HuX" style="IBUITableViewCellStyleDefault" id="2Rn-JC-WQE">
-                                        <rect key="frame" x="0.0" y="211" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="147" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Rn-JC-WQE" id="5BN-Ef-6Da">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -108,7 +108,7 @@
                             <tableViewSection headerTitle="פרופיל" id="am3-eX-fHv">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="XPR-YN-eeS" style="IBUITableViewCellStyleDefault" id="xiQ-RG-7yw">
-                                        <rect key="frame" x="0.0" y="303" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="239" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xiQ-RG-7yw" id="vlb-w6-z8m">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -129,7 +129,7 @@
                             <tableViewSection headerTitle="אודות" id="25t-dq-w5p">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7Hb-Wk-VHB" style="IBUITableViewCellStyleDefault" id="bJy-YL-0Ne">
-                                        <rect key="frame" x="0.0" y="395" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="331" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bJy-YL-0Ne" id="DTQ-wk-GCf">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -168,7 +168,7 @@
                         <viewControllerLayoutGuide type="bottom" id="tXJ-jS-eRp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1cy-up-z7K">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -187,7 +187,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2AY-KT-EcH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jfq-ww-kzH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9du-vE-Fxq">
@@ -224,13 +224,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZA-oM-W0v">
-                                        <rect key="frame" x="0.0" y="180" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <items>
-                                            <barButtonItem image="heart.png" id="Uw3-a1-k6l"/>
-                                        </items>
-                                    </toolbar>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="xOc-tU-l2K">
+                                        <rect key="frame" x="139" y="175" width="42" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.11764705882352941" green="0.41176470588235292" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -242,6 +239,7 @@
                     <navigationItem key="navigationItem" id="nif-UI-uGZ"/>
                     <connections>
                         <outlet property="backgroundView" destination="9du-vE-Fxq" id="QYa-Jz-lSy"/>
+                        <outlet property="beatingHeart" destination="xOc-tU-l2K" id="ObE-7h-NN3"/>
                         <outlet property="bpmLabel" destination="tbc-1V-7B1" id="rLR-cX-lHN"/>
                         <outlet property="fingerDetectLabel" destination="r4k-E7-Lye" id="2Az-CV-mnW"/>
                         <outlet property="timeLabel" destination="6g4-xu-kHe" id="6XM-RS-F1m"/>

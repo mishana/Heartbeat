@@ -17,6 +17,7 @@
 		2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957C17E37FC20019F1A5 /* CoreImage.framework */; };
 		3924993D17F771FD001928DD /* beep-7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3924993C17F771FD001928DD /* beep-7.wav */; };
 		3924993F17F79359001928DD /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3924993E17F79359001928DD /* heart@2x.png */; };
+		3924994117F7B4B0001928DD /* beep-21.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3924994017F7B4B0001928DD /* beep-21.wav */; };
 		3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3947F74917F1AF5D0026E415 /* SettingsViewController.m */; };
 		3947F74C17F1B0930026E415 /* heart-rate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3947F74B17F1B0930026E415 /* heart-rate.png */; };
 		3947F74E17F1B1410026E415 /* spanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 3947F74D17F1B1410026E415 /* spanner.png */; };
@@ -64,6 +65,7 @@
 		2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoManagerViewController.m; sourceTree = "<group>"; };
 		3924993C17F771FD001928DD /* beep-7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-7.wav"; sourceTree = "<group>"; };
 		3924993E17F79359001928DD /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
+		3924994017F7B4B0001928DD /* beep-21.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-21.wav"; sourceTree = "<group>"; };
 		3947F74817F1AF5D0026E415 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		3947F74917F1AF5D0026E415 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		3947F74B17F1B0930026E415 /* heart-rate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-rate.png"; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				3947F74B17F1B0930026E415 /* heart-rate.png */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				397A383117F24AB000BA69F3 /* settings 11@2x.png */,
+				3924994017F7B4B0001928DD /* beep-21.wav */,
 				39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */,
 				3924993E17F79359001928DD /* heart@2x.png */,
 				397A383B17F336EE00BA69F3 /* pink-ios-7-fade@2x.png */,
@@ -274,6 +277,7 @@
 				3947F74C17F1B0930026E415 /* heart-rate.png in Resources */,
 				397A383D17F336EE00BA69F3 /* pink-ios-7-fade@2x.png in Resources */,
 				397A384117F33D4600BA69F3 /* stawberry_iPhone@2x.jpg in Resources */,
+				3924994117F7B4B0001928DD /* beep-21.wav in Resources */,
 				397A383817F3284F00BA69F3 /* blue-green@2x.png in Resources */,
 				397A384217F33D4600BA69F3 /* Wall-2@2x.jpg in Resources */,
 				394F4E7D17DF62E5001C5049 /* InfoPlist.strings in Resources */,
