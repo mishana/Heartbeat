@@ -81,6 +81,15 @@
 
 - (void)viewDidLoad
 {
+    //------------------DESIGN BLOCK-----------------
+
+    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.216 green:0.326 blue:0.690 alpha:1.0];
+
+    
+    //self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor whiteColor] };
+    
+    //-----------------------------------------------
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
