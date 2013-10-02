@@ -63,9 +63,9 @@
     [super viewWillDisappear:animated];
     
     // tab bar configuration
-    self.tabBarController.tabBar.barTintColor = self.tabBarColor;
-    self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
-    self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
+//    self.tabBarController.tabBar.barTintColor = self.tabBarColor;
+//    self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
+//    self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
     
     self.settings = nil;
     self.algorithm = nil;
@@ -82,9 +82,9 @@
     [super viewWillAppear:animated];
     
     // tab bar configuration
-    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.216 green:0.326 blue:0.690 alpha:1.0];
-    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
-    self.tabBarController.tabBar.translucent = NO;
+//    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.216 green:0.326 blue:0.690 alpha:1.0];
+//    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+//    self.tabBarController.tabBar.translucent = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -116,9 +116,9 @@
     //------------------DESIGN BLOCK-----------------
     
     // tab bar configuration
-    self.tabBarColor = self.tabBarController.tabBar.barTintColor;
-    self.tabBarItemColor = self.tabBarController.tabBar.tintColor;
-    self.tabBarTranslucent = self.tabBarController.tabBar.translucent;
+//    self.tabBarColor = self.tabBarController.tabBar.barTintColor;
+//    self.tabBarItemColor = self.tabBarController.tabBar.tintColor;
+//    self.tabBarTranslucent = self.tabBarController.tabBar.translucent;
 
     // background configuration
     UIImage *backgroundImage = [UIImage imageNamed:@"stawberry_iPhone.jpg"];
@@ -163,6 +163,14 @@
     
     [self.session addOutput:self.frameOutput];
     
+    //------------------SOUND BEEP BLOCK-------
+    
+    NSURL *beepSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"beep-7" ofType:@"wav"]];
+    self.playBeepSound = [[AVAudioPlayer alloc] initWithContentsOfURL:beepSound error:nil];
+    self.playBeepSound.volume = 0.03;
+    
+    //-----------------------------------------------
+    
     /*// turn flash on
     if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
         [self.videoDevice lockForConfiguration:nil];
@@ -184,55 +192,55 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
     
 #warning - incomplete implementation
+    dispatch_queue_t algorithmQ = dispatch_queue_create("algorithm thread", NULL);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(algorithmQ, ^{
         UIColor *dominantColor = [image averageColorPrecise];
-        
-        CGFloat red , green , blue , alpha;
-        [dominantColor getRed:&red green:&green blue:&blue alpha:&alpha];
-        blue = blue*255.0f;
-        green = green*255.0f;
-        red = red*255.0f;
-        
-        if (red < 210/* || green < 4*/) {
-            //finger isn't on camera
-            self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
-            self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", 0];
-            self.algorithm = nil;
-            self.algorithmStartTime = nil;
-            return;
-            
-        }
-        else {
-            self.fingerDetectLabel.text = @"האלגוריתם התחיל";
-            //show the time since the start
-            self.timeLabel.text = [NSString stringWithFormat:@"time: %.01fs", [[NSDate date] timeIntervalSinceDate:self.algorithmStartTime]];
-        }
-        
-        NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red , green , blue]);
-        
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
         
-        self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", self.algorithm.bpmLatestResult];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            CGFloat red , green , blue , alpha;
+            [dominantColor getRed:&red green:&green blue:&blue alpha:&alpha];
+            blue = blue*255.0f;
+            green = green*255.0f;
+            red = red*255.0f;
+            
+            if (red < 210/* || green < 4*/) {
+                //finger isn't on camera
+                self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", 0];
+                self.algorithm = nil;
+                self.algorithmStartTime = nil;
+                return;
+                
+            }
+            else {
+                self.fingerDetectLabel.text = @"האלגוריתם התחיל";
+                //show the time since the start
+                self.timeLabel.text = [NSString stringWithFormat:@"time: %.01fs", [[NSDate date] timeIntervalSinceDate:self.algorithmStartTime]];
+            }
+            
+            NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red , green , blue]);
+            
+            self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", self.algorithm.bpmLatestResult];
+            
+        });
         
-        if (!self.algorithm.isPeakInLastFrame) return;
-        
-        //------------------SOUND BEEP BLOCK-------
-        
-        //NSURL *beepSound = [[NSURL alloc] initFileURLWithPath:@"beep-7.wav"];
-        NSURL *beepSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"beep-7" ofType:@"wav"]];
-        self.playBeepSound = [[AVAudioPlayer alloc] initWithContentsOfURL:beepSound error:nil];
-        self.playBeepSound.volume = 0.03;
-        [self.playBeepSound play];
-        
-        //-----------------------------------------------
-        
-        [UIView transitionWithView:self.beatingHeart
-                          duration:0.2
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            self.beatingHeart.tintColor = [UIColor redColor];
-                        } completion:NULL];
+        if (self.algorithm.isPeakInLastFrame){
+            //------------------SOUND BEEP BLOCK-------
+ 
+            [self.playBeepSound play];
+            
+            //---------------------------------------------
+        }
+
+        //        [UIView transitionWithView:self.beatingHeart
+        //                          duration:0.2
+        //                           options:UIViewAnimationOptionTransitionCrossDissolve
+        //                        animations:^{
+        //                            self.beatingHeart.tintColor = [UIColor redColor];
+        //                        } completion:NULL];
         //self.beatingHeart.tintColor = [UIColor grayColor];
     });
     

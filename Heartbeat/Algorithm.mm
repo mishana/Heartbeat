@@ -214,7 +214,7 @@
 - (BOOL)isMissedPeak
 {
     double excpectedFramesSinceLastPeak = 1/(self.bpmLatestResult/(60*self.frameRate));
-    double marginFactor = 0.5;
+    double marginFactor = 0.333;
     if (self.framesCounter - self.windowSize - 1 - self.lastPeakPlace > (1+marginFactor)*excpectedFramesSinceLastPeak) {
         printf("missed peak\n");
         return YES;
@@ -315,15 +315,11 @@
         int k = i - calib + (self.firstPeakPlace + w + 1) + calibrationWeight;
         self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * (1-lastResultFactor*sensitiveFactor/(k+sensitiveFactor)) + average_bpm * lastResultFactor * sensitiveFactor/(k+sensitiveFactor));
         
-        if (i == 510) {
-            int lastAverageResult = [self.bpmAverageValues[i-w-1] intValue];
-            self.isFinalResultDetermined;
-            
-        }
     }
     
+    self.isPeakInLastFrame = [self.isPeak[i-w-1] boolValue];
+    
     if ([self.isPeak[i-w-1] boolValue]) {
-        self.isPeakInLastFrame = YES;
         self.lastPeakPlace = i-w-1;
         printf("%d\n" , i-w-1);
     }
