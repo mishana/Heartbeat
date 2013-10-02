@@ -69,7 +69,12 @@
     
     self.settings = nil;
     self.algorithm = nil;
-    [self.session stopRunning];
+    
+    dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
+    
+    dispatch_async(sessionQ, ^{
+        [self.session stopRunning];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -86,13 +91,17 @@
 {
     [super viewDidAppear:animated];
     
-    if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
-        [self.videoDevice lockForConfiguration:nil];
-        [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
-        [self.videoDevice setFlashMode:AVCaptureFlashModeOn];
-        [self.videoDevice unlockForConfiguration];
-    }
-    [self.session startRunning];
+    dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
+    
+    dispatch_async(sessionQ, ^{
+        if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
+            [self.videoDevice lockForConfiguration:nil];
+            [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
+            [self.videoDevice setFlashMode:AVCaptureFlashModeOn];
+            [self.videoDevice unlockForConfiguration];
+        }
+        [self.session startRunning];
+    });
 }
 
 - (IBAction)turnOffFlash
@@ -154,7 +163,7 @@
     
     [self.session addOutput:self.frameOutput];
     
-    // turn flash on
+    /*// turn flash on
     if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
         [self.videoDevice lockForConfiguration:nil];
         [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
@@ -163,7 +172,7 @@
     }
     //
     
-    [self.session startRunning];
+    [self.session startRunning];*/
 }
 
 // Delegate routine that is called when a sample buffer was written
