@@ -12,6 +12,8 @@
 @interface SettingsViewController () <UITableViewDelegate>
 @property (strong, nonatomic) Settings *settings;
 
+@property (weak, nonatomic) IBOutlet UISwitch *autoStopAfterSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *continuesModeSwitch;
 @end
 
 @implementation SettingsViewController
@@ -65,11 +67,6 @@
     [self.settings synchronize];
 }
 
-- (IBAction)changeAutoStopOption:(UISwitch *)sender
-{
-    self.settings.continuousMode = !sender.isOn;
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -99,5 +96,39 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//
+
+- (IBAction)changeBeepWithPulseOption:(UISwitch *)sender {
+    self.settings.beepWithPulse = sender.on;
+}
+
+- (IBAction)changeContinuesModeOption:(UISwitch *)sender {
+    [self.autoStopAfterSwitch setOn:!sender.on animated:YES];
+    self.settings.continuousMode = sender.on;
+    
+    if (sender.on) {
+        self.settings.autoStopAfter = 0;
+    }
+    else {
+        self.settings.autoStopAfter = 20;
+    }
+}
+
+- (IBAction)changeAutoStopOption:(UISwitch *)sender
+{
+    [self.continuesModeSwitch setOn:!sender.on animated:YES];
+    self.settings.continuousMode = !sender.on;
+    
+    if (sender.on) {
+        self.settings.autoStopAfter = 20;
+    }
+    else {
+        self.settings.autoStopAfter = 0;
+    }
+}
+
+
+
 
 @end
