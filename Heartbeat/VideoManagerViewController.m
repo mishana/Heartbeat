@@ -208,11 +208,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             red = red*255.0f;
             
             if (self.algorithm.isFinalResultDetermined) {
-                // TODO
                 self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d" , (int)self.algorithm.bpmLatestResult];
+                // TODO
+            } else {
+                self.finalBPMLabel.text = @"Final BPM:   ";
             }
             
-            if (!self.settings.continuousMode) {
+            if (self.settings.autoStopAfter) {
                 // TODO
             }
             

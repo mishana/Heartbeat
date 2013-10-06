@@ -23,7 +23,7 @@
 
 - (id)asPropertyList
 {
-    return @{ CONTINUOUS_MODE_KEY : @(self.isContinuousMode), AUTO_STOP_AFTER_KEY : @(self.autoStopAfter) };
+    return @{ BEEP_WITH_PULSE_KEY : @(self.beepWithPulse), CONTINUOUS_MODE_KEY : @(self.isContinuousMode), AUTO_STOP_AFTER_KEY : @(self.autoStopAfter) };
 }
 
 - (void)synchronize

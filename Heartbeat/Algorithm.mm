@@ -125,16 +125,18 @@
     return _isCalibrationOver;
 }
 
-#define FINAL_RESULT_MARGIN 1
+#define FINAL_RESULT_MARGIN 0.5
 
 - (BOOL)isFinalResultDetermined{
     if (self.isCalibrationOver && (fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - self.calibrationDuration-self.windowSize -1] doubleValue]) <= FINAL_RESULT_MARGIN)) {
         return _isFinalResultDetermined = YES;
     }
     else {
-        //_isFinalResultDetermined = NO;//*
+        _isFinalResultDetermined = NO;//*
     }
     return _isFinalResultDetermined;
+    // should make isFinalResultDetermined more reliable
+    // maybe by checking it for several more frames...
 }
 
 - (CGFloat)bpmLatestResult
