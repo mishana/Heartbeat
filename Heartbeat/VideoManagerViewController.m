@@ -23,6 +23,7 @@
 @property (strong, nonatomic) Settings *settings;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
+@property (weak, nonatomic) IBOutlet UILabel *finalBPMLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *beatingHeart;
 @property (nonatomic, retain) AVAudioPlayer *playBeepSound;
@@ -206,6 +207,15 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             green = green*255.0f;
             red = red*255.0f;
             
+            if (self.algorithm.isFinalResultDetermined) {
+                // TODO
+                self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d" , (int)self.algorithm.bpmLatestResult];
+            }
+            
+            if (!self.settings.continuousMode) {
+                // TODO
+            }
+            
             if (red < 210/* || green < 4*/) {
                 //finger isn't on camera
                 self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
@@ -227,7 +237,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             
         });
         
-        if (self.algorithm.isPeakInLastFrame){
+        if (self.settings.beepWithPulse && self.algorithm.isPeakInLastFrame){
             //------------------SOUND BEEP BLOCK-------
  
             [self.playBeepSound play];
