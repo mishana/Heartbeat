@@ -16,6 +16,7 @@
 
 #define ALL_SETTINGS_KEY @"Setings_All"
 
+#define BEEP_WITH_PULSE_KEY @"beepWithPulse"
 #define CONTINUOUS_MODE_KEY @"continuousMode"
 #define AUTO_STOP_AFTER_KEY @"autoStopAfter"
 
@@ -35,8 +36,9 @@
 {
     Settings *settings = [[Settings alloc] init];
     
+    settings.beepWithPulse = YES;
     settings.continuousMode = NO;
-    settings.autoStopAfter = 15;
+    settings.autoStopAfter = 20;
     
     return settings;
 }
@@ -52,6 +54,7 @@
         [currentSettings synchronize];
         
     } else {
+        currentSettings.beepWithPulse = [settingsFromUserDefaulats[BEEP_WITH_PULSE_KEY] boolValue];
         currentSettings.continuousMode = [settingsFromUserDefaulats[CONTINUOUS_MODE_KEY] boolValue];
         currentSettings.autoStopAfter = [settingsFromUserDefaulats[AUTO_STOP_AFTER_KEY] unsignedIntegerValue];
     }
