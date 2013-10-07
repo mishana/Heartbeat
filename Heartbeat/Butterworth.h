@@ -9,8 +9,6 @@
 #ifndef __Heartbeat__Butterworth__
 #define __Heartbeat__Butterworth__
 
-//#include <iostream>
-
 double** butter(double FrequencyBands[2], int FiltOrd); //bandpass values
 void filter(int ord, double *a, double *b, int np, double *x, double *y);
 

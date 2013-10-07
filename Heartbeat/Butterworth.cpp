@@ -230,7 +230,6 @@ double** butter(double FrequencyBands[2], int FilterOrder)
     //Frequency bands is a vector of values - Lower Frequency Band and Higher Frequency Band
     
     double *DenC = ComputeDenCoeffs(FilterOrder, FrequencyBands[0], FrequencyBands[1]);
-    
     double *NumC = ComputeNumCoeffs(FilterOrder, FrequencyBands[0], FrequencyBands[1] , DenC);
     
     double** z = (double **)calloc( 2 , sizeof(double *) );

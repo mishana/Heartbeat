@@ -11,13 +11,10 @@
 @interface Settings : NSObject
 
 @property (nonatomic) BOOL beepWithPulse;
-
 @property (nonatomic, getter = isContinuousMode) BOOL continuousMode;
-
 @property (nonatomic) NSUInteger autoStopAfter; // in seconds
 
 + (Settings *)defaultSettings;
-
 + (Settings *)currentSettings;
 
 - (void)synchronize;

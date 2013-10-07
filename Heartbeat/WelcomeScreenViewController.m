@@ -8,20 +8,7 @@
 
 #import "WelcomeScreenViewController.h"
 
-@interface WelcomeScreenViewController ()
-
-@end
-
 @implementation WelcomeScreenViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -37,16 +24,10 @@
     // background configuration
     UIImage *backgroundImage = [UIImage imageNamed:@"iphone_JPG.jpg"];
     UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
-     [self.view addSubview:backgroundView];
+    [self.view addSubview:backgroundView];
     
     //self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     //self.view.alpha = 1;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

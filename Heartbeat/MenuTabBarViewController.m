@@ -8,10 +8,6 @@
 
 #import "MenuTabBarViewController.h"
 
-@interface MenuTabBarViewController ()
-
-@end
-
 @implementation MenuTabBarViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -28,6 +24,7 @@
 	// Do any additional setup after loading the view.
     
     self.selectedIndex = 1;
+    
 }
 
 - (void)didReceiveMemoryWarning

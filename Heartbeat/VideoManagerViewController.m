@@ -10,23 +10,31 @@
 #import "UIImage+ImageAverageColor.h"
 #import "Algorithm.h"
 #import "Settings.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface VideoManagerViewController ()
+// AVFoundation
 @property (nonatomic,strong) AVCaptureSession * session;
 @property (strong) AVCaptureDevice * videoDevice;
 @property (strong) AVCaptureDeviceInput * videoInput;
 @property (strong) AVCaptureVideoDataOutput * frameOutput;
+
+// Audio
+@property (nonatomic, retain) AVAudioPlayer *BeepSound;
+
+// Algorithm
 @property (nonatomic , strong) Algorithm *algorithm;
-@property (weak, nonatomic) IBOutlet UILabel *bpmLabel;
-@property (weak, nonatomic) IBOutlet UILabel *fingerDetectLabel;
 @property (strong , nonatomic) NSDate *algorithmStartTime;
 @property (strong, nonatomic) Settings *settings;
+
+// view Outlets
+@property (weak, nonatomic) IBOutlet UILabel *bpmLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fingerDetectLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *finalBPMLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *beatingHeart;
-@property (nonatomic, retain) AVAudioPlayer *playBeepSound;
 
 // tab bar configuration properties
 @property (strong, nonatomic) UIColor *tabBarColor;
@@ -59,33 +67,18 @@
     return _algorithm;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    // tab bar configuration
-//    self.tabBarController.tabBar.barTintColor = self.tabBarColor;
-//    self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
-//    self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
-    
-    self.settings = nil;
-    self.algorithm = nil;
-    
-    dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
-    
-    dispatch_async(sessionQ, ^{
-        [self.session stopRunning];
-    });
-}
+//
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     // tab bar configuration
-//    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.216 green:0.326 blue:0.690 alpha:1.0];
-//    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
-//    self.tabBarController.tabBar.translucent = NO;
+    /*
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.216 green:0.326 blue:0.690 alpha:1.0];
+    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.translucent = NO;
+     */
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -105,10 +98,33 @@
     });
 }
 
-- (IBAction)turnOffFlash
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [self.session stopRunning];
+    [super viewWillDisappear:animated];
+    
+    // tab bar configuration
+    //    self.tabBarController.tabBar.barTintColor = self.tabBarColor;
+    //    self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
+    //    self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
+    
+    self.settings = nil;
+    self.algorithmStartTime = nil;
+    self.algorithm = nil;
+    
+    dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
+    
+    dispatch_async(sessionQ, ^{
+        [self.session stopRunning];
+    });
 }
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+}
+
+//
 
 - (void)viewDidLoad
 {
@@ -167,8 +183,8 @@
     //------------------SOUND BEEP BLOCK-------
     
     NSURL *beepSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"beep-7" ofType:@"wav"]];
-    self.playBeepSound = [[AVAudioPlayer alloc] initWithContentsOfURL:beepSound error:nil];
-    self.playBeepSound.volume = 0.03;
+    self.BeepSound = [[AVAudioPlayer alloc] initWithContentsOfURL:beepSound error:nil];
+    self.BeepSound.volume = 0.03;
     
     //-----------------------------------------------
     
@@ -184,6 +200,8 @@
     [self.session startRunning];*/
 }
 
+//
+
 // Delegate routine that is called when a sample buffer was written
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
 didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
@@ -192,36 +210,39 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     // Create a UIImage from the sample buffer data
     UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
     
-#warning - incomplete implementation
+    // dispatch all the algorithm functionality to another thread
     dispatch_queue_t algorithmQ = dispatch_queue_create("algorithm thread", NULL);
-    
     dispatch_async(algorithmQ, ^{
-        UIColor *dominantColor = [image averageColorPrecise];
+        
+        UIColor *dominantColor = [image averageColorPrecise];// get the average color from the image
+        CGFloat red , green , blue , alpha;
+        [dominantColor getRed:&red green:&green blue:&blue alpha:&alpha];
+        blue = blue*255.0f;
+        green = green*255.0f;
+        red = red*255.0f;
+        
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             
-            CGFloat red , green , blue , alpha;
-            [dominantColor getRed:&red green:&green blue:&blue alpha:&alpha];
-            blue = blue*255.0f;
-            green = green*255.0f;
-            red = red*255.0f;
-            
             if (self.algorithm.isFinalResultDetermined) {
                 self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d" , (int)self.algorithm.bpmLatestResult];
-                // TODO
+                #warning - incomplete implementation
             } else {
                 self.finalBPMLabel.text = @"Final BPM:   ";
+                #warning - incomplete implementation
             }
             
             if (self.settings.autoStopAfter) {
-                // TODO
+                if ([[NSDate date] timeIntervalSinceDate:self.algorithmStartTime] > self.settings.autoStopAfter) {
+                    #warning - incomplete implementation
+                }
             }
             
             if (red < 210/* || green < 4*/) {
                 //finger isn't on camera
                 self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
-                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", 0];
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d", 0];
                 self.algorithm = nil;
                 self.algorithmStartTime = nil;
                 return;
@@ -239,26 +260,34 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             
         });
         
-        if (self.settings.beepWithPulse && self.algorithm.isPeakInLastFrame){
-            //------------------SOUND BEEP BLOCK-------
- 
-            [self.playBeepSound play];
-            
-            //---------------------------------------------
-        }
-
-        //        [UIView transitionWithView:self.beatingHeart
-        //                          duration:0.2
-        //                           options:UIViewAnimationOptionTransitionCrossDissolve
-        //                        animations:^{
-        //                            self.beatingHeart.tintColor = [UIColor redColor];
-        //                        } completion:NULL];
-        //self.beatingHeart.tintColor = [UIColor grayColor];
+        [self playBeepSound];
+        
     });
     
-    //
-    
 }
+
+//
+
+- (void)playBeepSound
+{
+    if (self.settings.beepWithPulse && self.algorithm.isPeakInLastFrame){
+        [self.BeepSound play];
+    }
+}
+
+- (void)heartAnimation
+{
+    /*
+    [UIView transitionWithView:self.beatingHeart
+                      duration:0.2
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{ self.beatingHeart.tintColor = [UIColor redColor];}
+                    completion:NULL];
+    self.beatingHeart.tintColor = [UIColor grayColor];
+     */
+}
+
+//
 
 // Create a UIImage from sample buffer data
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer

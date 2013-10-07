@@ -20,16 +20,9 @@
 #define CONTINUOUS_MODE_KEY @"continuousMode"
 #define AUTO_STOP_AFTER_KEY @"autoStopAfter"
 
-
 - (id)asPropertyList
 {
     return @{ BEEP_WITH_PULSE_KEY : @(self.beepWithPulse), CONTINUOUS_MODE_KEY : @(self.isContinuousMode), AUTO_STOP_AFTER_KEY : @(self.autoStopAfter) };
-}
-
-- (void)synchronize
-{
-    [[NSUserDefaults standardUserDefaults] setObject:[self asPropertyList] forKey:ALL_SETTINGS_KEY];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (Settings *)defaultSettings
@@ -59,6 +52,12 @@
         currentSettings.autoStopAfter = [settingsFromUserDefaulats[AUTO_STOP_AFTER_KEY] unsignedIntegerValue];
     }
     return currentSettings;
+}
+
+- (void)synchronize
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[self asPropertyList] forKey:ALL_SETTINGS_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

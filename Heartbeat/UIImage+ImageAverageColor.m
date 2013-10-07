@@ -41,10 +41,11 @@
 	CFRelease(data);
     
 	CGFloat f = 1.0f / (255.0f * imageWidth * imageHeight);
-	return [UIColor colorWithRed:f * red  green:f * green blue:f * blue alpha:1];
+	return [UIColor colorWithRed:f*red  green:f*green blue:f*blue alpha:1];
 }
 
 // should be at least four time faster than averageColorPrecise
+// but the result isn't accurate, color values only given in integers (if multiplied by 255.0f)
 - (UIColor *)averageColor
 {
     CGSize size = {1, 1};

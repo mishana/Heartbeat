@@ -12,53 +12,21 @@
 @interface SettingsViewController () <UITableViewDelegate>
 @property (strong, nonatomic) Settings *settings;
 
+// IBOutlets
 @property (weak, nonatomic) IBOutlet UISwitch *autoStopAfterSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *continuesModeSwitch;
+
 @end
 
 @implementation SettingsViewController
-
-#pragma - UITableViewDataSource methods
-//
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UILabel *rtlLabel = [[UILabel alloc] init];
-    NSString *text;
-    
-    switch(section) {
-        case 0:
-            text = @"   אפשרויות";
-            break;
-        case 1:
-            text = @"   עזרה";
-            break;
-        case 2:
-            text = @"   פרופיל";
-            break;
-        case 3:
-            text = @"   אודות";
-            break;
-    }
-    rtlLabel.text = text;
-    rtlLabel.textColor = [UIColor grayColor];
-    rtlLabel.backgroundColor = [UIColor clearColor];
-    rtlLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
-    rtlLabel.textAlignment = NSTextAlignmentRight;
-    
-    return rtlLabel;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 35;
-}
-//
 
 - (Settings *)settings
 {
     if (!_settings) _settings = [Settings currentSettings];
     return _settings;
 }
+
+//
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -97,7 +65,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-//
+// IBActions
 
 - (IBAction)changeBeepWithPulseOption:(UISwitch *)sender {
     self.settings.beepWithPulse = sender.on;
@@ -128,7 +96,39 @@
     }
 }
 
+#pragma - UITableViewDataSource methods
 
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel *rtlLabel = [[UILabel alloc] init];
+    NSString *text;
+    
+    switch(section) {
+        case 0:
+            text = @"   אפשרויות";
+            break;
+        case 1:
+            text = @"   עזרה";
+            break;
+        case 2:
+            text = @"   פרופיל";
+            break;
+        case 3:
+            text = @"   אודות";
+            break;
+    }
+    rtlLabel.text = text;
+    rtlLabel.textColor = [UIColor grayColor];
+    rtlLabel.backgroundColor = [UIColor clearColor];
+    rtlLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    rtlLabel.textAlignment = NSTextAlignmentRight;
+    
+    return rtlLabel;
+}
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 35;
+}
 
 @end
