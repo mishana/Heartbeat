@@ -25,6 +25,8 @@
 // Algorithm
 @property (nonatomic , strong) Algorithm *algorithm;
 @property (strong , nonatomic) NSDate *algorithmStartTime;
+@property (strong , nonatomic) NSDate *bpmFinalResultFirstTimeDetected;
+
 @property (strong, nonatomic) Settings *settings;
 
 // view Outlets
@@ -32,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *fingerDetectLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *finalBPMLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeTillResultLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *beatingHeart;
@@ -65,6 +68,14 @@
     return _algorithmStartTime;
 }
 
+- (NSDate *)bpmFinalResultFirstTimeDetected
+{
+    if (!_bpmFinalResultFirstTimeDetected) {
+        _bpmFinalResultFirstTimeDetected = [NSDate date];
+    }
+    return _bpmFinalResultFirstTimeDetected;
+}
+
 - (Algorithm *)algorithm
 {
     if (!_algorithm) {
@@ -84,10 +95,11 @@
     self.algorithm = nil;
     
     // tab bar configuration
-    
+    /*
     self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
     self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
     self.tabBarController.tabBar.translucent = NO;
+    */
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -112,9 +124,11 @@
     [super viewWillDisappear:animated];
     
     // tab bar configuration
+    /*
     self.tabBarController.tabBar.barTintColor = self.tabBarColor;
     self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
     self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
+     */
     
     dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
     
@@ -138,9 +152,11 @@
     //------------------DESIGN BLOCK-----------------
     
     // tab bar configuration
+    /*
     self.tabBarColor = self.tabBarController.tabBar.barTintColor;
     self.tabBarItemColor = self.tabBarController.tabBar.tintColor;
     self.tabBarTranslucent = self.tabBarController.tabBar.translucent;
+     */
 
     // background configuration
     UIImage *backgroundImage = [UIImage imageNamed:@"Background_2.jpg"];
@@ -207,6 +223,8 @@
 
 //
 
+#define TIME_TO_DETERMINE_BPM_FINAL_RESULT 3 // in seconds
+
 // Delegate routine that is called when a sample buffer was written
 - (void)captureOutput:(AVCaptureOutput *)captureOutput
 didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
@@ -231,10 +249,16 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         dispatch_sync(dispatch_get_main_queue(), ^{
             
             if (self.algorithm.isFinalResultDetermined) {
+                if (TIME_TO_DETERMINE_BPM_FINAL_RESULT <= [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]) {
+                    #warning - incomplete implementation
+                }
                 self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d" , (int)self.algorithm.bpmLatestResult];
-                #warning - incomplete implementation
+                self.timeTillResultLabel.text = [NSString stringWithFormat:@"time till result: %.01fs" , TIME_TO_DETERMINE_BPM_FINAL_RESULT - [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]];
+                
             } else {
                 self.finalBPMLabel.text = @"Final BPM:   ";
+                self.timeTillResultLabel.text = @"time till result:   ";
+                self.bpmFinalResultFirstTimeDetected = nil;
                 #warning - incomplete implementation
             }
             
@@ -250,8 +274,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d", 0];
                 self.algorithm = nil;
                 self.algorithmStartTime = nil;
+                self.bpmFinalResultFirstTimeDetected = nil;
                 return;
-                
             }
             else {
                 self.fingerDetectLabel.text = @"האלגוריתם התחיל";

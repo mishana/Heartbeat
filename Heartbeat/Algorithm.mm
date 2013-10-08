@@ -125,11 +125,17 @@
     return _isCalibrationOver;
 }
 
-#define FINAL_RESULT_MARGIN 0.5
+#define FINAL_RESULT_MARGIN 1.5
 
 - (BOOL)isFinalResultDetermined{
-    if (self.isCalibrationOver && (fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - self.calibrationDuration-self.windowSize -1] doubleValue]) <= FINAL_RESULT_MARGIN)) {
-        return _isFinalResultDetermined = YES;
+    if (self.isCalibrationOver) {
+        if ((fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - (int)((self.calibrationDuration-self.windowSize -1)/2)] doubleValue]) <= FINAL_RESULT_MARGIN/2) &&
+            (fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - self.calibrationDuration-self.windowSize -1] doubleValue]) <= FINAL_RESULT_MARGIN)) {
+                return _isFinalResultDetermined = YES;
+        }
+        else {
+            _isFinalResultDetermined = NO;//*
+        }
     }
     else {
         _isFinalResultDetermined = NO;//*
