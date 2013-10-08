@@ -73,7 +73,7 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="השמעת צפצוץ עם דופק" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sho-Pm-ikw">
-                                                    <rect key="frame" x="163" y="11" width="157" height="21"/>
+                                                    <rect key="frame" x="158" y="11" width="157" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -90,7 +90,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="עצירה אוטומטית לאחר 20 שניות" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IW-ZG-OrH">
-                                                    <rect key="frame" x="104" y="11" width="216" height="21"/>
+                                                    <rect key="frame" x="99" y="11" width="216" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -121,7 +121,7 @@
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="מצב מתמשך" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-sA-Vhx">
-                                                    <rect key="frame" x="234" y="11" width="86" height="21"/>
+                                                    <rect key="frame" x="229" y="11" width="86" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -212,10 +212,10 @@
             </objects>
             <point key="canvasLocation" x="1751" y="804"/>
         </scene>
-        <!--Help View Controller - הוראות-->
+        <!--Results View Controller - תוצאות-->
         <scene sceneID="Tkh-5A-tuK">
             <objects>
-                <viewController id="9Ug-15-Cc5" customClass="HelpViewController" sceneMemberID="viewController">
+                <viewController id="9Ug-15-Cc5" customClass="ResultsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1iS-fP-5Y9"/>
                         <viewControllerLayoutGuide type="bottom" id="tXJ-jS-eRp"/>
@@ -223,9 +223,9 @@
                     <view key="view" contentMode="scaleToFill" id="1cy-up-z7K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.94337930484693877" green="0.93924553065626548" blue="0.88337817184426926" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="הוראות" image="Help_full.png" id="K5b-Db-W7d"/>
+                    <tabBarItem key="tabBarItem" title="תוצאות" image="Help_full.png" id="K5b-Db-W7d"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXh-zs-hhr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
