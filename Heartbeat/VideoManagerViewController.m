@@ -51,7 +51,9 @@
 
 - (Settings *)settings
 {
-    if (!_settings) _settings = [Settings currentSettings];
+    if (!_settings)
+        _settings = [Settings currentSettings];
+    
     return _settings;
 }
 
@@ -76,6 +78,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.settings = nil;
+    self.algorithmStartTime = nil;
+    self.algorithm = nil;
     
     // tab bar configuration
     
@@ -109,10 +115,6 @@
     self.tabBarController.tabBar.barTintColor = self.tabBarColor;
     self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
     self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
-    
-    self.settings = nil;
-    self.algorithmStartTime = nil;
-    self.algorithm = nil;
     
     dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
     

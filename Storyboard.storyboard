@@ -204,6 +204,7 @@
                     <navigationItem key="navigationItem" title="הגדרות" id="lWe-PW-dr5"/>
                     <connections>
                         <outlet property="autoStopAfterSwitch" destination="Oc5-Pq-MoL" id="Ro1-7n-QcT"/>
+                        <outlet property="beepSwitch" destination="ErI-bZ-cd9" id="Zk9-HP-VRu"/>
                         <outlet property="continuesModeSwitch" destination="Jgh-hZ-sPK" id="DHn-BJ-5k6"/>
                     </connections>
                 </tableViewController>

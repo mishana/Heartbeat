@@ -15,6 +15,7 @@
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UISwitch *autoStopAfterSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *continuesModeSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *beepSwitch;
 
 @end
 
@@ -57,6 +58,10 @@
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.autoStopAfterSwitch.on = self.settings.autoStopAfter;
+    self.continuesModeSwitch.on = self.settings.isContinuousMode;
+    self.beepSwitch.on = self.settings.beepWithPulse;
 }
 
 - (void)didReceiveMemoryWarning
