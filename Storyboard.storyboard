@@ -272,6 +272,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGR-l5-LLu">
+                                        <rect key="frame" x="70" y="397" width="149" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqI-pp-y7g">
+                                        <rect key="frame" x="88" y="202" width="144" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.11764705882352941" green="0.41176470588235292" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -286,7 +300,9 @@
                         <outlet property="beatingHeart" destination="xOc-tU-l2K" id="ObE-7h-NN3"/>
                         <outlet property="bpmLabel" destination="tbc-1V-7B1" id="rLR-cX-lHN"/>
                         <outlet property="finalBPMLabel" destination="SGq-Cw-loV" id="7U5-5b-Hzt"/>
+                        <outlet property="fingerDetectLabel" destination="nqI-pp-y7g" id="Sh2-Ez-e5t"/>
                         <outlet property="timeLabel" destination="6g4-xu-kHe" id="6XM-RS-F1m"/>
+                        <outlet property="timeTillResultLabel" destination="LGR-l5-LLu" id="IPF-vJ-6ih"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqv-SE-9Fp" userLabel="First Responder" sceneMemberID="firstResponder"/>
