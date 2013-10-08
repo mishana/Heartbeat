@@ -45,6 +45,15 @@
 		397A383E17F336EE00BA69F3 /* ios-7-green-fade@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 397A383C17F336EE00BA69F3 /* ios-7-green-fade@2x.png */; };
 		397A384117F33D4600BA69F3 /* stawberry_iPhone@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 397A383F17F33D4600BA69F3 /* stawberry_iPhone@2x.jpg */; };
 		397A384217F33D4600BA69F3 /* Wall-2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 397A384017F33D4600BA69F3 /* Wall-2@2x.jpg */; };
+		3986F127180426EF000537CE /* Background_2@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3986F126180426EF000537CE /* Background_2@2x.jpg */; };
+		3986F1301804273A000537CE /* lamb_Line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3986F1281804273A000537CE /* lamb_Line@2x.png */; };
+		3986F1311804273A000537CE /* Lamb_Full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3986F1291804273A000537CE /* Lamb_Full@2x.png */; };
+		3986F1321804273A000537CE /* Heart_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3986F12A1804273A000537CE /* Heart_line@2x.png */; };
+		3986F1331804273A000537CE /* Heart_Full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3986F12B1804273A000537CE /* Heart_Full@2x.png */; };
+		3986F1341804273A000537CE /* Help_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3986F12C1804273A000537CE /* Help_full@2x.png */; };
+		3986F1351804273A000537CE /* Help_Line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3986F12D1804273A000537CE /* Help_Line@2x.png */; };
+		3986F1361804273A000537CE /* Settings_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3986F12E1804273A000537CE /* Settings_full@2x.png */; };
+		3986F1371804273A000537CE /* Settings_Line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3986F12F1804273A000537CE /* Settings_Line@2x.png */; };
 		39ABE22017EE38B600CD6815 /* WelcomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */; };
 		39AC87BC17F66F64003A39B1 /* iphone_JPG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */; };
 		39FC1BC217F68311003A4390 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FC1BC117F68311003A4390 /* HelpViewController.m */; };
@@ -101,6 +110,15 @@
 		397A383C17F336EE00BA69F3 /* ios-7-green-fade@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-7-green-fade@2x.png"; sourceTree = "<group>"; };
 		397A383F17F33D4600BA69F3 /* stawberry_iPhone@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "stawberry_iPhone@2x.jpg"; sourceTree = "<group>"; };
 		397A384017F33D4600BA69F3 /* Wall-2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Wall-2@2x.jpg"; sourceTree = "<group>"; };
+		3986F126180426EF000537CE /* Background_2@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Background_2@2x.jpg"; sourceTree = "<group>"; };
+		3986F1281804273A000537CE /* lamb_Line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lamb_Line@2x.png"; sourceTree = "<group>"; };
+		3986F1291804273A000537CE /* Lamb_Full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lamb_Full@2x.png"; sourceTree = "<group>"; };
+		3986F12A1804273A000537CE /* Heart_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heart_line@2x.png"; sourceTree = "<group>"; };
+		3986F12B1804273A000537CE /* Heart_Full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heart_Full@2x.png"; sourceTree = "<group>"; };
+		3986F12C1804273A000537CE /* Help_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Help_full@2x.png"; sourceTree = "<group>"; };
+		3986F12D1804273A000537CE /* Help_Line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Help_Line@2x.png"; sourceTree = "<group>"; };
+		3986F12E1804273A000537CE /* Settings_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings_full@2x.png"; sourceTree = "<group>"; };
+		3986F12F1804273A000537CE /* Settings_Line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings_Line@2x.png"; sourceTree = "<group>"; };
 		39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeScreenViewController.h; sourceTree = "<group>"; };
 		39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeScreenViewController.m; sourceTree = "<group>"; };
 		39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "iphone_JPG@2x.jpg"; sourceTree = "<group>"; };
@@ -187,6 +205,15 @@
 				3947F74B17F1B0930026E415 /* heart-rate.png */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				397A383117F24AB000BA69F3 /* settings 11@2x.png */,
+				3986F126180426EF000537CE /* Background_2@2x.jpg */,
+				3986F1281804273A000537CE /* lamb_Line@2x.png */,
+				3986F1291804273A000537CE /* Lamb_Full@2x.png */,
+				3986F12A1804273A000537CE /* Heart_line@2x.png */,
+				3986F12B1804273A000537CE /* Heart_Full@2x.png */,
+				3986F12C1804273A000537CE /* Help_full@2x.png */,
+				3986F12D1804273A000537CE /* Help_Line@2x.png */,
+				3986F12E1804273A000537CE /* Settings_full@2x.png */,
+				3986F12F1804273A000537CE /* Settings_Line@2x.png */,
 				3924994017F7B4B0001928DD /* beep-21.wav */,
 				39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */,
 				3924993E17F79359001928DD /* heart@2x.png */,
@@ -281,24 +308,33 @@
 			files = (
 				3947F74C17F1B0930026E415 /* heart-rate.png in Resources */,
 				397A383D17F336EE00BA69F3 /* pink-ios-7-fade@2x.png in Resources */,
+				3986F1321804273A000537CE /* Heart_line@2x.png in Resources */,
 				397A384117F33D4600BA69F3 /* stawberry_iPhone@2x.jpg in Resources */,
 				3924994117F7B4B0001928DD /* beep-21.wav in Resources */,
 				397A383817F3284F00BA69F3 /* blue-green@2x.png in Resources */,
 				397A384217F33D4600BA69F3 /* Wall-2@2x.jpg in Resources */,
 				394F4E7D17DF62E5001C5049 /* InfoPlist.strings in Resources */,
 				397A383A17F334F100BA69F3 /* green-blue-fade@2x.png in Resources */,
+				3986F1361804273A000537CE /* Settings_full@2x.png in Resources */,
+				3986F1301804273A000537CE /* lamb_Line@2x.png in Resources */,
+				3986F127180426EF000537CE /* Background_2@2x.jpg in Resources */,
 				394F4E8517DF62E5001C5049 /* Default.png in Resources */,
 				397A382F17F2493B00BA69F3 /* settings 12@2x.png in Resources */,
 				3947F74E17F1B1410026E415 /* spanner.png in Resources */,
+				3986F1341804273A000537CE /* Help_full@2x.png in Resources */,
 				394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */,
+				3986F1351804273A000537CE /* Help_Line@2x.png in Resources */,
+				3986F1331804273A000537CE /* Heart_Full@2x.png in Resources */,
 				394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */,
 				3924993F17F79359001928DD /* heart@2x.png in Resources */,
 				394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */,
 				397A383417F24AB000BA69F3 /* settings 11@2x.png in Resources */,
 				3924993D17F771FD001928DD /* beep-7.wav in Resources */,
 				397A382E17F2493B00BA69F3 /* info@2x.png in Resources */,
+				3986F1311804273A000537CE /* Lamb_Full@2x.png in Resources */,
 				397A383517F24AB000BA69F3 /* settings 4@2x.png in Resources */,
 				39AC87BC17F66F64003A39B1 /* iphone_JPG@2x.jpg in Resources */,
+				3986F1371804273A000537CE /* Settings_Line@2x.png in Resources */,
 				397A383017F2493B00BA69F3 /* heart +@2x.png in Resources */,
 				397A383E17F336EE00BA69F3 /* ios-7-green-fade@2x.png in Resources */,
 				397A383617F24AB000BA69F3 /* settings 3@2x.png in Resources */,
