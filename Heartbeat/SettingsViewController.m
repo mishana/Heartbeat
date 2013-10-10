@@ -29,6 +29,12 @@
 
 //
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -41,6 +47,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        self.tabBarController.tabBarItem.selectedImage = [UIImage imageNamed:@"Settings_line.png"];
     }
     return self;
 }
@@ -49,7 +57,7 @@
 {
     //------------------DESIGN BLOCK-----------------
 
-    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.216 green:0.326 blue:0.690 alpha:1.0];
+    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.177 green:0.341 blue:0.945 alpha:0.8];
 
     
     //self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor whiteColor] };

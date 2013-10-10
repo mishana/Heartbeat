@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Jor-mS-9rW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Jor-mS-9rW">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -261,8 +261,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="heart.png" translatesAutoresizingMaskIntoConstraints="NO" id="xOc-tU-l2K">
-                                        <rect key="frame" x="139" y="232" width="42" height="42"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Heart_Full.png" translatesAutoresizingMaskIntoConstraints="NO" id="xOc-tU-l2K">
+                                        <rect key="frame" x="139" y="263" width="42" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Final BPM:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGq-Cw-loV">
@@ -280,12 +280,23 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqI-pp-y7g">
-                                        <rect key="frame" x="88" y="202" width="144" height="22"/>
+                                        <rect key="frame" x="20" y="202" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlc-sk-k2I">
+                                        <rect key="frame" x="284" y="48" width="22" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="1Kk-lX-XJb" kind="modal" id="Ot8-8Y-T6E"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.11764705882352941" green="0.41176470588235292" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -301,6 +312,7 @@
                         <outlet property="bpmLabel" destination="tbc-1V-7B1" id="rLR-cX-lHN"/>
                         <outlet property="finalBPMLabel" destination="SGq-Cw-loV" id="7U5-5b-Hzt"/>
                         <outlet property="fingerDetectLabel" destination="nqI-pp-y7g" id="Sh2-Ez-e5t"/>
+                        <outlet property="helpButton" destination="Hlc-sk-k2I" id="RaE-JH-RRF"/>
                         <outlet property="timeLabel" destination="6g4-xu-kHe" id="6XM-RS-F1m"/>
                         <outlet property="timeTillResultLabel" destination="LGR-l5-LLu" id="IPF-vJ-6ih"/>
                     </connections>
@@ -369,13 +381,16 @@
     </scenes>
     <resources>
         <image name="Heart_Full.png" width="33" height="30"/>
+        <image name="Heart_Full.png" width="33" height="30"/>
         <image name="Help_full.png" width="32" height="33"/>
         <image name="Settings_full.png" width="35" height="30"/>
-        <image name="heart.png" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ot8-8Y-T6E"/>
+    </inferredMetricsTieBreakers>
 </document>

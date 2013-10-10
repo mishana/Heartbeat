@@ -39,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *beatingHeart;
 
+@property (weak, nonatomic) IBOutlet UIButton *helpButton;
+
 // tab bar configuration properties
 @property (strong, nonatomic) UIColor *tabBarColor;
 @property (strong, nonatomic) UIColor *tabBarItemColor;
@@ -95,11 +97,11 @@
     self.algorithm = nil;
     
     // tab bar configuration
-    /*
+    ///*
     self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
     self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
     self.tabBarController.tabBar.translucent = NO;
-    */
+    //*/
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -124,11 +126,11 @@
     [super viewWillDisappear:animated];
     
     // tab bar configuration
-    /*
+    ///*
     self.tabBarController.tabBar.barTintColor = self.tabBarColor;
     self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
     self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
-     */
+     //*/
     
     dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
     
@@ -151,12 +153,14 @@
     
     //------------------DESIGN BLOCK-----------------
     
+    self.helpButton.tintColor = [UIColor whiteColor];
+    
     // tab bar configuration
-    /*
+    ///*
     self.tabBarColor = self.tabBarController.tabBar.barTintColor;
     self.tabBarItemColor = self.tabBarController.tabBar.tintColor;
     self.tabBarTranslucent = self.tabBarController.tabBar.translucent;
-     */
+     //*/
 
     // background configuration
     UIImage *backgroundImage = [UIImage imageNamed:@"Background_2.jpg"];
