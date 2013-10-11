@@ -96,12 +96,41 @@
     self.algorithmStartTime = nil;
     self.algorithm = nil;
     
-    // tab bar configuration
-    ///*
-    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
-    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
-    self.tabBarController.tabBar.translucent = NO;
-    //*/
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+
+        // tab bar configuration
+        ///*
+        self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
+        self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+        self.tabBarController.tabBar.translucent = NO;
+        
+        // set selected and unselected icons
+        UITabBarItem *item0 = [self.tabBarController.tabBar.items objectAtIndex:0];
+        UITabBarItem *item1 = [self.tabBarController.tabBar.items objectAtIndex:1];
+        UITabBarItem *item2 = [self.tabBarController.tabBar.items objectAtIndex:2];
+        
+        // set colors of selected text
+        [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.tabBarItemColor, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        
+        [item1 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        
+        [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.tabBarItemColor, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        
+        // set colors of un-selected text
+        [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        
+        [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        
+        // this way, the icon gets rendered as it is (thus, it needs to be green in this example)
+        item0.image = [[UIImage imageNamed:@"pieChart_Line.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        item2.image = [[UIImage imageNamed:@"Settings_Line-1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        // this icon is used for selected tab and it will get tinted as defined in self.tabBar.tintColor
+        item0.selectedImage = [UIImage imageNamed:@"pieChart_full.png"];
+        item1.selectedImage = [UIImage imageNamed:@"Heart_Full.png"];
+        item2.selectedImage = [UIImage imageNamed:@"settings_full-1.png"];
+        //*/
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -125,12 +154,32 @@
 {
     [super viewWillDisappear:animated];
     
-    // tab bar configuration
-    ///*
-    self.tabBarController.tabBar.barTintColor = self.tabBarColor;
-    self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
-    self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
-     //*/
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+        
+        // tab bar configuration
+        ///*
+        self.tabBarController.tabBar.barTintColor = self.tabBarColor;
+        self.tabBarController.tabBar.tintColor = self.tabBarItemColor;
+        self.tabBarController.tabBar.translucent = self.isTabBarTranslucent;
+        
+        // set selected and unselected icons
+        UITabBarItem *item0 = [self.tabBarController.tabBar.items objectAtIndex:0];
+        UITabBarItem *item1 = [self.tabBarController.tabBar.items objectAtIndex:1];
+        UITabBarItem *item2 = [self.tabBarController.tabBar.items objectAtIndex:2];
+        
+        // set colors of un-selected text
+        [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        
+        [item1 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        
+        [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        
+        // this way, the icon gets rendered as it is (thus, it needs to be green in this example)
+        item0.image = [UIImage imageNamed:@"pieChart_Line.png"];
+        item1.image = [UIImage imageNamed:@"Heart_line.png"];
+        item2.image = [UIImage imageNamed:@"Settings_Line-1.png"];
+        //*/
+    }
     
     dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
     
@@ -155,12 +204,15 @@
     
     self.helpButton.tintColor = [UIColor whiteColor];
     
-    // tab bar configuration
-    ///*
-    self.tabBarColor = self.tabBarController.tabBar.barTintColor;
-    self.tabBarItemColor = self.tabBarController.tabBar.tintColor;
-    self.tabBarTranslucent = self.tabBarController.tabBar.translucent;
-     //*/
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+
+        // tab bar configuration
+        ///*
+        self.tabBarColor = self.tabBarController.tabBar.barTintColor;
+        self.tabBarItemColor = self.tabBarController.tabBar.tintColor;
+        self.tabBarTranslucent = self.tabBarController.tabBar.translucent;
+        //*/
+    }
 
     // background configuration
     UIImage *backgroundImage = [UIImage imageNamed:@"Background_2.jpg"];

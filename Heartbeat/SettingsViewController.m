@@ -47,8 +47,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
-        self.tabBarController.tabBarItem.selectedImage = [UIImage imageNamed:@"Settings_line.png"];
     }
     return self;
 }
@@ -57,10 +55,13 @@
 {
     //------------------DESIGN BLOCK-----------------
 
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+
     //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.177 green:0.341 blue:0.945 alpha:0.8];
 
     
     //self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor whiteColor] };
+    }
     
     //-----------------------------------------------
     

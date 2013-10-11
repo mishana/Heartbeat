@@ -58,6 +58,10 @@
 		3986F13D18043F66000537CE /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = 3986F13C18043F66000537CE /* Result.m */; };
 		39ABE22017EE38B600CD6815 /* WelcomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */; };
 		39AC87BC17F66F64003A39B1 /* iphone_JPG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */; };
+		39B96CFB180759E6004651F8 /* pieChart_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96CF9180759E6004651F8 /* pieChart_full@2x.png */; };
+		39B96CFC180759E6004651F8 /* pieChart_Line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96CFA180759E6004651F8 /* pieChart_Line@2x.png */; };
+		39B96CFF18075B04004651F8 /* settings_full-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96CFD18075B04004651F8 /* settings_full-1@2x.png */; };
+		39B96D0018075B04004651F8 /* Settings_Line-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96CFE18075B04004651F8 /* Settings_Line-1@2x.png */; };
 		39FC1BC217F68311003A4390 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FC1BC117F68311003A4390 /* HelpViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +132,10 @@
 		39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeScreenViewController.h; sourceTree = "<group>"; };
 		39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeScreenViewController.m; sourceTree = "<group>"; };
 		39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "iphone_JPG@2x.jpg"; sourceTree = "<group>"; };
+		39B96CF9180759E6004651F8 /* pieChart_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pieChart_full@2x.png"; sourceTree = "<group>"; };
+		39B96CFA180759E6004651F8 /* pieChart_Line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pieChart_Line@2x.png"; sourceTree = "<group>"; };
+		39B96CFD18075B04004651F8 /* settings_full-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_full-1@2x.png"; sourceTree = "<group>"; };
+		39B96CFE18075B04004651F8 /* Settings_Line-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings_Line-1@2x.png"; sourceTree = "<group>"; };
 		39FC1BC017F68311003A4390 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		39FC1BC117F68311003A4390 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,6 +219,10 @@
 				2CD3957017E133530019F1A5 /* project_script_3 */,
 				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
 				3947F74B17F1B0930026E415 /* heart-rate.png */,
+				39B96CF9180759E6004651F8 /* pieChart_full@2x.png */,
+				39B96CFA180759E6004651F8 /* pieChart_Line@2x.png */,
+				39B96CFD18075B04004651F8 /* settings_full-1@2x.png */,
+				39B96CFE18075B04004651F8 /* Settings_Line-1@2x.png */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				397A383117F24AB000BA69F3 /* settings 11@2x.png */,
 				3986F126180426EF000537CE /* Background_2@2x.jpg */,
@@ -324,6 +336,7 @@
 				397A383817F3284F00BA69F3 /* blue-green@2x.png in Resources */,
 				397A384217F33D4600BA69F3 /* Wall-2@2x.jpg in Resources */,
 				394F4E7D17DF62E5001C5049 /* InfoPlist.strings in Resources */,
+				39B96CFC180759E6004651F8 /* pieChart_Line@2x.png in Resources */,
 				397A383A17F334F100BA69F3 /* green-blue-fade@2x.png in Resources */,
 				3986F1361804273A000537CE /* Settings_full@2x.png in Resources */,
 				3986F1301804273A000537CE /* lamb_Line@2x.png in Resources */,
@@ -331,6 +344,7 @@
 				394F4E8517DF62E5001C5049 /* Default.png in Resources */,
 				397A382F17F2493B00BA69F3 /* settings 12@2x.png in Resources */,
 				3947F74E17F1B1410026E415 /* spanner.png in Resources */,
+				39B96D0018075B04004651F8 /* Settings_Line-1@2x.png in Resources */,
 				3986F1341804273A000537CE /* Help_full@2x.png in Resources */,
 				394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */,
 				3986F1351804273A000537CE /* Help_Line@2x.png in Resources */,
@@ -341,12 +355,14 @@
 				397A383417F24AB000BA69F3 /* settings 11@2x.png in Resources */,
 				3924993D17F771FD001928DD /* beep-7.wav in Resources */,
 				397A382E17F2493B00BA69F3 /* info@2x.png in Resources */,
+				39B96CFF18075B04004651F8 /* settings_full-1@2x.png in Resources */,
 				3986F1311804273A000537CE /* Lamb_Full@2x.png in Resources */,
 				397A383517F24AB000BA69F3 /* settings 4@2x.png in Resources */,
 				39AC87BC17F66F64003A39B1 /* iphone_JPG@2x.jpg in Resources */,
 				3986F1371804273A000537CE /* Settings_Line@2x.png in Resources */,
 				397A383017F2493B00BA69F3 /* heart +@2x.png in Resources */,
 				397A383E17F336EE00BA69F3 /* ios-7-green-fade@2x.png in Resources */,
+				39B96CFB180759E6004651F8 /* pieChart_full@2x.png in Resources */,
 				397A383617F24AB000BA69F3 /* settings 3@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
