@@ -276,11 +276,15 @@
 {
     [super viewDidLoad];
     
+    //------------------Notifications BLOCK-----------------
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationEnteredForeground) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationEnteredBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    //------------------------------------------------------
+
     
     //------------------DESIGN BLOCK-----------------
     
@@ -298,8 +302,6 @@
 
     // background configuration
     UIImage *backgroundImage = [UIImage imageNamed:@"Background_2.jpg"];
-    /*UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
-    [self.view addSubview:backgroundView];*/
     
     self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.backgroundView.alpha = 1;
@@ -357,6 +359,8 @@
     //
     
     [self.session startRunning];*/
+    self.beatingHeart.layer.shadowColor = [[UIColor redColor] CGColor];
+
 }
 
 //
@@ -428,9 +432,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         });
         
         [self playBeepSound];
-        
     });
-    
 }
 
 //
@@ -439,6 +441,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     if (self.settings.beepWithPulse && self.algorithm.isPeakInLastFrame){
         [self.BeepSound play];
+        [self heartAnimation];
     }
 }
 
@@ -446,11 +449,26 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     /*
     [UIView transitionWithView:self.beatingHeart
-                      duration:0.2
+                      duration:1
                        options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{ self.beatingHeart.tintColor = [UIColor redColor];}
-                    completion:NULL];
-    self.beatingHeart.tintColor = [UIColor grayColor];
+                    animations:^{
+                        self.beatingHeart.layer.shadowColor = [[UIColor redColor] CGColor];
+                        self.beatingHeart.layer.shadowOpacity = 1.0;
+                        self.beatingHeart.layer.shadowRadius = 3;
+                        self.beatingHeart.layer.zPosition = 1;
+                    }
+                    completion:^(BOOL fin){
+                        if (fin) {
+                            [UIView transitionWithView:self.beatingHeart
+                                              duration:0.3
+                                               options:UIViewAnimationOptionTransitionCrossDissolve
+                                            animations:^{
+                                                self.beatingHeart.layer.shadowOpacity = 0;
+                                                self.beatingHeart.layer.shadowRadius = 0;
+                                            }
+                                            completion:NULL];
+                        }
+                    }];
      */
 }
 
