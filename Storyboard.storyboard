@@ -381,6 +381,7 @@
     </scenes>
     <resources>
         <image name="Heart_Full.png" width="33" height="30"/>
+        <image name="Heart_Full.png" width="33" height="30"/>
         <image name="Help_full.png" width="32" height="33"/>
         <image name="Settings_full.png" width="35" height="30"/>
     </resources>
