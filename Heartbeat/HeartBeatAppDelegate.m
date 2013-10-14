@@ -7,14 +7,21 @@
 //
 
 #import "HeartBeatAppDelegate.h"
-#import "VideoManagerViewController.h"
+#import "WelcomeScreenViewController.h"
 
 @implementation HeartBeatAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-        return YES;
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"wasLaunchedBefore"]) {
+        //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];
+    } else {
+        //self.window.rootViewController = [[WelcomeScreenViewController alloc] initWithNibName:@"WelcomeScreenViewController" bundle:nil];
+    }
+    //[self.window makeKeyAndVisible];
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

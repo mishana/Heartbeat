@@ -61,6 +61,9 @@
 
     
     //self.navigationController.navigationBar.titleTextAttributes = @{ UITextAttributeTextColor : [UIColor whiteColor] };
+        
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     }
     
     //-----------------------------------------------
