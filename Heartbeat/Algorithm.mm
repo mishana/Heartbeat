@@ -38,8 +38,8 @@
 #define FPS 30
 #define WINDOW_SIZE 12
 #define WINDOW_SIZE_FOR_FILTER_CALCULATION 60// should be at least WINDOW_SIZE*2
-#define CALIBRATION_DURATION 120
-#define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 120
+#define CALIBRATION_DURATION 90
+#define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 90
 
 - (CGFloat)frameRate{
     if (!_frameRate) {
@@ -53,6 +53,13 @@
         _windowSize = WINDOW_SIZE;
     }
     return _windowSize;
+}
+
+- (NSUInteger)filterWindowSize{
+    if (!_filterWindowSize) {
+        _filterWindowSize = WINDOW_SIZE_FOR_FILTER_CALCULATION;
+    }
+    return _filterWindowSize;
 }
 
 - (NSUInteger)calibrationDuration{
@@ -257,12 +264,12 @@
     int calib = self.calibrationDuration;
     
     //
-    if (i <= WINDOW_SIZE_FOR_FILTER_CALCULATION) {
+    if (i <= self.filterWindowSize) {
         return;// continue, nothing to be done yet
     }
     
     //
-    int dynamicwindowSize = WINDOW_SIZE_FOR_FILTER_CALCULATION+1;
+    int dynamicwindowSize = self.filterWindowSize+1;
     double x[dynamicwindowSize] , y[dynamicwindowSize];
     [self getLatestPoints:dynamicwindowSize andSetIntoDoubleArray:x];
     [self Substract:[self mean:x withSize:dynamicwindowSize] fromArray:x withSize:dynamicwindowSize];
@@ -278,8 +285,8 @@
         
         if ([self.isPeak[i-w-1] boolValue]) {
             self.firstPeakPlace = i-w-1;
-            self.bpmValues[i-w-1] = @(60*self.frameRate/w);
-            self.bpmAverageValues[i-w-1] = @([self.bpmValues[i-w-1] doubleValue]);
+            self.bpmValues[i-w-1] = @(DEFAULT_BPM_VALUE);
+            self.bpmAverageValues[i-w-1] = @(DEFAULT_BPM_VALUE);
         }
         
         return;// continue
@@ -287,7 +294,7 @@
     
     if (i < calib + (self.firstPeakPlace + w + 1)) {
         
-        self.isPeak[i-w-1] = @([self isPeak:z :w] && ![self.isPeak[i-w-2] boolValue]);// could also check self.isPeak[i-w-3]
+        self.isPeak[i-w-1] = @([self isPeak:z :w] && (![self.isPeak[i-w-2] boolValue] && ![self.isPeak[i-w-3] boolValue]));
         
         self.numOfPeaks += [self.isPeak[i-w-1] boolValue];
         
@@ -297,14 +304,14 @@
         }
         
         self.bpmValues[i-w-1] = @((self.numOfPeaks/(frames/self.frameRate))*60);
-        int k = i-(self.firstPeakPlace+w+1);
+        int k = i-(self.firstPeakPlace+w+1) + 3;// +3 to improve calibration result for low bpm
         self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+1) + [self.bpmValues[i-w-1] doubleValue] * 1/(k+1));
     }
     
     else {
         //calibration is over
         
-        self.isPeak[i-w-1] = @(([self isPeak:z :w] && ![self.isPeak[i-w-2] boolValue]) || [self isMissedPeak]);// could also check self.isPeak[i-w-3]
+        self.isPeak[i-w-1] = @(([self isPeak:z :w] && (![self.isPeak[i-w-2] boolValue] && ![self.isPeak[i-w-3] boolValue])) || [self isMissedPeak]);
         
         self.numOfPeaks += [self.isPeak[i-w-1] boolValue] - [self.isPeak[i-w-1-calib] boolValue];
         

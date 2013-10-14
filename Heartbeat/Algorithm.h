@@ -13,6 +13,7 @@
 @property (nonatomic , readonly) NSUInteger framesCounter;
 @property (nonatomic , readwrite) CGFloat frameRate;// the frame rate of the video
 @property (nonatomic , readwrite) NSUInteger windowSize;// size in frames
+@property (nonatomic , readwrite) NSUInteger filterWindowSize;// duration in frames
 @property (nonatomic , readwrite) NSUInteger calibrationDuration;// duration in frames
 @property (nonatomic , readwrite) NSUInteger windowSizeForAverageCalculation;// size must be <= calibrationDuration
 
