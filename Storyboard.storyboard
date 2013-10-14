@@ -255,11 +255,11 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="NPM-Oe-MKs">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Result" id="NPM-Oe-MKs">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="9"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QRb-2L-m8a">
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Result" id="QRb-2L-m8a">
                                     <rect key="frame" x="0.0" y="350" width="320" height="9"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
@@ -269,6 +269,10 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.92156869173049927" green="0.92156869173049927" blue="0.92156869173049927" alpha="1" colorSpace="deviceRGB"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="ZCC-JG-VIK" appends="YES" id="eX9-pn-Af2"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="PND-gS-Npd"/>
                     <connections>
@@ -276,6 +280,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXh-zs-hhr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="ZCC-JG-VIK">
+                    <connections>
+                        <action selector="swipeResult:" destination="9Ug-15-Cc5" id="i2A-ti-E4P"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1751" y="-703"/>
         </scene>

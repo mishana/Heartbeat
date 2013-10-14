@@ -10,10 +10,17 @@
 
 @interface ResultsViewController () <UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *resultCollectionView;
+@property (nonatomic, strong) NSNumber *numOfResults;
 
 @end
 
 @implementation ResultsViewController
+
+- (NSNumber *)numOfResults
+{
+    if (!_numOfResults) _numOfResults = @(10);
+    return _numOfResults;
+}
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
@@ -27,7 +34,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 #warning need to update this later
-    return 10;
+    return [self.numOfResults integerValue];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -74,6 +81,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)swipeResult:(UISwipeGestureRecognizer *)gesture
+{
+    /*
+    CGPoint swipeLocation = [gesture locationInView:self.resultCollectionView];
+    NSIndexPath *indexPath = [self.resultCollectionView indexPathForItemAtPoint:swipeLocation];
+    
+    if (indexPath) {
+        self.numOfResults = @([self.numOfResults integerValue] - 1);
+        [self.resultCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+    }
+    */
 }
 
 @end
