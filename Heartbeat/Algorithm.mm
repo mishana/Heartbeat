@@ -109,8 +109,8 @@
 }
 
 #define FILTER_ORDER 3
-#define FILTER_LOWER_BAND 0.05
-#define FILTER_UPPER_BAND 0.2
+#define FILTER_LOWER_BAND 0.04 //36
+#define FILTER_UPPER_BAND 0.167 //150
 
 - (double**)buttterworthValues{
     if (!_buttterworthValues) {
@@ -132,11 +132,11 @@
     return _isCalibrationOver;
 }
 
-#define FINAL_RESULT_MARGIN 1.5
+#define FINAL_RESULT_MARGIN 1.2
 
 - (BOOL)isFinalResultDetermined{
     if (self.isCalibrationOver) {
-        if ((fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - (int)((self.calibrationDuration-self.windowSize -1)/2)] doubleValue]) <= FINAL_RESULT_MARGIN/2) &&
+        if ((fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - (int)((self.calibrationDuration-self.windowSize -1)/2)] doubleValue]) <= FINAL_RESULT_MARGIN*2/3) &&
             (fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - self.calibrationDuration-self.windowSize -1] doubleValue]) <= FINAL_RESULT_MARGIN)) {
                 return _isFinalResultDetermined = YES;
         }
@@ -242,6 +242,8 @@
 //
 
 #define DEFAULT_BPM_VALUE 72
+#define MIN_BPM_VALUE 36
+#define MAX_BPM_VALUE 150
 
 - (void)newFrameDetectedWithAverageColor:(UIColor *)color
 {
@@ -303,21 +305,25 @@
             frames = calib;
         }
         
-        self.bpmValues[i-w-1] = @((self.numOfPeaks/(frames/self.frameRate))*60);
-        int k = i-(self.firstPeakPlace+w+1) + 3;// +3 to improve calibration result for low bpm
+        self.bpmValues[i-w-1] = @(MIN(MAX((self.numOfPeaks/(frames/self.frameRate))*60 , MIN_BPM_VALUE), MAX_BPM_VALUE));
+        int k = i-(self.firstPeakPlace+w+1) + 5;// +5 to improve calibration result for low bpm
         self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+1) + [self.bpmValues[i-w-1] doubleValue] * 1/(k+1));
     }
     
     else {
         //calibration is over
         
-        self.isPeak[i-w-1] = @(([self isPeak:z :w] && (![self.isPeak[i-w-2] boolValue] && ![self.isPeak[i-w-3] boolValue])) || [self isMissedPeak]);
+        if (i < calib + (self.firstPeakPlace + w + 1) + 2.5*self.frameRate){
+            self.isPeak[i-w-1] = @([self isPeak:z :w] && (![self.isPeak[i-w-2] boolValue] && ![self.isPeak[i-w-3] boolValue]));
+        } else {
+            self.isPeak[i-w-1] = @(([self isPeak:z :w] && (![self.isPeak[i-w-2] boolValue] && ![self.isPeak[i-w-3] boolValue])) || [self isMissedPeak]);
+        }
         
         self.numOfPeaks += [self.isPeak[i-w-1] boolValue] - [self.isPeak[i-w-1-calib] boolValue];
         
         NSUInteger frames = calib;
         
-        self.bpmValues[i-w-1] = @((self.numOfPeaks/(frames/self.frameRate))*60);
+        self.bpmValues[i-w-1] = @(MIN(MAX((self.numOfPeaks/(frames/self.frameRate))*60 , MIN_BPM_VALUE), MAX_BPM_VALUE));
         
         double tempSum = 0;
         for (int j = 1; j <= self.windowSizeForAverageCalculation; j++) {
