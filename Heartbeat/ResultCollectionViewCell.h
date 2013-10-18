@@ -11,5 +11,6 @@
 
 @interface ResultCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet ResultView *resultView;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 
 @end

@@ -8,6 +8,10 @@
 
 #import "ResultView.h"
 
+@interface ResultView()
+
+@end
+
 @implementation ResultView
 
 - (void)drawRect:(CGRect)rect
@@ -20,7 +24,35 @@
     [[UIColor whiteColor] setFill];
     UIRectFill(self.bounds);
     
+    [self drawBpm];
     [self drawOneRect];
+}
+
+- (void)drawBpm
+{
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    
+    UIFont *cornerFont = [UIFont systemFontOfSize:self.bounds.size.width * 0.06];
+    
+    NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d\n%@", self.bpm, self.date] attributes:@{ NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : cornerFont, NSForegroundColorAttributeName : [UIColor purpleColor] }];
+    
+    CGRect textBounds;
+    textBounds.origin = CGPointMake(2.0, 2.0);
+    textBounds.size = [cornerText size];
+    [cornerText drawInRect:textBounds];
+}
+
+- (void)setBpm:(NSUInteger)bpm
+{
+    _bpm = bpm;
+    [self setNeedsDisplay];
+}
+
+- (void)setDate:(NSDate *)date
+{
+    _date = date;
+    [self setNeedsDisplay];
 }
 
 - (id)initWithFrame:(CGRect)frame

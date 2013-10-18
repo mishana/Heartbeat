@@ -81,6 +81,17 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)deleteFromResults
+{
+    NSMutableDictionary *mutableResultsFromUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:ALL_RESULTS_KEY] mutableCopy];
+    if (!mutableResultsFromUserDefaults)
+        mutableResultsFromUserDefaults = [[NSMutableDictionary alloc] init];
+    
+    [mutableResultsFromUserDefaults removeObjectForKey:[self.start description]];
+    [[NSUserDefaults standardUserDefaults] setObject:mutableResultsFromUserDefaults forKey:ALL_RESULTS_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (id)asPropertyList
 {
     return @{ START_KEY : self.start, END_KEY : self.end, BPM_KEY : @(self.bpm) };

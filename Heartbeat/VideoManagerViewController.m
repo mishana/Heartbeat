@@ -11,6 +11,7 @@
 #import "Algorithm.h"
 #import "Settings.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "Result.h"
 
 @interface VideoManagerViewController ()
 // AVFoundation
@@ -46,12 +47,20 @@
 @property (strong, nonatomic) UIColor *tabBarItemColor;
 @property (nonatomic, getter = isTabBarTranslucent) BOOL tabBarTranslucent;
 
+@property (nonatomic, strong) Result *result;
+
 @end
 
 @implementation VideoManagerViewController
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
+}
+
+- (Result *)result
+{
+    if (!_result) _result = [[Result alloc] init];
+    return _result;
 }
 
 - (Settings *)settings
@@ -392,6 +401,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             
             if (self.algorithm.isFinalResultDetermined) {
                 if (TIME_TO_DETERMINE_BPM_FINAL_RESULT <= [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]) {
+                    
+                    //------------------Results BLOCK-----------------
+
+                    self.result.bpm = (int)self.algorithm.bpmLatestResult;
+                    self.result = nil;
+                    self.tabBarController.selectedIndex = 0;
+                    
+                    //------------------------------------------------
                     #warning - incomplete implementation
                 }
                 self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d" , (int)self.algorithm.bpmLatestResult];
