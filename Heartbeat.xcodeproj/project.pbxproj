@@ -66,6 +66,9 @@
 		39B96D1518099B13004651F8 /* ResultCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B96D1418099B13004651F8 /* ResultCollectionViewCell.m */; };
 		39B96D1818099EAF004651F8 /* ResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B96D1718099EAF004651F8 /* ResultView.m */; };
 		39B96D1A180A9323004651F8 /* default_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96D19180A9323004651F8 /* default_bg.png */; };
+		39F6C0381811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */; };
+		39F6C03A1811FF5B00CC7F01 /* Mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F6C0391811FF5B00CC7F01 /* Mask@2x.png */; };
+		39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F6C03B1812065A00CC7F01 /* QuartzCore.framework */; };
 		39FC1BC217F68311003A4390 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FC1BC117F68311003A4390 /* HelpViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +150,10 @@
 		39B96D1618099EAF004651F8 /* ResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultView.h; sourceTree = "<group>"; };
 		39B96D1718099EAF004651F8 /* ResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultView.m; sourceTree = "<group>"; };
 		39B96D19180A9323004651F8 /* default_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_bg.png; sourceTree = "<group>"; };
+		39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FSHIghlightAnimationAdditions.h"; sourceTree = "<group>"; };
+		39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FSHIghlightAnimationAdditions.m"; sourceTree = "<group>"; };
+		39F6C0391811FF5B00CC7F01 /* Mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mask@2x.png"; sourceTree = "<group>"; };
+		39F6C03B1812065A00CC7F01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		39FC1BC017F68311003A4390 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		39FC1BC117F68311003A4390 /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */,
 				2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */,
 				2CD3957F17E37FEC0019F1A5 /* CoreMedia.framework in Frameworks */,
 				2CD3957B17E37FB70019F1A5 /* CoreVideo.framework in Frameworks */,
@@ -189,6 +197,7 @@
 		394F4E7117DF62E5001C5049 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39F6C03B1812065A00CC7F01 /* QuartzCore.framework */,
 				2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */,
 				2CD3957C17E37FC20019F1A5 /* CoreImage.framework */,
 				2CD3957A17E37FB70019F1A5 /* CoreVideo.framework */,
@@ -224,6 +233,8 @@
 				2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */,
 				2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */,
 				2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */,
+				39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */,
+				39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */,
 				394F4E9117DF6383001C5049 /* model */,
 				394F4E7917DF62E5001C5049 /* Supporting Files */,
 			);
@@ -235,6 +246,7 @@
 			children = (
 				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
+				39F6C0391811FF5B00CC7F01 /* Mask@2x.png */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
 				394F4E7B17DF62E5001C5049 /* InfoPlist.strings */,
 				2CD3957017E133530019F1A5 /* project_script_3 */,
@@ -375,6 +387,7 @@
 				3924993D17F771FD001928DD /* beep-7.wav in Resources */,
 				397A382E17F2493B00BA69F3 /* info@2x.png in Resources */,
 				39B96CFF18075B04004651F8 /* settings_full-1@2x.png in Resources */,
+				39F6C03A1811FF5B00CC7F01 /* Mask@2x.png in Resources */,
 				3986F1311804273A000537CE /* Lamb_Full@2x.png in Resources */,
 				397A383517F24AB000BA69F3 /* settings 4@2x.png in Resources */,
 				39AC87BC17F66F64003A39B1 /* iphone_JPG@2x.jpg in Resources */,
@@ -398,6 +411,7 @@
 				394F4E8317DF62E5001C5049 /* HeartBeatAppDelegate.m in Sources */,
 				39B96D1518099B13004651F8 /* ResultCollectionViewCell.m in Sources */,
 				3973F90F17F8EF5F000CF6D0 /* MenuTabBarViewController.m in Sources */,
+				39F6C0381811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m in Sources */,
 				3986F13A18043C3E000537CE /* ResultsViewController.m in Sources */,
 				3947F75117F1E88F0026E415 /* Settings.m in Sources */,
 				39B96D121807935C004651F8 /* MainNavigationViewController.m in Sources */,
