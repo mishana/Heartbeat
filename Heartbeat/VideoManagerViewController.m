@@ -11,6 +11,7 @@
 #import "Algorithm.h"
 #import "Settings.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "Result.h"
 
 @interface VideoManagerViewController ()
 // AVFoundation
@@ -45,6 +46,8 @@
 @property (strong, nonatomic) UIColor *tabBarColor;
 @property (strong, nonatomic) UIColor *tabBarItemColor;
 @property (nonatomic, getter = isTabBarTranslucent) BOOL tabBarTranslucent;
+
+@property (nonatomic, strong) Result *result;
 
 @end
 
@@ -270,6 +273,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationEnteredForeground) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationEnteredBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    //------------------------------------------------------
+
     
     //------------------DESIGN BLOCK-----------------
     
@@ -287,8 +292,6 @@
 
     // background configuration
     UIImage *backgroundImage = [UIImage imageNamed:@"Background_2.jpg"];
-    /*UIImageView *backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
-    [self.view addSubview:backgroundView];*/
     
     self.backgroundView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     self.backgroundView.alpha = 1;
@@ -367,6 +370,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             
             if (self.algorithm.isFinalResultDetermined) {
                 if (TIME_TO_DETERMINE_BPM_FINAL_RESULT <= [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]) {
+                    
+                    //------------------Results BLOCK-----------------
+
+                    self.result.bpm = (int)self.algorithm.bpmLatestResult;
+                    self.result = nil;
+                    self.tabBarController.selectedIndex = 0;
+                    
+                    //------------------------------------------------
                     #warning - incomplete implementation
                 }
                 self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d" , (int)self.algorithm.bpmLatestResult];
@@ -407,9 +418,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         });
         
         [self playBeepSound];
-        
     });
-    
 }
 
 //
@@ -418,6 +427,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     if (self.settings.beepWithPulse && self.algorithm.isPeakInLastFrame){
         [self.BeepSound play];
+        [self heartAnimation];
     }
 }
 
@@ -425,11 +435,26 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     /*
     [UIView transitionWithView:self.beatingHeart
-                      duration:0.2
+                      duration:1
                        options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{ self.beatingHeart.tintColor = [UIColor redColor];}
-                    completion:NULL];
-    self.beatingHeart.tintColor = [UIColor grayColor];
+                    animations:^{
+                        self.beatingHeart.layer.shadowColor = [[UIColor redColor] CGColor];
+                        self.beatingHeart.layer.shadowOpacity = 1.0;
+                        self.beatingHeart.layer.shadowRadius = 3;
+                        self.beatingHeart.layer.zPosition = 1;
+                    }
+                    completion:^(BOOL fin){
+                        if (fin) {
+                            [UIView transitionWithView:self.beatingHeart
+                                              duration:0.3
+                                               options:UIViewAnimationOptionTransitionCrossDissolve
+                                            animations:^{
+                                                self.beatingHeart.layer.shadowOpacity = 0;
+                                                self.beatingHeart.layer.shadowRadius = 0;
+                                            }
+                                            completion:NULL];
+                        }
+                    }];
      */
 }
 

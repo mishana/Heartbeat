@@ -7,20 +7,33 @@
 //
 
 #import "ResultsViewController.h"
+#import "ResultCollectionViewCell.h"
+#import "Result.h"
 
 @interface ResultsViewController () <UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *resultCollectionView;
-@property (nonatomic, strong) NSNumber *numOfResults;
+//@property (nonatomic, strong) NSNumber *numOfResults;
+@property (nonatomic) int resultsNumOld;
 
 @end
 
 @implementation ResultsViewController
 
-- (NSNumber *)numOfResults
+- (NSArray *)resultsByDate
+{
+    return [[Result allResults] sortedArrayUsingSelector:@selector(compareByDate:)];
+}
+
+- (int)numOfResults
+{
+    return [[Result allResults] count];
+}
+
+/*- (NSNumber *)numOfResults
 {
     if (!_numOfResults) _numOfResults = @(10);
     return _numOfResults;
-}
+}*/
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
@@ -34,15 +47,27 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 #warning need to update this later
-    return [self.numOfResults integerValue];
+    return [self numOfResults];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Result" forIndexPath:indexPath];
+    
+    [self updateCell:cell usingResult:[self resultsByDate][indexPath.item] ];
 
     return cell;
+}
+
+- (void)updateCell:(UICollectionViewCell *)cell usingResult:(Result *)result
+{
+    if ([cell isKindOfClass:[ResultCollectionViewCell class]]) {
+        ResultView *resultView = ((ResultCollectionViewCell *)cell).resultView;
+        
+        resultView.bpm = result.bpm;
+        resultView.date = result.end;
+    }
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,6 +77,26 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (self.resultsNumOld == [self numOfResults] - 1) {
+        NSUInteger indexes[2];
+        indexes[0] = 0;
+        indexes[1] = 0;
+        NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
+
+        [self.resultCollectionView insertItemsAtIndexPaths:@[indexPath]];
+    }
+    self.resultsNumOld = [self numOfResults];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 - (void)viewDidLoad
@@ -75,6 +120,8 @@
     }
     
     //-----------------------------------------------
+    
+    self.resultsNumOld = [self numOfResults];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,15 +132,17 @@
 
 - (IBAction)swipeResult:(UISwipeGestureRecognizer *)gesture
 {
-    /*
+    ///*
     CGPoint swipeLocation = [gesture locationInView:self.resultCollectionView];
     NSIndexPath *indexPath = [self.resultCollectionView indexPathForItemAtPoint:swipeLocation];
     
     if (indexPath) {
-        self.numOfResults = @([self.numOfResults integerValue] - 1);
+        [((Result *)[[self resultsByDate] objectAtIndex:indexPath.item]) deleteFromResults];
+        
+        self.resultsNumOld = [self numOfResults];
         [self.resultCollectionView deleteItemsAtIndexPaths:@[indexPath]];
     }
-    */
+    //*/
 }
 
 @end
