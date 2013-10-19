@@ -12,6 +12,7 @@
 #import "Settings.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "Result.h"
+#import "UILabel+FSHIghlightAnimationAdditions.h"
 
 @interface VideoManagerViewController ()
 // AVFoundation
@@ -140,6 +141,9 @@
         item2.selectedImage = [UIImage imageNamed:@"settings_full-1.png"];
         //*/
     }
+    
+    [self heartAnimation];
+    [self.fingerDetectLabel setTextWithChangeAnimation:@"שים את האצבע על המצלמה"];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -369,7 +373,6 @@
     
     [self.session startRunning];*/
     self.beatingHeart.layer.shadowColor = [[UIColor redColor] CGColor];
-
 }
 
 //
@@ -458,12 +461,41 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     if (self.settings.beepWithPulse && self.algorithm.isPeakInLastFrame){
         [self.BeepSound play];
-        [self heartAnimation];
+        //[self heartAnimation];
     }
 }
 
 - (void)heartAnimation
 {
+    ///*
+    CGFloat gradientWidth = 2.0;
+    CGFloat transparency = 0.5;
+    
+    CAGradientLayer *gradientMask = [CAGradientLayer layer];
+    gradientMask.frame = self.beatingHeart.bounds;
+    CGFloat gradientSize = gradientWidth / self.beatingHeart.frame.size.width;
+    UIColor *gradient = [UIColor colorWithWhite:1.0f alpha:transparency];
+    UIView *superview = self.beatingHeart.superview;
+    NSArray *startLocations = @[[NSNumber numberWithFloat:0.0f], [NSNumber numberWithFloat:(gradientSize / 2)], [NSNumber numberWithFloat:gradientSize]];
+    NSArray *endLocations = @[[NSNumber numberWithFloat:(1.0f - gradientSize)], [NSNumber numberWithFloat:(1.0f -(gradientSize / 2))], [NSNumber numberWithFloat:1.0f]];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"locations"];
+    
+    gradientMask.colors = @[(id)gradient.CGColor, (id)[UIColor whiteColor].CGColor, (id)gradient.CGColor];
+    gradientMask.locations = startLocations;
+    gradientMask.startPoint = CGPointMake(0 - (gradientSize * 2), .5);
+    gradientMask.endPoint = CGPointMake(1 + gradientSize, .5);
+    
+    [self.beatingHeart removeFromSuperview];
+    self.beatingHeart.layer.mask = gradientMask;
+    [superview addSubview:self.beatingHeart];
+    
+    animation.fromValue = startLocations;
+    animation.toValue = endLocations;
+    animation.repeatCount = 3.4e38f;
+    animation.duration  = 3.0f;
+    
+    [gradientMask addAnimation:animation forKey:@"animateGradient"];
+    //*/
     /*
     [UIView transitionWithView:self.beatingHeart
                       duration:1
