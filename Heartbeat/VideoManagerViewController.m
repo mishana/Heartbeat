@@ -54,6 +54,8 @@
     return UIStatusBarStyleLightContent;
 }
 
+// Properties
+
 - (Settings *)settings
 {
     if (!_settings)
@@ -88,16 +90,42 @@
 
 //
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)startRunningSession
 {
-    [super viewWillAppear:animated];
+    dispatch_queue_t sessionQ = dispatch_queue_create("start running session thread", NULL);
     
-    self.settings = nil;
-    self.algorithmStartTime = nil;
-    self.algorithm = nil;
-    
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+    dispatch_async(sessionQ, ^{
+        // turn flash on
+        if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
+            [self.videoDevice lockForConfiguration:nil];
+            [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
+            [self.videoDevice setFlashMode:AVCaptureFlashModeOn];
+            [self.videoDevice unlockForConfiguration];
+        }
+        [self.session startRunning];
+    });
+}
 
+- (void)stopRunningSession
+{
+    dispatch_queue_t sessionQ = dispatch_queue_create("stop running session thread", NULL);
+    
+    dispatch_async(sessionQ, ^{
+        [self.session stopRunning];
+        // turn flash off (maybe unnecessary because stopRunning do this)
+        if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
+            [self.videoDevice lockForConfiguration:nil];
+            [self.videoDevice setTorchMode:AVCaptureTorchModeOff];
+            [self.videoDevice setFlashMode:AVCaptureFlashModeOff];
+            [self.videoDevice unlockForConfiguration];
+        }
+    });
+}
+
+- (void)tabBarConfiguration
+{
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+        
         // tab bar configuration
         ///*
         self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
@@ -133,21 +161,32 @@
     }
 }
 
+- (void)resetAlgorithm
+{
+    self.settings = nil;
+    self.algorithmStartTime = nil;
+    self.bpmFinalResultFirstTimeDetected = nil;
+    self.algorithm = nil;
+}
+
+//
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self resetAlgorithm];
+    
+    [self tabBarConfiguration];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
+    [self startRunningSession];
     
-    dispatch_async(sessionQ, ^{
-        if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
-            [self.videoDevice lockForConfiguration:nil];
-            [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
-            [self.videoDevice setFlashMode:AVCaptureFlashModeOn];
-            [self.videoDevice unlockForConfiguration];
-        }
-        [self.session startRunning];
-    });
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];// prevent the iphone from sleeping
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -181,92 +220,40 @@
         //*/
     }
     
-    dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
+    [self stopRunningSession];
     
-    dispatch_async(sessionQ, ^{
-        [self.session stopRunning];
-    });
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];// enable sleeping
+
 }
+
+//
 
 - (void)applicationWillEnterForeground
 {
     if (self.isViewLoaded && self.view.window) {
-    
-        self.settings = nil;
-        self.algorithmStartTime = nil;
-        self.algorithm = nil;
+        [self resetAlgorithm];
         
-        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-            
-            // tab bar configuration
-            ///*
-            self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
-            self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
-            self.tabBarController.tabBar.translucent = NO;
-            
-            // set selected and unselected icons
-            UITabBarItem *item0 = [self.tabBarController.tabBar.items objectAtIndex:0];
-            UITabBarItem *item1 = [self.tabBarController.tabBar.items objectAtIndex:1];
-            UITabBarItem *item2 = [self.tabBarController.tabBar.items objectAtIndex:2];
-            
-            // set colors of selected text
-            [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.tabBarItemColor, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-            
-            [item1 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-            
-            [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.tabBarItemColor, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-            
-            // set colors of un-selected text
-            [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
-            
-            [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
-            
-            // this way, the icon gets rendered as it is (thus, it needs to be green in this example)
-            item0.image = [[UIImage imageNamed:@"pieChart_Line.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            item2.image = [[UIImage imageNamed:@"Settings_Line-1.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-            
-            // this icon is used for selected tab and it will get tinted as defined in self.tabBar.tintColor
-            item0.selectedImage = [UIImage imageNamed:@"pieChart_full.png"];
-            item1.selectedImage = [UIImage imageNamed:@"Heart_Full.png"];
-            item2.selectedImage = [UIImage imageNamed:@"settings_full-1.png"];
-            //*/
-        }
+        [self tabBarConfiguration];
     }
 }
 
 - (void)applicationEnteredForeground
 {
     if (self.isViewLoaded && self.view.window) {
-        
-        dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
-        
-        dispatch_async(sessionQ, ^{
-            if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
-                [self.videoDevice lockForConfiguration:nil];
-                [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
-                [self.videoDevice setFlashMode:AVCaptureFlashModeOn];
-                [self.videoDevice unlockForConfiguration];
-            }
-            [self.session startRunning];
-        });
+        [self startRunningSession];
     }
 }
 
 - (void)applicationEnteredBackground
 {
     if (self.isViewLoaded && self.view.window) {
-        
-        dispatch_queue_t sessionQ = dispatch_queue_create("session thread", NULL);
-        
-        dispatch_async(sessionQ, ^{
-            [self.session stopRunning];
-        });
+        [self stopRunningSession];
     }
 }
 
@@ -275,6 +262,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
@@ -346,17 +335,7 @@
     self.BeepSound.volume = 0.03;
     
     //-----------------------------------------------
-    
-    /*// turn flash on
-    if ([self.videoDevice hasTorch] && [self.videoDevice hasFlash]){
-        [self.videoDevice lockForConfiguration:nil];
-        [self.videoDevice setTorchMode:AVCaptureTorchModeOn];
-        [self.videoDevice setFlashMode:AVCaptureFlashModeOn];
-        [self.videoDevice unlockForConfiguration];
-    }
-    //
-    
-    [self.session startRunning];*/
+
 }
 
 //
@@ -457,7 +436,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 //
 
 // Create a UIImage from sample buffer data
-- (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer
+- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
     // Get a CMSampleBuffer's Core Video image buffer for the media data
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
