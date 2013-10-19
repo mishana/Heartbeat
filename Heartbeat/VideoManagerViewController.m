@@ -91,6 +91,12 @@
     return _algorithm;
 }
 
+- (Result *)result
+{
+    if (!_result) _result = [[Result alloc] init];
+    return _result;
+}
+
 //
 
 - (void)startRunningSession
@@ -266,7 +272,7 @@
 {
     [super viewDidLoad];
     
-    //
+    //------------------Notifications BLOCK-----------------
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     
@@ -338,6 +344,8 @@
     self.BeepSound.volume = 0.03;
     
     //-----------------------------------------------
+    
+    self.beatingHeart.layer.shadowColor = [[UIColor redColor] CGColor];
 
 }
 
