@@ -10,10 +10,12 @@
 #import "ResultCollectionViewCell.h"
 #import "Result.h"
 
-@interface ResultsViewController () <UICollectionViewDataSource>
+@interface ResultsViewController () <UICollectionViewDataSource, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *resultCollectionView;
 //@property (nonatomic, strong) NSNumber *numOfResults;
 @property (nonatomic) int resultsNumOld;
+
+@property (nonatomic, strong) NSIndexPath *deleteIndex;
 
 @end
 
@@ -130,6 +132,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        [((Result *)[[self resultsByDate] objectAtIndex:self.deleteIndex.item]) deleteFromResults];
+        
+        self.resultsNumOld = [self numOfResults];
+        [self.resultCollectionView deleteItemsAtIndexPaths:@[self.deleteIndex]];
+    }
+}
+
 - (IBAction)swipeResult:(UISwipeGestureRecognizer *)gesture
 {
     ///*
@@ -137,10 +149,17 @@
     NSIndexPath *indexPath = [self.resultCollectionView indexPathForItemAtPoint:swipeLocation];
     
     if (indexPath) {
-        [((Result *)[[self resultsByDate] objectAtIndex:indexPath.item]) deleteFromResults];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:@"Delete Result"
+                                                        otherButtonTitles:nil];
         
-        self.resultsNumOld = [self numOfResults];
-        [self.resultCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+        [self.resultCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+        
+        [actionSheet showFromTabBar:self.tabBarController.tabBar];
+        
+        self.deleteIndex = indexPath;
     }
     //*/
 }

@@ -386,6 +386,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
                     self.result.bpm = (int)self.algorithm.bpmLatestResult;
                     self.result = nil;
+                    self.algorithm = nil;
                     self.tabBarController.selectedIndex = 0;
                     
                     //------------------------------------------------
