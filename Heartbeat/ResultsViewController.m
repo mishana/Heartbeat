@@ -21,6 +21,18 @@
 
 @implementation ResultsViewController
 
+- (void)scrollToTop
+{
+    NSUInteger indexes[2];
+    indexes[0] = 0;
+    indexes[1] = 0;
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
+    
+    if ([self.resultCollectionView cellForItemAtIndexPath:indexPath]) {
+        [self.resultCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    }
+}
+
 - (NSArray *)resultsByDate
 {
     return [[Result allResults] sortedArrayUsingSelector:@selector(compareByDate:)];
@@ -92,6 +104,8 @@
         NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
 
         [self.resultCollectionView insertItemsAtIndexPaths:@[indexPath]];
+        
+        [self.resultCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
     }
     self.resultsNumOld = [self numOfResults];
 }
@@ -151,8 +165,8 @@
     if (indexPath) {
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                                  delegate:self
-                                                        cancelButtonTitle:@"Cancel"
-                                                   destructiveButtonTitle:@"Delete Result"
+                                                        cancelButtonTitle:@"בטל"
+                                                   destructiveButtonTitle:@"מחק תוצאה"
                                                         otherButtonTitles:nil];
         
         [self.resultCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];

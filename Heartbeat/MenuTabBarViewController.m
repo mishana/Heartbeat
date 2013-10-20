@@ -7,8 +7,27 @@
 //
 
 #import "MenuTabBarViewController.h"
+#import "ResultsViewController.h"
+
+@interface MenuTabBarViewController () <UITabBarDelegate>
+
+@end
 
 @implementation MenuTabBarViewController
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+    if (self.selectedIndex == 0) {
+        if ([self.viewControllers[0] isKindOfClass:[UINavigationController class]]) {
+            if ([[(UINavigationController *)self.viewControllers[0] visibleViewController] isKindOfClass:[ResultsViewController class]]) {
+                [(ResultsViewController *)[(UINavigationController *)self.viewControllers[0] visibleViewController] scrollToTop];
+            };
+        }
+        if ([self.viewControllers[0] isKindOfClass:[ResultsViewController class]]) {
+            [self.viewControllers[0] scrollToTop];
+        };
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
