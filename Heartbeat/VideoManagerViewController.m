@@ -169,9 +169,6 @@
         item2.selectedImage = [UIImage imageNamed:@"settings_full-1.png"];
         //*/
     }
-    
-    [self heartAnimation];
-    [self.fingerDetectLabel setTextWithChangeAnimation:@"שים את האצבע על המצלמה"];
 }
 
 - (void)resetAlgorithm
@@ -191,6 +188,9 @@
     [self resetAlgorithm];
     
     [self tabBarConfiguration];
+    
+    //[self heartAnimation];
+    //[self.fingerDetectLabel setTextWithChangeAnimation:@"שים את האצבע על המצלמה"];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -200,6 +200,9 @@
     [self startRunningSession];
     
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];// prevent the iphone from sleeping
+    
+    [self heartAnimation];
+    [self.fingerDetectLabel setTextWithChangeAnimation:@"שים את האצבע על המצלמה"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -452,13 +455,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     CAGradientLayer *gradientMask = [CAGradientLayer layer];
     gradientMask.frame = self.beatingHeart.bounds;
     CGFloat gradientSize = gradientWidth / self.beatingHeart.frame.size.width;
-    UIColor *gradient = [UIColor colorWithWhite:1.0f alpha:transparency];
+    UIColor *gradient = [UIColor colorWithRed:0.9 green:0 blue:0 alpha:transparency];
     UIView *superview = self.beatingHeart.superview;
     NSArray *startLocations = @[[NSNumber numberWithFloat:0.0f], [NSNumber numberWithFloat:(gradientSize / 2)], [NSNumber numberWithFloat:gradientSize]];
     NSArray *endLocations = @[[NSNumber numberWithFloat:(1.0f - gradientSize)], [NSNumber numberWithFloat:(1.0f -(gradientSize / 2))], [NSNumber numberWithFloat:1.0f]];
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"locations"];
     
-    gradientMask.colors = @[(id)gradient.CGColor, (id)[UIColor whiteColor].CGColor, (id)gradient.CGColor];
+    gradientMask.colors = @[(id)gradient.CGColor, (id)[UIColor redColor].CGColor, (id)gradient.CGColor];
     gradientMask.locations = startLocations;
     gradientMask.startPoint = CGPointMake(0 - (gradientSize * 2), .5);
     gradientMask.endPoint = CGPointMake(1 + gradientSize, .5);
