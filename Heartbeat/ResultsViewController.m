@@ -28,7 +28,7 @@
     indexes[1] = 0;
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndexes:indexes length:2];
     
-    if ([self.resultCollectionView cellForItemAtIndexPath:indexPath]) {
+    if ([self.resultCollectionView numberOfItemsInSection:0]) {
         [self.resultCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
     }
 }
