@@ -36,7 +36,7 @@
 // Properties
 
 #define FPS 30
-#define WINDOW_SIZE 10
+#define WINDOW_SIZE 9
 #define WINDOW_SIZE_FOR_FILTER_CALCULATION 45// should be at least WINDOW_SIZE*2
 #define CALIBRATION_DURATION 90
 #define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 90
@@ -336,12 +336,13 @@
         }
         double average_bpm = tempSum/self.windowSizeForAverageCalculation;
         
-        int calibrationWeight = 3;// simulate the weight of the calibration calculated results.
+        int calibrationWeight = 2;// simulate the weight of the calibration calculated results.
         // if it's 0, the calibration is worthless
         int sensitiveFactor = 3;// adjust this bigger the make the algorithm more sensitive to changes
-        CGFloat lastResultFactor = fabs(average_bpm/[self.bpmAverageValues[i-w-2] doubleValue] -1) < 0.1 ? 1 : fabs(1 - fabs(average_bpm-[self.bpmAverageValues[i-w-2] doubleValue])/[self.bpmAverageValues[i-w-2] doubleValue]);
+        //CGFloat lastResultFactor = fabs(average_bpm/[self.bpmAverageValues[i-w-2] doubleValue] -1) < 0.1 ? 1 : fabs(1 - fabs(average_bpm-[self.bpmAverageValues[i-w-2] doubleValue])/[self.bpmAverageValues[i-w-2] doubleValue]);
         int k = i - calib + (self.firstPeakPlace + w + 1) + calibrationWeight;
-        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * (1-lastResultFactor*sensitiveFactor/(k+sensitiveFactor)) + average_bpm * lastResultFactor * sensitiveFactor/(k+sensitiveFactor));
+        //self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * (1-lastResultFactor*sensitiveFactor/(k+sensitiveFactor)) + average_bpm * lastResultFactor * sensitiveFactor/(k+sensitiveFactor));
+        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+sensitiveFactor) + average_bpm * sensitiveFactor/(k+sensitiveFactor));
         
     }
     

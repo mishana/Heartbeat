@@ -97,6 +97,7 @@
 {
     if (!_algorithm2) {
         _algorithm2 = [[Algorithm alloc] init];
+        _algorithm2.windowSize = 10;
         _algorithm2.filterWindowSize = 60;
     }
     return _algorithm2;
