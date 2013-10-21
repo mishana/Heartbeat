@@ -37,7 +37,7 @@
 
 #define FPS 30
 #define WINDOW_SIZE 10
-#define WINDOW_SIZE_FOR_FILTER_CALCULATION 60// should be at least WINDOW_SIZE*2
+#define WINDOW_SIZE_FOR_FILTER_CALCULATION 45// should be at least WINDOW_SIZE*2
 #define CALIBRATION_DURATION 90
 #define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 90
 
@@ -197,6 +197,11 @@
 {
     // graph size should be window*2+1
     // window must be positive
+    
+    if (self.framesCounter - self.lastPeakPlace < window) {
+        return NO;
+    }
+    
     double middlePoint = graph[window];
     for (int i=0; i < window; i++) {
         if (middlePoint <= graph[i]) { // the middle point should be larger from all points detected before it
@@ -296,9 +301,9 @@
     
     if (i < calib + (self.firstPeakPlace + w + 1)) {
         
-        self.isPeak[i-w-1] = @([self isPeak:z :w] && (![self.isPeak[i-w-2] boolValue] && ![self.isPeak[i-w-3] boolValue]));
+        self.isPeak[i-w-1] = @([self isPeak:z :w]);
         
-        self.numOfPeaks += [self.isPeak[i-w-1] boolValue];
+        self.numOfPeaks += [self.isPeak[i-w-1] integerValue];
         
         NSUInteger frames = i - self.firstPeakPlace-1;
         if (frames > calib) {
@@ -313,13 +318,13 @@
     else {
         //calibration is over
         
-        if (i < calib + (self.firstPeakPlace + w + 1) + 2.5*self.frameRate){
-            self.isPeak[i-w-1] = @([self isPeak:z :w] && (![self.isPeak[i-w-2] boolValue] && ![self.isPeak[i-w-3] boolValue]));
+        if (i < calib + (self.firstPeakPlace + w + 1) + 3*self.frameRate){
+            self.isPeak[i-w-1] = @([self isPeak:z :w]);
         } else {
-            self.isPeak[i-w-1] = @(([self isPeak:z :w] && (![self.isPeak[i-w-2] boolValue] && ![self.isPeak[i-w-3] boolValue])) || [self isMissedPeak]);
+            self.isPeak[i-w-1] = @([self isMissedPeak] ? 1 : [self isPeak:z :w]);//*
         }
         
-        self.numOfPeaks += [self.isPeak[i-w-1] boolValue] - [self.isPeak[i-w-1-calib] boolValue];
+        self.numOfPeaks += [self.isPeak[i-w-1] integerValue] - [self.isPeak[i-w-1-calib] integerValue];
         
         NSUInteger frames = calib;
         
@@ -346,7 +351,7 @@
         self.lastPeakPlace = i-w-1;
         printf("%d\n" , i-w-1);
     }
-    
+
 }
 
 @end
