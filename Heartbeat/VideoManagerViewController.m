@@ -26,6 +26,7 @@
 
 // Algorithm
 @property (nonatomic , strong) Algorithm *algorithm;
+@property (nonatomic , strong) Algorithm *algorithm2;
 @property (strong , nonatomic) NSDate *algorithmStartTime;
 @property (strong , nonatomic) NSDate *bpmFinalResultFirstTimeDetected;
 
@@ -90,6 +91,15 @@
         _algorithm = [[Algorithm alloc] init];
     }
     return _algorithm;
+}
+
+- (Algorithm *)algorithm2
+{
+    if (!_algorithm2) {
+        _algorithm2 = [[Algorithm alloc] init];
+        _algorithm2.filterWindowSize = 60;
+    }
+    return _algorithm2;
 }
 
 - (Result *)result
@@ -177,6 +187,7 @@
     self.algorithmStartTime = nil;
     self.bpmFinalResultFirstTimeDetected = nil;
     self.algorithm = nil;
+    self.algorithm2 = nil;
 }
 
 //
@@ -379,6 +390,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         red = red*255.0f;
         
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
+        [self.algorithm2 newFrameDetectedWithAverageColor:dominantColor];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             
@@ -395,7 +407,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                     //------------------------------------------------
                     #warning - incomplete implementation
                 }
-                self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d" , (int)self.algorithm.bpmLatestResult];
+                self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d , BPM2: %d" , (int)self.algorithm.bpmLatestResult , (int)self.algorithm2.bpmLatestResult];
                 self.timeTillResultLabel.text = [NSString stringWithFormat:@"time till result: %.01fs" , TIME_TO_DETERMINE_BPM_FINAL_RESULT - [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]];
                 
             } else {
@@ -416,6 +428,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
                 self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d", 0];
                 self.algorithm = nil;
+                self.algorithm2 = nil;
                 self.algorithmStartTime = nil;
                 self.bpmFinalResultFirstTimeDetected = nil;
                 return;
@@ -428,7 +441,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             
             NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red , green , blue]);
             
-            self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f", self.algorithm.bpmLatestResult];
+            self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", self.algorithm.bpmLatestResult , self.algorithm2.bpmLatestResult];
             
         });
         
