@@ -36,7 +36,7 @@
 // Properties
 
 #define FPS 30
-#define WINDOW_SIZE 12
+#define WINDOW_SIZE 10
 #define WINDOW_SIZE_FOR_FILTER_CALCULATION 60// should be at least WINDOW_SIZE*2
 #define CALIBRATION_DURATION 90
 #define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 90
@@ -108,9 +108,9 @@
     return _isPeak;
 }
 
-#define FILTER_ORDER 3
+#define FILTER_ORDER 5
 #define FILTER_LOWER_BAND 0.04 //36
-#define FILTER_UPPER_BAND 0.167 //150
+#define FILTER_UPPER_BAND 0.2 //180
 
 - (double**)buttterworthValues{
     if (!_buttterworthValues) {
@@ -243,7 +243,7 @@
 
 #define DEFAULT_BPM_VALUE 72
 #define MIN_BPM_VALUE 36
-#define MAX_BPM_VALUE 150
+#define MAX_BPM_VALUE 180
 
 - (void)newFrameDetectedWithAverageColor:(UIColor *)color
 {
