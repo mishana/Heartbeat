@@ -168,12 +168,16 @@
 - (BOOL)shouldShowLatestResult
 {
     if (self.isCalibrationOver && (self.framesCounter > self.calibrationDuration + self.firstPeakPlace + self.windowSize + self.windowSizeForAverageCalculation)) {
-        if (([self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 2] doubleValue] < 1/12) && (([self.bpmAverageValues[self.framesCounter-(int)(self.calibrationDuration/2)-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-(int)(self.calibrationDuration/2)-self.windowSize - 2] doubleValue] < 1/15) && ([self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.windowSize - 2] doubleValue] < 1/20))) {
-            _shouldShowLatestResult = YES;
+        
+        if (fabs([self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 2] doubleValue]) < 1/5) {
+            
+            if (fabs([self.bpmAverageValues[self.framesCounter-(int)(self.calibrationDuration/2)-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-(int)(self.calibrationDuration/2)-self.windowSize - 2] doubleValue]) < 1/6) {
+                
+                if (fabs([self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.windowSize - 2] doubleValue]) < 1/8) {
+                    _shouldShowLatestResult = YES;
+                }
+            }
         }
-    }
-    else {
-        _shouldShowLatestResult = NO;
     }
     return _shouldShowLatestResult;
 }
