@@ -27,6 +27,9 @@
 @property (nonatomic , readwrite) BOOL isFinalResultDetermined;
 
 @property (nonatomic, readwrite) BOOL isPeakInLastFrame;
+
+@property (nonatomic , readwrite) BOOL shouldShowLatestResult;
+
 @property (nonatomic) NSUInteger lastPeakPlace;
 
 @end
@@ -123,8 +126,8 @@
 // outside API
 
 - (BOOL)isCalibrationOver{
-    if (self.framesCounter > (self.calibrationDuration + self.firstPeakPlace + self.windowSize)) {
-        return _isCalibrationOver = YES;
+    if ((self.framesCounter > self.calibrationDuration + self.filterWindowSize) && (self.framesCounter > (self.calibrationDuration + self.firstPeakPlace + self.windowSize))) {
+        _isCalibrationOver = YES;
     }
     else {
         _isCalibrationOver = NO;
@@ -136,7 +139,7 @@
 
 - (BOOL)isFinalResultDetermined{
     if (self.isCalibrationOver) {
-        if ((fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - (int)((self.calibrationDuration-self.windowSize -1)/2)] doubleValue]) <= FINAL_RESULT_MARGIN*2/3) &&
+        if ((fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - (int)(self.calibrationDuration/2)-self.windowSize-1] doubleValue]) <= FINAL_RESULT_MARGIN*2/3) &&
             (fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - self.calibrationDuration-self.windowSize -1] doubleValue]) <= FINAL_RESULT_MARGIN)) {
                 return _isFinalResultDetermined = YES;
         }
@@ -160,6 +163,19 @@
         return [self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue];
     }
     return 0;
+}
+
+- (BOOL)shouldShowLatestResult
+{
+    if (self.isCalibrationOver) {
+        if ([self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.windowSize - 2] doubleValue] < 1/20) {
+            _shouldShowLatestResult = YES;
+        }
+    }
+    else {
+        _shouldShowLatestResult = NO;
+    }
+    return _shouldShowLatestResult;
 }
 
 //

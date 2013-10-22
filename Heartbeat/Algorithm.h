@@ -30,6 +30,8 @@
 
 @property (nonatomic, readonly) BOOL isPeakInLastFrame;
 
+@property (nonatomic , readonly) BOOL shouldShowLatestResult;
+
 // the method to be called on each frame
 - (void)newFrameDetectedWithAverageColor:(UIColor *)color;
 

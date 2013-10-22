@@ -442,7 +442,18 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             
             NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red , green , blue]);
             
-            self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", self.algorithm.bpmLatestResult , self.algorithm2.bpmLatestResult];
+            if (self.algorithm.shouldShowLatestResult && self.algorithm2.shouldShowLatestResult) {
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", self.algorithm.bpmLatestResult , self.algorithm2.bpmLatestResult];
+            }
+            else if (self.algorithm.shouldShowLatestResult) {
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", self.algorithm.bpmLatestResult , 0];
+            }
+            else if (self.algorithm2.shouldShowLatestResult) {
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", 0 , self.algorithm2.bpmLatestResult];
+            }
+            else {
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", 0 , 0];
+            }
             
         });
         
