@@ -167,8 +167,8 @@
 
 - (BOOL)shouldShowLatestResult
 {
-    if (self.isCalibrationOver) {
-        if ([self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.windowSize - 2] doubleValue] < 1/20) {
+    if (self.isCalibrationOver && (self.framesCounter > self.calibrationDuration + self.firstPeakPlace + self.windowSize + self.windowSizeForAverageCalculation)) {
+        if (([self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 2] doubleValue] < 1/12) && (([self.bpmAverageValues[self.framesCounter-(int)(self.calibrationDuration/2)-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-(int)(self.calibrationDuration/2)-self.windowSize - 2] doubleValue] < 1/15) && ([self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.windowSize - 2] doubleValue] < 1/20))) {
             _shouldShowLatestResult = YES;
         }
     }
@@ -334,7 +334,7 @@
     else {
         //calibration is over
         
-        if (i < calib + (self.firstPeakPlace + w + 1) + 3*self.frameRate){
+        if (i < calib + (self.firstPeakPlace + w + 1) + self.windowSizeForAverageCalculation){
             self.isPeak[i-w-1] = @([self isPeak:z :w]);
         } else {
             self.isPeak[i-w-1] = @([self isMissedPeak] ? 1 : [self isPeak:z :w]);//*
