@@ -446,13 +446,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", self.algorithm.bpmLatestResult , self.algorithm2.bpmLatestResult];
             }
             else if (self.algorithm.shouldShowLatestResult) {
-                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", self.algorithm.bpmLatestResult , 0];
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %d", self.algorithm.bpmLatestResult , 0];
             }
             else if (self.algorithm2.shouldShowLatestResult) {
-                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", 0 , self.algorithm2.bpmLatestResult];
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d , BPM2: %.01f", 0 , self.algorithm2.bpmLatestResult];
             }
             else {
-                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", 0 , 0];
+                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d , BPM2: %d", 0 , 0];
             }
             
         });
