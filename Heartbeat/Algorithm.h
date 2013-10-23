@@ -17,7 +17,7 @@
 @property (nonatomic , readwrite) NSUInteger calibrationDuration;// duration in frames
 @property (nonatomic , readwrite) NSUInteger windowSizeForAverageCalculation;// size must be <= calibrationDuration
 
-#warning should we care of releasing this array?
+#warning we should care of releasing this array - because of memory leaks
 @property (nonatomic , readwrite) double ** buttterworthValues;
 
 //

@@ -412,16 +412,28 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 self.timeTillResultLabel.text = [NSString stringWithFormat:@"time till result: %.01fs" , TIME_TO_DETERMINE_BPM_FINAL_RESULT - [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]];
                 
             } else {
-                self.finalBPMLabel.text = @"Final BPM:   ";
+                self.finalBPMLabel.text = @"Final BPM: 0 , BPM2: 0";
                 self.timeTillResultLabel.text = @"time till result:   ";
                 self.bpmFinalResultFirstTimeDetected = nil;
                 #warning - incomplete implementation
             }
             
             if (self.settings.autoStopAfter) {
+                #warning - incomplete implementation
+                
                 if ([[NSDate date] timeIntervalSinceDate:self.algorithmStartTime] > self.settings.autoStopAfter) {
-                    #warning - incomplete implementation
+                    if (self.algorithm.isFinalResultDetermined) {
+                        //------------------Results BLOCK-----------------
+                        
+                        self.result.bpm = (int)self.algorithm.bpmLatestResult;
+                        self.result = nil;
+                        self.algorithm = nil;
+                        self.tabBarController.selectedIndex = 0;
+                        
+                        //------------------------------------------------
+                    }
                 }
+                
             }
             
             if (red < 210/* || green < 4*/) {

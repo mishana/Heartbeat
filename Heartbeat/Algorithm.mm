@@ -135,7 +135,7 @@
     return _isCalibrationOver;
 }
 
-#define FINAL_RESULT_MARGIN 1.2
+#define FINAL_RESULT_MARGIN 1.5
 
 - (BOOL)isFinalResultDetermined{
     if (self.isCalibrationOver) {
@@ -151,10 +151,6 @@
         _isFinalResultDetermined = NO;//*
     }
     return _isFinalResultDetermined;
-    
-#warning - need to improve
-    // should make isFinalResultDetermined more reliable
-    // maybe by checking it for several more frames...
 }
 
 - (CGFloat)bpmLatestResult
