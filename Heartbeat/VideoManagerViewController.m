@@ -418,26 +418,47 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 #warning - incomplete implementation
             }
             
-            if (self.settings.autoStopAfter) {
-                #warning - incomplete implementation
+            if (red < 210) {
+                //finger isn't on camera
                 
-                if ([[NSDate date] timeIntervalSinceDate:self.algorithmStartTime] > self.settings.autoStopAfter) {
+                if (self.settings.autoStopAfter) {
+#warning - incomplete implementation
+                    
+                    if ([[NSDate date] timeIntervalSinceDate:self.algorithmStartTime] > self.settings.autoStopAfter) {
+                        if (self.algorithm.isFinalResultDetermined) {
+                            //------------------Results BLOCK-----------------
+                            
+                            self.result.bpm = (int)self.algorithm.bpmLatestResult;
+                            self.result = nil;
+                            self.algorithm = nil;
+                            self.algorithm2 = nil;
+                            self.algorithmStartTime = nil;
+                            self.bpmFinalResultFirstTimeDetected = nil;
+                            self.tabBarController.selectedIndex = 0;
+                            
+                            //------------------------------------------------
+                            return;
+                        }
+                    }
+                }
+                
+                else {
                     if (self.algorithm.isFinalResultDetermined) {
                         //------------------Results BLOCK-----------------
                         
                         self.result.bpm = (int)self.algorithm.bpmLatestResult;
                         self.result = nil;
                         self.algorithm = nil;
+                        self.algorithm2 = nil;
+                        self.algorithmStartTime = nil;
+                        self.bpmFinalResultFirstTimeDetected = nil;
                         self.tabBarController.selectedIndex = 0;
                         
                         //------------------------------------------------
+                        return;
                     }
                 }
                 
-            }
-            
-            if (red < 210/* || green < 4*/) {
-                //finger isn't on camera
                 self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
                 self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d", 0];
                 self.algorithm = nil;
