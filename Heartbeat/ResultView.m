@@ -35,7 +35,17 @@
     
     UIFont *cornerFont = [UIFont systemFontOfSize:self.bounds.size.width * 0.06];
     
-    NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d\n%@", self.bpm, self.date] attributes:@{ NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : cornerFont, NSForegroundColorAttributeName : [UIColor purpleColor] }];
+    //
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"he_IL"]];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    [dateFormatter setDateFormat:@"EEEE dd.MM.yy ',' 'בשעה' HH:mm"];
+    
+    NSString *date = [dateFormatter stringFromDate:self.date];
+    //
+    
+    NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d\n%@", self.bpm, date] attributes:@{ NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : cornerFont, NSForegroundColorAttributeName : [UIColor purpleColor] }];
     
     CGRect textBounds;
     textBounds.origin = CGPointMake(2.0, 2.0);
