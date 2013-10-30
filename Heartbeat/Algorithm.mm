@@ -42,7 +42,7 @@
 #define WINDOW_SIZE 9
 #define WINDOW_SIZE_FOR_FILTER_CALCULATION 45// should be at least WINDOW_SIZE*2
 #define CALIBRATION_DURATION 90
-#define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 90
+#define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 75
 
 - (CGFloat)frameRate{
     if (!_frameRate) {
@@ -214,7 +214,7 @@
     // graph size should be window*2+1
     // window must be positive
     
-    if (self.framesCounter - self.lastPeakPlace < window) {
+    if (self.framesCounter-window-1 - self.lastPeakPlace < window) {
         return NO;
     }
     
@@ -308,14 +308,14 @@
         
         if ([self.isPeak[i-w-1] boolValue]) {
             self.firstPeakPlace = i-w-1;
-            self.bpmValues[i-w-1] = @(DEFAULT_BPM_VALUE);
-            self.bpmAverageValues[i-w-1] = @(DEFAULT_BPM_VALUE);
+            self.bpmValues[i-w-1] = @(0);
+            self.bpmAverageValues[i-w-1] = @(0);
         }
         
         return;// continue
     }
     
-    if (i < calib + (self.firstPeakPlace + w + 1)) {
+    if (i < calib + self.firstPeakPlace + w + 1) {
         
         self.isPeak[i-w-1] = @([self isPeak:z :w]);
         
@@ -327,14 +327,15 @@
         }
         
         self.bpmValues[i-w-1] = @(MIN(MAX((self.numOfPeaks/(frames/self.frameRate))*60 , MIN_BPM_VALUE), MAX_BPM_VALUE));
-        int k = i-(self.firstPeakPlace+w+1) + 5;// +5 to improve calibration result for low bpm
-        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+1) + [self.bpmValues[i-w-1] doubleValue] * 1/(k+1));
+        double k = i-(self.firstPeakPlace+w+1) - 1 + 4.5;// + 4.5 to improve calibration result for low bpm
+        double sensitiveFactor = 1.5;// adjust this bigger the make the algorithm more sensitive to changes
+        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+sensitiveFactor) + [self.bpmValues[i-w-1] doubleValue] * sensitiveFactor/(k+sensitiveFactor));
     }
     
     else {
         //calibration is over
         
-        if (i < calib + (self.firstPeakPlace + w + 1) + self.windowSizeForAverageCalculation){
+        if (i < calib + (self.firstPeakPlace + w + 1) + 3*30){
             self.isPeak[i-w-1] = @([self isPeak:z :w]);
         } else {
             self.isPeak[i-w-1] = @([self isMissedPeak] ? 1 : [self isPeak:z :w]);//*
@@ -352,11 +353,11 @@
         }
         double average_bpm = tempSum/self.windowSizeForAverageCalculation;
         
-        int calibrationWeight = 2;// simulate the weight of the calibration calculated results.
+        int calibrationWeight = 2.5;// simulate the weight of the calibration calculated results.
         // if it's 0, the calibration is worthless
-        int sensitiveFactor = 3;// adjust this bigger the make the algorithm more sensitive to changes
+        double sensitiveFactor = 2.5;// adjust this bigger the make the algorithm more sensitive to changes
         //CGFloat lastResultFactor = fabs(average_bpm/[self.bpmAverageValues[i-w-2] doubleValue] -1) < 0.1 ? 1 : fabs(1 - fabs(average_bpm-[self.bpmAverageValues[i-w-2] doubleValue])/[self.bpmAverageValues[i-w-2] doubleValue]);
-        int k = i - calib + (self.firstPeakPlace + w + 1) + calibrationWeight;
+        int k = i - (calib + self.firstPeakPlace + w + 1) + calibrationWeight;
         //self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * (1-lastResultFactor*sensitiveFactor/(k+sensitiveFactor)) + average_bpm * lastResultFactor * sensitiveFactor/(k+sensitiveFactor));
         self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+sensitiveFactor) + average_bpm * sensitiveFactor/(k+sensitiveFactor));
         
