@@ -40,7 +40,7 @@
 
 #define FPS 30
 #define WINDOW_SIZE 9
-#define WINDOW_SIZE_FOR_FILTER_CALCULATION 45// should be at least WINDOW_SIZE*2
+#define WINDOW_SIZE_FOR_FILTER_CALCULATION 60// should be at least WINDOW_SIZE*2
 #define CALIBRATION_DURATION 90
 #define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 75
 
@@ -245,14 +245,14 @@
 {
     for (int i=0 ; i<n ; i++) {
         points[i] -= num;
-        points[i] *= -1;//*
+        //points[i] *= -1;//*
     }
 }
 
 - (BOOL)isMissedPeak
 {
     double excpectedFramesSinceLastPeak = 1/(self.bpmLatestResult/(60*self.frameRate));
-    double marginFactor = 0.333;
+    double marginFactor = 0.5;
     if (self.framesCounter - self.windowSize - 1 - self.lastPeakPlace > (1+marginFactor)*excpectedFramesSinceLastPeak) {
         printf("missed peak\n");
         return YES;
@@ -335,7 +335,7 @@
     else {
         //calibration is over
         
-        if (i < calib + (self.firstPeakPlace + w + 1) + 3*30){
+        if (i < calib + (self.firstPeakPlace + w + 1) + 2.5*30){
             self.isPeak[i-w-1] = @([self isPeak:z :w]);
         } else {
             self.isPeak[i-w-1] = @([self isMissedPeak] ? 1 : [self isPeak:z :w]);//*
