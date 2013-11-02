@@ -29,6 +29,7 @@
 @property (nonatomic , readonly) CGFloat bpmLatestResult;
 
 @property (nonatomic, readonly) BOOL isPeakInLastFrame;
+@property (nonatomic, readonly) BOOL isMissedTheLastPeak;
 
 @property (nonatomic , readonly) BOOL shouldShowLatestResult;
 

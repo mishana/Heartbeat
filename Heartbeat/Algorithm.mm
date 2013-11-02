@@ -27,6 +27,7 @@
 @property (nonatomic , readwrite) BOOL isFinalResultDetermined;
 
 @property (nonatomic, readwrite) BOOL isPeakInLastFrame;
+@property (nonatomic, readwrite) BOOL isMissedTheLastPeak;
 
 @property (nonatomic , readwrite) BOOL shouldShowLatestResult;
 
@@ -339,6 +340,7 @@
             self.isPeak[i-w-1] = @([self isPeak:z :w]);
         } else {
             self.isPeak[i-w-1] = @([self isMissedPeak] ? 1 : [self isPeak:z :w]);//*
+            self.isMissedTheLastPeak = [self isMissedPeak] ? YES : NO;
         }
         
         self.numOfPeaks += [self.isPeak[i-w-1] integerValue] - [self.isPeak[i-w-1-calib] integerValue];

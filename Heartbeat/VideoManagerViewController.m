@@ -97,8 +97,8 @@
 {
     if (!_algorithm2) {
         _algorithm2 = [[Algorithm alloc] init];
-        _algorithm2.windowSize = 10;
-        _algorithm2.filterWindowSize = 60;
+        _algorithm2.windowSize = 9;
+        _algorithm2.filterWindowSize = 45;
     }
     return _algorithm2;
 }
@@ -498,9 +498,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (void)playBeepSound
 {
-    if (self.settings.beepWithPulse && self.algorithm.isPeakInLastFrame){
-        [self.BeepSound play];
-        //[self heartAnimation];
+    if (self.settings.beepWithPulse){
+        if (self.algorithm.isPeakInLastFrame && !self.algorithm.isMissedTheLastPeak) {
+            [self.BeepSound play];
+        }
     }
 }
 
