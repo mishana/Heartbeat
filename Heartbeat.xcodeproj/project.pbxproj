@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2C05C5B9181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */; };
 		2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C27A86217E128450065ECC0 /* Butterworth.cpp */; };
+		2C98821018493AE40071B387 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C98820F18493AE40071B387 /* FacebookSDK.framework */; };
+		2C988212184949CE0071B387 /* IconFacebook-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C988211184949CE0071B387 /* IconFacebook-72@2x.png */; };
+		2C98821518495BBC0071B387 /* SUProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */; };
 		2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3957317E2F7F70019F1A5 /* Algorithm.mm */; };
 		2CD3957917E37FA50019F1A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957817E37FA50019F1A5 /* AVFoundation.framework */; };
 		2CD3957B17E37FB70019F1A5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957A17E37FB70019F1A5 /* CoreVideo.framework */; };
@@ -155,6 +158,10 @@
 		2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		2C27A86217E128450065ECC0 /* Butterworth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Butterworth.cpp; sourceTree = "<group>"; };
 		2C27A86317E128450065ECC0 /* Butterworth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Butterworth.h; sourceTree = "<group>"; };
+		2C98820F18493AE40071B387 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		2C988211184949CE0071B387 /* IconFacebook-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconFacebook-72@2x.png"; sourceTree = "<group>"; };
+		2C98821318495BBC0071B387 /* SUProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUProfileTableViewCell.h; sourceTree = "<group>"; };
+		2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUProfileTableViewCell.m; sourceTree = "<group>"; };
 		2CD3957017E133530019F1A5 /* project_script_3 */ = {isa = PBXFileReference; explicitFileType = text.script.worksheet; fileEncoding = 4; path = project_script_3; sourceTree = "<group>"; };
 		2CD3957217E2F7F70019F1A5 /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algorithm.h; sourceTree = "<group>"; };
 		2CD3957317E2F7F70019F1A5 /* Algorithm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Algorithm.mm; sourceTree = "<group>"; };
@@ -244,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */,
+				2C98821018493AE40071B387 /* FacebookSDK.framework in Frameworks */,
 				2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */,
 				2CD3957F17E37FEC0019F1A5 /* CoreMedia.framework in Frameworks */,
 				2CD3957B17E37FB70019F1A5 /* CoreVideo.framework in Frameworks */,
@@ -365,6 +373,7 @@
 		394F4E7117DF62E5001C5049 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C98820F18493AE40071B387 /* FacebookSDK.framework */,
 				39F6C03B1812065A00CC7F01 /* QuartzCore.framework */,
 				2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */,
 				2CD3957C17E37FC20019F1A5 /* CoreImage.framework */,
@@ -380,6 +389,8 @@
 		394F4E7817DF62E5001C5049 /* Heartbeat */ = {
 			isa = PBXGroup;
 			children = (
+				2C98821318495BBC0071B387 /* SUProfileTableViewCell.h */,
+				2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */,
 				394F4E8F17DF6350001C5049 /* Storyboard.storyboard */,
 				39B96D1318099B13004651F8 /* ResultCollectionViewCell.h */,
 				39B96D1418099B13004651F8 /* ResultCollectionViewCell.m */,
@@ -412,6 +423,7 @@
 		394F4E7917DF62E5001C5049 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C988211184949CE0071B387 /* IconFacebook-72@2x.png */,
 				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				39F6C0391811FF5B00CC7F01 /* Mask@2x.png */,
@@ -510,6 +522,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				he,
 			);
 			mainGroup = 394F4E6617DF62E5001C5049;
 			productRefGroup = 394F4E7017DF62E5001C5049 /* Products */;
@@ -531,6 +544,7 @@
 				3986F1321804273A000537CE /* Heart_line@2x.png in Resources */,
 				397A384117F33D4600BA69F3 /* stawberry_iPhone@2x.jpg in Resources */,
 				3924994117F7B4B0001928DD /* beep-21.wav in Resources */,
+				2C988212184949CE0071B387 /* IconFacebook-72@2x.png in Resources */,
 				39B96D1A180A9323004651F8 /* default_bg.png in Resources */,
 				397A383817F3284F00BA69F3 /* blue-green@2x.png in Resources */,
 				397A384217F33D4600BA69F3 /* Wall-2@2x.jpg in Resources */,
@@ -583,6 +597,7 @@
 				3986F13A18043C3E000537CE /* ResultsViewController.m in Sources */,
 				3947F75117F1E88F0026E415 /* Settings.m in Sources */,
 				39B96D121807935C004651F8 /* MainNavigationViewController.m in Sources */,
+				2C98821518495BBC0071B387 /* SUProfileTableViewCell.m in Sources */,
 				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
 				3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */,
 				39FC1BC217F68311003A4390 /* HelpViewController.m in Sources */,
@@ -668,6 +683,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Or/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
@@ -685,6 +704,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Or/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
