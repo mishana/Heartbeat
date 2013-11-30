@@ -25,6 +25,7 @@
     UIRectFill(self.bounds);
     
     [self drawBpm];
+#warning need to stop using ResultView, and instead update the UILabel in the ViewCell
     [self drawOneRect];
 }
 

@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "Settings.h"
+//#import "FacebookSDK/FacebookSDK.h"
 
 @interface SettingsViewController () <UITableViewDelegate>
 @property (strong, nonatomic) Settings *settings;
@@ -122,13 +123,13 @@
     
     switch(section) {
         case 0:
-            text = @"   אפשרויות";
+            text = @"   פרופיל";
             break;
         case 1:
-            text = @"   עזרה";
+            text = @"   אפשרויות";
             break;
         case 2:
-            text = @"   פרופיל";
+            text = @"   עזרה";
             break;
         case 3:
             text = @"   אודות";
@@ -145,7 +146,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 35;
+    return 36;
 }
 
 @end

@@ -340,7 +340,7 @@
             self.isPeak[i-w-1] = @([self isPeak:z :w]);
         } else {
             self.isPeak[i-w-1] = @([self isMissedPeak] ? 1 : [self isPeak:z :w]);//*
-            self.isMissedTheLastPeak = [self isMissedPeak] ? YES : NO;
+            self.isMissedTheLastPeak = [self isMissedPeak];
         }
         
         self.numOfPeaks += [self.isPeak[i-w-1] integerValue] - [self.isPeak[i-w-1-calib] integerValue];

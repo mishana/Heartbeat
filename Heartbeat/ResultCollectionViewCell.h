@@ -10,7 +10,10 @@
 #import "ResultView.h"
 
 @interface ResultCollectionViewCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet ResultView *resultView;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 
 @end
