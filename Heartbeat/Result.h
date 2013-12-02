@@ -15,6 +15,8 @@
 - (NSComparisonResult)compareByBpm:(Result *)result;
 - (NSComparisonResult)compareByDuration:(Result *)result;
 
+- (void)deleteFromResults;
+
 @property (readonly, nonatomic) NSDate *start;
 @property (readonly, nonatomic) NSDate *end;
 @property (readonly, nonatomic) NSTimeInterval duration;

@@ -10,4 +10,6 @@
 
 @interface ResultsViewController : UIViewController
 
+- (void)scrollToTop;
+
 @end

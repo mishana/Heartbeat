@@ -27,6 +27,10 @@
 @property (nonatomic , readwrite) BOOL isFinalResultDetermined;
 
 @property (nonatomic, readwrite) BOOL isPeakInLastFrame;
+@property (nonatomic, readwrite) BOOL isMissedTheLastPeak;
+
+@property (nonatomic , readwrite) BOOL shouldShowLatestResult;
+
 @property (nonatomic) NSUInteger lastPeakPlace;
 
 @end
@@ -36,10 +40,10 @@
 // Properties
 
 #define FPS 30
-#define WINDOW_SIZE 12
+#define WINDOW_SIZE 9
 #define WINDOW_SIZE_FOR_FILTER_CALCULATION 60// should be at least WINDOW_SIZE*2
-#define CALIBRATION_DURATION 120
-#define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 120
+#define CALIBRATION_DURATION 90
+#define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 75
 
 - (CGFloat)frameRate{
     if (!_frameRate) {
@@ -53,6 +57,13 @@
         _windowSize = WINDOW_SIZE;
     }
     return _windowSize;
+}
+
+- (NSUInteger)filterWindowSize{
+    if (!_filterWindowSize) {
+        _filterWindowSize = WINDOW_SIZE_FOR_FILTER_CALCULATION;
+    }
+    return _filterWindowSize;
 }
 
 - (NSUInteger)calibrationDuration{
@@ -101,9 +112,9 @@
     return _isPeak;
 }
 
-#define FILTER_ORDER 3
-#define FILTER_LOWER_BAND 0.05
-#define FILTER_UPPER_BAND 0.2
+#define FILTER_ORDER 5
+#define FILTER_LOWER_BAND 0.04 //36
+#define FILTER_UPPER_BAND 0.2 //180
 
 - (double**)buttterworthValues{
     if (!_buttterworthValues) {
@@ -116,8 +127,8 @@
 // outside API
 
 - (BOOL)isCalibrationOver{
-    if (self.framesCounter > (self.calibrationDuration + self.firstPeakPlace + self.windowSize)) {
-        return _isCalibrationOver = YES;
+    if ((self.framesCounter > self.calibrationDuration + self.filterWindowSize) && (self.framesCounter > (self.calibrationDuration + self.firstPeakPlace + self.windowSize))) {
+        _isCalibrationOver = YES;
     }
     else {
         _isCalibrationOver = NO;
@@ -129,7 +140,7 @@
 
 - (BOOL)isFinalResultDetermined{
     if (self.isCalibrationOver) {
-        if ((fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - (int)((self.calibrationDuration-self.windowSize -1)/2)] doubleValue]) <= FINAL_RESULT_MARGIN/2) &&
+        if ((fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - (int)(self.calibrationDuration/2)-self.windowSize-1] doubleValue]) <= FINAL_RESULT_MARGIN*2/3) &&
             (fabs(self.bpmLatestResult - [self.bpmAverageValues[self.framesCounter - self.calibrationDuration-self.windowSize -1] doubleValue]) <= FINAL_RESULT_MARGIN)) {
                 return _isFinalResultDetermined = YES;
         }
@@ -141,10 +152,6 @@
         _isFinalResultDetermined = NO;//*
     }
     return _isFinalResultDetermined;
-    
-#warning - need to improve
-    // should make isFinalResultDetermined more reliable
-    // maybe by checking it for several more frames...
 }
 
 - (CGFloat)bpmLatestResult
@@ -153,6 +160,23 @@
         return [self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue];
     }
     return 0;
+}
+
+- (BOOL)shouldShowLatestResult
+{
+    if (self.isCalibrationOver && (self.framesCounter > self.calibrationDuration + self.firstPeakPlace + self.windowSize + self.windowSizeForAverageCalculation)) {
+
+        if (fabs([self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 2] doubleValue]) < 0.083) {
+
+            if (fabs([self.bpmAverageValues[self.framesCounter-self.calibrationDuration/2-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration/2-self.windowSize - 2] doubleValue]) < 0.066) {
+                
+                if (fabs([self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.windowSize - 2] doubleValue]) < 0.05) {
+                    _shouldShowLatestResult = YES;
+                }
+            }
+        }
+    }
+    return _shouldShowLatestResult;
 }
 
 //
@@ -190,6 +214,11 @@
 {
     // graph size should be window*2+1
     // window must be positive
+    
+    if (self.framesCounter-window-1 - self.lastPeakPlace < window) {
+        return NO;
+    }
+    
     double middlePoint = graph[window];
     for (int i=0; i < window; i++) {
         if (middlePoint <= graph[i]) { // the middle point should be larger from all points detected before it
@@ -217,14 +246,14 @@
 {
     for (int i=0 ; i<n ; i++) {
         points[i] -= num;
-        points[i] *= -1;//*
+        //points[i] *= -1;//*
     }
 }
 
 - (BOOL)isMissedPeak
 {
     double excpectedFramesSinceLastPeak = 1/(self.bpmLatestResult/(60*self.frameRate));
-    double marginFactor = 0.333;
+    double marginFactor = 0.5;
     if (self.framesCounter - self.windowSize - 1 - self.lastPeakPlace > (1+marginFactor)*excpectedFramesSinceLastPeak) {
         printf("missed peak\n");
         return YES;
@@ -235,6 +264,8 @@
 //
 
 #define DEFAULT_BPM_VALUE 72
+#define MIN_BPM_VALUE 36
+#define MAX_BPM_VALUE 180
 
 - (void)newFrameDetectedWithAverageColor:(UIColor *)color
 {
@@ -257,12 +288,12 @@
     int calib = self.calibrationDuration;
     
     //
-    if (i <= WINDOW_SIZE_FOR_FILTER_CALCULATION) {
+    if (i <= self.filterWindowSize) {
         return;// continue, nothing to be done yet
     }
     
     //
-    int dynamicwindowSize = WINDOW_SIZE_FOR_FILTER_CALCULATION+1;
+    int dynamicwindowSize = self.filterWindowSize+1;
     double x[dynamicwindowSize] , y[dynamicwindowSize];
     [self getLatestPoints:dynamicwindowSize andSetIntoDoubleArray:x];
     [self Substract:[self mean:x withSize:dynamicwindowSize] fromArray:x withSize:dynamicwindowSize];
@@ -278,39 +309,45 @@
         
         if ([self.isPeak[i-w-1] boolValue]) {
             self.firstPeakPlace = i-w-1;
-            self.bpmValues[i-w-1] = @(60*self.frameRate/w);
-            self.bpmAverageValues[i-w-1] = @([self.bpmValues[i-w-1] doubleValue]);
+            self.bpmValues[i-w-1] = @(0);
+            self.bpmAverageValues[i-w-1] = @(0);
         }
         
         return;// continue
     }
     
-    if (i < calib + (self.firstPeakPlace + w + 1)) {
+    if (i < calib + self.firstPeakPlace + w + 1) {
         
-        self.isPeak[i-w-1] = @([self isPeak:z :w] && ![self.isPeak[i-w-2] boolValue]);// could also check self.isPeak[i-w-3]
+        self.isPeak[i-w-1] = @([self isPeak:z :w]);
         
-        self.numOfPeaks += [self.isPeak[i-w-1] boolValue];
+        self.numOfPeaks += [self.isPeak[i-w-1] integerValue];
         
         NSUInteger frames = i - self.firstPeakPlace-1;
         if (frames > calib) {
             frames = calib;
         }
         
-        self.bpmValues[i-w-1] = @((self.numOfPeaks/(frames/self.frameRate))*60);
-        int k = i-(self.firstPeakPlace+w+1);
-        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+1) + [self.bpmValues[i-w-1] doubleValue] * 1/(k+1));
+        self.bpmValues[i-w-1] = @(MIN(MAX((self.numOfPeaks/(frames/self.frameRate))*60 , MIN_BPM_VALUE), MAX_BPM_VALUE));
+        double k = i-(self.firstPeakPlace+w+1) - 1 + 4.5;// + 4.5 to improve calibration result for low bpm
+        double sensitiveFactor = 1.5;// adjust this bigger the make the algorithm more sensitive to changes
+        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+sensitiveFactor) + [self.bpmValues[i-w-1] doubleValue] * sensitiveFactor/(k+sensitiveFactor));
     }
     
     else {
         //calibration is over
         
-        self.isPeak[i-w-1] = @(([self isPeak:z :w] && ![self.isPeak[i-w-2] boolValue]) || [self isMissedPeak]);// could also check self.isPeak[i-w-3]
+        if (i < calib + (self.firstPeakPlace + w + 1) + 2.5*30){
+            self.isPeak[i-w-1] = @([self isPeak:z :w]);
+        } else {
+            self.isPeak[i-w-1] = @([self isMissedPeak] ? 1 : [self isPeak:z :w]);//*
+            self.isMissedTheLastPeak = [self isMissedPeak];
+        }
         
-        self.numOfPeaks += [self.isPeak[i-w-1] boolValue] - [self.isPeak[i-w-1-calib] boolValue];
+        self.numOfPeaks += [self.isPeak[i-w-1] integerValue] - [self.isPeak[i-w-1-calib] integerValue];
         
         NSUInteger frames = calib;
         
-        self.bpmValues[i-w-1] = @((self.numOfPeaks/(frames/self.frameRate))*60);
+        self.bpmValues[i-w-1] = @(MIN(MAX((self.numOfPeaks/(frames/self.frameRate))*60 , MIN_BPM_VALUE), MAX_BPM_VALUE));
         
         double tempSum = 0;
         for (int j = 1; j <= self.windowSizeForAverageCalculation; j++) {
@@ -318,12 +355,13 @@
         }
         double average_bpm = tempSum/self.windowSizeForAverageCalculation;
         
-        int calibrationWeight = 3;// simulate the weight of the calibration calculated results.
+        int calibrationWeight = 2.5;// simulate the weight of the calibration calculated results.
         // if it's 0, the calibration is worthless
-        int sensitiveFactor = 3;// adjust this bigger the make the algorithm more sensitive to changes
-        CGFloat lastResultFactor = fabs(average_bpm/[self.bpmAverageValues[i-w-2] doubleValue] -1) < 0.1 ? 1 : fabs(1 - fabs(average_bpm-[self.bpmAverageValues[i-w-2] doubleValue])/[self.bpmAverageValues[i-w-2] doubleValue]);
-        int k = i - calib + (self.firstPeakPlace + w + 1) + calibrationWeight;
-        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * (1-lastResultFactor*sensitiveFactor/(k+sensitiveFactor)) + average_bpm * lastResultFactor * sensitiveFactor/(k+sensitiveFactor));
+        double sensitiveFactor = 2.5;// adjust this bigger the make the algorithm more sensitive to changes
+        //CGFloat lastResultFactor = fabs(average_bpm/[self.bpmAverageValues[i-w-2] doubleValue] -1) < 0.1 ? 1 : fabs(1 - fabs(average_bpm-[self.bpmAverageValues[i-w-2] doubleValue])/[self.bpmAverageValues[i-w-2] doubleValue]);
+        int k = i - (calib + self.firstPeakPlace + w + 1) + calibrationWeight;
+        //self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * (1-lastResultFactor*sensitiveFactor/(k+sensitiveFactor)) + average_bpm * lastResultFactor * sensitiveFactor/(k+sensitiveFactor));
+        self.bpmAverageValues[i-w-1] = @([self.bpmAverageValues[i-w-2] doubleValue] * k/(k+sensitiveFactor) + average_bpm * sensitiveFactor/(k+sensitiveFactor));
         
     }
     
@@ -333,7 +371,7 @@
         self.lastPeakPlace = i-w-1;
         printf("%d\n" , i-w-1);
     }
-    
+
 }
 
 @end
