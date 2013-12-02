@@ -9,8 +9,9 @@
 #import "ResultsViewController.h"
 #import "ResultCollectionViewCell.h"
 #import "Result.h"
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface ResultsViewController () <UICollectionViewDataSource, UIActionSheetDelegate>
+@interface ResultsViewController () <UICollectionViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *resultCollectionView;
 //@property (nonatomic, strong) NSNumber *numOfResults;
 @property (nonatomic) int resultsNumOld;
@@ -19,7 +20,141 @@
 
 @end
 
-@implementation ResultsViewController
+typedef void (^RPSBlock)(void);
+
+@implementation ResultsViewController {
+    RPSBlock _alertOkHandler;
+}
+
+- (IBAction)clickFacebookButton:(id)sender {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Facebook"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Do Nothing"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Share on Facebook", @"Check settings",  nil];
+    // Show the sheet
+    [sheet showInView:sender];
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != 0) { // ok
+        if (_alertOkHandler) {
+            _alertOkHandler();
+            _alertOkHandler = nil;
+        }
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0: { // share
+            BOOL didDialog = NO;
+            didDialog = [self shareResult];
+            
+            if (!didDialog) {
+                [self alertWithMessage:
+                 @"Upgrade the Facebook application on your device and "
+                 @"get cool new sharing features for this application. "
+                 @"What do you want to do?"
+                                    ok:@"Upgrade Now"
+                                cancel:@"Decide Later"
+                            completion:^{
+                                // launch itunes to get the Facebook application installed/upgraded
+                                [[UIApplication sharedApplication]
+                                 openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Facebook"]];
+                            }];
+            }
+            break;
+        }
+        case 1: // settings
+            [self.navigationController pushViewController:[[FBUserSettingsViewController alloc] init] animated:YES];
+            break;
+    }
+}
+
+//
+
+- (BOOL)shareResult {
+    id<FBOpenGraphAction> action = (id<FBOpenGraphAction>)[FBGraphObject openGraphActionForPost];
+    
+    return nil !=
+    [FBDialogs presentShareDialogWithOpenGraphAction:action
+                                          actionType:@"bpm:"
+                                 previewPropertyName:@"bpm"
+                                             handler:nil];
+}
+
+//
+
+- (void)requestPermissionsWithCompletion:(RPSBlock)completion {
+    [FBSession.activeSession requestNewPublishPermissions:[NSArray arrayWithObject:@"publish_actions"]
+                                          defaultAudience:FBSessionDefaultAudienceEveryone
+                                        completionHandler:^(FBSession *session, NSError *error) {
+                                            if (!error) {
+                                                // Now have the permission
+                                                completion();
+                                            } else {
+                                                NSLog(@"Error: %@", error.description);
+                                            }
+                                        }];
+}
+
+- (void)alertWithMessage:(NSString *)message
+                      ok:(NSString *)ok
+                  cancel:(NSString *)cancel
+              completion:(RPSBlock)completion {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Share with Facebook"
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:cancel
+                                              otherButtonTitles:ok, nil];
+    _alertOkHandler = [completion copy];
+    [alertView show];
+}
+
+- (void)publishResult {
+    
+    FBRequestConnection *connection = [[FBRequestConnection alloc] init];
+    
+    NSMutableDictionary<FBOpenGraphObject> *result = [self createResultObject];
+    FBRequest *objectRequest = [FBRequest requestForPostOpenGraphObject:result];
+    [connection addRequest:objectRequest
+         completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+             if (error) {
+                 NSLog(@"Error: %@", error.description);
+             }
+         }
+            batchEntryName:@"objectCreate"];
+    
+    /*
+     NSMutableDictionary<FBGraphObject> *action = [self createPlayActionWithGame:@"{result=objectCreate:$.id}"];
+     FBRequest *actionRequest = [FBRequest requestForPostWithGraphPath:@"me/fb_sample_rps:play"
+     graphObject:action];
+     [connection addRequest:actionRequest
+     completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+     if (error) {
+     NSLog(@"Error: %@", error.description);
+     } else {
+     NSLog(@"Posted OG action with id: %@", result[@"id"]);
+     }
+     }];
+     */
+    
+    [connection start];
+}
+
+- (NSMutableDictionary<FBOpenGraphObject> *)createResultObject {
+    
+    NSString *resultName = @"60";// should be the bpm result
+    
+    NSMutableDictionary<FBOpenGraphObject> *result = [FBGraphObject openGraphObjectForPost];
+    result[@"type"] = @"Heartbeat:bpm";
+    result[@"title"] = @"Heartbeat";
+    result[@"data"][@"result"] = resultName;
+    
+    return result;
+}
 
 - (void)scrollToTop
 {
@@ -146,13 +281,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+// UIActionSheetDelegate methods
+
+#define SWIPE_ACTION_SHEET_TAG 0
+#define FACEBOOK_ACTION_SHEET_TAG 1
+
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == actionSheet.destructiveButtonIndex) {
-        [((Result *)[[self resultsByDate] objectAtIndex:self.deleteIndex.item]) deleteFromResults];
-        
-        self.resultsNumOld = [self numOfResults];
-        [self.resultCollectionView deleteItemsAtIndexPaths:@[self.deleteIndex]];
+    if (actionSheet.tag == SWIPE_ACTION_SHEET_TAG) {
+        if (buttonIndex == actionSheet.destructiveButtonIndex) {
+            [((Result *)[[self resultsByDate] objectAtIndex:self.deleteIndex.item]) deleteFromResults];
+            
+            self.resultsNumOld = [self numOfResults];
+            [self.resultCollectionView deleteItemsAtIndexPaths:@[self.deleteIndex]];
+        }
+    }
+    else if (actionSheet.tag == FACEBOOK_ACTION_SHEET_TAG) {
+        // do nothing
     }
 }
 
@@ -168,6 +313,7 @@
                                                         cancelButtonTitle:@"בטל"
                                                    destructiveButtonTitle:@"מחק תוצאה"
                                                         otherButtonTitles:nil];
+        [actionSheet setTag:SWIPE_ACTION_SHEET_TAG];// used the distinguish between the actionSheets
         
         [self.resultCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
         

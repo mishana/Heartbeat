@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2C05C5B9181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */; };
 		2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C27A86217E128450065ECC0 /* Butterworth.cpp */; };
+		2C78F50F184A5AC1006805A3 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */; };
+		2C78F512184BAD2C006805A3 /* FacebookUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C78F511184BAD2C006805A3 /* FacebookUserManager.m */; };
+		2C78F518184C1A97006805A3 /* login-with-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F517184C1A97006805A3 /* login-with-facebook.png */; };
 		2C98821018493AE40071B387 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C98820F18493AE40071B387 /* FacebookSDK.framework */; };
 		2C988212184949CE0071B387 /* IconFacebook-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C988211184949CE0071B387 /* IconFacebook-72@2x.png */; };
 		2C98821518495BBC0071B387 /* SUProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */; };
@@ -155,9 +158,13 @@
 		2C05C5B5181FDCB500F9C16B /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
 		2C05C5B6181FDCB500F9C16B /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		2C05C5B7181FDCB500F9C16B /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
-		2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
+		2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "../libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		2C27A86217E128450065ECC0 /* Butterworth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Butterworth.cpp; sourceTree = "<group>"; };
 		2C27A86317E128450065ECC0 /* Butterworth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Butterworth.h; sourceTree = "<group>"; };
+		2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
+		2C78F510184BAD2C006805A3 /* FacebookUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookUserManager.h; sourceTree = "<group>"; };
+		2C78F511184BAD2C006805A3 /* FacebookUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FacebookUserManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		2C78F517184C1A97006805A3 /* login-with-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-with-facebook.png"; sourceTree = "<group>"; };
 		2C98820F18493AE40071B387 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		2C988211184949CE0071B387 /* IconFacebook-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconFacebook-72@2x.png"; sourceTree = "<group>"; };
 		2C98821318495BBC0071B387 /* SUProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUProfileTableViewCell.h; sourceTree = "<group>"; };
@@ -351,10 +358,20 @@
 			path = CorePlotHeaders;
 			sourceTree = "<group>";
 		};
+		2C78F513184BAD46006805A3 /* Facebook related files */ = {
+			isa = PBXGroup;
+			children = (
+				2C78F510184BAD2C006805A3 /* FacebookUserManager.h */,
+				2C78F511184BAD2C006805A3 /* FacebookUserManager.m */,
+				2C98821318495BBC0071B387 /* SUProfileTableViewCell.h */,
+				2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */,
+			);
+			name = "Facebook related files";
+			sourceTree = "<group>";
+		};
 		394F4E6617DF62E5001C5049 = {
 			isa = PBXGroup;
 			children = (
-				2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */,
 				2C05C569181FDCB400F9C16B /* CorePlotHeaders */,
 				394F4E7817DF62E5001C5049 /* Heartbeat */,
 				394F4E7117DF62E5001C5049 /* Frameworks */,
@@ -389,8 +406,7 @@
 		394F4E7817DF62E5001C5049 /* Heartbeat */ = {
 			isa = PBXGroup;
 			children = (
-				2C98821318495BBC0071B387 /* SUProfileTableViewCell.h */,
-				2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */,
+				2C78F513184BAD46006805A3 /* Facebook related files */,
 				394F4E8F17DF6350001C5049 /* Storyboard.storyboard */,
 				39B96D1318099B13004651F8 /* ResultCollectionViewCell.h */,
 				39B96D1418099B13004651F8 /* ResultCollectionViewCell.m */,
@@ -423,6 +439,9 @@
 		394F4E7917DF62E5001C5049 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C78F517184C1A97006805A3 /* login-with-facebook.png */,
+				2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */,
+				2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */,
 				2C988211184949CE0071B387 /* IconFacebook-72@2x.png */,
 				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
@@ -559,10 +578,12 @@
 				3947F74E17F1B1410026E415 /* spanner.png in Resources */,
 				39B96D0018075B04004651F8 /* Settings_Line-1@2x.png in Resources */,
 				3986F1341804273A000537CE /* Help_full@2x.png in Resources */,
+				2C78F518184C1A97006805A3 /* login-with-facebook.png in Resources */,
 				394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */,
 				3986F1351804273A000537CE /* Help_Line@2x.png in Resources */,
 				3986F1331804273A000537CE /* Heart_Full@2x.png in Resources */,
 				394F4E8917DF62E5001C5049 /* Default-568h@2x.png in Resources */,
+				2C78F50F184A5AC1006805A3 /* FBUserSettingsViewResources.bundle in Resources */,
 				3924993F17F79359001928DD /* heart@2x.png in Resources */,
 				394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */,
 				397A383417F24AB000BA69F3 /* settings 11@2x.png in Resources */,
@@ -599,6 +620,7 @@
 				39B96D121807935C004651F8 /* MainNavigationViewController.m in Sources */,
 				2C98821518495BBC0071B387 /* SUProfileTableViewCell.m in Sources */,
 				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
+				2C78F512184BAD2C006805A3 /* FacebookUserManager.m in Sources */,
 				3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */,
 				39FC1BC217F68311003A4390 /* HelpViewController.m in Sources */,
 				2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */,

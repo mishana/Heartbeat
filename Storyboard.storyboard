@@ -58,14 +58,14 @@
                         <sections>
                             <tableViewSection headerTitle="פרופיל" id="Rgu-C7-bjf">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="XPR-YN-eeS" style="IBUITableViewCellStyleDefault" id="xiQ-RG-7yw" customClass="SUProfileTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FacebookProfileCell" textLabel="bCy-47-oDO" style="IBUITableViewCellStyleDefault" id="xiQ-RG-7yw" customClass="SUProfileTableViewCell">
                                         <rect key="frame" x="0.0" y="119" width="320" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xiQ-RG-7yw" id="vlb-w6-z8m">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Log In With Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XPR-YN-eeS">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bCy-47-oDO">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="47"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -206,7 +206,6 @@
                         <outlet property="autoStopAfterSwitch" destination="Oc5-Pq-MoL" id="Ro1-7n-QcT"/>
                         <outlet property="beepSwitch" destination="ErI-bZ-cd9" id="Zk9-HP-VRu"/>
                         <outlet property="continuesModeSwitch" destination="Jgh-hZ-sPK" id="DHn-BJ-5k6"/>
-                        <outlet property="profileLabel" destination="XPR-YN-eeS" id="6d6-uO-SUw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPp-Rw-t4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,13 +254,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kao-eS-SIB">
-                                                            <rect key="frame" x="247" y="60" width="36" height="36"/>
+                                                            <rect key="frame" x="133" y="60" width="36" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" backgroundImage="IconFacebook-72.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="clickFacebookButton:" destination="07r-4N-F0o" eventType="touchUpInside" id="G7U-50-KxK"/>
+                                                                <action selector="clickFacebookButton:" destination="9Ug-15-Cc5" eventType="touchUpInside" id="6hJ-IU-xZt"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -271,8 +270,6 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <outlet property="facebookButton" destination="Kao-eS-SIB" id="p9O-Rd-sYV"/>
-                                            <outlet property="resultLabel" destination="QS9-Yq-cle" id="5PU-wr-95b"/>
                                             <outlet property="resultView" destination="hns-yY-oOp" id="3V7-y4-yK3"/>
                                         </connections>
                                     </collectionViewCell>
