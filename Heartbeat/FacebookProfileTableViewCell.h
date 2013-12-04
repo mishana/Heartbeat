@@ -1,5 +1,5 @@
 //
-//  SUProfileTableViewCell.h
+//  FacebookProfileTableViewCell.h
 //  Heartbeat
 //
 //  Created by or maayan on 12/01/13.
@@ -10,7 +10,7 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface SUProfileTableViewCell : UITableViewCell
+@interface FacebookProfileTableViewCell : UITableViewCell
 
 @property (copy, nonatomic) NSString *userID;
 @property (copy, nonatomic) NSString *userName;

@@ -1,5 +1,5 @@
 //
-//  SUProfileTableViewCell.m
+//  FacebookProfileTableViewCell.m
 //  Heartbeat
 //
 //  Created by or maayan on 12/01/13.
@@ -7,9 +7,9 @@
 //
 
 
-#import "SUProfileTableViewCell.h"
+#import "FacebookProfileTableViewCell.h"
 
-@implementation SUProfileTableViewCell
+@implementation FacebookProfileTableViewCell
 
 #define leftMargin 4
 #define topMargin 4
