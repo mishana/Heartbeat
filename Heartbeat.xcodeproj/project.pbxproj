@@ -12,6 +12,7 @@
 		2C78F50F184A5AC1006805A3 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */; };
 		2C78F512184BAD2C006805A3 /* FacebookUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C78F511184BAD2C006805A3 /* FacebookUserManager.m */; };
 		2C78F518184C1A97006805A3 /* login-with-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F517184C1A97006805A3 /* login-with-facebook.png */; };
+		2C78F520184FA824006805A3 /* facebook-cell-background-1x5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */; };
 		2C98821018493AE40071B387 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C98820F18493AE40071B387 /* FacebookSDK.framework */; };
 		2C988212184949CE0071B387 /* IconFacebook-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C988211184949CE0071B387 /* IconFacebook-72@2x.png */; };
 		2C98821518495BBC0071B387 /* SUProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */; };
@@ -165,6 +166,7 @@
 		2C78F510184BAD2C006805A3 /* FacebookUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookUserManager.h; sourceTree = "<group>"; };
 		2C78F511184BAD2C006805A3 /* FacebookUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FacebookUserManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2C78F517184C1A97006805A3 /* login-with-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-with-facebook.png"; sourceTree = "<group>"; };
+		2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-cell-background-1x5.png"; sourceTree = "<group>"; };
 		2C98820F18493AE40071B387 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		2C988211184949CE0071B387 /* IconFacebook-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconFacebook-72@2x.png"; sourceTree = "<group>"; };
 		2C98821318495BBC0071B387 /* SUProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUProfileTableViewCell.h; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 		394F4E7917DF62E5001C5049 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */,
 				2C78F517184C1A97006805A3 /* login-with-facebook.png */,
 				2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */,
 				2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */,
@@ -572,6 +575,7 @@
 				397A383A17F334F100BA69F3 /* green-blue-fade@2x.png in Resources */,
 				3986F1361804273A000537CE /* Settings_full@2x.png in Resources */,
 				3986F1301804273A000537CE /* lamb_Line@2x.png in Resources */,
+				2C78F520184FA824006805A3 /* facebook-cell-background-1x5.png in Resources */,
 				3986F127180426EF000537CE /* Background_2@2x.jpg in Resources */,
 				394F4E8517DF62E5001C5049 /* Default.png in Resources */,
 				397A382F17F2493B00BA69F3 /* settings 12@2x.png in Resources */,
