@@ -55,10 +55,10 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-
+    
     if (FBSession.activeSession.isOpen){
         [self.loginView removeFromSuperview];
-
+        
         self.textLabel.frame = CGRectMake(leftMargin * 2 + pictureWidth,
                                           topMargin,
                                           self.bounds.size.width - (leftMargin * 2 + pictureWidth)*2 - rightMargin,
@@ -92,7 +92,7 @@
     
     if (!userID) {
         //[self setNeedsDisplay];
-        #warning need to check if necessary
+    #warning need to check if necessary
     }
 }
 
@@ -114,7 +114,7 @@
 
 - (void)setLoginView:(FBLoginView *)loginView {
     _loginView = loginView;
-    [self setNeedsDisplay];
+    //[self setNeedsDisplay];
 }
 
 #pragma mark - Public API

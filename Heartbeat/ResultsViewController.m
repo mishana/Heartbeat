@@ -11,12 +11,15 @@
 #import "Result.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface ResultsViewController () <UICollectionViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate>
+@interface ResultsViewController () <UICollectionViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate , FBUserSettingsDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *resultCollectionView;
 //@property (nonatomic, strong) NSNumber *numOfResults;
 @property (nonatomic) int resultsNumOld;
 
+@property (nonatomic, strong) FBUserSettingsViewController *userSettingsViewController;
+
 @property (nonatomic, strong) NSIndexPath *deleteIndex;
+@property (nonatomic, strong) NSIndexPath *selectedIndex;// will be used for the publish action
 
 @end
 
@@ -24,6 +27,14 @@ typedef void (^RPSBlock)(void);
 
 @implementation ResultsViewController {
     RPSBlock _alertOkHandler;
+}
+
+- (FBUserSettingsViewController *)userSettingsViewController {
+    if (!_userSettingsViewController) {
+        _userSettingsViewController =[[FBUserSettingsViewController alloc] init];
+        _userSettingsViewController.delegate = self;
+    }
+    return _userSettingsViewController;
 }
 
 - (void)scrollToTop
@@ -191,13 +202,19 @@ typedef void (^RPSBlock)(void);
 
 #pragma mark - Facebook
 
-- (IBAction)clickFacebookButton:(id)sender {
+- (UIActionSheet *)getFacebookActionSheet {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Facebook"
                                                        delegate:self
                                               cancelButtonTitle:@"Do Nothing"
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"Share on Facebook", @"Check settings",  nil];
     [sheet setTag:FACEBOOK_ACTION_SHEET_TAG];
+    return sheet;
+}
+
+- (IBAction)clickFacebookButton:(id)sender {
+    UIActionSheet *sheet;
+    sheet = [self getFacebookActionSheet];
     // Show the sheet
     [sheet showFromTabBar:self.tabBarController.tabBar];
 }
@@ -235,7 +252,7 @@ typedef void (^RPSBlock)(void);
                 break;
             }
             case 1: // settings
-                [self.navigationController pushViewController:[[FBUserSettingsViewController alloc] init] animated:YES];
+                [self.navigationController pushViewController:self.userSettingsViewController animated:YES];
                 break;
         }
     }
@@ -322,6 +339,34 @@ typedef void (^RPSBlock)(void);
     result[@"data"][@"result"] = resultName;
     
     return result;
+}
+
+#pragma mark - FBUserSettingsDelegate methods
+
+- (void)loginViewControllerDidLogUserOut:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FacebookActiveSessionStateChanged" object:nil];
+}
+
+- (void)loginViewControllerDidLogUserIn:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [[self getFacebookActionSheet] showFromTabBar:self.tabBarController.tabBar];
+    
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"FacebookActiveSessionStateChanged" object:nil];
+    // don't need to update the cell because loginViewShowingLoggedInUser do it
+}
+
+- (void)loginViewController:(id)sender receivedError:(NSError *)error{
+    // Facebook SDK * login flow *
+    // There are many ways to implement the Facebook login flow.
+    // In this sample, the FBUserSettingsViewController is only presented
+    // as a log out option after the user has been authenticated, so
+    // no real errors should occur. If the FBUserSettingsViewController
+    // had been the entry point to the app, then this error handler should
+    // be as rigorous as the FBLoginView delegate (SCLoginViewController)
+    // in order to handle login errors.
+    if (error) {
+        NSLog(@"Unexpected error sent to the FBUserSettingsViewController delegate: %@", error);
+    }
 }
 
 @end

@@ -14,6 +14,8 @@
 @interface SettingsViewController () <UITableViewDataSource , UITableViewDelegate , FBLoginViewDelegate , FBUserSettingsDelegate>
 // Properties
 @property (strong, nonatomic) Settings *settings;
+@property (strong, nonatomic) FBLoginView *loginView;
+@property (nonatomic, strong) FBUserSettingsViewController *userSettingsViewController;
 
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UISwitch *autoStopAfterSwitch;
@@ -30,6 +32,24 @@
 {
     if (!_settings) _settings = [Settings currentSettings];
     return _settings;
+}
+
+- (FBLoginView *)loginView {
+    if (!_loginView) {
+        NSArray *permissions = @[@"basic_info",@"user_birthday"];
+        _loginView = [[FBLoginView alloc] initWithReadPermissions:permissions];
+        _loginView.delegate = self;
+        _loginView.loginBehavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;//
+    }
+    return _loginView;
+}
+
+- (FBUserSettingsViewController *)userSettingsViewController {
+    if (!_userSettingsViewController) {
+        _userSettingsViewController =[[FBUserSettingsViewController alloc] init];
+        _userSettingsViewController.delegate = self;
+    }
+    return _userSettingsViewController;
 }
 
 #pragma mark - Lifecycle
@@ -95,7 +115,7 @@
 #warning - incomplete implementation
     // probably should update Facebook Profile Cell
     //[self updateCell:[self getFacebookProfileCell]];
-    //[self reloadFacebookProfileCellWithAnimation:@(UITableViewRowAnimationNone)];
+    [self reloadFacebookProfileCellWithAnimation:@(UITableViewRowAnimationNone)];
 }
 
 #pragma mark - IBActions
@@ -211,14 +231,6 @@
 
  */
 
-- (FBLoginView *)getLoginViewConfigured {
-    NSArray *permissions = @[@"basic_info",@"user_birthday"];
-    FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:permissions];
-    loginView.delegate = self;
-    loginView.loginBehavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;// FBSessionLoginBehaviorWithFallbackToWebView
-    return loginView;
-}
-
 - (void)updateCell:(FacebookProfileTableViewCell *)cell {
 
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -230,8 +242,7 @@
         cell.userName = @"";
         cell.userID = nil;
         
-        cell.loginView = [self getLoginViewConfigured];
-        
+        cell.loginView = self.loginView;
     } else {
         [[FBRequest requestForMe] startWithCompletionHandler:
          ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
@@ -346,12 +357,6 @@
     }
 }
 
--(FBUserSettingsViewController *)getUserSettingsViewControllerConfigured {
-    FBUserSettingsViewController *userSettingsViewController =[[FBUserSettingsViewController alloc] init];
-    userSettingsViewController.delegate = self;
-    return userSettingsViewController;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
         // this is the facebook user cell
@@ -359,7 +364,7 @@
         if (FBSession.activeSession.isOpen) {
             // go to another view controller
             // currently not doing anything
-            [self.navigationController pushViewController:[self getUserSettingsViewControllerConfigured] animated:YES];
+            [self.navigationController pushViewController:self.userSettingsViewController animated:YES];
         } else {
             // logging in
             //[self login];
@@ -385,17 +390,15 @@
 #pragma mark - FBUserSettingsDelegate methods
 
 - (void)reloadFacebookProfileCellWithAnimation:(NSNumber *)animation{
+    //[self.tableView beginUpdates];
     [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForFacebookProfileCell]] withRowAnimation:[animation integerValue]];
+    //[self.tableView endUpdates];
 }
 
 - (void)loginViewControllerDidLogUserOut:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 
     [self performSelector:@selector(reloadFacebookProfileCellWithAnimation:) withObject:@(UITableViewRowAnimationFade) afterDelay:0.5];
-}
-
-- (void)loginViewControllerDidLogUserIn:(id)sender {
-    
 }
 
 - (void)loginViewController:(id)sender receivedError:(NSError *)error{
@@ -416,8 +419,15 @@
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
     // need to update cell first or send notification
-    [self updateCell:[self getFacebookProfileCell]];
-    [self reloadFacebookProfileCellWithAnimation:@(UITableViewRowAnimationFade)];
+    //[self updateCell:[self getFacebookProfileCell]];
+    [self reloadFacebookProfileCellWithAnimation:@(UITableViewRowAnimationNone)];
+}
+
+- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    // Facebook SDK * login flow *
+    // It is important to always handle session closure because it can happen
+    // externally; for example, if the current session's access token becomes
+    // invalid. For now, we do nothing
 }
 
 + (void)loginView:(FBLoginView *)loginView
@@ -464,14 +474,7 @@
 }
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user {
-    
-}
-
-- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-    // Facebook SDK * login flow *
-    // It is important to always handle session closure because it can happen
-    // externally; for example, if the current session's access token becomes
-    // invalid. For this sample, we simply pop back to the landing page.
+    // TODO
 }
 
 @end
