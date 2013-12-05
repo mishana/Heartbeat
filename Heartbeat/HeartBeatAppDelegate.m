@@ -8,6 +8,8 @@
 
 #import "HeartBeatAppDelegate.h"
 #import "WelcomeScreenViewController.h"
+#import "FacebookSDK/FacebookSDK.h"
+#import "SettingsViewController.h"
 
 @implementation HeartBeatAppDelegate
 
@@ -21,12 +23,6 @@
         //self.window.rootViewController = [[WelcomeScreenViewController alloc] initWithNibName:@"WelcomeScreenViewController" bundle:nil];
     }
     //[self.window makeKeyAndVisible];
-    
-    // Facebook part
-    self.userManager = [[FacebookUserManager alloc] init];
-    // At startup time we attempt to log in the default user that has signed on using Facebook Login
-    //[viewController2 loginDefaultUser];
-    //
     
     return YES;
 }
@@ -48,16 +44,19 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [FBAppEvents activateApp];
-    [FBAppCall handleDidBecomeActiveWithSession:self.userManager.currentSession];
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // if the app is going away, we close the session object; this is a good idea because
+    // things may be hanging off the session, that need releasing (completion block, etc.) and
+    // other components in the app may be awaiting close notification in order to do cleanup
+    [FBSession.activeSession close];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [FBAppEvents activateApp];
+    
+    // We need to properly handle activation of the application with regards to SSO
+    //  (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
+    [FBAppCall handleDidBecomeActive];
 }
 
 // As part of the login workflow, the native application or Safari will transition back to this application'
@@ -67,10 +66,40 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    // attempt to extract a token from the url
-    return [FBAppCall handleOpenURL:url
-                  sourceApplication:sourceApplication
-                        withSession:self.userManager.currentSession];
+
+    // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication fallbackHandler:^(FBAppCall *call) {
+
+        // For simplicity, this sample will ignore the link if the session is already
+        // open but a more advanced app could support features like user switching.
+        if (call.accessTokenData) {
+            if ([FBSession activeSession].isOpen) {
+                NSLog(@"INFO: Ignoring app link because current session is open.");
+            }
+            else {
+                [self handleAppLink:call.accessTokenData];
+            }
+        }
+    }];
+}
+
+// Helper method to wrap logic for handling app links.
+- (void)handleAppLink:(FBAccessTokenData *)appLinkToken {
+    // Initialize a new blank session instance...
+    FBSession *appLinkSession = [[FBSession alloc] initWithAppID:nil
+                                                     permissions:nil
+                                                 defaultAudience:FBSessionDefaultAudienceNone
+                                                 urlSchemeSuffix:nil
+                                              tokenCacheStrategy:[FBSessionTokenCachingStrategy nullCacheInstance] ];
+    [FBSession setActiveSession:appLinkSession];
+    // ... and open it from the App Link's Token.
+    [appLinkSession openFromAccessTokenData:appLinkToken
+                          completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                              // Forward any errors to the FBLoginView delegate.
+                              if (error) {
+                                  [SettingsViewController loginView:nil handleError:error];
+                              }
+                          }];
 }
 
 @end

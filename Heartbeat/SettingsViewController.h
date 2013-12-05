@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FacebookSDK/FacebookSDK.h"
 
 @interface SettingsViewController : UITableViewController
+
++ (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error;// handle facebook login error
 
 @end

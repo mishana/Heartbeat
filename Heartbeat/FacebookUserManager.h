@@ -10,19 +10,13 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 
-extern NSString *const SUInvalidSlotNumber;
-
 @protocol FBGraphUser;
 
 @interface FacebookUserManager : NSObject
 
-// This is where our active session is maintained
-@property (strong, readonly) FBSession *currentSession;
+@property (strong , nonatomic) NSString *userId;
+@property (strong , nonatomic) NSString *userName;
 
-- (id)init;
-
-- (NSString*)getUserID;
-- (NSString*)getUserName;
 - (void)updateUser:(NSDictionary<FBGraphUser> *)user;
 
 - (BOOL)isLoggedIn;

@@ -47,10 +47,10 @@
 	<string>1382011812023711</string>
 	<key>FacebookDisplayName</key>
 	<string>Heartbeat</string>
-	<key>URL types</key>
+	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>URL Schemes</key>
+			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb1382011812023711</string>
 			</array>

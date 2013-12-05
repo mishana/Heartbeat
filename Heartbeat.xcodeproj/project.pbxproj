@@ -10,11 +10,10 @@
 		2C05C5B9181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */; };
 		2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C27A86217E128450065ECC0 /* Butterworth.cpp */; };
 		2C78F50F184A5AC1006805A3 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */; };
-		2C78F512184BAD2C006805A3 /* FacebookUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C78F511184BAD2C006805A3 /* FacebookUserManager.m */; };
-		2C78F518184C1A97006805A3 /* login-with-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F517184C1A97006805A3 /* login-with-facebook.png */; };
+		2C78F520184FA824006805A3 /* facebook-cell-background-1x5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */; };
 		2C98821018493AE40071B387 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C98820F18493AE40071B387 /* FacebookSDK.framework */; };
 		2C988212184949CE0071B387 /* IconFacebook-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C988211184949CE0071B387 /* IconFacebook-72@2x.png */; };
-		2C98821518495BBC0071B387 /* SUProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */; };
+		2C98821518495BBC0071B387 /* FacebookProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98821418495BBC0071B387 /* FacebookProfileTableViewCell.m */; };
 		2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3957317E2F7F70019F1A5 /* Algorithm.mm */; };
 		2CD3957917E37FA50019F1A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957817E37FA50019F1A5 /* AVFoundation.framework */; };
 		2CD3957B17E37FB70019F1A5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957A17E37FB70019F1A5 /* CoreVideo.framework */; };
@@ -22,7 +21,7 @@
 		2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */; };
 		2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */; };
 		2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD3957C17E37FC20019F1A5 /* CoreImage.framework */; };
-		3924993D17F771FD001928DD /* beep-7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3924993C17F771FD001928DD /* beep-7.wav */; };
+		3924993D17F771FD001928DD /* pulse-beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3924993C17F771FD001928DD /* pulse-beep.wav */; };
 		3924993F17F79359001928DD /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3924993E17F79359001928DD /* heart@2x.png */; };
 		3924994117F7B4B0001928DD /* beep-21.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3924994017F7B4B0001928DD /* beep-21.wav */; };
 		3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3947F74917F1AF5D0026E415 /* SettingsViewController.m */; };
@@ -162,14 +161,11 @@
 		2C27A86217E128450065ECC0 /* Butterworth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Butterworth.cpp; sourceTree = "<group>"; };
 		2C27A86317E128450065ECC0 /* Butterworth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Butterworth.h; sourceTree = "<group>"; };
 		2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
-		2C78F510184BAD2C006805A3 /* FacebookUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookUserManager.h; sourceTree = "<group>"; };
-		2C78F511184BAD2C006805A3 /* FacebookUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FacebookUserManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		2C78F517184C1A97006805A3 /* login-with-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-with-facebook.png"; sourceTree = "<group>"; };
+		2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-cell-background-1x5.png"; sourceTree = "<group>"; };
 		2C98820F18493AE40071B387 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		2C988211184949CE0071B387 /* IconFacebook-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconFacebook-72@2x.png"; sourceTree = "<group>"; };
-		2C98821318495BBC0071B387 /* SUProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUProfileTableViewCell.h; sourceTree = "<group>"; };
-		2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUProfileTableViewCell.m; sourceTree = "<group>"; };
-		2CD3957017E133530019F1A5 /* project_script_3 */ = {isa = PBXFileReference; explicitFileType = text.script.worksheet; fileEncoding = 4; path = project_script_3; sourceTree = "<group>"; };
+		2C98821318495BBC0071B387 /* FacebookProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookProfileTableViewCell.h; sourceTree = "<group>"; };
+		2C98821418495BBC0071B387 /* FacebookProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookProfileTableViewCell.m; sourceTree = "<group>"; };
 		2CD3957217E2F7F70019F1A5 /* Algorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Algorithm.h; sourceTree = "<group>"; };
 		2CD3957317E2F7F70019F1A5 /* Algorithm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Algorithm.mm; sourceTree = "<group>"; };
 		2CD3957817E37FA50019F1A5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -180,11 +176,11 @@
 		2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageAverageColor.m"; sourceTree = "<group>"; };
 		2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoManagerViewController.h; sourceTree = "<group>"; };
 		2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoManagerViewController.m; sourceTree = "<group>"; };
-		3924993C17F771FD001928DD /* beep-7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-7.wav"; sourceTree = "<group>"; };
+		3924993C17F771FD001928DD /* pulse-beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pulse-beep.wav"; sourceTree = "<group>"; };
 		3924993E17F79359001928DD /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		3924994017F7B4B0001928DD /* beep-21.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-21.wav"; sourceTree = "<group>"; };
 		3947F74817F1AF5D0026E415 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		3947F74917F1AF5D0026E415 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		3947F74917F1AF5D0026E415 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		3947F74B17F1B0930026E415 /* heart-rate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-rate.png"; sourceTree = "<group>"; };
 		3947F74D17F1B1410026E415 /* spanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spanner.png; sourceTree = "<group>"; };
 		3947F74F17F1E88F0026E415 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -358,15 +354,79 @@
 			path = CorePlotHeaders;
 			sourceTree = "<group>";
 		};
-		2C78F513184BAD46006805A3 /* Facebook related files */ = {
+		2C78F521185099EF006805A3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2C78F510184BAD2C006805A3 /* FacebookUserManager.h */,
-				2C78F511184BAD2C006805A3 /* FacebookUserManager.m */,
-				2C98821318495BBC0071B387 /* SUProfileTableViewCell.h */,
-				2C98821418495BBC0071B387 /* SUProfileTableViewCell.m */,
+				3986F13818043C3E000537CE /* ResultsViewController.h */,
+				3986F13918043C3E000537CE /* ResultsViewController.m */,
+				2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */,
+				2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */,
+				3947F74817F1AF5D0026E415 /* SettingsViewController.h */,
+				3947F74917F1AF5D0026E415 /* SettingsViewController.m */,
+				39FC1BC017F68311003A4390 /* HelpViewController.h */,
+				39FC1BC117F68311003A4390 /* HelpViewController.m */,
+				3973F90D17F8EF5F000CF6D0 /* MenuTabBarViewController.h */,
+				3973F90E17F8EF5F000CF6D0 /* MenuTabBarViewController.m */,
+				39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */,
+				39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */,
+				39B96D101807935C004651F8 /* MainNavigationViewController.h */,
+				39B96D111807935C004651F8 /* MainNavigationViewController.m */,
 			);
-			name = "Facebook related files";
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2C78F52218509ACB006805A3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				2CD3958617E3BCC60019F1A5 /* UIImage+ImageAverageColor.h */,
+				2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */,
+				39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */,
+				39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		2C78F52318509B9B006805A3 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				2C988211184949CE0071B387 /* IconFacebook-72@2x.png */,
+				2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */,
+				39F6C0391811FF5B00CC7F01 /* Mask@2x.png */,
+				3947F74B17F1B0930026E415 /* heart-rate.png */,
+				39B96CF9180759E6004651F8 /* pieChart_full@2x.png */,
+				39B96CFA180759E6004651F8 /* pieChart_Line@2x.png */,
+				39B96CFD18075B04004651F8 /* settings_full-1@2x.png */,
+				39B96CFE18075B04004651F8 /* Settings_Line-1@2x.png */,
+				397A383117F24AB000BA69F3 /* settings 11@2x.png */,
+				3986F126180426EF000537CE /* Background_2@2x.jpg */,
+				3986F1281804273A000537CE /* lamb_Line@2x.png */,
+				3986F1291804273A000537CE /* Lamb_Full@2x.png */,
+				3986F12A1804273A000537CE /* Heart_line@2x.png */,
+				3986F12B1804273A000537CE /* Heart_Full@2x.png */,
+				3986F12C1804273A000537CE /* Help_full@2x.png */,
+				3986F12D1804273A000537CE /* Help_Line@2x.png */,
+				3986F12E1804273A000537CE /* Settings_full@2x.png */,
+				3986F12F1804273A000537CE /* Settings_Line@2x.png */,
+				39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */,
+				3924993E17F79359001928DD /* heart@2x.png */,
+				397A383B17F336EE00BA69F3 /* pink-ios-7-fade@2x.png */,
+				397A383C17F336EE00BA69F3 /* ios-7-green-fade@2x.png */,
+				397A383917F334F100BA69F3 /* green-blue-fade@2x.png */,
+				397A383717F3284F00BA69F3 /* blue-green@2x.png */,
+				397A383217F24AB000BA69F3 /* settings 4@2x.png */,
+				397A383F17F33D4600BA69F3 /* stawberry_iPhone@2x.jpg */,
+				397A384017F33D4600BA69F3 /* Wall-2@2x.jpg */,
+				39B96D19180A9323004651F8 /* default_bg.png */,
+				397A383317F24AB000BA69F3 /* settings 3@2x.png */,
+				397A382B17F2493B00BA69F3 /* info@2x.png */,
+				397A382C17F2493B00BA69F3 /* settings 12@2x.png */,
+				397A382D17F2493B00BA69F3 /* heart +@2x.png */,
+				3947F74D17F1B1410026E415 /* spanner.png */,
+				394F4E8417DF62E5001C5049 /* Default.png */,
+				394F4E8617DF62E5001C5049 /* Default@2x.png */,
+				394F4E8817DF62E5001C5049 /* Default-568h@2x.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 		394F4E6617DF62E5001C5049 = {
@@ -406,30 +466,17 @@
 		394F4E7817DF62E5001C5049 /* Heartbeat */ = {
 			isa = PBXGroup;
 			children = (
-				2C78F513184BAD46006805A3 /* Facebook related files */,
+				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
+				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				394F4E8F17DF6350001C5049 /* Storyboard.storyboard */,
+				2C98821318495BBC0071B387 /* FacebookProfileTableViewCell.h */,
+				2C98821418495BBC0071B387 /* FacebookProfileTableViewCell.m */,
 				39B96D1318099B13004651F8 /* ResultCollectionViewCell.h */,
 				39B96D1418099B13004651F8 /* ResultCollectionViewCell.m */,
 				39B96D1618099EAF004651F8 /* ResultView.h */,
 				39B96D1718099EAF004651F8 /* ResultView.m */,
-				3986F13818043C3E000537CE /* ResultsViewController.h */,
-				3986F13918043C3E000537CE /* ResultsViewController.m */,
-				3973F90D17F8EF5F000CF6D0 /* MenuTabBarViewController.h */,
-				3973F90E17F8EF5F000CF6D0 /* MenuTabBarViewController.m */,
-				39FC1BC017F68311003A4390 /* HelpViewController.h */,
-				39FC1BC117F68311003A4390 /* HelpViewController.m */,
-				3947F74817F1AF5D0026E415 /* SettingsViewController.h */,
-				3947F74917F1AF5D0026E415 /* SettingsViewController.m */,
-				39B96D101807935C004651F8 /* MainNavigationViewController.h */,
-				39B96D111807935C004651F8 /* MainNavigationViewController.m */,
-				39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */,
-				39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */,
-				2CD3958617E3BCC60019F1A5 /* UIImage+ImageAverageColor.h */,
-				2CD3958717E3BCC70019F1A5 /* UIImage+ImageAverageColor.m */,
-				2CD3958917E3BDE70019F1A5 /* VideoManagerViewController.h */,
-				2CD3958A17E3BDE70019F1A5 /* VideoManagerViewController.m */,
-				39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */,
-				39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */,
+				2C78F521185099EF006805A3 /* ViewControllers */,
+				2C78F52218509ACB006805A3 /* Categories */,
 				394F4E9117DF6383001C5049 /* model */,
 				394F4E7917DF62E5001C5049 /* Supporting Files */,
 			);
@@ -439,53 +486,15 @@
 		394F4E7917DF62E5001C5049 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2C78F517184C1A97006805A3 /* login-with-facebook.png */,
-				2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */,
 				2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */,
-				2C988211184949CE0071B387 /* IconFacebook-72@2x.png */,
-				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
-				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
-				39F6C0391811FF5B00CC7F01 /* Mask@2x.png */,
+				2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
 				394F4E7B17DF62E5001C5049 /* InfoPlist.strings */,
-				2CD3957017E133530019F1A5 /* project_script_3 */,
-				3947F74B17F1B0930026E415 /* heart-rate.png */,
-				39B96CF9180759E6004651F8 /* pieChart_full@2x.png */,
-				39B96CFA180759E6004651F8 /* pieChart_Line@2x.png */,
-				39B96CFD18075B04004651F8 /* settings_full-1@2x.png */,
-				39B96CFE18075B04004651F8 /* Settings_Line-1@2x.png */,
-				397A383117F24AB000BA69F3 /* settings 11@2x.png */,
-				3986F126180426EF000537CE /* Background_2@2x.jpg */,
-				3986F1281804273A000537CE /* lamb_Line@2x.png */,
-				3986F1291804273A000537CE /* Lamb_Full@2x.png */,
-				3986F12A1804273A000537CE /* Heart_line@2x.png */,
-				3986F12B1804273A000537CE /* Heart_Full@2x.png */,
-				3986F12C1804273A000537CE /* Help_full@2x.png */,
-				3986F12D1804273A000537CE /* Help_Line@2x.png */,
-				3986F12E1804273A000537CE /* Settings_full@2x.png */,
-				3986F12F1804273A000537CE /* Settings_Line@2x.png */,
-				3924994017F7B4B0001928DD /* beep-21.wav */,
-				39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */,
-				3924993E17F79359001928DD /* heart@2x.png */,
-				397A383B17F336EE00BA69F3 /* pink-ios-7-fade@2x.png */,
-				3924993C17F771FD001928DD /* beep-7.wav */,
-				397A383C17F336EE00BA69F3 /* ios-7-green-fade@2x.png */,
-				397A383917F334F100BA69F3 /* green-blue-fade@2x.png */,
-				397A383717F3284F00BA69F3 /* blue-green@2x.png */,
-				397A383217F24AB000BA69F3 /* settings 4@2x.png */,
-				397A383F17F33D4600BA69F3 /* stawberry_iPhone@2x.jpg */,
-				397A384017F33D4600BA69F3 /* Wall-2@2x.jpg */,
-				39B96D19180A9323004651F8 /* default_bg.png */,
-				397A383317F24AB000BA69F3 /* settings 3@2x.png */,
-				397A382B17F2493B00BA69F3 /* info@2x.png */,
-				397A382C17F2493B00BA69F3 /* settings 12@2x.png */,
-				397A382D17F2493B00BA69F3 /* heart +@2x.png */,
 				394F4E7E17DF62E5001C5049 /* main.m */,
-				3947F74D17F1B1410026E415 /* spanner.png */,
 				394F4E8017DF62E5001C5049 /* Heartbeat-Prefix.pch */,
-				394F4E8417DF62E5001C5049 /* Default.png */,
-				394F4E8617DF62E5001C5049 /* Default@2x.png */,
-				394F4E8817DF62E5001C5049 /* Default-568h@2x.png */,
+				3924994017F7B4B0001928DD /* beep-21.wav */,
+				3924993C17F771FD001928DD /* pulse-beep.wav */,
+				2C78F52318509B9B006805A3 /* images */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -572,13 +581,13 @@
 				397A383A17F334F100BA69F3 /* green-blue-fade@2x.png in Resources */,
 				3986F1361804273A000537CE /* Settings_full@2x.png in Resources */,
 				3986F1301804273A000537CE /* lamb_Line@2x.png in Resources */,
+				2C78F520184FA824006805A3 /* facebook-cell-background-1x5.png in Resources */,
 				3986F127180426EF000537CE /* Background_2@2x.jpg in Resources */,
 				394F4E8517DF62E5001C5049 /* Default.png in Resources */,
 				397A382F17F2493B00BA69F3 /* settings 12@2x.png in Resources */,
 				3947F74E17F1B1410026E415 /* spanner.png in Resources */,
 				39B96D0018075B04004651F8 /* Settings_Line-1@2x.png in Resources */,
 				3986F1341804273A000537CE /* Help_full@2x.png in Resources */,
-				2C78F518184C1A97006805A3 /* login-with-facebook.png in Resources */,
 				394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */,
 				3986F1351804273A000537CE /* Help_Line@2x.png in Resources */,
 				3986F1331804273A000537CE /* Heart_Full@2x.png in Resources */,
@@ -587,7 +596,7 @@
 				3924993F17F79359001928DD /* heart@2x.png in Resources */,
 				394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */,
 				397A383417F24AB000BA69F3 /* settings 11@2x.png in Resources */,
-				3924993D17F771FD001928DD /* beep-7.wav in Resources */,
+				3924993D17F771FD001928DD /* pulse-beep.wav in Resources */,
 				397A382E17F2493B00BA69F3 /* info@2x.png in Resources */,
 				39B96CFF18075B04004651F8 /* settings_full-1@2x.png in Resources */,
 				39F6C03A1811FF5B00CC7F01 /* Mask@2x.png in Resources */,
@@ -618,9 +627,8 @@
 				3986F13A18043C3E000537CE /* ResultsViewController.m in Sources */,
 				3947F75117F1E88F0026E415 /* Settings.m in Sources */,
 				39B96D121807935C004651F8 /* MainNavigationViewController.m in Sources */,
-				2C98821518495BBC0071B387 /* SUProfileTableViewCell.m in Sources */,
+				2C98821518495BBC0071B387 /* FacebookProfileTableViewCell.m in Sources */,
 				2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */,
-				2C78F512184BAD2C006805A3 /* FacebookUserManager.m in Sources */,
 				3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */,
 				39FC1BC217F68311003A4390 /* HelpViewController.m in Sources */,
 				2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */,
@@ -712,6 +720,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Or/Developer/Heartbeat,
@@ -733,6 +742,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Or/Developer/Heartbeat,
