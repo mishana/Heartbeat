@@ -205,14 +205,19 @@ typedef void (^RPSBlock)(void);
 - (UIActionSheet *)getFacebookActionSheet {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Facebook"
                                                        delegate:self
-                                              cancelButtonTitle:@"Do Nothing"
+                                              cancelButtonTitle:@"בטל"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Share on Facebook", @"Check settings",  nil];
+                                              otherButtonTitles:@"שתף", @"בדוק הגדרות",  nil];
     [sheet setTag:FACEBOOK_ACTION_SHEET_TAG];
     return sheet;
 }
 
-- (IBAction)clickFacebookButton:(id)sender {
+- (IBAction)clickFacebookButton:(UIButton *)sender {
+    CGPoint tapLocation = [sender convertPoint:CGPointZero toView:self.resultCollectionView];
+    NSIndexPath *indexPath = [self.resultCollectionView indexPathForItemAtPoint:tapLocation];
+    [self.resultCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    self.selectedIndex = indexPath;
+    
     UIActionSheet *sheet;
     sheet = [self getFacebookActionSheet];
     // Show the sheet

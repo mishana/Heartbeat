@@ -36,8 +36,8 @@
 
 - (FBLoginView *)loginView {
     if (!_loginView) {
-        NSArray *permissions = @[@"basic_info",@"user_birthday"];
-        _loginView = [[FBLoginView alloc] initWithReadPermissions:permissions];
+        //NSArray *permissions = @[@"basic_info",@"user_birthday"];
+        _loginView = [[FBLoginView alloc] initWithReadPermissions:nil];
         _loginView.delegate = self;
         _loginView.loginBehavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;//
     }
@@ -232,16 +232,12 @@
  */
 
 - (void)updateCell:(FacebookProfileTableViewCell *)cell {
-
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    
-    //cell.editingAccessoryType = UITableViewCellAccessoryNone;
-    
     if (!FBSession.activeSession.isOpen) {
         //there is no active session
-        cell.userName = @"";
-        cell.userID = nil;
+        //cell.userName = @"";
+        //cell.userID = nil;
         
+        cell.accessoryType = UITableViewCellAccessoryNone;
         cell.loginView = self.loginView;
     } else {
         [[FBRequest requestForMe] startWithCompletionHandler:

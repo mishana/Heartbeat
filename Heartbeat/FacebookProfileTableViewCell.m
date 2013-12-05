@@ -89,11 +89,6 @@
     // Setting the profileID property of the profile picture view causes the view to fetch and display
     // the profile picture for the given user
     self.profilePic.profileID = userID;
-    
-    if (!userID) {
-        //[self setNeedsDisplay];
-    #warning need to check if necessary
-    }
 }
 
 - (NSString*)userName {
@@ -102,19 +97,16 @@
 
 - (void)setUserName:(NSString *)userName {
     self.textLabel.text = userName;
-    //[self setNeedsDisplay];
 }
 
-#warning need to check if [self setNeedsDisplay] necessary in these methods
+#warning need to check if [self setNeedsDisplay] necessary in these methods (probably not)
 
 - (void)setProfilePic:(FBProfilePictureView *)profilePic {
     _profilePic = profilePic;
-    //[self setNeedsDisplay];
 }
 
 - (void)setLoginView:(FBLoginView *)loginView {
     _loginView = loginView;
-    //[self setNeedsDisplay];
 }
 
 #pragma mark - Public API

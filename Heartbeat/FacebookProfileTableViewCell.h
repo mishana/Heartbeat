@@ -12,8 +12,9 @@
 
 @interface FacebookProfileTableViewCell : UITableViewCell
 
-@property (copy, nonatomic) NSString *userID;
-@property (copy, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *userID;
+@property (strong, nonatomic) NSString *userName;
+
 @property (strong, nonatomic) FBProfilePictureView *profilePic;
 @property (strong, nonatomic) FBLoginView *loginView;
 

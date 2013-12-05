@@ -66,11 +66,10 @@
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    
-    // Facebook SDK * login flow *
+
     // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication fallbackHandler:^(FBAppCall *call) {
-        // Facebook SDK * App Linking *
+
         // For simplicity, this sample will ignore the link if the session is already
         // open but a more advanced app could support features like user switching.
         if (call.accessTokenData) {
