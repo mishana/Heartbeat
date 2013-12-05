@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Or Maayan. All rights reserved.
 //
 
-
 #import "FacebookProfileTableViewCell.h"
 
 @implementation FacebookProfileTableViewCell
@@ -37,23 +36,21 @@
 }
 
 - (void)initializeSubViews {
-    if (!FBSession.activeSession.isOpen){
-        // do nothing
-    } else {
-        FBProfilePictureView *profilePic = [[FBProfilePictureView alloc]
-                                            initWithFrame:CGRectMake(leftMargin,
-                                                                     topMargin,
-                                                                     pictureWidth,
-                                                                     pictureHeight)];
-        
-        self.profilePic = profilePic;
-    }
-    
+    FBProfilePictureView *profilePic = [[FBProfilePictureView alloc]
+                                        initWithFrame:CGRectMake(leftMargin,
+                                                                 topMargin,
+                                                                 pictureWidth,
+                                                                 pictureHeight)];
+    self.profilePic = profilePic;
+
     self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"facebook-cell-background-1x5.png"]];
-    self.backgroundView.alpha = 0.9;
+    self.backgroundView.alpha = 1;
     
     self.clipsToBounds = YES;
     self.autoresizesSubviews = YES;
+    
+    //currently there is a bug when displaying the label for the first time
+    self.textLabel.hidden = YES;
 }
 
 - (void)layoutSubviews{
@@ -61,18 +58,20 @@
 
     if (FBSession.activeSession.isOpen){
         [self.loginView removeFromSuperview];
-        [self addSubview:self.profilePic];
-        
-        CGSize size = self.bounds.size;
+
         self.textLabel.frame = CGRectMake(leftMargin * 2 + pictureWidth,
                                           topMargin,
-                                          size.width - (leftMargin * 2 + pictureWidth)*2 - rightMargin,
-                                          size.height - topMargin*2);
+                                          self.bounds.size.width - (leftMargin * 2 + pictureWidth)*2 - rightMargin,
+                                          self.bounds.size.height - topMargin*2);
         self.textLabel.backgroundColor = [UIColor clearColor];
         self.textLabel.font = [self.textLabel.font fontWithSize:20];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
+        
+        //self.textLabel.hidden = NO;
+        [self addSubview:self.profilePic];
     } else {
         [self.profilePic removeFromSuperview];
+        //self.textLabel.hidden = YES;
         
         self.loginView.frame = self.bounds;
         self.loginView.clipsToBounds = YES;
@@ -92,7 +91,7 @@
     self.profilePic.profileID = userID;
     
     if (!userID) {
-        [self setNeedsDisplay];
+        //[self setNeedsDisplay];
         #warning need to check if necessary
     }
 }
@@ -103,6 +102,14 @@
 
 - (void)setUserName:(NSString *)userName {
     self.textLabel.text = userName;
+    //[self setNeedsDisplay];
+}
+
+#warning need to check if [self setNeedsDisplay] necessary in these methods
+
+- (void)setProfilePic:(FBProfilePictureView *)profilePic {
+    _profilePic = profilePic;
+    //[self setNeedsDisplay];
 }
 
 - (void)setLoginView:(FBLoginView *)loginView {
@@ -110,17 +117,12 @@
     [self setNeedsDisplay];
 }
 
-- (void)setProfilePic:(FBProfilePictureView *)profilePic {
-    _profilePic = profilePic;
-    [self setNeedsDisplay];
-    #warning need to check if necessary
-}
+#pragma mark - Public API
 
-//
 #define LoginViewHeight 45 // login view is 45 height maximum
 #warning probably shouldn't use here magic number
 
-- (CGFloat)desiredHeight {
+- (CGFloat)desiredCellHeight {
     if (!FBSession.activeSession.isOpen){
         return LoginViewHeight;
     } else {

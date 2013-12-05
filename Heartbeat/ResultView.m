@@ -25,7 +25,7 @@
     UIRectFill(self.bounds);
     
     [self drawBpm];
-#warning need to update this method
+    #warning need to update this method
     [self drawOneRect];
 }
 

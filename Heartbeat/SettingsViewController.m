@@ -8,12 +8,11 @@
 
 #import "SettingsViewController.h"
 #import "Settings.h"
-#import "SUProfileTableViewCell.h"
-#import "FacebookSDK/FacebookSDK.h"
-#import "FacebookUserManager.h"
+#import "FacebookProfileTableViewCell.h"
 #import "HeartBeatAppDelegate.h"
 
-@interface SettingsViewController () <UITableViewDataSource , UITableViewDelegate>
+@interface SettingsViewController () <UITableViewDataSource , UITableViewDelegate , FBLoginViewDelegate , FBUserSettingsDelegate>
+// Properties
 @property (strong, nonatomic) Settings *settings;
 
 // IBOutlets
@@ -21,13 +20,11 @@
 @property (weak, nonatomic) IBOutlet UISwitch *continuesModeSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *beepSwitch;
 
-// Facebook
-@property (nonatomic) BOOL pendingLogin;
-@property (strong, nonatomic) FBRequest *pendingRequest;
-
 @end
 
 @implementation SettingsViewController
+
+#pragma mark - Properties
 
 - (Settings *)settings
 {
@@ -35,7 +32,7 @@
     return _settings;
 }
 
-//
+#pragma mark - Lifecycle
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -50,15 +47,6 @@
     [self.settings synchronize];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -66,6 +54,8 @@
     //self.tableView.delegate = nil;
     //self.tableView.dataSource = nil;
     //self.tableView = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"FacebookActiveSessionStateChanged" object:nil];
 }
 
 - (void)viewDidLoad
@@ -81,6 +71,8 @@
         
         self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
         self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+        
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }
     
     //-----------------------------------------------
@@ -91,154 +83,22 @@
     self.autoStopAfterSwitch.on = self.settings.autoStopAfter;
     self.continuesModeSwitch.on = self.settings.isContinuousMode;
     self.beepSwitch.on = self.settings.beepWithPulse;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(facebookActiveSessionStateDidChange:)
+                                                 name:@"FacebookActiveSessionStateChanged" object:nil];
 }
 
-//
+#pragma mark - NSNotifications
 
-- (void)loginDefaultUser {
-    HeartBeatAppDelegate *appDelegate = (HeartBeatAppDelegate *)[[UIApplication sharedApplication] delegate];
-    FacebookUserManager *userManager = appDelegate.userManager;
-    
-    if ([userManager isLoggedIn]) {
-        [self login];
-    }
+- (void)facebookActiveSessionStateDidChange:(NSNotification *)notification {
+#warning - incomplete implementation
+    // probably should update Facebook Profile Cell
+    //[self updateCell:[self getFacebookProfileCell]];
+    //[self reloadFacebookProfileCellWithAnimation:@(UITableViewRowAnimationNone)];
 }
 
-- (void)login{
-    HeartBeatAppDelegate *appDelegate = (HeartBeatAppDelegate *)[[UIApplication sharedApplication]delegate];
-    FacebookUserManager *userManager = appDelegate.userManager;
-    
-    // If we can't log in as new user, we don't want to still be logged in as previous user,
-    // particularly if it might not be obvious to the user that the login failed.
-    [userManager switchToNoActiveUser];
-    self.pendingLogin = YES;
-    [self updateFacebookUserCell];
-
-    // user is going to log on via Facebook Login with option to Fallback to web view
-    FBSessionLoginBehavior behavior =
-    FBSessionLoginBehaviorWithFallbackToWebView;
-    
-    FBSession *session = [userManager switchToUser];
-    [self updateFacebookUserCell];//*
-    
-    // we pass the correct behavior here to indicate the login workflow to use (Facebook Login, fallback, etc.)
-    [session openWithBehavior:behavior
-            completionHandler:^(FBSession *session,
-                                FBSessionState status,
-                                NSError *error) {
-                // this handler is called back whether the login succeeds or fails; in the
-                // success case it will also be called back upon each state transition between
-                // session-open and session-close
-                if (error) {
-                    [userManager switchToNoActiveUser];
-                }
-                [self updateForSessionChange];
-            }];
-}
-
-- (void)updateCell:(SUProfileTableViewCell *)cell {
-    HeartBeatAppDelegate *appDelegate = (HeartBeatAppDelegate *)[[UIApplication sharedApplication]delegate];
-    FacebookUserManager *userManager = appDelegate.userManager;
-    
-    NSString *userID = [userManager getUserID];
-    
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    
-    cell.editingAccessoryType = UITableViewCellAccessoryNone;
-    
-    if (userID == nil) {
-        cell.userName = @"LogIn with Facebook";
-        cell.userID = nil;
-        
-        /*
-        cell.userName = nil;
-        UIImageView *imgView = [[UIImageView alloc] init];
-        imgView.image = [UIImage imageNamed:@"login-with-facebook.png"];
-        [imgView setFrame:CGRectMake((cell.frame.size.width - imgView.image.size.width)/2, (cell.desiredHeight-imgView.image.size.height)/2, imgView.image.size.width, imgView.image.size.height)];
-        //imgView.bounds = cell.bounds;
-        
-        [cell addSubview:imgView];
-         */
-        
-    } else {
-        if (self.pendingLogin) {
-            cell.userName = @"Logging in...";
-        } else {
-            cell.userName = [userManager getUserName];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        cell.userID = userID;
-    }
-}
-
-- (void)updateFacebookUserCell{
-    SUProfileTableViewCell *cell = (SUProfileTableViewCell *)[self.tableView cellForRowAtIndexPath:
-                                                              [self indexPathForFacebookUserCell]];
-    [self updateCell:cell];
-}
-
-- (NSIndexPath*)indexPathForFacebookUserCell{
-    // I assume FacebookUserCell is placed first in the settings tab table view
-    // See comment in userSlotFromIndexPath:
-    return [NSIndexPath indexPathForRow:0
-                              inSection:0];
-}
-
-- (void)updateForSessionChange {
-    HeartBeatAppDelegate *appDelegate = (HeartBeatAppDelegate *)[[UIApplication sharedApplication]delegate];
-    FacebookUserManager *userManager = appDelegate.userManager;
-
-    // Get the current session from the userManager
-    FBSession *session = userManager.currentSession;
-    
-    if (session.isOpen) {
-        // fetch profile info such as name, id, etc. for the open session
-        FBRequest *me = [[FBRequest alloc] initWithSession:session
-                                                 graphPath:@"me"];
-        
-        self.pendingRequest= me;
-        
-        [me startWithCompletionHandler:^(FBRequestConnection *connection,
-                                         NSDictionary<FBGraphUser> *result,
-                                         NSError *error) {
-            // because we have a cached copy of the connection, we can check
-            // to see if this is the connection we care about; a prematurely
-            // cancelled connection will short-circuit here
-            if (me != self.pendingRequest) {
-                return;
-            }
-#warning should check this
-            
-            self.pendingRequest = nil;
-            self.pendingLogin = NO;
-
-            // we interpret an error in the initial fetch as a reason to
-            // fail the user switch, and leave the application without an
-            // active user (similar to initial state)
-            if (error) {
-                NSLog(@"Couldn't complete process: %@", error.localizedDescription);
-                [userManager switchToNoActiveUser];
-                return;
-            }
-            [userManager updateUser:result];
-            [self updateFacebookUserCell];
-        }];
-    } else {
-        // in the closed case, we check to see if we picked up a cached token that we
-        // expect to be valid and ready for use; if so then we open the session on the spot
-#warning need to check this
-        if (session.state == FBSessionStateCreatedTokenLoaded) {
-            // even though we had a cached token, we need to login to make the session usable
-            [session openWithCompletionHandler:^(FBSession *session,
-                                                 FBSessionState status,
-                                                 NSError *error) {
-                [self indexPathForFacebookUserCell];
-            }];
-        }
-    }
-}
-
-// IBActions
+#pragma mark - IBActions
 
 - (IBAction)changeBeepWithPulseOption:(UISwitch *)sender {
     self.settings.beepWithPulse = sender.on;
@@ -269,7 +129,133 @@
     }
 }
 
-#pragma - UITableViewDataSource methods
+#pragma mark - Facebook
+/*
+
+- (void)login{
+
+    // If we can't log in as new user, we don't want to still be logged in as previous user,
+    // particularly if it might not be obvious to the user that the login failed.
+    [self updateCell:[self getFacebookProfileCell]];
+
+    // user is going to log on via Facebook Login with option to Fallback to web view
+    FBSessionLoginBehavior behavior =
+    FBSessionLoginBehaviorWithFallbackToWebView;
+    
+    [self updateCell:[self getFacebookProfileCell]];//*
+    
+    // we pass the correct behavior here to indicate the login workflow to use (Facebook Login, fallback, etc.)
+    if (session.isOpen) {
+        [self updateForSessionChange];
+    }
+    [session openWithBehavior:behavior
+            completionHandler:^(FBSession *session,
+                                FBSessionState status,
+                                NSError *error) {
+                // this handler is called back whether the login succeeds or fails; in the
+                // success case it will also be called back upon each state transition between
+                // session-open and session-close
+                if (error) {
+                    [userManager switchToNoActiveUser];
+                }
+                [self updateForSessionChange];
+            }];
+}
+
+- (void)updateForSessionChange {
+    // Get the current session from the userManager
+    FBSession *session = userManager.currentSession;
+    
+    if (session.isOpen) {
+        // fetch profile info such as name, id, etc. for the open session
+        FBRequest *me = [[FBRequest alloc] initWithSession:session
+                                                 graphPath:@"me"];
+        
+        [me startWithCompletionHandler:^(FBRequestConnection *connection,
+                                         NSDictionary<FBGraphUser> *result,
+                                         NSError *error) {
+            // because we have a cached copy of the connection, we can check
+            // to see if this is the connection we care about; a prematurely
+            // cancelled connection will short-circuit here
+            
+#warning should check this
+            
+            self.pendingRequest = nil;
+            self.pendingLogin = NO;
+            
+            // we interpret an error in the initial fetch as a reason to
+            // fail the user switch, and leave the application without an
+            // active user (similar to initial state)
+            if (error) {
+                NSLog(@"Couldn't complete process: %@", error.localizedDescription);
+                [userManager switchToNoActiveUser];
+                return;
+            }
+            [userManager updateUser:result];
+            [self updateCell:[self getFacebookProfileCell]];
+        }];
+    } else {
+        // in the closed case, we check to see if we picked up a cached token that we
+        // expect to be valid and ready for use; if so then we open the session on the spot
+#warning need to check this
+        if (session.state == FBSessionStateCreatedTokenLoaded) {
+            // even though we had a cached token, we need to login to make the session usable
+            [session openWithCompletionHandler:^(FBSession *session,
+                                                 FBSessionState status,
+                                                 NSError *error) {
+                [self indexPathForFacebookProfileCell];
+            }];
+        }
+    }
+}
+
+ */
+
+- (FBLoginView *)getLoginViewConfigured {
+    NSArray *permissions = @[@"basic_info",@"user_birthday"];
+    FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:permissions];
+    loginView.delegate = self;
+    loginView.loginBehavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;// FBSessionLoginBehaviorWithFallbackToWebView
+    return loginView;
+}
+
+- (void)updateCell:(FacebookProfileTableViewCell *)cell {
+
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    //cell.editingAccessoryType = UITableViewCellAccessoryNone;
+    
+    if (!FBSession.activeSession.isOpen) {
+        //there is no active session
+        cell.userName = @"";
+        cell.userID = nil;
+        
+        cell.loginView = [self getLoginViewConfigured];
+        
+    } else {
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+             if (!error) {
+                 cell.userName = user.name;
+                 cell.userID = [user objectForKey:@"id"];
+             }
+         }];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+}
+
+- (FacebookProfileTableViewCell *)getFacebookProfileCell{
+    FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell *)[self.tableView cellForRowAtIndexPath:
+                                                              [self indexPathForFacebookProfileCell]];
+    return cell;
+}
+
+- (NSIndexPath*)indexPathForFacebookProfileCell{
+    // I assume FacebookUserCell is placed first in the settings tab table view
+    return [NSIndexPath indexPathForRow:0 inSection:0];
+}
+
+#pragma mark - UITableViewDataSource methods
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -305,13 +291,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        HeartBeatAppDelegate *appDelegate = (HeartBeatAppDelegate *)[[UIApplication sharedApplication]delegate];
-        FacebookUserManager *userManager = [appDelegate userManager];
-        
+    if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
+
         if (editingStyle == UITableViewCellEditingStyleDelete) {
-            [userManager updateUser:nil];
-            [self updateFacebookUserCell];
+            [FBSession.activeSession closeAndClearTokenInformation];
+            [tableView setEditing:NO animated:YES];
+            [self performSelector:@selector(reloadFacebookProfileCellWithAnimation:) withObject:@(UITableViewRowAnimationFade) afterDelay:0.5];
         }
         
     } else {
@@ -321,24 +306,21 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        HeartBeatAppDelegate *appDelegate = (HeartBeatAppDelegate *)[[UIApplication sharedApplication]delegate];
-        FacebookUserManager *userManager = [appDelegate userManager];
-        
-        return [userManager getUserID] != nil;
+    if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
+
+        return FBSession.activeSession.isOpen;
     } else {
         return NO;
     }
-    
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
         static NSString *CellIdentifier = @"FacebookProfileCell";
-        SUProfileTableViewCell *cell = (SUProfileTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil) {
-            cell = [[SUProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[FacebookProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         
         [self updateCell:cell];
@@ -351,30 +333,36 @@
     }
 }
 
-#pragma mark UITableViewDelegate methods
+#pragma mark - UITableViewDelegate methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        SUProfileTableViewCell *cell = (SUProfileTableViewCell*)[self tableView:tableView
+    if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
+        FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell*)[self tableView:tableView
                                                       cellForRowAtIndexPath:indexPath];
-        return cell.desiredHeight;
+        return cell.desiredCellHeight;
     }
     else {
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
 }
 
+-(FBUserSettingsViewController *)getUserSettingsViewControllerConfigured {
+    FBUserSettingsViewController *userSettingsViewController =[[FBUserSettingsViewController alloc] init];
+    userSettingsViewController.delegate = self;
+    return userSettingsViewController;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
         // this is the facebook user cell
-        HeartBeatAppDelegate *appDelegate = (HeartBeatAppDelegate *)[[UIApplication sharedApplication]delegate];
-        FacebookUserManager *userManager = [appDelegate userManager];
-        if (userManager.isLoggedIn) {
+
+        if (FBSession.activeSession.isOpen) {
             // go to another view controller
             // currently not doing anything
+            [self.navigationController pushViewController:[self getUserSettingsViewControllerConfigured] animated:YES];
         } else {
             // logging in
-            [self login];
+            //[self login];
         }
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -388,9 +376,102 @@
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
         return @"Log Out";
     }
+    return @"Forget";
+}
+
+#pragma mark - FBUserSettingsDelegate methods
+
+- (void)reloadFacebookProfileCellWithAnimation:(NSNumber *)animation{
+    [self.tableView reloadRowsAtIndexPaths:@[[self indexPathForFacebookProfileCell]] withRowAnimation:[animation integerValue]];
+}
+
+- (void)loginViewControllerDidLogUserOut:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
+    [self performSelector:@selector(reloadFacebookProfileCellWithAnimation:) withObject:@(UITableViewRowAnimationFade) afterDelay:0.5];
+}
+
+- (void)loginViewControllerDidLogUserIn:(id)sender {
+    
+}
+
+- (void)loginViewController:(id)sender receivedError:(NSError *)error{
+    // Facebook SDK * login flow *
+    // There are many ways to implement the Facebook login flow.
+    // In this sample, the FBUserSettingsViewController is only presented
+    // as a log out option after the user has been authenticated, so
+    // no real errors should occur. If the FBUserSettingsViewController
+    // had been the entry point to the app, then this error handler should
+    // be as rigorous as the FBLoginView delegate (SCLoginViewController)
+    // in order to handle login errors.
+    if (error) {
+        NSLog(@"Unexpected error sent to the FBUserSettingsViewController delegate: %@", error);
+    }
+}
+
+#pragma mark - FBLoginView delegate
+
+- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
+    // need to update cell first or send notification
+    [self updateCell:[self getFacebookProfileCell]];
+    [self reloadFacebookProfileCellWithAnimation:@(UITableViewRowAnimationFade)];
+}
+
++ (void)loginView:(FBLoginView *)loginView
+      handleError:(NSError *)error{
+    NSString *alertMessage, *alertTitle;
+    
+    // Facebook SDK * error handling *
+    // Error handling is an important part of providing a good user experience.
+    // Since this sample uses the FBLoginView, this delegate will respond to
+    // login failures, or other failures that have closed the session (such
+    // as a token becoming invalid). Please see the [- postOpenGraphAction:]
+    // and [- requestPermissionAndPost] on `SCViewController` for further
+    // error handling on other operations.
+    FBErrorCategory errorCategory = [FBErrorUtility errorCategoryForError:error];
+    if ([FBErrorUtility shouldNotifyUserForError:error]) {
+        // If the SDK has a message for the user, surface it. This conveniently
+        // handles cases like password change or iOS6 app slider state.
+        alertTitle = @"Something Went Wrong";
+        alertMessage = [FBErrorUtility userMessageForError:error];
+    } else if (errorCategory == FBErrorCategoryAuthenticationReopenSession) {
+        // It is important to handle session closures as mentioned. You can inspect
+        // the error for more context but this sample generically notifies the user.
+        alertTitle = @"Session Error";
+        alertMessage = @"Your current session is no longer valid. Please log in again.";
+    } else if (errorCategory == FBErrorCategoryUserCancelled) {
+        // The user has cancelled a login. You can inspect the error
+        // for more context. For this sample, we will simply ignore it.
+        NSLog(@"user cancelled login");
+    } else {
+        // For simplicity, this sample treats other errors blindly, but you should
+        // refer to https://developers.facebook.com/docs/technical-guides/iossdk/errors/ for more information.
+        alertTitle  = @"Unknown Error";
+        alertMessage = @"Error. Please try again later.";
+        NSLog(@"Unexpected error:%@", error);
+    }
+    
+    if (alertMessage) {
+        [[[UIAlertView alloc] initWithTitle:alertTitle
+                                    message:alertMessage
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
+}
+
+- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user {
+    
+}
+
+- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
+    // Facebook SDK * login flow *
+    // It is important to always handle session closure because it can happen
+    // externally; for example, if the current session's access token becomes
+    // invalid. For this sample, we simply pop back to the landing page.
 }
 
 @end

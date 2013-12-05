@@ -48,12 +48,6 @@ typedef void (^RPSBlock)(void);
     return [[Result allResults] count];
 }
 
-/*- (NSNumber *)numOfResults
-{
-    if (!_numOfResults) _numOfResults = @(10);
-    return _numOfResults;
-}*/
-
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
@@ -137,6 +131,8 @@ typedef void (^RPSBlock)(void);
         
         self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0];
         self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+        
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     }
     
     //-----------------------------------------------
@@ -150,7 +146,7 @@ typedef void (^RPSBlock)(void);
     // Dispose of any resources that can be recreated.
 }
 
-// UIActionSheetDelegate methods
+#pragma mark - UIActionSheetDelegate methods
 
 #define SWIPE_ACTION_SHEET_TAG 0
 #define FACEBOOK_ACTION_SHEET_TAG 1
@@ -193,7 +189,7 @@ typedef void (^RPSBlock)(void);
     //*/
 }
 
-// Facebook
+#pragma mark - Facebook
 
 - (IBAction)clickFacebookButton:(id)sender {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Facebook"
