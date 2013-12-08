@@ -10,11 +10,12 @@
 
 @implementation FacebookProfileTableViewCell
 
-#define leftMargin 4
+#define leftMargin 8
 #define topMargin 4
 #define rightMargin 24
-#define pictureWidth 56
-#define pictureHeight 56
+#define pictureRadius 28
+#define pictureWidth 2*pictureRadius
+#define pictureHeight 2*pictureRadius
 
 #pragma mark - Lifecycle
 
@@ -42,6 +43,8 @@
                                                                  pictureWidth,
                                                                  pictureHeight)];
     self.profilePic = profilePic;
+    self.profilePic.layer.cornerRadius = pictureRadius;// makes the picture circled
+    self.profilePic.layer.masksToBounds = YES;
 
     self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"facebook-cell-background-1x5.png"]];
     self.backgroundView.alpha = 1;
