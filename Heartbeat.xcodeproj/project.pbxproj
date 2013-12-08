@@ -391,7 +391,6 @@
 			isa = PBXGroup;
 			children = (
 				2C988211184949CE0071B387 /* IconFacebook-72@2x.png */,
-				2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */,
 				39F6C0391811FF5B00CC7F01 /* Mask@2x.png */,
 				3947F74B17F1B0930026E415 /* heart-rate.png */,
 				39B96CF9180759E6004651F8 /* pieChart_full@2x.png */,
@@ -488,6 +487,7 @@
 		394F4E7917DF62E5001C5049 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */,
 				2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */,
 				2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
