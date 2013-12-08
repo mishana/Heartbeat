@@ -10,6 +10,7 @@
 #import "ResultCollectionViewCell.h"
 #import "Result.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "HeartBeatProtocols.h"
 
 @interface ResultsViewController () <UICollectionViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate , FBUserSettingsDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *resultCollectionView;
@@ -238,22 +239,7 @@ typedef void (^RPSBlock)(void);
     if (actionSheet.tag == FACEBOOK_ACTION_SHEET_TAG) {
         switch (buttonIndex) {
             case 0: { // share
-                BOOL didDialog = NO;
-                didDialog = [self shareResult];
-                
-                if (!didDialog) {
-                    [self alertWithMessage:
-                     @"Upgrade the Facebook application on your device and "
-                     @"get cool new sharing features for this application. "
-                     @"What do you want to do?"
-                                        ok:@"Upgrade Now"
-                                    cancel:@"Decide Later"
-                                completion:^{
-                                    // launch itunes to get the Facebook application installed/upgraded
-                                    [[UIApplication sharedApplication]
-                                     openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Facebook"]];
-                                }];
-                }
+                [self shareResult];
                 break;
             }
             case 1: // settings
@@ -265,18 +251,38 @@ typedef void (^RPSBlock)(void);
 
 //
 
-- (BOOL)shareResult {
-    id<FBOpenGraphAction> action = (id<FBOpenGraphAction>)[FBGraphObject openGraphActionForPost];
+- (void)shareResult {
+    if (FBSession.activeSession.isOpen) {
+        // Attempt to post immediately - note the error handling logic will request permissions
+        // if they are needed.
+        [self postOpenGraphAction];
+    } else {
+        if (![self presentShareDialogForPulseInfo]) {
+            #warning maybe we should give the user login option
+            
+            [self alertWithMessage:
+             @"Upgrade the Facebook application on your device and "
+             @"get cool new sharing features for this application. "
+             @"What do you want to do?"
+                                ok:@"Upgrade Now"
+                            cancel:@"Decide Later"
+                        completion:^{
+                            // launch itunes to get the Facebook application installed/upgraded
+                            [[UIApplication sharedApplication]
+                             openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Facebook"]];
+                        }];
+        } else {
+            //we present share dialog
+        }
+    }
     
-    return nil !=
-    [FBDialogs presentShareDialogWithOpenGraphAction:action
-                                          actionType:@"bpm:"
-                                 previewPropertyName:@"bpm"
-                                             handler:nil];
+    //if (!presentable) { // this means that the Facebook app is not installed or up to date
+        // if the share dialog is not available, lets encourage a login so we can share directly
+        //[self presentLoginSettings];
+    //}
 }
 
-//
-
+/*
 - (void)requestPermissionsWithCompletion:(RPSBlock)completion {
     [FBSession.activeSession requestNewPublishPermissions:[NSArray arrayWithObject:@"publish_actions"]
                                           defaultAudience:FBSessionDefaultAudienceEveryone
@@ -289,6 +295,7 @@ typedef void (^RPSBlock)(void);
                                             }
                                         }];
 }
+ */
 
 - (void)alertWithMessage:(NSString *)message
                       ok:(NSString *)ok
@@ -301,49 +308,6 @@ typedef void (^RPSBlock)(void);
                                               otherButtonTitles:ok, nil];
     _alertOkHandler = [completion copy];
     [alertView show];
-}
-
-- (void)publishResult {
-    
-    FBRequestConnection *connection = [[FBRequestConnection alloc] init];
-    
-    NSMutableDictionary<FBOpenGraphObject> *result = [self createResultObject];
-    FBRequest *objectRequest = [FBRequest requestForPostOpenGraphObject:result];
-    [connection addRequest:objectRequest
-         completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-             if (error) {
-                 NSLog(@"Error: %@", error.description);
-             }
-         }
-            batchEntryName:@"objectCreate"];
-    
-    /*
-     NSMutableDictionary<FBGraphObject> *action = [self createPlayActionWithGame:@"{result=objectCreate:$.id}"];
-     FBRequest *actionRequest = [FBRequest requestForPostWithGraphPath:@"me/fb_sample_rps:play"
-     graphObject:action];
-     [connection addRequest:actionRequest
-     completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-     if (error) {
-     NSLog(@"Error: %@", error.description);
-     } else {
-     NSLog(@"Posted OG action with id: %@", result[@"id"]);
-     }
-     }];
-     */
-    
-    [connection start];
-}
-
-- (NSMutableDictionary<FBOpenGraphObject> *)createResultObject {
-    
-    NSString *resultName = @"60";// should be the bpm result
-    
-    NSMutableDictionary<FBOpenGraphObject> *result = [FBGraphObject openGraphObjectForPost];
-    result[@"type"] = @"Heartbeat:bpm";
-    result[@"title"] = @"Heartbeat";
-    result[@"data"][@"result"] = resultName;
-    
-    return result;
 }
 
 #pragma mark - FBUserSettingsDelegate methods
@@ -372,6 +336,218 @@ typedef void (^RPSBlock)(void);
     if (error) {
         NSLog(@"Unexpected error sent to the FBUserSettingsViewController delegate: %@", error);
     }
+}
+
+#pragma mark - Open Graph Helpers
+
+// This is a helper function that returns an FBGraphObject representing a pulse
+- (id<PulseObject>)getPulseObject
+{
+    // We create an FBGraphObject object, but we can treat it as
+    // an SCOGMeal with typed properties, etc. See <FacebookSDK/FBGraphObject.h>
+    // for more details.
+    id<PulseObject> result = (id<PulseObject>)[FBGraphObject graphObject];
+    
+    // This URL is specific to this sample, and can be used to
+    // create arbitrary OG objects for this app; your OG objects
+    // will have URLs hosted by your server.
+    NSString *format =
+    @"http://samples.ogp.me/1382050005353225/repeater.php?"
+    @"fb:app_id=<1382011812023711>&og:type=%@&"
+    @"og:title=%@&og:description=%%22%@%%22&"
+    @"body=%@";
+    
+    // Give it a URL that will echo back the name of the meal as its title,
+    // description, and body.
+    //result.url = [NSString stringWithFormat:format, @"<heartbeat_ios:pulse", @"pulse", @"pulse", @"pulse"];
+    
+    result.url = @"http://samples.ogp.me/1382050005353225";
+    
+    NSString *bpmResult = @"60";// should be the bpm result
+    
+    result[@"type"] = @"heartbeat_ios:pulse";
+    result[@"title"] = @"Pulse";
+    //result[@"data"][@"bpm"] = bpmResult;
+    
+    return result;
+}
+
+/*
+- (void)enableUserInteraction:(BOOL) enabled {
+    if (enabled) {
+        [self.activityIndicator stopAnimating];
+    } else {
+        [self centerAndShowActivityIndicator];
+    }
+    
+    self.announceButton.enabled = enabled;
+    [self.view setUserInteractionEnabled:enabled];
+}
+ */
+
+- (id<MeaasurePulseAction>)actionFromPulseInfo {
+    // Create an Open Graph measure action with the pulse
+    id<MeaasurePulseAction> action = (id<MeaasurePulseAction>)[FBGraphObject graphObject];
+    
+#warning - incomplete implementation
+    
+    return action;
+}
+
+// Creates the Open Graph Action.
+- (void)postOpenGraphAction {
+    //[self enableUserInteraction:NO];
+    
+    FBRequestConnection *requestConnection = [[FBRequestConnection alloc] init];
+    requestConnection.errorBehavior = FBRequestConnectionErrorBehaviorRetry
+    | FBRequestConnectionErrorBehaviorReconnectSession;
+    
+    // Create an Open Graph measure action with the pulse
+    id<MeaasurePulseAction> action = [self actionFromPulseInfo];
+    
+    // create the Open Graph pulse object for bpm we measured
+    id<PulseObject> pulseObject = [self getPulseObject];
+    if (pulseObject) {
+        action.pulse = pulseObject;
+    } else {
+        // Facebook SDK * Object API *
+        id object = [FBGraphObject openGraphObjectForPostWithType:@"heartbeat_ios:measure"
+                                                            title:nil
+                                                            image:nil
+                                                              url:nil
+                                                      description:nil];//*
+        FBRequest *createObject = [FBRequest requestForPostOpenGraphObject:object];
+        
+        // We'll add the object creaction to the batch, and set the action's pulse accordingly.
+        [requestConnection addRequest:createObject
+                    completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                        if (error) {
+                            //[self enableUserInteraction:YES];
+                            [self handlePostOpenGraphActionError:error];
+                        }
+                    }
+                       batchEntryName:@"createobject"];
+        
+        action[@"pulse"] = @"{result=createobject:$.id}";
+    }
+    
+    // Create the request and post the action to the "me/fb_sample_scrumps:eat" path.
+    FBRequest *actionRequest = [FBRequest requestForPostWithGraphPath:@"me/heartbeat_ios:measure"
+                                                          graphObject:action];
+    [requestConnection addRequest:actionRequest
+                completionHandler:^(FBRequestConnection *connection,
+                                    id result,
+                                    NSError *error) {
+                    
+                    //[self enableUserInteraction:YES];
+                    if (result) {
+                        [[[UIAlertView alloc] initWithTitle:@"Result"
+                                                    message:[NSString stringWithFormat:@"Posted Open Graph action, id: %@",
+                                                             [result objectForKey:@"id"]]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Thanks!"
+                                          otherButtonTitles:nil]
+                         show];
+                        
+                        // start over
+
+                    } else if (error) {
+                        [self handlePostOpenGraphActionError:error];
+                    }
+                }];
+    [requestConnection start];
+}
+
+- (void)handlePostOpenGraphActionError:(NSError *) error{
+    // Facebook SDK * error handling *
+    // Some Graph API errors are retriable. For this sample, we will have a simple
+    // retry policy of one additional attempt. Please refer to
+    // https://developers.facebook.com/docs/reference/api/errors/ for more information.
+    //_retryCount++;
+    FBErrorCategory errorCategory = [FBErrorUtility errorCategoryForError:error];
+    if (errorCategory == FBErrorCategoryThrottling) {
+        // We also retry on a throttling error message. A more sophisticated app
+        // should consider a back-off period.
+        //if (_retryCount < 2) {
+            NSLog(@"Retrying open graph post");
+            [self postOpenGraphAction];
+            return;
+        //} else {
+            NSLog(@"Retry count exceeded.");
+        //}
+    }
+    
+    // Facebook SDK * pro-tip *
+    // Users can revoke post permissions on your app externally so it
+    // can be worthwhile to request for permissions again at the point
+    // that they are needed. This sample assumes a simple policy
+    // of re-requesting permissions.
+    if (errorCategory == FBErrorCategoryPermissions) {
+        NSLog(@"Re-requesting permissions");
+        [self requestPermissionAndPost];
+        return;
+    }
+    
+    // Facebook SDK * error handling *
+    [self presentAlertForError:error];
+}
+// Helper method to request publish permissions and post.
+- (void)requestPermissionAndPost {
+    [FBSession.activeSession requestNewPublishPermissions:[NSArray arrayWithObject:@"publish_actions"]
+                                          defaultAudience:FBSessionDefaultAudienceFriends
+                                        completionHandler:^(FBSession *session, NSError *error) {
+                                            if (!error && [FBSession.activeSession.permissions indexOfObject:@"publish_actions"] != NSNotFound) {
+                                                // Now have the permission
+                                                [self postOpenGraphAction];
+                                            } else if (error){
+                                                // Facebook SDK * error handling *
+                                                // if the operation is not user cancelled
+                                                if ([FBErrorUtility errorCategoryForError:error] != FBErrorCategoryUserCancelled) {
+                                                    [self presentAlertForError:error];
+                                                }
+                                            }
+                                        }];
+}
+
+- (void) presentAlertForError:(NSError *)error {
+    // Facebook SDK * error handling *
+    // Error handling is an important part of providing a good user experience.
+    // When shouldNotifyUser is YES, a userMessage can be
+    // presented as a user-ready message
+    if ([FBErrorUtility shouldNotifyUserForError:error]) {
+        // The SDK has a message for the user, surface it.
+        [[[UIAlertView alloc] initWithTitle:@"Something Went Wrong"
+                                    message:[FBErrorUtility userMessageForError:error]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    } else {
+        NSLog(@"unexpected error:%@", error);
+    }
+}
+
+- (BOOL)presentShareDialogForPulseInfo {
+    // Create an Open Graph measure action with the pulse
+    id<MeaasurePulseAction> action = [self actionFromPulseInfo];
+    
+    id object = [FBGraphObject openGraphObjectForPostWithType:@"heartbeat_ios:measure"
+                                                        title:nil
+                                                        image:nil
+                                                          url:nil
+                                                  description:nil];//*
+    
+    action.pulse = object;
+    
+    return nil != [FBDialogs presentShareDialogWithOpenGraphAction:action
+                                                                    actionType:@"heartbeat_ios:measure"
+                                                           previewPropertyName:@"pulse"
+                                                                       handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                                                           if (!error) {
+                                                                               //
+                                                                           } else {
+                                                                               NSLog(@"%@", error);
+                                                                           }
+                                                                       }];
 }
 
 @end

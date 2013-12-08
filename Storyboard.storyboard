@@ -39,13 +39,14 @@
                     <navigationItem key="navigationItem" id="3kv-eo-D9Z"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrF-up-Oac" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vE4-sK-EPE" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="F5b-L9-geB">
                     <connections>
-                        <segue destination="hJt-S2-Yun" kind="modal" id="X0B-5f-WBu"/>
+                        <segue destination="vE4-sK-EPE" kind="unwind" unwindAction="done:" id="jXV-qh-rK7"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="349" y="51"/>
+            <point key="canvasLocation" x="338" y="223"/>
         </scene>
         <!--Settings View Controller - הגדרות-->
         <scene sceneID="sHh-7K-93H">
@@ -362,7 +363,7 @@
                                             <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="1Kk-lX-XJb" kind="modal" id="Ot8-8Y-T6E"/>
+                                            <segue destination="1Kk-lX-XJb" kind="modal" id="qmy-0i-eEe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -400,7 +401,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="1Kk-lX-XJb" kind="relationship" relationship="rootViewController" id="WqG-Kt-1TR"/>
+                        <segue destination="1Kk-lX-XJb" kind="relationship" relationship="rootViewController" id="foN-U9-oWf"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFs-nu-mYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -478,6 +479,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WqG-Kt-1TR"/>
+        <segue reference="foN-U9-oWf"/>
     </inferredMetricsTieBreakers>
 </document>

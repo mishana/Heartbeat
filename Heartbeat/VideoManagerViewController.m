@@ -608,4 +608,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     return image;
 }
 
+- (IBAction)done:(UIStoryboardSegue *)segue {
+    // do nothing
+}
+
 @end
