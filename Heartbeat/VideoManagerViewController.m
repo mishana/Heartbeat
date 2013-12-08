@@ -498,7 +498,7 @@
     
     //------------------SOUND BEEP BLOCK-------
     
-    NSURL *beepSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"pulse-beep" ofType:@"wav"]];
+    NSURL *beepSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"beep-7" ofType:@"wav"]];
     self.BeepSound = [[AVAudioPlayer alloc] initWithContentsOfURL:beepSound error:nil];
     self.BeepSound.volume = 0.03;
     
