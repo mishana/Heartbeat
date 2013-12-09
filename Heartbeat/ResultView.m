@@ -26,7 +26,7 @@
     
     [self drawBpm];
     #warning need to update this method
-    [self drawOneRect];
+    //[self drawOneRect];
 }
 
 - (void)drawBpm
@@ -34,7 +34,7 @@
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    UIFont *cornerFont = [UIFont systemFontOfSize:self.bounds.size.width * 0.06];
+    UIFont *cornerFont =  [UIFont systemFontOfSize:[UIFont systemFontSize]];//self.bounds.size.width * 0.06];
     
     //
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -46,11 +46,13 @@
     NSString *date = [dateFormatter stringFromDate:self.date];
     //
     
-    NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d\n%@", self.bpm, date] attributes:@{ NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : cornerFont, NSForegroundColorAttributeName : [UIColor purpleColor] }];
+    NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d bpm\n%@", self.bpm, date] attributes:@{ NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : cornerFont, NSForegroundColorAttributeName : [UIColor purpleColor] }];
     
     CGRect textBounds;
-    textBounds.origin = CGPointMake(2.0, 2.0);
-    textBounds.size = [cornerText size];
+    textBounds.origin = CGPointMake((20*2+36), 14);
+    textBounds.size = self.frame.size;
+    textBounds.size.height = textBounds.size.height-14;
+    textBounds.size.width = textBounds.size.width - (20*3+36);
     [cornerText drawInRect:textBounds];
 }
 

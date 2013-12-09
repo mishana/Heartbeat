@@ -10,7 +10,7 @@
 
 @implementation FacebookProfileTableViewCell
 
-#define leftMargin 8
+#define leftMargin 4
 #define topMargin 4
 #define rightMargin 24
 #define pictureRadius 28
@@ -47,7 +47,7 @@
     self.profilePic.layer.masksToBounds = YES;
 
     self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"facebook-cell-background-1x5.png"]];
-    self.backgroundView.alpha = 1;
+    //self.backgroundColor = [UIColor clearColor];
     
     self.clipsToBounds = YES;
     self.autoresizesSubviews = YES;
