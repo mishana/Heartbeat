@@ -95,7 +95,7 @@
     self.resultsNumOld = [self numOfResults];
 }
 
-//
+#pragma mark - public methods
 
 - (void)scrollToTop
 {
@@ -112,13 +112,6 @@
 #pragma mark - UIActionSheet methods
 
 #define FACEBOOK_ACTION_SHEET_TAG 1
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (actionSheet.tag == FACEBOOK_ACTION_SHEET_TAG) {
-        // do nothing
-    }
-}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (actionSheet.tag == FACEBOOK_ACTION_SHEET_TAG) {
@@ -160,7 +153,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ResultCell";
-    ResultTableViewCell *cell = (ResultTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ResultTableViewCell *cell = (ResultTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
         cell = [[ResultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -172,13 +165,18 @@
     return cell;
 }
 
-
 - (void)updateCell:(UITableViewCell *)cell usingResult:(Result *)result
 {
     if ([cell isKindOfClass:[ResultTableViewCell class]]) {
-        #warning TODO
+        ResultTableViewCell *resultCell = (ResultTableViewCell *)cell;
+        resultCell.bpm = result.bpm;
+        resultCell.date = result.end;
+        resultCell.accessoryType = UITableViewCellAccessoryNone;
+
     }
 }
+
+//
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -235,7 +233,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     // for now doing nothing
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -574,6 +571,5 @@
                                                            }];
 }
  */
-
 
 @end

@@ -15,4 +15,7 @@
 
 - (CGFloat)desiredCellHeight;
 
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic) NSUInteger bpm;
+
 @end

@@ -45,7 +45,7 @@
                         <sections>
                             <tableViewSection headerTitle="פרופיל" id="Rgu-C7-bjf">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FacebookProfileCell" textLabel="bCy-47-oDO" rowHeight="64" style="IBUITableViewCellStyleDefault" id="xiQ-RG-7yw" customClass="SUProfileTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FacebookProfileCell" textLabel="bCy-47-oDO" rowHeight="64" style="IBUITableViewCellStyleDefault" id="xiQ-RG-7yw" customClass="FacebookProfileTableViewCell">
                                         <rect key="frame" x="0.0" y="119" width="320" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xiQ-RG-7yw" id="vlb-w6-z8m">
@@ -370,10 +370,10 @@
             </objects>
             <point key="canvasLocation" x="1340" y="-703"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Results Table View Controller-->
         <scene sceneID="wOv-uk-Dqd">
             <objects>
-                <tableViewController id="9it-bU-4Sc" sceneMemberID="viewController">
+                <tableViewController id="9it-bU-4Sc" customClass="ResultsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZJo-kf-Crl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
