@@ -197,87 +197,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPp-Rw-t4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1751" y="804"/>
-        </scene>
-        <!--Results View Controller-->
-        <scene sceneID="Tkh-5A-tuK">
-            <objects>
-                <viewController id="9Ug-15-Cc5" customClass="ResultsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1iS-fP-5Y9"/>
-                        <viewControllerLayoutGuide type="bottom" id="tXJ-jS-eRp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1cy-up-z7K">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lcY-Yx-DfE">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="10" id="DSc-iE-TJ0">
-                                    <size key="itemSize" width="320" height="64"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="9" maxX="0.0" maxY="9"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Result" id="07r-4N-F0o" customClass="ResultCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="73" width="320" height="64"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hns-yY-oOp" customClass="ResultView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kao-eS-SIB">
-                                                            <rect key="frame" x="20" y="14" width="36" height="36"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" backgroundImage="IconFacebook-72.png">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="clickFacebookButton:" destination="9Ug-15-Cc5" eventType="touchUpInside" id="6hJ-IU-xZt"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <connections>
-                                            <outlet property="resultView" destination="hns-yY-oOp" id="3V7-y4-yK3"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="9Ug-15-Cc5" id="T5G-6D-gX8"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.92156869173049927" green="0.92156869173049927" blue="0.92156869173049927" alpha="1" colorSpace="deviceRGB"/>
-                        <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="ZCC-JG-VIK" appends="YES" id="eX9-pn-Af2"/>
-                        </connections>
-                    </view>
-                    <navigationItem key="navigationItem" id="PND-gS-Npd"/>
-                    <connections>
-                        <outlet property="resultCollectionView" destination="lcY-Yx-DfE" id="1eB-9O-Om7"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nXh-zs-hhr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="ZCC-JG-VIK">
-                    <connections>
-                        <action selector="swipeResult:" destination="9Ug-15-Cc5" id="i2A-ti-E4P"/>
-                    </connections>
-                </swipeGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="1751" y="-703"/>
+            <point key="canvasLocation" x="1771" y="804"/>
         </scene>
         <!--Video Manager View Controller - מוניטור-->
         <scene sceneID="LZk-dh-zT7">
@@ -443,12 +363,61 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="9Ug-15-Cc5" kind="relationship" relationship="rootViewController" id="ylQ-nL-6Oc"/>
+                        <segue destination="9it-bU-4Sc" kind="relationship" relationship="rootViewController" id="O5h-ts-FAG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXg-3Z-mI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1340" y="-703"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="wOv-uk-Dqd">
+            <objects>
+                <tableViewController id="9it-bU-4Sc" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZJo-kf-Crl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" id="z0M-zC-ATx" customClass="ResultTableViewCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z0M-zC-ATx" id="GC4-wU-KDH">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbC-L0-0mk">
+                                            <rect key="frame" x="20" y="4" width="36" height="36"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="IconFacebook-72.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHM-bg-xE9">
+                                            <rect key="frame" x="64" y="4" width="236" height="36"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="facebookButton" destination="AbC-L0-0mk" id="JCw-qe-dcD"/>
+                                    <outlet property="resultLabel" destination="lHM-bg-xE9" id="HYX-Bt-ssM"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9it-bU-4Sc" id="PsS-cV-iuQ"/>
+                            <outlet property="delegate" destination="9it-bU-4Sc" id="VRV-2I-eCZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="djV-Pm-qzT"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mkW-R0-6gW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1771" y="-703"/>
         </scene>
     </scenes>
     <resources>
