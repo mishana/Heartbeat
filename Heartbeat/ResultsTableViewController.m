@@ -15,9 +15,7 @@
 @interface ResultsTableViewController () <UIActionSheetDelegate, UIAlertViewDelegate , FBUserSettingsDelegate>
 
 @property (nonatomic) int resultsNumOld;
-
 @property (nonatomic, strong) FBUserSettingsViewController *userSettingsViewController;
-
 @property (nonatomic, strong) NSIndexPath *selectedIndex;// will be used for the publish action
 
 @end
@@ -234,8 +232,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // for now doing nothing
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    return;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -253,7 +249,7 @@
     [[self getFacebookActionSheet] showFromTabBar:self.tabBarController.tabBar];
     
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"FacebookActiveSessionStateChanged" object:nil];
-    // don't need to update the cell because loginViewShowingLoggedInUser do it
+    // don't need to update the cell because loginViewShowingLoggedInUser in SettingsViewController do it
 }
 
 - (void)loginViewController:(id)sender receivedError:(NSError *)error{
@@ -430,12 +426,11 @@
     if (pulseObject) {
         action.pulse = pulseObject;
     } else {
-        // Facebook SDK * Object API *
         id object = [FBGraphObject openGraphObjectForPostWithType:@"heartbeat_ios:measure"
                                                             title:nil
                                                             image:nil
                                                               url:nil
-                                                      description:nil];//*
+                                                      description:nil];//
         FBRequest *createObject = [FBRequest requestForPostOpenGraphObject:object];
         
         // We'll add the object creaction to the batch, and set the action's pulse accordingly.
@@ -507,8 +502,7 @@
         [self requestPermissionAndPost];
         return;
     }
-    
-    // Facebook SDK * error handling *
+ 
     [self presentAlertForError:error];
 }
 // Helper method to request publish permissions and post.
@@ -520,7 +514,6 @@
                                                 // Now have the permission
                                                 [self postOpenGraphAction];
                                             } else if (error){
-                                                // Facebook SDK * error handling *
                                                 // if the operation is not user cancelled
                                                 if ([FBErrorUtility errorCategoryForError:error] != FBErrorCategoryUserCancelled) {
                                                     [self presentAlertForError:error];
@@ -554,7 +547,7 @@
                                                         title:nil
                                                         image:nil
                                                           url:nil
-                                                  description:nil];//*
+                                                  description:nil];//
     
     action.pulse = object;
     

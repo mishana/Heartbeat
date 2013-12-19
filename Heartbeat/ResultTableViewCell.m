@@ -9,7 +9,9 @@
 #import "ResultTableViewCell.h"
 
 @interface ResultTableViewCell ()
+
 @property (nonatomic) NSDateFormatter *dateFormatter;
+
 @end
 
 @implementation ResultTableViewCell
@@ -21,18 +23,37 @@
 #define facebookButtonWidth 2*facebookButtonRadius
 #define facebookButtonHeight 2*facebookButtonRadius
 
+#pragma mark - Lifecycle
 
-- (void)updateCell {
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.alignment = NSTextAlignmentCenter;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self initializeSubViews];
+    }
+    return self;
+}
+
+- (void)initializeSubViews {
+    self.clipsToBounds = YES;
+    self.autoresizesSubviews = YES;
+    self.textLabel.hidden = YES;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
     
-    UIFont *labelFont =  [UIFont systemFontOfSize:[UIFont systemFontSize]];//self.bounds.size.width * 0.06];
+    self.facebookButton.layer.cornerRadius = facebookButtonRadius/2;
+    self.facebookButton.layer.masksToBounds = YES;
     
-    NSString *date = [self.dateFormatter stringFromDate:self.date];
-    //
-    self.dateLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor blueColor]}];
-    
-    self.resultLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d bpm", self.bpm] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : [UIColor blueColor]}];
+    self.resultLabel.numberOfLines = 0;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
 }
 
 #pragma mark - Properties
@@ -60,42 +81,21 @@
     [self updateCell];
 }
 
+- (void)updateCell {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    
+    UIFont *labelFont =  [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    
+    NSString *date = [self.dateFormatter stringFromDate:self.date];
+    //
+    self.dateLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor blueColor]}];
+    
+    self.resultLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d bpm", self.bpm] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : [UIColor blueColor]}];
+}
+
 + (CGFloat)desiredCellHeight{
     return 44;
-}
-
-#pragma mark - Lifecycle
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        [self initializeSubViews];
-    }
-    return self;
-}
-
-- (void)initializeSubViews {
-    self.clipsToBounds = YES;
-    self.autoresizesSubviews = YES;
-    self.textLabel.hidden = YES;
-}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    self.facebookButton.layer.cornerRadius = facebookButtonRadius/2;
-    self.facebookButton.layer.masksToBounds = YES;
-    
-    self.resultLabel.numberOfLines = 0;
-    
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

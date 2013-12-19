@@ -112,9 +112,6 @@
 #pragma mark - NSNotifications
 
 - (void)facebookActiveSessionStateDidChange:(NSNotification *)notification {
-#warning - incomplete implementation
-    // probably should update Facebook Profile Cell
-    //[self updateCell:[self getFacebookProfileCell]];
     [self reloadFacebookProfileCellWithAnimation:@(UITableViewRowAnimationNone)];
 }
 
@@ -162,7 +159,7 @@
     FBSessionLoginBehavior behavior =
     FBSessionLoginBehaviorWithFallbackToWebView;
     
-    [self updateCell:[self getFacebookProfileCell]];//*
+    [self updateCell:[self getFacebookProfileCell]];//@
     
     // we pass the correct behavior here to indicate the login workflow to use (Facebook Login, fallback, etc.)
     if (session.isOpen) {
@@ -418,7 +415,6 @@
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-    // Facebook SDK * login flow *
     // It is important to always handle session closure because it can happen
     // externally; for example, if the current session's access token becomes
     // invalid. For now, we do nothing

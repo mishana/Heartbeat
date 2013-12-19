@@ -17,18 +17,14 @@
 
 @property (nonatomic , strong) NSMutableArray *points;// represent the array of color values (doubles) wrapped by NSNumbers
 @property (nonatomic , strong) NSMutableArray *bpmValues;// array of the calculated beats per minute values wrapped by NSNumbers
-// array size should be approximately windowSizeForAverageCalculation
 @property (nonatomic , strong) NSMutableArray *bpmAverageValues;// array of average values of the bpm wrapped by NSNumbers;
-// we could save only the latest bpmAverageValue calculated
 @property (nonatomic , strong) NSMutableArray *isPeak;// array of the BOOLs represent if the matching point is peak in the graph
 
 //
 @property (nonatomic , readwrite) BOOL isCalibrationOver;
 @property (nonatomic , readwrite) BOOL isFinalResultDetermined;
-
 @property (nonatomic, readwrite) BOOL isPeakInLastFrame;
 @property (nonatomic, readwrite) BOOL isMissedTheLastPeak;
-
 @property (nonatomic , readwrite) BOOL shouldShowLatestResult;
 
 @property (nonatomic) NSUInteger lastPeakPlace;
@@ -37,7 +33,15 @@
 
 @implementation Algorithm
 
-// Properties
+#pragma mark - Lifecycle
+
+- (void)dealoc {
+    free(self.buttterworthValues[0]);
+    free(self.buttterworthValues[1]);
+    free(self.buttterworthValues);
+}
+
+#pragma mark - Properties
 
 #define FPS 30
 #define WINDOW_SIZE 9
@@ -124,7 +128,7 @@
     return _buttterworthValues;
 }
 
-// outside API
+#pragma mark - public methods
 
 - (BOOL)isCalibrationOver{
     if ((self.framesCounter > self.calibrationDuration + self.filterWindowSize) && (self.framesCounter > (self.calibrationDuration + self.firstPeakPlace + self.windowSize))) {

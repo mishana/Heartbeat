@@ -14,9 +14,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
-+ (CGFloat)desiredCellHeight;
-
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic) NSUInteger bpm;
+
++ (CGFloat)desiredCellHeight;
 
 @end

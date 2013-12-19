@@ -17,20 +17,19 @@
 @property (nonatomic , readwrite) NSUInteger calibrationDuration;// duration in frames
 @property (nonatomic , readwrite) NSUInteger windowSizeForAverageCalculation;// size must be <= calibrationDuration
 
-#warning we should care of releasing this array - causes memory leaks
+#warning we should care of releasing this array - need to verify that dealoc do that
 @property (nonatomic , readwrite) double ** buttterworthValues;
 
 //
 - (CGFloat)getColorValueFrom:(UIColor *)color;
 
 // outside API
-@property (nonatomic , readonly) BOOL isCalibrationOver;
-@property (nonatomic , readonly) BOOL isFinalResultDetermined;
 @property (nonatomic , readonly) CGFloat bpmLatestResult;
 
+@property (nonatomic , readonly) BOOL isCalibrationOver;
+@property (nonatomic , readonly) BOOL isFinalResultDetermined;
 @property (nonatomic, readonly) BOOL isPeakInLastFrame;
 @property (nonatomic, readonly) BOOL isMissedTheLastPeak;
-
 @property (nonatomic , readonly) BOOL shouldShowLatestResult;
 
 // the method to be called on each frame

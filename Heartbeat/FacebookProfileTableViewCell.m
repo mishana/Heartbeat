@@ -102,8 +102,6 @@
     self.textLabel.text = userName;
 }
 
-#warning need to check if [self setNeedsDisplay] necessary in these methods (probably not)
-
 - (void)setProfilePic:(FBProfilePictureView *)profilePic {
     _profilePic = profilePic;
 }
