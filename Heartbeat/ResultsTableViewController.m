@@ -275,7 +275,7 @@
 - (void)clickFacebookButton:(UIButton *)sender {
     CGPoint tapLocation = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tapLocation];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     self.selectedIndex = indexPath;
     
     UIActionSheet *sheet = [self getFacebookActionSheet];

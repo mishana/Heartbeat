@@ -327,8 +327,6 @@
         FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (cell == nil) {
-            NSLog([NSString stringWithFormat:@"row %d, %d", indexPath.section, indexPath.row]);
-
             cell = [[FacebookProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         

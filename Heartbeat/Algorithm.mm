@@ -41,7 +41,7 @@
 
 #define FPS 30
 #define WINDOW_SIZE 9
-#define WINDOW_SIZE_FOR_FILTER_CALCULATION 60// should be at least WINDOW_SIZE*2
+#define WINDOW_SIZE_FOR_FILTER_CALCULATION 45// should be at least WINDOW_SIZE*2
 #define CALIBRATION_DURATION 90
 #define WINDOW_SIZE_FOR_AVERAGE_CALCULATION 75
 
@@ -136,7 +136,7 @@
     return _isCalibrationOver;
 }
 
-#define FINAL_RESULT_MARGIN 1.5
+#define FINAL_RESULT_MARGIN 2.1
 
 - (BOOL)isFinalResultDetermined{
     if (self.isCalibrationOver) {
@@ -166,11 +166,11 @@
 {
     if (self.isCalibrationOver && (self.framesCounter > self.calibrationDuration + self.firstPeakPlace + self.windowSize + self.windowSizeForAverageCalculation)) {
 
-        if (fabs([self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 2] doubleValue]) < 0.083) {
+        if (fabs([self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration-self.windowSize - 2] doubleValue]) < 0.125) {
 
-            if (fabs([self.bpmAverageValues[self.framesCounter-self.calibrationDuration/2-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration/2-self.windowSize - 2] doubleValue]) < 0.066) {
+            if (fabs([self.bpmAverageValues[self.framesCounter-self.calibrationDuration/2-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.calibrationDuration/2-self.windowSize - 2] doubleValue]) < 0.1) {
                 
-                if (fabs([self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.windowSize - 2] doubleValue]) < 0.05) {
+                if (fabs([self.bpmAverageValues[self.framesCounter-self.windowSize - 1] doubleValue] - [self.bpmAverageValues[self.framesCounter-self.windowSize - 2] doubleValue]) < 0.075) {
                     _shouldShowLatestResult = YES;
                 }
             }

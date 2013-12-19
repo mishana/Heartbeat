@@ -16,6 +16,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [FBSession openActiveSessionWithAllowLoginUI:NO];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"wasLaunchedBefore"]) {
         //[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"wasLaunchedBefore"];

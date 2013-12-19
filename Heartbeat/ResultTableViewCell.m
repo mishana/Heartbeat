@@ -30,8 +30,9 @@
     
     NSString *date = [self.dateFormatter stringFromDate:self.date];
     //
+    self.dateLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor blueColor]}];
     
-    self.resultLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d bpm\n%@", self.bpm, date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor blueColor]}];
+    self.resultLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d bpm", self.bpm] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : [UIColor blueColor]}];
 }
 
 #pragma mark - Properties
@@ -42,7 +43,7 @@
         [_dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"he_IL"]];
         [_dateFormatter setDateStyle:NSDateFormatterFullStyle];
         [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        [_dateFormatter setDateFormat:@"EEEE dd.MM.yy ',' 'בשעה' HH:mm"];
+        [_dateFormatter setDateFormat:@"EEEE dd.MM.yy \n 'בשעה' HH:mm"];
     }
     return _dateFormatter;
 }
@@ -87,6 +88,7 @@
     self.facebookButton.layer.masksToBounds = YES;
     
     self.resultLabel.numberOfLines = 0;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
