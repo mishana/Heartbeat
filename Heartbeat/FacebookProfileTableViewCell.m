@@ -117,7 +117,7 @@
 #define LoginViewHeight 45 // login view is 45 height maximum
 #warning probably shouldn't use here magic number
 
-- (CGFloat)desiredCellHeight {
++ (CGFloat)desiredCellHeight {
     if (!FBSession.activeSession.isOpen){
         return LoginViewHeight;
     } else {

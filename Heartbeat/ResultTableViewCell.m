@@ -59,7 +59,7 @@
     [self updateCell];
 }
 
-- (CGFloat)desiredCellHeight{
++ (CGFloat)desiredCellHeight{
     return 44;
 }
 

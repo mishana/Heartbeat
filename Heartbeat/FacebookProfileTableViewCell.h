@@ -18,6 +18,6 @@
 @property (strong, nonatomic) FBProfilePictureView *profilePic;
 @property (strong, nonatomic) FBLoginView *loginView;
 
-- (CGFloat)desiredCellHeight;
++ (CGFloat)desiredCellHeight;
 
 @end

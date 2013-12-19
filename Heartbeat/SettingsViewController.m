@@ -323,11 +323,13 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
-        static NSString *CellIdentifier = @"FacebookProfileCell";
-        FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        static NSString *cellIdentifier = @"FacebookProfileCell";
+        FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (cell == nil) {
-            cell = [[FacebookProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            NSLog([NSString stringWithFormat:@"row %d, %d", indexPath.section, indexPath.row]);
+
+            cell = [[FacebookProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         
         [self updateCell:cell];
@@ -344,9 +346,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
-        FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell*)[self tableView:tableView
-                                                      cellForRowAtIndexPath:indexPath];
-        return cell.desiredCellHeight;
+
+        FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return [FacebookProfileTableViewCell desiredCellHeight];
     }
     else {
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];

@@ -151,7 +151,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{    
     static NSString *CellIdentifier = @"ResultCell";
     ResultTableViewCell *cell = (ResultTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -160,7 +160,7 @@
     }
     [cell.facebookButton addTarget:self action:@selector(clickFacebookButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self updateCell:cell usingResult:[self resultsByDate][indexPath.item]];
+    [self updateCell:cell usingResult:[self resultsByDate][indexPath.row]];
     
     return cell;
 }
@@ -228,8 +228,8 @@
 #pragma mark - UITableViewDelegate methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResultTableViewCell *cell = (ResultTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.desiredCellHeight;
+    //ResultTableViewCell *cell = (ResultTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return [ResultTableViewCell desiredCellHeight];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

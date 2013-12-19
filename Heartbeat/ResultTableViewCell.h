@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 
-- (CGFloat)desiredCellHeight;
++ (CGFloat)desiredCellHeight;
 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic) NSUInteger bpm;
