@@ -346,8 +346,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath compare:[self indexPathForFacebookProfileCell]] == NSOrderedSame) {
-
-        FacebookProfileTableViewCell *cell = (FacebookProfileTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return [FacebookProfileTableViewCell desiredCellHeight];
     }
     else {

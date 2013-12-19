@@ -152,13 +152,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-    static NSString *CellIdentifier = @"ResultCell";
-    ResultTableViewCell *cell = (ResultTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *cellIdentifier = @"ResultCell";
+    ResultTableViewCell *cell = (ResultTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (cell == nil) {
-        cell = [[ResultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[ResultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    [cell.facebookButton addTarget:self action:@selector(clickFacebookButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [self updateCell:cell usingResult:[self resultsByDate][indexPath.row]];
     
@@ -172,7 +171,8 @@
         resultCell.bpm = result.bpm;
         resultCell.date = result.end;
         resultCell.accessoryType = UITableViewCellAccessoryNone;
-
+        
+        [resultCell.facebookButton addTarget:self action:@selector(clickFacebookButton:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
@@ -228,7 +228,6 @@
 #pragma mark - UITableViewDelegate methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //ResultTableViewCell *cell = (ResultTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     return [ResultTableViewCell desiredCellHeight];
 }
 
