@@ -81,6 +81,15 @@
     [self updateCell];
 }
 
+- (void)addAttributes:(NSDictionary *)attributes range:(NSRange)range toLabel:(UILabel *)label
+{
+    if (range.location != NSNotFound) {
+        NSMutableAttributedString *mat = [label.attributedText mutableCopy];
+        [mat addAttributes:attributes range:range];
+        label.attributedText = mat;
+    }
+}
+
 - (void)updateCell {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentCenter;
@@ -89,9 +98,15 @@
     
     NSString *date = [self.dateFormatter stringFromDate:self.date];
     //
-    self.dateLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor blueColor]}];
+    self.dateLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor lightGrayColor] }];
     
-    self.resultLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d bpm", self.bpm] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSForegroundColorAttributeName : [UIColor blueColor]}];
+    self.resultLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d bpm", self.bpm] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0]}];
+    
+    //
+    NSRange range = [[self.resultLabel.attributedText string] rangeOfString:[NSString stringWithFormat:@"%d", self.bpm]];
+    NSDictionary *bpmAttributes = @{ NSFontAttributeName : [UIFont boldSystemFontOfSize:28] };
+    
+    [self addAttributes:bpmAttributes range:range toLabel:self.resultLabel];
 }
 
 + (CGFloat)desiredCellHeight{
