@@ -11,6 +11,7 @@
 @interface ResultTableViewCell ()
 
 @property (nonatomic) NSDateFormatter *dateFormatter;
+@property (nonatomic) BOOL isRadiusChanged;
 
 @end
 
@@ -43,8 +44,15 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    self.facebookButton.layer.cornerRadius = facebookButtonRadius/2;
+    if (self.isRadiusChanged) return;
+    
+    self.isRadiusChanged = YES;
+    
+    /*self.facebookButton.layer.cornerRadius = facebookButtonRadius/2;
     self.facebookButton.layer.masksToBounds = YES;
+    
+    self.facebookButton.layer.shouldRasterize = YES;
+    self.facebookButton.layer.rasterizationScale = [[UIScreen mainScreen] scale];*/
     
     self.resultLabel.numberOfLines = 0;
 }

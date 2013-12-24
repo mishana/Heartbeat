@@ -182,6 +182,16 @@
 		39B96D0018075B04004651F8 /* Settings_Line-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96CFE18075B04004651F8 /* Settings_Line-1@2x.png */; };
 		39B96D121807935C004651F8 /* MainNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B96D111807935C004651F8 /* MainNavigationViewController.m */; };
 		39B96D1A180A9323004651F8 /* default_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96D19180A9323004651F8 /* default_bg.png */; };
+		39C055DC186911CA009FAF1D /* facebook-logo-png-transparent-i111@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055DB186911CA009FAF1D /* facebook-logo-png-transparent-i111@2x.png */; };
+		39C055DE1869125C009FAF1D /* facebook-logo-webtreatsetc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055DD1869125C009FAF1D /* facebook-logo-webtreatsetc@2x.png */; };
+		39C055E018691303009FAF1D /* facebook_home_logo_580-100034106-large@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39C055DF18691303009FAF1D /* facebook_home_logo_580-100034106-large@2x.jpg */; };
+		39C055E218691376009FAF1D /* FacebookLogoOfficialApril2013-150x150@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E118691376009FAF1D /* FacebookLogoOfficialApril2013-150x150@2x.jpg */; };
+		39C055E41869149B009FAF1D /* facebookLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E31869149B009FAF1D /* facebookLogo@2x.png */; };
+		39C055E618691544009FAF1D /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E518691544009FAF1D /* facebook@2x.png */; };
+		39C055E818691678009FAF1D /* face_book_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E718691678009FAF1D /* face_book_icon@2x.png */; };
+		39C055EA18691775009FAF1D /* face_book_icon_200@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E918691775009FAF1D /* face_book_icon_200@2x.png */; };
+		39C055EC18691902009FAF1D /* face_book_icon_144@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */; };
+		39C055EE18691A3C009FAF1D /* facebook_O@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055ED18691A3C009FAF1D /* facebook_O@2x.png */; };
 		39F6C0381811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */; };
 		39F6C03A1811FF5B00CC7F01 /* Mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F6C0391811FF5B00CC7F01 /* Mask@2x.png */; };
 		39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F6C03B1812065A00CC7F01 /* QuartzCore.framework */; };
@@ -462,6 +472,16 @@
 		39B96D101807935C004651F8 /* MainNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNavigationViewController.h; path = ../MainNavigationViewController.h; sourceTree = "<group>"; };
 		39B96D111807935C004651F8 /* MainNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainNavigationViewController.m; path = ../MainNavigationViewController.m; sourceTree = "<group>"; };
 		39B96D19180A9323004651F8 /* default_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_bg.png; sourceTree = "<group>"; };
+		39C055DB186911CA009FAF1D /* facebook-logo-png-transparent-i111@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-logo-png-transparent-i111@2x.png"; sourceTree = "<group>"; };
+		39C055DD1869125C009FAF1D /* facebook-logo-webtreatsetc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-logo-webtreatsetc@2x.png"; sourceTree = "<group>"; };
+		39C055DF18691303009FAF1D /* facebook_home_logo_580-100034106-large@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "facebook_home_logo_580-100034106-large@2x.jpg"; sourceTree = "<group>"; };
+		39C055E118691376009FAF1D /* FacebookLogoOfficialApril2013-150x150@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "FacebookLogoOfficialApril2013-150x150@2x.jpg"; sourceTree = "<group>"; };
+		39C055E31869149B009FAF1D /* facebookLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebookLogo@2x.png"; sourceTree = "<group>"; };
+		39C055E518691544009FAF1D /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		39C055E718691678009FAF1D /* face_book_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon@2x.png"; sourceTree = "<group>"; };
+		39C055E918691775009FAF1D /* face_book_icon_200@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_200@2x.png"; sourceTree = "<group>"; };
+		39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_144@2x.png"; sourceTree = "<group>"; };
+		39C055ED18691A3C009FAF1D /* facebook_O@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_O@2x.png"; sourceTree = "<group>"; };
 		39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FSHIghlightAnimationAdditions.h"; sourceTree = "<group>"; };
 		39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FSHIghlightAnimationAdditions.m"; sourceTree = "<group>"; };
 		39F6C0391811FF5B00CC7F01 /* Mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mask@2x.png"; sourceTree = "<group>"; };
@@ -783,13 +803,23 @@
 		394F4E7917DF62E5001C5049 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				39C055DF18691303009FAF1D /* facebook_home_logo_580-100034106-large@2x.jpg */,
 				2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */,
+				39C055E31869149B009FAF1D /* facebookLogo@2x.png */,
+				39C055ED18691A3C009FAF1D /* facebook_O@2x.png */,
+				39C055E918691775009FAF1D /* face_book_icon_200@2x.png */,
+				39C055E518691544009FAF1D /* facebook@2x.png */,
+				39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */,
+				39C055DD1869125C009FAF1D /* facebook-logo-webtreatsetc@2x.png */,
 				2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */,
+				39C055E718691678009FAF1D /* face_book_icon@2x.png */,
+				39C055E118691376009FAF1D /* FacebookLogoOfficialApril2013-150x150@2x.jpg */,
 				2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */,
 				2C05C5B8181FDCBC00F9C16B /* libCorePlot-CocoaTouch.a */,
 				2C988211184949CE0071B387 /* IconFacebook-72@2x.png */,
 				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
+				39C055DB186911CA009FAF1D /* facebook-logo-png-transparent-i111@2x.png */,
 				39F6C0391811FF5B00CC7F01 /* Mask@2x.png */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
 				394F4E7B17DF62E5001C5049 /* InfoPlist.strings */,
@@ -959,6 +989,7 @@
 				2CC6554D1854B72600FF14EF /* h5_38@2x.png in Resources */,
 				2CC6556E1854B72600FF14EF /* h5_71@2x.png in Resources */,
 				2CC6554B1854B72600FF14EF /* h5_36@2x.png in Resources */,
+				39C055EE18691A3C009FAF1D /* facebook_O@2x.png in Resources */,
 				2CC655851854B72600FF14EF /* h5_94@2x.png in Resources */,
 				2CC655661854B72600FF14EF /* h5_63@2x.png in Resources */,
 				2CC655211854B72600FF14EF /* h5_107@2x.png in Resources */,
@@ -972,6 +1003,7 @@
 				2CC655381854B72600FF14EF /* h5_17@2x.png in Resources */,
 				394F4E7D17DF62E5001C5049 /* InfoPlist.strings in Resources */,
 				2CC655261854B72600FF14EF /* h5_112@2x.png in Resources */,
+				39C055E618691544009FAF1D /* facebook@2x.png in Resources */,
 				2CC655471854B72600FF14EF /* h5_32@2x.png in Resources */,
 				2CC6555A1854B72600FF14EF /* h5_51@2x.png in Resources */,
 				2CC655611854B72600FF14EF /* h5_58@2x.png in Resources */,
@@ -991,6 +1023,7 @@
 				3986F1361804273A000537CE /* Settings_full@2x.png in Resources */,
 				2CC655411854B72600FF14EF /* h5_26@2x.png in Resources */,
 				3986F1301804273A000537CE /* lamb_Line@2x.png in Resources */,
+				39C055E818691678009FAF1D /* face_book_icon@2x.png in Resources */,
 				2C78F520184FA824006805A3 /* facebook-cell-background-1x5.png in Resources */,
 				2CC655481854B72600FF14EF /* h5_33@2x.png in Resources */,
 				2CC6554A1854B72600FF14EF /* h5_35@2x.png in Resources */,
@@ -1018,11 +1051,13 @@
 				2CC655861854B72600FF14EF /* h5_95@2x.png in Resources */,
 				2CC655621854B72600FF14EF /* h5_59@2x.png in Resources */,
 				394F4E8717DF62E5001C5049 /* Default@2x.png in Resources */,
+				39C055DC186911CA009FAF1D /* facebook-logo-png-transparent-i111@2x.png in Resources */,
 				3986F1351804273A000537CE /* Help_Line@2x.png in Resources */,
 				2CC6552E1854B72600FF14EF /* h5_120@2x.png in Resources */,
 				3986F1331804273A000537CE /* Heart_Full@2x.png in Resources */,
 				2CC655401854B72600FF14EF /* h5_25@2x.png in Resources */,
 				2CC655751854B72600FF14EF /* h5_78@2x.png in Resources */,
+				39C055EC18691902009FAF1D /* face_book_icon_144@2x.png in Resources */,
 				2CC6556F1854B72600FF14EF /* h5_72@2x.png in Resources */,
 				2CC655551854B72600FF14EF /* h5_46@2x.png in Resources */,
 				2CC655431854B72600FF14EF /* h5_28@2x.png in Resources */,
@@ -1033,6 +1068,7 @@
 				2CC6552B1854B72600FF14EF /* h5_117@2x.png in Resources */,
 				2C78F50F184A5AC1006805A3 /* FBUserSettingsViewResources.bundle in Resources */,
 				2CC655331854B72600FF14EF /* h5_125@2x.png in Resources */,
+				39C055E018691303009FAF1D /* facebook_home_logo_580-100034106-large@2x.jpg in Resources */,
 				2CC655321854B72600FF14EF /* h5_124@2x.png in Resources */,
 				2CC655361854B72600FF14EF /* h5_128@2x.png in Resources */,
 				2CC655651854B72600FF14EF /* h5_62@2x.png in Resources */,
@@ -1040,6 +1076,7 @@
 				3924993F17F79359001928DD /* heart@2x.png in Resources */,
 				394F4E9017DF6350001C5049 /* Storyboard.storyboard in Resources */,
 				2CC6557B1854B72600FF14EF /* h5_84@2x.png in Resources */,
+				39C055E218691376009FAF1D /* FacebookLogoOfficialApril2013-150x150@2x.jpg in Resources */,
 				2CC655521854B72600FF14EF /* h5_43@2x.png in Resources */,
 				397A383417F24AB000BA69F3 /* settings 11@2x.png in Resources */,
 				3924993D17F771FD001928DD /* pulse-beep.wav in Resources */,
@@ -1066,14 +1103,17 @@
 				2CC655391854B72600FF14EF /* h5_18@2x.png in Resources */,
 				2CC655531854B72600FF14EF /* h5_44@2x.png in Resources */,
 				2CC655231854B72600FF14EF /* h5_109@2x.png in Resources */,
+				39C055E41869149B009FAF1D /* facebookLogo@2x.png in Resources */,
 				2CC655511854B72600FF14EF /* h5_42@2x.png in Resources */,
 				2CC655461854B72600FF14EF /* h5_31@2x.png in Resources */,
 				39AC87BC17F66F64003A39B1 /* iphone_JPG@2x.jpg in Resources */,
+				39C055DE1869125C009FAF1D /* facebook-logo-webtreatsetc@2x.png in Resources */,
 				2CC6553A1854B72600FF14EF /* h5_19@2x.png in Resources */,
 				2CC655891854B72600FF14EF /* h5_98@2x.png in Resources */,
 				3986F1371804273A000537CE /* Settings_Line@2x.png in Resources */,
 				2CC6552F1854B72600FF14EF /* h5_121@2x.png in Resources */,
 				2CC655711854B72600FF14EF /* h5_74@2x.png in Resources */,
+				39C055EA18691775009FAF1D /* face_book_icon_200@2x.png in Resources */,
 				397A383017F2493B00BA69F3 /* heart +@2x.png in Resources */,
 				397A383E17F336EE00BA69F3 /* ios-7-green-fade@2x.png in Resources */,
 				39B96CFB180759E6004651F8 /* pieChart_full@2x.png in Resources */,
