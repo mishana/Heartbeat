@@ -176,6 +176,7 @@
 		3986F13D18043F66000537CE /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = 3986F13C18043F66000537CE /* Result.m */; };
 		39ABE22017EE38B600CD6815 /* WelcomeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */; };
 		39AC87BC17F66F64003A39B1 /* iphone_JPG@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */; };
+		39B0A9F5186D248300A3A0FA /* TKProgressCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B0A9F4186D248300A3A0FA /* TKProgressCircleView.m */; };
 		39B96CFB180759E6004651F8 /* pieChart_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96CF9180759E6004651F8 /* pieChart_full@2x.png */; };
 		39B96CFC180759E6004651F8 /* pieChart_Line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96CFA180759E6004651F8 /* pieChart_Line@2x.png */; };
 		39B96CFF18075B04004651F8 /* settings_full-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B96CFD18075B04004651F8 /* settings_full-1@2x.png */; };
@@ -192,6 +193,7 @@
 		39C055EA18691775009FAF1D /* face_book_icon_200@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E918691775009FAF1D /* face_book_icon_200@2x.png */; };
 		39C055EC18691902009FAF1D /* face_book_icon_144@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */; };
 		39C055EE18691A3C009FAF1D /* facebook_O@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055ED18691A3C009FAF1D /* facebook_O@2x.png */; };
+		39C055FF186D1610009FAF1D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C055FE186D1610009FAF1D /* MapKit.framework */; };
 		39F6C0381811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */; };
 		39F6C03A1811FF5B00CC7F01 /* Mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F6C0391811FF5B00CC7F01 /* Mask@2x.png */; };
 		39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F6C03B1812065A00CC7F01 /* QuartzCore.framework */; };
@@ -465,6 +467,8 @@
 		39ABE21E17EE38B600CD6815 /* WelcomeScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeScreenViewController.h; sourceTree = "<group>"; };
 		39ABE21F17EE38B600CD6815 /* WelcomeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeScreenViewController.m; sourceTree = "<group>"; };
 		39AC87BB17F66F64003A39B1 /* iphone_JPG@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "iphone_JPG@2x.jpg"; sourceTree = "<group>"; };
+		39B0A9F3186D248300A3A0FA /* TKProgressCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressCircleView.h; sourceTree = "<group>"; };
+		39B0A9F4186D248300A3A0FA /* TKProgressCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressCircleView.m; sourceTree = "<group>"; };
 		39B96CF9180759E6004651F8 /* pieChart_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pieChart_full@2x.png"; sourceTree = "<group>"; };
 		39B96CFA180759E6004651F8 /* pieChart_Line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pieChart_Line@2x.png"; sourceTree = "<group>"; };
 		39B96CFD18075B04004651F8 /* settings_full-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_full-1@2x.png"; sourceTree = "<group>"; };
@@ -482,6 +486,7 @@
 		39C055E918691775009FAF1D /* face_book_icon_200@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_200@2x.png"; sourceTree = "<group>"; };
 		39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_144@2x.png"; sourceTree = "<group>"; };
 		39C055ED18691A3C009FAF1D /* facebook_O@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_O@2x.png"; sourceTree = "<group>"; };
+		39C055FE186D1610009FAF1D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FSHIghlightAnimationAdditions.h"; sourceTree = "<group>"; };
 		39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FSHIghlightAnimationAdditions.m"; sourceTree = "<group>"; };
 		39F6C0391811FF5B00CC7F01 /* Mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mask@2x.png"; sourceTree = "<group>"; };
@@ -495,6 +500,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39C055FF186D1610009FAF1D /* MapKit.framework in Frameworks */,
 				39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */,
 				2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */,
 				2CD3957F17E37FEC0019F1A5 /* CoreMedia.framework in Frameworks */,
@@ -768,6 +774,7 @@
 		394F4E7117DF62E5001C5049 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39C055FE186D1610009FAF1D /* MapKit.framework */,
 				397F5F24184D28D000FF7C88 /* FacebookSDK.framework */,
 				39F6C03B1812065A00CC7F01 /* QuartzCore.framework */,
 				2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */,
@@ -792,6 +799,8 @@
 				2C6D7F3E1861E44D00C4BB74 /* ResultTableViewCell.h */,
 				2C6D7F3F1861E44D00C4BB74 /* ResultTableViewCell.m */,
 				2C260D751853944800E47600 /* HeartBeatProtocols.h */,
+				39B0A9F3186D248300A3A0FA /* TKProgressCircleView.h */,
+				39B0A9F4186D248300A3A0FA /* TKProgressCircleView.m */,
 				2C78F521185099EF006805A3 /* ViewControllers */,
 				394F4E9117DF6383001C5049 /* model */,
 				2C78F52218509ACB006805A3 /* Categories */,
@@ -1144,6 +1153,7 @@
 				3947F74A17F1AF5D0026E415 /* SettingsViewController.m in Sources */,
 				39FC1BC217F68311003A4390 /* HelpViewController.m in Sources */,
 				2C6D7F401861E44D00C4BB74 /* ResultTableViewCell.m in Sources */,
+				39B0A9F5186D248300A3A0FA /* TKProgressCircleView.m in Sources */,
 				2CD3957417E2F7F70019F1A5 /* Algorithm.mm in Sources */,
 				2CD3958817E3BCC80019F1A5 /* UIImage+ImageAverageColor.m in Sources */,
 				2CD3958B17E3BDE80019F1A5 /* VideoManagerViewController.m in Sources */,
@@ -1233,11 +1243,19 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Or/Developer/Heartbeat,
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1256,11 +1274,19 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Heartbeat/Heartbeat-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "Heartbeat/Heartbeat-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Or/Developer/Heartbeat,
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
 				);
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
