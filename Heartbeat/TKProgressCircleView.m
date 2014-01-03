@@ -15,8 +15,8 @@
 	return self;
 }
 - (id) initWithFrame:(CGRect)frame {
-	//frame.size = CGSizeMake(40,40);
-    frame.size = CGSizeMake(50,50);
+	frame.size = CGSizeMake(80,80);
+    //frame.size = CGSizeMake(50,50);
 
 	if(!(self = [super initWithFrame:frame])) return nil;
 	
@@ -42,7 +42,8 @@
 	CGContextStrokePath(context);
     
 	//CGContextSetRGBFillColor(context,1,1,1,1);
-    CGContextSetRGBFillColor(context, 0.816, 0.949, 0.78, 1.0);
+    //CGContextSetRGBFillColor(context, 0.816, 0.949, 0.78, 1.0);
+    CGContextSetRGBFillColor(context, 0.972, 0.949, 0.78, 1.0);
 	
 	if(!_twirlMode){
 		CGContextAddArc(context, rect.size.width/2, rect.size.height/2, (rect.size.width/2)-7, M_PI/-2.0, ((M_PI*2.0) *_displayProgress) - M_PI/2.0 , false);

@@ -69,7 +69,7 @@
 {
 	if(!_progressCircle) {
         _progressCircle = [[TKProgressCircleView alloc] init];
-        _progressCircle.center = CGPointMake(self.view.bounds.size.width * 0.6, 100);
+        _progressCircle.center = CGPointMake(self.view.bounds.size.width * 0.5, 127);
         //_progressCircle.center = CGPointMake(self.view.bounds.size.width/4, self.view.bounds.size.height/6);
 
     }
@@ -397,7 +397,7 @@
     
     //-----------------------------------------------
     
-    self.bpmLabel.font = [UIFont fontWithName:@"DBLCDTempBlack" size:40.0];
+    self.bpmLabel.font = [UIFont fontWithName:@"DBLCDTempBlack" size:70.0];
     
     [self.view addSubview:self.progressCircle];
     //[self.progressCircle setTwirlMode:YES];
@@ -450,8 +450,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 //self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d , BPM2: %d" , (int)self.algorithm.bpmLatestResult , (int)self.algorithm2.bpmLatestResult];
                 self.finalBPMLabel.text = @"";
                 
-                self.timeTillResultLabel.text = [NSString stringWithFormat:@"time till result: %.01fs" , TIME_TO_DETERMINE_BPM_FINAL_RESULT - [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]];
-                //self.timeTillResultLabel.text = @"";
+                //self.timeTillResultLabel.text = [NSString stringWithFormat:@"time till result: %.01fs" , TIME_TO_DETERMINE_BPM_FINAL_RESULT - [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]];
+                self.timeTillResultLabel.text = @"";
                 
                 [self.progressCircle setProgress:[[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected] / TIME_TO_DETERMINE_BPM_FINAL_RESULT animated:YES];
                 
