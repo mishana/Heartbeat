@@ -15,8 +15,8 @@
 	return self;
 }
 - (id) initWithFrame:(CGRect)frame {
-	frame.size = CGSizeMake(80,80);
-    //frame.size = CGSizeMake(50,50);
+	//frame.size = CGSizeMake(80,80);
+    frame.size = CGSizeMake(90,90);
 
 	if(!(self = [super initWithFrame:frame])) return nil;
 	

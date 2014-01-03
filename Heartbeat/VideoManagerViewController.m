@@ -217,7 +217,7 @@
     [self tabBarConfiguration];
     
     [self.progressCircle setProgress:0];
-    self.bpmLabel.text = @"0.0";
+    self.bpmLabel.text = @"0";
 }
 
 - (NSArray *)heartsFromRes:(int)from toRes:(int)to
@@ -512,7 +512,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 }
                 
                 self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
-                self.bpmLabel.text = @"0.0";
+                self.bpmLabel.text = @"0";
                 [self.progressCircle setTwirlMode:NO];
                 [self.progressCircle setProgress:0];
 
@@ -547,12 +547,18 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             }*/
             
             if (self.algorithm.shouldShowLatestResult) {
-                self.bpmLabel.text = [NSString stringWithFormat:@"%.01f", self.algorithm.bpmLatestResult];
+                self.bpmLabel.text = [NSString stringWithFormat:@"%.0f", self.algorithm.bpmLatestResult];
                 [self.progressCircle setTwirlMode:NO];
+                
+                self.fingerDetectLabel.text = @"מחשב דופק";
             }
-            else
+            else {
                 //self.bpmLabel.text = @"מחשב דופק";
                 [self.progressCircle setTwirlMode:YES];
+                
+                self.fingerDetectLabel.text = @"מחפש דופק";
+            }
+            
             
             [self animateHeart];
         });
