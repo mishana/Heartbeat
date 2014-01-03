@@ -69,7 +69,9 @@
 {
 	if(!_progressCircle) {
         _progressCircle = [[TKProgressCircleView alloc] init];
-        _progressCircle.center = CGPointMake(self.view.bounds.size.width/2, 120);
+        _progressCircle.center = CGPointMake(self.view.bounds.size.width * 0.6, 100);
+        //_progressCircle.center = CGPointMake(self.view.bounds.size.width/4, self.view.bounds.size.height/6);
+
     }
 	return _progressCircle;
 }
@@ -213,6 +215,9 @@
     [self resetAlgorithm];
     
     [self tabBarConfiguration];
+    
+    [self.progressCircle setProgress:0];
+    self.bpmLabel.text = @"0.0";
 }
 
 - (NSArray *)heartsFromRes:(int)from toRes:(int)to
@@ -392,10 +397,10 @@
     
     //-----------------------------------------------
     
-    self.bpmLabel.font = [UIFont fontWithName:@"DBLCDTempBlack" size:20.0];
+    self.bpmLabel.font = [UIFont fontWithName:@"DBLCDTempBlack" size:40.0];
     
     [self.view addSubview:self.progressCircle];
-    [self.progressCircle setTwirlMode:YES];
+    //[self.progressCircle setTwirlMode:YES];
 
 }
 
@@ -424,7 +429,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
         [self.algorithm2 newFrameDetectedWithAverageColor:dominantColor];
-        
+                
         dispatch_sync(dispatch_get_main_queue(), ^{
             
             if (self.algorithm.isFinalResultDetermined) {
@@ -437,15 +442,26 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                     self.algorithm = nil;
                     self.tabBarController.selectedIndex = 0;
                     
+                    [self.progressCircle setProgress:0 animated:YES];
+                    
                     //------------------------------------------------
                     #warning - incomplete implementation
                 }
-                self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d , BPM2: %d" , (int)self.algorithm.bpmLatestResult , (int)self.algorithm2.bpmLatestResult];
+                //self.finalBPMLabel.text = [NSString stringWithFormat:@"Final BPM: %d , BPM2: %d" , (int)self.algorithm.bpmLatestResult , (int)self.algorithm2.bpmLatestResult];
+                self.finalBPMLabel.text = @"";
+                
                 self.timeTillResultLabel.text = [NSString stringWithFormat:@"time till result: %.01fs" , TIME_TO_DETERMINE_BPM_FINAL_RESULT - [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]];
+                //self.timeTillResultLabel.text = @"";
+                
+                [self.progressCircle setProgress:[[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected] / TIME_TO_DETERMINE_BPM_FINAL_RESULT animated:YES];
                 
             } else {
-                self.finalBPMLabel.text = @"Final BPM: 0 , BPM2: 0";
-                self.timeTillResultLabel.text = @"time till result:   ";
+                //self.finalBPMLabel.text = @"Final BPM: 0 , BPM2: 0";
+                self.finalBPMLabel.text = @"";
+                
+                //self.timeTillResultLabel.text = @"time till result:   ";
+                self.timeTillResultLabel.text = @"";
+                
                 self.bpmFinalResultFirstTimeDetected = nil;
                 #warning - incomplete implementation
             }
@@ -460,6 +476,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                         if (self.algorithm.isFinalResultDetermined) {
                             //------------------Results BLOCK-----------------
                             
+                            [self.progressCircle setProgress:0 animated:YES];
+
                             self.result.bpm = (int)self.algorithm.bpmLatestResult;
                             self.result = nil;
                             self.algorithm = nil;
@@ -478,6 +496,8 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                     if (self.algorithm.isFinalResultDetermined) {
                         //------------------Results BLOCK-----------------
                         
+                        [self.progressCircle setProgress:0 animated:YES];
+                        
                         self.result.bpm = (int)self.algorithm.bpmLatestResult;
                         self.result = nil;
                         self.algorithm = nil;
@@ -492,7 +512,12 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 }
                 
                 self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
-                self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d", 0];
+                self.bpmLabel.text = @"0.0";
+                [self.progressCircle setTwirlMode:NO];
+                [self.progressCircle setProgress:0];
+
+                //self.bpmLabel.text = @"אין דופק";
+                //self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d", 0];
                 self.algorithm = nil;
                 self.algorithm2 = nil;
                 self.algorithmStartTime = nil;
@@ -502,12 +527,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             else {
                 self.fingerDetectLabel.text = @"";
                 //show the time since the start
-                self.timeLabel.text = [NSString stringWithFormat:@"time: %.01fs", [[NSDate date] timeIntervalSinceDate:self.algorithmStartTime]];
+                //self.timeLabel.text = [NSString stringWithFormat:@"time: %.01fs", [[NSDate date] timeIntervalSinceDate:self.algorithmStartTime]];
+                self.timeLabel.text = @"";
             }
             
             NSLog([NSString stringWithFormat:@"red: %.01f , green: %.01f , blue: %.01f" , red , green , blue]);
             
-            if (self.algorithm.shouldShowLatestResult && self.algorithm2.shouldShowLatestResult) {
+            /*if (self.algorithm.shouldShowLatestResult && self.algorithm2.shouldShowLatestResult) {
                 self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %.01f , BPM2: %.01f", self.algorithm.bpmLatestResult , self.algorithm2.bpmLatestResult];
             }
             else if (self.algorithm.shouldShowLatestResult) {
@@ -518,7 +544,15 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
             }
             else {
                 self.bpmLabel.text = [NSString stringWithFormat:@"BPM: %d , BPM2: %d", 0 , 0];
+            }*/
+            
+            if (self.algorithm.shouldShowLatestResult) {
+                self.bpmLabel.text = [NSString stringWithFormat:@"%.01f", self.algorithm.bpmLatestResult];
+                [self.progressCircle setTwirlMode:NO];
             }
+            else
+                //self.bpmLabel.text = @"מחשב דופק";
+                [self.progressCircle setTwirlMode:YES];
             
             [self animateHeart];
         });
