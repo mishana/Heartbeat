@@ -218,6 +218,7 @@
     
     [self.progressCircle setProgress:0];
     self.bpmLabel.text = @"00";
+    self.fingerDetectLabel.font = [self.fingerDetectLabel.font fontWithSize:20];
 }
 
 - (NSArray *)heartsFromRes:(int)from toRes:(int)to
@@ -511,7 +512,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                     }
                 }
                 
+                self.fingerDetectLabel.font = [self.fingerDetectLabel.font fontWithSize:20];
                 self.fingerDetectLabel.text = @"שים את האצבע על המצלמה";
+                
                 self.bpmLabel.text = @"00";
                 [self.progressCircle setTwirlMode:NO];
                 [self.progressCircle setProgress:0];
@@ -550,11 +553,13 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 self.bpmLabel.text = [NSString stringWithFormat:@"%.0f", self.algorithm.bpmLatestResult];
                 [self.progressCircle setTwirlMode:NO];
                 
+                self.fingerDetectLabel.font = [self.fingerDetectLabel.font fontWithSize:24];
                 self.fingerDetectLabel.text = @"מחשב דופק";
             }
             else {
                 [self.progressCircle setTwirlMode:YES];
                 
+                self.fingerDetectLabel.font = [self.fingerDetectLabel.font fontWithSize:24];
                 self.fingerDetectLabel.text = @"מחפש דופק";
             }
             
