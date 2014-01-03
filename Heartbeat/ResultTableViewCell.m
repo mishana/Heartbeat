@@ -106,13 +106,14 @@
     
     NSString *date = [self.dateFormatter stringFromDate:self.date];
     //
-    self.dateLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor lightGrayColor] }];
+    self.dateLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor grayColor] }];
     
     self.resultLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d bpm", self.bpm] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor colorWithRed:0.075 green:0.439 blue:0.753 alpha:1.0]}];
     
     //
     NSRange range = [[self.resultLabel.attributedText string] rangeOfString:[NSString stringWithFormat:@"%d", self.bpm]];
     NSDictionary *bpmAttributes = @{ NSFontAttributeName : [UIFont boldSystemFontOfSize:28] };
+    //NSDictionary *bpmAttributes = @{ NSFontAttributeName : [UIFont fontWithName:@"DBLCDTempBlack" size:28.0] };
     
     [self addAttributes:bpmAttributes range:range toLabel:self.resultLabel];
 }
