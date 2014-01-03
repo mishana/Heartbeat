@@ -16,7 +16,7 @@
 }
 - (id) initWithFrame:(CGRect)frame {
 	//frame.size = CGSizeMake(80,80);
-    frame.size = CGSizeMake(90,90);
+    frame.size = CGSizeMake(100,100);
 
 	if(!(self = [super initWithFrame:frame])) return nil;
 	
@@ -34,7 +34,7 @@
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGRect r = CGRectInset(rect, 4, 4);
 	
-	CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 0.6);
+	CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 0.3);
     //CGContextSetRGBStrokeColor(context, 0.322, 0.647, 0.275, 1.0);
 
     CGContextSetLineWidth(context, 3.0);
