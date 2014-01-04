@@ -20,6 +20,8 @@
 
 @end
 
+typedef void (^CompletionBlock)(void);
+
 @implementation ResultsTableViewController
 
 #pragma mark - Properties
@@ -115,7 +117,7 @@
     if (actionSheet.tag == FACEBOOK_ACTION_SHEET_TAG) {
         switch (buttonIndex) {
             case 0: { // share
-                //[self shareResult];
+                [self shareResult];
                 // after the share we maybe need to update self.selectedIndex to nil
                 break;
             }
@@ -149,7 +151,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
     static NSString *cellIdentifier = @"ResultCell";
     ResultTableViewCell *cell = (ResultTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
@@ -189,7 +191,7 @@
         self.resultsNumOld = [self numOfResults];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // not supported
         // return [super tableView:tableView commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
@@ -279,18 +281,8 @@
     [sheet showFromTabBar:self.tabBarController.tabBar];
 }
 
-/*
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex != 0) { // ok
-        if (_alertOkHandler) {
-            _alertOkHandler();
-            _alertOkHandler = nil;
-        }
-    }
-}
-
 //
- 
+
 - (void)shareResult {
     if (FBSession.activeSession.isOpen) {
         // Attempt to post immediately - note the error handling logic will request permissions
@@ -312,7 +304,7 @@
                              openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Facebook"]];
                         }];
         } else {
-            //we present share dialog
+            //we presented the share dialog already
         }
     }
     
@@ -321,34 +313,17 @@
     //[self presentLoginSettings];
     //}
 }
- */
 
-/*
- - (void)requestPermissionsWithCompletion:(RPSBlock)completion {
- [FBSession.activeSession requestNewPublishPermissions:[NSArray arrayWithObject:@"publish_actions"]
- defaultAudience:FBSessionDefaultAudienceEveryone
- completionHandler:^(FBSession *session, NSError *error) {
- if (!error) {
- // Now have the permission
- completion();
- } else {
- NSLog(@"Error: %@", error.description);
- }
- }];
- }
- */
-
-/*
 - (void)alertWithMessage:(NSString *)message
                       ok:(NSString *)ok
                   cancel:(NSString *)cancel
-              completion:(RPSBlock)completion {
+              completion:(CompletionBlock)completion {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Share with Facebook"
                                                         message:message
                                                        delegate:self
                                               cancelButtonTitle:cancel
                                               otherButtonTitles:ok, nil];
-    _alertOkHandler = [completion copy];
+    //_alertOkHandler = [completion copy];
     [alertView show];
 }
 
@@ -358,34 +333,28 @@
 - (id<PulseObject>)getPulseObject
 {
     // We create an FBGraphObject object, but we can treat it as
-    // an SCOGMeal with typed properties, etc. See <FacebookSDK/FBGraphObject.h>
-    // for more details.
+    // an PulseObject with typed properties
     id<PulseObject> result = (id<PulseObject>)[FBGraphObject graphObject];
-    
-    // This URL is specific to this sample, and can be used to
-    // create arbitrary OG objects for this app; your OG objects
-    // will have URLs hosted by your server.
-    NSString *format =
-    @"http://samples.ogp.me/1382050005353225/repeater.php?"
-    @"fb:app_id=<1382011812023711>&og:type=%@&"
-    @"og:title=%@&og:description=%%22%@%%22&"
-    @"body=%@";
     
     // Give it a URL that will echo back the name of the meal as its title,
     // description, and body.
-    //result.url = [NSString stringWithFormat:format, @"<heartbeat_ios:pulse", @"pulse", @"pulse", @"pulse"];
+    //result.url = @"http://samples.ogp.me/1382050005353225";
     
-    result.url = @"http://samples.ogp.me/1382050005353225";
-    
-    NSString *bpmResult = @"60";// should be the bpm result
+    NSUInteger bpmResult = ((ResultTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectedIndex]).bpm;// should be the bpm result
+    NSDate *date = ((ResultTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectedIndex]).date;
     
     result[@"type"] = @"heartbeat_ios:pulse";
     result[@"title"] = @"Pulse";
-    //result[@"data"][@"bpm"] = bpmResult;
+    result[@"description"] = [NSString stringWithFormat:@"Pulse BPM: %d, Date: %@" , bpmResult , date];
+    result[@"fbsdk:create_object"] = @YES;
+    result[@"locale"] = @"he_IL";//*
+    result[@"data"][@"bpm"] = @(bpmResult);//*
+    result[@"data"][@"date"] = date;//*
+    //result[@"url"] = @"";
+    //result[@"image"] = @"";
     
     return result;
 }
- */
 
 /*
  - (void)enableUserInteraction:(BOOL) enabled {
@@ -400,12 +369,12 @@
  }
  */
 
-/*
 - (id<MeaasurePulseAction>)actionFromPulseInfo {
     // Create an Open Graph measure action with the pulse
     id<MeaasurePulseAction> action = (id<MeaasurePulseAction>)[FBGraphObject graphObject];
     
-#warning - incomplete implementation
+    action.pulse = [self getPulseObject];
+    action[@"message"] = [NSString stringWithFormat:@"Heartbeat מדדתי דופק באמצעות"];// not working
     
     return action;
 }
@@ -420,17 +389,14 @@
     
     // Create an Open Graph measure action with the pulse
     id<MeaasurePulseAction> action = [self actionFromPulseInfo];
+    //
+    action[@"fb:explicitly_shared"] = @"true";
     
-    // create the Open Graph pulse object for bpm we measured
-    id<PulseObject> pulseObject = [self getPulseObject];
-    if (pulseObject) {
-        action.pulse = pulseObject;
+    if (action.pulse) {
+        // pulse object created successfully
+        action[@"pulse"] = action.pulse;
     } else {
-        id object = [FBGraphObject openGraphObjectForPostWithType:@"heartbeat_ios:measure"
-                                                            title:nil
-                                                            image:nil
-                                                              url:nil
-                                                      description:nil];//
+        id object = [self getPulseObject];
         FBRequest *createObject = [FBRequest requestForPostOpenGraphObject:object];
         
         // We'll add the object creaction to the batch, and set the action's pulse accordingly.
@@ -456,11 +422,10 @@
                     
                     //[self enableUserInteraction:YES];
                     if (result) {
-                        [[[UIAlertView alloc] initWithTitle:@"Result"
-                                                    message:[NSString stringWithFormat:@"Posted Open Graph action, id: %@",
-                                                             [result objectForKey:@"id"]]
+                        [[[UIAlertView alloc] initWithTitle:@"Sucessfully posted to your news feed"
+                                                    message:@"Go to Facebook and Check this out!"
                                                    delegate:nil
-                                          cancelButtonTitle:@"Thanks!"
+                                          cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil]
                          show];
                         
@@ -487,6 +452,7 @@
         NSLog(@"Retrying open graph post");
         [self postOpenGraphAction];
         return;
+#warning we shouldn't try to publish again and again
         //} else {
         NSLog(@"Retry count exceeded.");
         //}
@@ -497,13 +463,15 @@
     // can be worthwhile to request for permissions again at the point
     // that they are needed. This sample assumes a simple policy
     // of re-requesting permissions.
-    if (errorCategory == FBErrorCategoryPermissions) {
+    else if (errorCategory == FBErrorCategoryPermissions) {
         NSLog(@"Re-requesting permissions");
         [self requestPermissionAndPost];
         return;
     }
- 
-    [self presentAlertForError:error];
+    
+    else {
+        [self presentAlertForError:error];
+    }
 }
 // Helper method to request publish permissions and post.
 - (void)requestPermissionAndPost {
@@ -543,25 +511,22 @@
     // Create an Open Graph measure action with the pulse
     id<MeaasurePulseAction> action = [self actionFromPulseInfo];
     
-    id object = [FBGraphObject openGraphObjectForPostWithType:@"heartbeat_ios:measure"
-                                                        title:nil
-                                                        image:nil
-                                                          url:nil
-                                                  description:nil];//
-    
-    action.pulse = object;
+    if (action.pulse) {
+        // pulse object created successfully
+        action[@"pulse"] = action.pulse;
+    }
+#warning need to check what hapens when action.pulse is nil
     
     return nil != [FBDialogs presentShareDialogWithOpenGraphAction:action
                                                         actionType:@"heartbeat_ios:measure"
                                                previewPropertyName:@"pulse"
                                                            handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                                                                if (!error) {
-                                                                   //
+                                                                   NSLog(@"Success!");
                                                                } else {
                                                                    NSLog(@"%@", error);
                                                                }
                                                            }];
 }
- */
 
 @end

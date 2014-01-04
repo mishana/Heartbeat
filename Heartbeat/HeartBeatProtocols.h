@@ -11,9 +11,6 @@
 
 @protocol PulseObject<FBGraphObject>
 
-@property (retain, nonatomic) NSString *id;
-@property (retain, nonatomic) NSString *url;
-
 @end
 
 @protocol MeaasurePulseAction<FBOpenGraphAction>
