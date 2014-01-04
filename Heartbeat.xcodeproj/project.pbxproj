@@ -186,8 +186,6 @@
 		39C055E818691678009FAF1D /* face_book_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E718691678009FAF1D /* face_book_icon@2x.png */; };
 		39C055EA18691775009FAF1D /* face_book_icon_200@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E918691775009FAF1D /* face_book_icon_200@2x.png */; };
 		39C055EC18691902009FAF1D /* face_book_icon_144@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */; };
-		39C055EE18691A3C009FAF1D /* facebook_O@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055ED18691A3C009FAF1D /* facebook_O@2x.png */; };
-		39C055FF186D1610009FAF1D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C055FE186D1610009FAF1D /* MapKit.framework */; };
 		39F6C0381811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */; };
 		39F6C03A1811FF5B00CC7F01 /* Mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F6C0391811FF5B00CC7F01 /* Mask@2x.png */; };
 		39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F6C03B1812065A00CC7F01 /* QuartzCore.framework */; };
@@ -473,8 +471,6 @@
 		39C055E718691678009FAF1D /* face_book_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon@2x.png"; sourceTree = "<group>"; };
 		39C055E918691775009FAF1D /* face_book_icon_200@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_200@2x.png"; sourceTree = "<group>"; };
 		39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_144@2x.png"; sourceTree = "<group>"; };
-		39C055ED18691A3C009FAF1D /* facebook_O@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_O@2x.png"; sourceTree = "<group>"; };
-		39C055FE186D1610009FAF1D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FSHIghlightAnimationAdditions.h"; sourceTree = "<group>"; };
 		39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FSHIghlightAnimationAdditions.m"; sourceTree = "<group>"; };
 		39F6C0391811FF5B00CC7F01 /* Mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mask@2x.png"; sourceTree = "<group>"; };
