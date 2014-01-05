@@ -302,6 +302,8 @@
         [self resetAlgorithm];
         
         [self tabBarConfiguration];
+        
+        [self.fingerDetectLabel setTextWithChangeAnimation:@"שים את האצבע על המצלמה"];
     }
 }
 
@@ -401,8 +403,6 @@
     self.bpmLabel.font = [UIFont fontWithName:@"DBLCDTempBlack" size:70.0];
     
     [self.view addSubview:self.progressCircle];
-    //[self.progressCircle setTwirlMode:YES];
-
 }
 
 #pragma mark - Algorithm & Animation
