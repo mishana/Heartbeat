@@ -35,4 +35,6 @@
 // the method to be called on each frame
 - (void)newFrameDetectedWithAverageColor:(UIColor *)color;
 
+- (NSArray *)getPlotData;
+
 @end

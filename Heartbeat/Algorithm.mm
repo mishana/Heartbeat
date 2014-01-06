@@ -378,4 +378,12 @@
 
 }
 
+- (NSArray *)getPlotData {
+    NSRange range;
+    range.length = [self.points count] < 150 ? [self.points count] : 150;
+    range.location = [self.points count] - range.length;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    return [self.points objectsAtIndexes:indexSet];
+}
+
 @end

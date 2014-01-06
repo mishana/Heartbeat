@@ -14,8 +14,13 @@
 #import "Result.h"
 #import "UILabel+FSHIghlightAnimationAdditions.h"
 #import "TKProgressCircleView.h"
+#include "CorePlot-CocoaTouch.h"
 
-@interface VideoManagerViewController ()
+@interface VideoManagerViewController () <CPTPlotDataSource , CPTScatterPlotDelegate>
+// CorePlot
+@property (nonatomic,strong) NSArray *plotData;
+@property (nonatomic, strong) CPTGraphHostingView *hostView;
+
 // AVFoundation
 @property (nonatomic,strong) AVCaptureSession * session;
 @property (strong) AVCaptureDevice * videoDevice;
@@ -124,6 +129,14 @@
     return _result;
 }
 
+// CorePlot
+
+- (NSArray *)plotData {
+    //return @[@(2),@(2.5),@(2.8),@(2.9),@(2.4)];
+    //_plotData = [self.algorithm getPlotData];
+    return _plotData;
+}
+
 //
 
 - (void)startRunningSession
@@ -213,12 +226,17 @@
     [super viewWillAppear:animated];
     
     [self resetAlgorithm];
+    [self resetCorePlot];
     
     [self tabBarConfiguration];
     
     [self.progressCircle setProgress:0];
     self.bpmLabel.text = @"00";
     self.fingerDetectLabel.font = [self.fingerDetectLabel.font fontWithSize:20];
+}
+
+- (void)resetCorePlot {
+    self.plotData = nil;
 }
 
 - (NSArray *)heartsFromRes:(int)from toRes:(int)to
@@ -244,12 +262,171 @@
 {
     [super viewDidAppear:animated];
     
+    // TODO
+    [self initPlot];
+    
     [self startRunningSession];
     
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES]; // prevent the iphone from sleeping
     
     [self.fingerDetectLabel setTextWithChangeAnimation:@"שים את האצבע על המצלמה"];
+    
+    
 }
+
+#pragma mark - Chart behavior
+-(void)initPlot {
+    [self configureGraph];
+    [self configurePlots];
+    [self configureAxes];
+}
+
+-(void)configureHost {
+    self.hostView = [(CPTGraphHostingView *) [CPTGraphHostingView alloc] initWithFrame:CGRectMake(50, 350, 220, 110)];
+    self.hostView.allowPinchScaling = NO;
+    //self.hostView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.hostView];
+}
+
+-(void)configureGraph {
+    // 1 - Create the graph
+    CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
+    [graph applyTheme:[CPTTheme themeNamed:kCPTSlateTheme]];
+    self.hostView.hostedGraph = graph;
+    // 2 - Set graph title
+    graph.title = nil;
+    // 3 - Create and set text style
+    /*
+    CPTMutableTextStyle *titleStyle = [CPTMutableTextStyle textStyle];
+    titleStyle.color = [CPTColor whiteColor];
+    titleStyle.fontName = @"Helvetica-Bold";
+    titleStyle.fontSize = 16.0f;
+    graph.titleTextStyle = titleStyle;
+    graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
+    graph.titleDisplacement = CGPointMake(0.0f, 10.0f);
+     */
+    // 4 - Set padding for plot area - TODO should be removed
+    [graph.plotAreaFrame setPaddingLeft:0.0f];
+    [graph.plotAreaFrame setPaddingBottom:0.0f];
+    // 5 - Enable user interactions for plot space
+    graph.defaultPlotSpace.allowsUserInteraction = NO;
+}
+
+-(void)configurePlots {
+    // 1 - Get graph and plot space
+    CPTGraph *graph = self.hostView.hostedGraph;
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
+    // 2 - Create the plot
+    CPTScatterPlot *aaplPlot = [[CPTScatterPlot alloc] init];
+    aaplPlot.dataSource = self;
+    //aaplPlot.delegate = self;
+    aaplPlot.identifier = @"AAPL";
+    CPTColor *aaplColor = [CPTColor redColor];
+    [graph addPlot:aaplPlot toPlotSpace:plotSpace];
+    // 3 - Set up plot space
+    [plotSpace scaleToFitPlots:[graph allPlots]];
+    CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
+    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.4f)];
+    plotSpace.xRange = xRange;
+    CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.4f)];
+    plotSpace.yRange = yRange;
+    // 4 - Create styles and symbols
+    CPTMutableLineStyle *aaplLineStyle = [aaplPlot.dataLineStyle mutableCopy];
+    aaplLineStyle.lineWidth = 2.5;
+    aaplLineStyle.lineColor = aaplColor;
+    aaplPlot.dataLineStyle = aaplLineStyle;
+    CPTMutableLineStyle *aaplSymbolLineStyle = [CPTMutableLineStyle lineStyle];
+    aaplSymbolLineStyle.lineColor = aaplColor;
+    CPTPlotSymbol *aaplSymbol = [CPTPlotSymbol plotSymbol];
+    aaplSymbol.symbolType = CPTPlotSymbolTypeNone;
+    aaplSymbol.fill = [CPTFill fillWithColor:aaplColor];
+    aaplSymbol.lineStyle = aaplSymbolLineStyle;
+    aaplSymbol.size = CGSizeMake(2.0f, 2.0f);
+    aaplPlot.plotSymbol = aaplSymbol;
+}
+
+-(void)configureAxes {
+    /*
+    // 1 - Create styles
+    CPTMutableTextStyle *axisTitleStyle = [CPTMutableTextStyle textStyle];
+    axisTitleStyle.color = [CPTColor whiteColor];
+    axisTitleStyle.fontName = @"Helvetica-Bold";
+    axisTitleStyle.fontSize = 12.0f;
+    CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
+    axisLineStyle.lineWidth = 2.0f;
+    axisLineStyle.lineColor = [CPTColor whiteColor];
+    CPTMutableTextStyle *axisTextStyle = [[CPTMutableTextStyle alloc] init];
+    axisTextStyle.color = [CPTColor whiteColor];
+    axisTextStyle.fontName = @"Helvetica-Bold";
+    axisTextStyle.fontSize = 11.0f;
+    CPTMutableLineStyle *tickLineStyle = [CPTMutableLineStyle lineStyle];
+    tickLineStyle.lineColor = [CPTColor whiteColor];
+    tickLineStyle.lineWidth = 2.0f;
+    CPTMutableLineStyle *gridLineStyle = [CPTMutableLineStyle lineStyle];
+    tickLineStyle.lineColor = [CPTColor blackColor];
+    tickLineStyle.lineWidth = 1.0f;
+    // 2 - Get axis set
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
+    // 3 - Configure x-axis
+    CPTAxis *x = axisSet.xAxis;
+    x.title = nil;
+    x.titleTextStyle = axisTitleStyle;
+    x.titleOffset = 15.0f;
+    x.axisLineStyle = axisLineStyle;
+    x.labelingPolicy = CPTAxisLabelingPolicyNone;
+    x.labelTextStyle = axisTextStyle;
+    x.majorTickLineStyle = axisLineStyle;
+    x.majorTickLength = 4.0f;
+    x.tickDirection = CPTSignNegative;
+    NSMutableSet *xLocations = [NSMutableSet setWithCapacity:150];
+    for (int i = 0 ; i < 150 ; i++) {
+        [xLocations addObject:[NSNumber numberWithInt:i]];
+    }
+    x.axisLabels = nil;
+    x.majorTickLocations = nil;
+    // 4 - Configure y-axis
+    CPTAxis *y = axisSet.yAxis;
+    y.title = nil;
+    y.titleTextStyle = axisTitleStyle;
+    y.titleOffset = -40.0f;
+    y.axisLineStyle = axisLineStyle;
+    y.majorGridLineStyle = gridLineStyle;
+    y.labelingPolicy = CPTAxisLabelingPolicyNone;
+    y.labelTextStyle = axisTextStyle;
+    y.labelOffset = 16.0f;
+    y.majorTickLineStyle = axisLineStyle;
+    y.majorTickLength = 4.0f;
+    y.minorTickLength = 2.0f;
+    y.tickDirection = CPTSignPositive;
+    NSInteger majorIncrement = 100;
+    NSInteger minorIncrement = 50;
+    CGFloat yMax = 700.0f;  // should determine dynamically based on max price
+    NSMutableSet *yLabels = [NSMutableSet set];
+    NSMutableSet *yMajorLocations = [NSMutableSet set];
+    NSMutableSet *yMinorLocations = [NSMutableSet set];
+    for (NSInteger j = minorIncrement; j <= yMax; j += minorIncrement) {
+        NSUInteger mod = j % majorIncrement;
+        if (mod == 0) {
+            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%i", j] textStyle:y.labelTextStyle];
+            NSDecimal location = CPTDecimalFromInteger(j);
+            label.tickLocation = location;
+            label.offset = -y.majorTickLength - y.labelOffset;
+            if (label) {
+                [yLabels addObject:label];
+            }
+            [yMajorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:location]];
+        } else {
+            [yMinorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromInteger(j)]];
+        }
+    }
+    y.axisLabels = nil;
+    y.majorTickLocations = nil;
+    y.minorTickLocations = nil;
+     */
+    self.hostView.hostedGraph.axisSet = nil;
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -368,6 +545,27 @@
     // Find a suitable AVCaptureDevice
     self.videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
+    //
+    [self.videoDevice lockForConfiguration:nil];
+    if ([self.videoDevice isExposureModeSupported:AVCaptureExposureModeLocked]) {
+        //self.videoDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
+    }
+    if ([self.videoDevice isExposurePointOfInterestSupported]) {
+        //self.videoDevice.exposurePointOfInterest = CGPointMake(320 , 578);
+    }
+    if ([self.videoDevice isFocusModeSupported:AVCaptureFocusModeLocked]) {
+        //self.videoDevice.focusMode = AVCaptureFocusModeLocked;
+    }
+    if ([self.videoDevice isFocusPointOfInterestSupported]) {
+        //self.videoDevice.focusPointOfInterest = CGPointMake(320 , 578);
+    }
+    if ([self.videoDevice isLowLightBoostSupported]) {
+        //[self.videoDevice setAutomaticallyEnablesLowLightBoostWhenAvailable:YES];
+    }
+    
+    [self.videoDevice unlockForConfiguration];
+    //
+    
     // Create a device input with the device and add it to the session.
     NSError *error = nil;
     self.videoInput = [AVCaptureDeviceInput deviceInputWithDevice:self.videoDevice error:&error];
@@ -403,6 +601,9 @@
     self.bpmLabel.font = [UIFont fontWithName:@"DBLCDTempBlack" size:70.0];
     
     [self.view addSubview:self.progressCircle];
+    
+    // CorePlot
+    [self configureHost];
 }
 
 #pragma mark - Algorithm & Animation
@@ -430,8 +631,18 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
         [self.algorithm2 newFrameDetectedWithAverageColor:dominantColor];
-                
+        self.plotData = [self.algorithm getPlotData];// neccesery
+        
         dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.hostView.hostedGraph reloadData];
+            CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) self.hostView.hostedGraph.defaultPlotSpace;
+            [plotSpace scaleToFitPlots:[self.hostView.hostedGraph allPlots]];
+            CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
+            [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.0f)];
+            plotSpace.xRange = xRange;
+            CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+            [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
+            plotSpace.yRange = yRange;
             
             if (self.algorithm.isFinalResultDetermined) {
                 if (TIME_TO_DETERMINE_BPM_FINAL_RESULT <= [[NSDate date] timeIntervalSinceDate:self.bpmFinalResultFirstTimeDetected]) {
@@ -702,6 +913,29 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (IBAction)done:(UIStoryboardSegue *)segue {
     // do nothing
+}
+
+#pragma CorePlot
+
+- (NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
+    return [self.plotData count];
+}
+
+- (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx {
+    // TODO
+    NSInteger valueCount = 150;
+    switch (fieldEnum) {
+        case CPTScatterPlotFieldX:
+            if (idx < valueCount) {
+                return [NSNumber numberWithUnsignedInteger:idx];
+            }
+            break;
+            
+        case CPTScatterPlotFieldY:
+            return [NSNumber numberWithDouble:[[self.plotData objectAtIndex:idx] doubleValue]];
+            break;
+    }
+    return [NSDecimalNumber zero];
 }
 
 @end

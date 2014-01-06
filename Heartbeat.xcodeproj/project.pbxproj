@@ -10,6 +10,7 @@
 		2C27A86417E128450065ECC0 /* Butterworth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C27A86217E128450065ECC0 /* Butterworth.cpp */; };
 		2C6D7F3D1861DD1B00C4BB74 /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D7F3C1861DD1B00C4BB74 /* ResultsTableViewController.m */; };
 		2C6D7F401861E44D00C4BB74 /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D7F3F1861E44D00C4BB74 /* ResultTableViewCell.m */; };
+		2C70043C187AE5030040D055 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C70043B187AE5030040D055 /* libCorePlot-CocoaTouch.a */; };
 		2C78F50F184A5AC1006805A3 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */; };
 		2C78F520184FA824006805A3 /* facebook-cell-background-1x5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */; };
 		2C988212184949CE0071B387 /* IconFacebook-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C988211184949CE0071B387 /* IconFacebook-72@2x.png */; };
@@ -279,6 +280,7 @@
 		2C6D7F3C1861DD1B00C4BB74 /* ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
 		2C6D7F3E1861E44D00C4BB74 /* ResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
 		2C6D7F3F1861E44D00C4BB74 /* ResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewCell.m; sourceTree = "<group>"; };
+		2C70043B187AE5030040D055 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "../../Downloads/CorePlot_1.4/Binaries/iOS/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		2C78F50E184A5AC1006805A3 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-cell-background-1x5.png"; sourceTree = "<group>"; };
 		2C988211184949CE0071B387 /* IconFacebook-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconFacebook-72@2x.png"; sourceTree = "<group>"; };
@@ -484,7 +486,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39C055FF186D1610009FAF1D /* MapKit.framework in Frameworks */,
+				2C70043C187AE5030040D055 /* libCorePlot-CocoaTouch.a in Frameworks */,
 				39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */,
 				2CD3958C17E3CD1F0019F1A5 /* CoreImage.framework in Frameworks */,
 				2CD3957F17E37FEC0019F1A5 /* CoreMedia.framework in Frameworks */,
@@ -758,7 +760,7 @@
 		394F4E7117DF62E5001C5049 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				39C055FE186D1610009FAF1D /* MapKit.framework */,
+				2C70043B187AE5030040D055 /* libCorePlot-CocoaTouch.a */,
 				397F5F24184D28D000FF7C88 /* FacebookSDK.framework */,
 				39F6C03B1812065A00CC7F01 /* QuartzCore.framework */,
 				2CD3957E17E37FEC0019F1A5 /* CoreMedia.framework */,
@@ -1222,6 +1224,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Or/Developer/Heartbeat,
+					/Users/Or/Downloads/CorePlot_1.4/Binaries/iOS,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1253,6 +1256,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Or/Developer/Heartbeat,
+					/Users/Or/Downloads/CorePlot_1.4/Binaries/iOS,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
