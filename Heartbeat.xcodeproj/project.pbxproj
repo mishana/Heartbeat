@@ -15,6 +15,7 @@
 		2C78F520184FA824006805A3 /* facebook-cell-background-1x5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C78F51F184FA824006805A3 /* facebook-cell-background-1x5.png */; };
 		2C988212184949CE0071B387 /* IconFacebook-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C988211184949CE0071B387 /* IconFacebook-72@2x.png */; };
 		2C98821518495BBC0071B387 /* FacebookProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98821418495BBC0071B387 /* FacebookProfileTableViewCell.m */; };
+		2C988FC8187B60B400435C36 /* Mask2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C988FC7187B60B400435C36 /* Mask2@2x.png */; };
 		2CC6551A1854B72600FF14EF /* h5_100@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CC654A91854B72600FF14EF /* h5_100@2x.png */; };
 		2CC6551B1854B72600FF14EF /* h5_101@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CC654AA1854B72600FF14EF /* h5_101@2x.png */; };
 		2CC6551C1854B72600FF14EF /* h5_102@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CC654AB1854B72600FF14EF /* h5_102@2x.png */; };
@@ -286,6 +287,7 @@
 		2C988211184949CE0071B387 /* IconFacebook-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconFacebook-72@2x.png"; sourceTree = "<group>"; };
 		2C98821318495BBC0071B387 /* FacebookProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookProfileTableViewCell.h; sourceTree = "<group>"; };
 		2C98821418495BBC0071B387 /* FacebookProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookProfileTableViewCell.m; sourceTree = "<group>"; };
+		2C988FC7187B60B400435C36 /* Mask2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mask2@2x.png"; sourceTree = "<group>"; };
 		2CC654A91854B72600FF14EF /* h5_100@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "h5_100@2x.png"; sourceTree = "<group>"; };
 		2CC654AA1854B72600FF14EF /* h5_101@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "h5_101@2x.png"; sourceTree = "<group>"; };
 		2CC654AB1854B72600FF14EF /* h5_102@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "h5_102@2x.png"; sourceTree = "<group>"; };
@@ -809,6 +811,7 @@
 				394F4E8117DF62E5001C5049 /* HeartBeatAppDelegate.h */,
 				394F4E8217DF62E5001C5049 /* HeartBeatAppDelegate.m */,
 				39F6C0391811FF5B00CC7F01 /* Mask@2x.png */,
+				2C988FC7187B60B400435C36 /* Mask2@2x.png */,
 				394F4E7A17DF62E5001C5049 /* Heartbeat-Info.plist */,
 				394F4E7B17DF62E5001C5049 /* InfoPlist.strings */,
 				397F5F2E184D5F4200FF7C88 /* TabBar icons */,
@@ -1082,6 +1085,7 @@
 				2CC655351854B72600FF14EF /* h5_127@2x.png in Resources */,
 				3986F1311804273A000537CE /* Lamb_Full@2x.png in Resources */,
 				2CC655741854B72600FF14EF /* h5_77@2x.png in Resources */,
+				2C988FC8187B60B400435C36 /* Mask2@2x.png in Resources */,
 				3924993D17F771FD001928DD /* pulse-beep.wav in Resources */,
 				2CC655391854B72600FF14EF /* h5_18@2x.png in Resources */,
 				2CC655531854B72600FF14EF /* h5_44@2x.png in Resources */,

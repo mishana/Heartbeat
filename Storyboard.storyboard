@@ -216,7 +216,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbc-1V-7B1">
-                                        <rect key="frame" x="113" y="228" width="250" height="112"/>
+                                        <rect key="frame" x="113" y="230" width="250" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="70"/>
                                         <color key="textColor" red="0.97254901960784312" green="0.94901960784313721" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -255,16 +255,21 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="h5_64.png" translatesAutoresizingMaskIntoConstraints="NO" id="pwA-3y-BV2">
-                                        <rect key="frame" x="20" y="263" width="128" height="128"/>
+                                        <rect key="frame" x="52" y="296" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLl-16-CHh">
-                                        <rect key="frame" x="28" y="469" width="280" height="36"/>
+                                        <rect key="frame" x="20" y="186" width="280" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0e-tV-unP" customClass="CPTGraphHostingView">
+                                        <rect key="frame" x="63" y="368" width="195" height="98"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.11764705882352941" green="0.41176470588235292" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -281,6 +286,7 @@
                         <outlet property="fingerDetectLabel" destination="xLl-16-CHh" id="QsC-bb-67O"/>
                         <outlet property="heart" destination="pwA-3y-BV2" id="QzS-db-fYV"/>
                         <outlet property="helpButton" destination="Hlc-sk-k2I" id="RaE-JH-RRF"/>
+                        <outlet property="hostView" destination="A0e-tV-unP" id="mdi-nJ-dOC"/>
                         <outlet property="timeLabel" destination="6g4-xu-kHe" id="6XM-RS-F1m"/>
                         <outlet property="timeTillResultLabel" destination="LGR-l5-LLu" id="IPF-vJ-6ih"/>
                     </connections>
@@ -389,14 +395,14 @@
                                             </state>
                                         </button>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHM-bg-xE9">
-                                            <rect key="frame" x="210" y="4" width="90" height="36"/>
+                                            <rect key="frame" x="216" y="4" width="84" height="36"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" translatesAutoresizingMaskIntoConstraints="NO" id="0jW-8p-gdM">
-                                            <rect key="frame" x="94" y="4" width="108" height="36"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="126" translatesAutoresizingMaskIntoConstraints="NO" id="0jW-8p-gdM">
+                                            <rect key="frame" x="82" y="4" width="126" height="36"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Date">

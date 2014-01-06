@@ -18,7 +18,7 @@
     // Mask image ends with 0.3 opacity on both sides. Set the background color of the layer
     // to the same value so the layer can extend the mask image.
     maskLayer.backgroundColor = [[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.3f] CGColor];
-    maskLayer.contents = (id)[[UIImage imageNamed:@"Mask.png"] CGImage];
+    maskLayer.contents = (id)[[UIImage imageNamed:@"Mask2.png"] CGImage];
     
     // Center the mask image on twice the width of the text layer, so it starts to the left
     // of the text layer and moves to its right when we translate it by width.
