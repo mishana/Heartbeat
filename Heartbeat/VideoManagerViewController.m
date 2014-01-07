@@ -187,16 +187,16 @@
         UITabBarItem *item2 = [self.tabBarController.tabBar.items objectAtIndex:2];
         
         // set colors of selected text
-        [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.tabBarItemColor, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.tabBarItemColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         
-        [item1 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        [item1 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         
-        [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.tabBarItemColor, UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:self.tabBarItemColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         
         // set colors of un-selected text
-        [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        [item0 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
         
-        [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        [item2 setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
         
         // this way, the icon gets rendered as it is (thus, it needs to be green in this example)
         item0.image = [[UIImage imageNamed:@"pieChart_Line.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -493,7 +493,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                     
                     //------------------Results BLOCK-----------------
 
-                    self.result.bpm = (int)self.algorithm.bpmLatestResult;
+                    self.result.bpm = lroundf(self.algorithm.bpmLatestResult);
                     self.result = nil;
                     self.algorithm = nil;
                     self.tabBarController.selectedIndex = 0;
@@ -534,7 +534,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                             
                             [self.progressCircle setProgress:0 animated:YES];
 
-                            self.result.bpm = (int)self.algorithm.bpmLatestResult;
+                            self.result.bpm = lroundf(self.algorithm.bpmLatestResult);
                             self.result = nil;
                             self.algorithm = nil;
                             self.algorithm2 = nil;
@@ -554,7 +554,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                         
                         [self.progressCircle setProgress:0 animated:YES];
                         
-                        self.result.bpm = (int)self.algorithm.bpmLatestResult;
+                        self.result.bpm = lroundf(self.algorithm.bpmLatestResult);
                         self.result = nil;
                         self.algorithm = nil;
                         self.algorithm2 = nil;
