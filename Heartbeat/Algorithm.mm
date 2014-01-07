@@ -116,7 +116,7 @@
     return _isPeak;
 }
 
-#define FILTER_ORDER 5
+#define FILTER_ORDER 3
 #define FILTER_LOWER_BAND 0.04 //36
 #define FILTER_UPPER_BAND 0.2 //180
 
@@ -250,7 +250,7 @@
 {
     for (int i=0 ; i<n ; i++) {
         points[i] -= num;
-        //points[i] *= -1;//*
+        points[i] *= -1;//*
     }
 }
 
@@ -379,11 +379,50 @@
 }
 
 - (NSArray *)getPlotData {
+    //filtered version
+    if ([self.points count] <= self.filterWindowSize) {
+        return nil;// continue, nothing to be done yet
+    }
+    int dynamicwindowSize = [self.points count] < 150 ? [self.points count] : 150;
+    double x[dynamicwindowSize] , y[dynamicwindowSize];
+    [self getLatestPoints:dynamicwindowSize andSetIntoDoubleArray:x];
+    [self Substract:[self mean:x withSize:dynamicwindowSize] fromArray:x withSize:dynamicwindowSize];
+    filter(2*FILTER_ORDER, self.buttterworthValues[1], self.buttterworthValues[0], dynamicwindowSize, x, y);
+    return [self getArrayFromArray:y withSize:dynamicwindowSize];
+    //original version
     NSRange range;
     range.length = [self.points count] < 150 ? [self.points count] : 150;
     range.location = [self.points count] - range.length;
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-    return [self.points objectsAtIndexes:indexSet];
+    NSMutableArray *temp = [NSMutableArray arrayWithArray:[self.points objectsAtIndexes:indexSet]];
+    [self Substract:[self mean:temp] fromArray:temp];
+    return temp;
+}
+
+- (double)mean:(NSArray *)points
+{
+    double sum = 0;
+    for (int i=0 ; i<[points count] ; i++) {
+        sum += [points[i] doubleValue];
+    }
+    return sum/[points count];
+}
+
+- (void)Substract:(double)num fromArray:(NSMutableArray *)points
+{
+    for (int i=0 ; i<[points count] ; i++) {
+        points[i] = @(-([points[i] doubleValue]-num));
+    }
+}
+
+- (NSArray *)getArrayFromArray:(double *)x withSize:(int)num
+{
+    NSMutableArray *points = [[NSMutableArray alloc] init];
+    int offset = 45;
+    for (int i=0 ; i<num-offset ; i++) {
+        [points addObject:@(x[i+offset])];
+    }
+    return points;
 }
 
 @end

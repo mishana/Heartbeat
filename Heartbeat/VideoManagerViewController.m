@@ -816,6 +816,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 -(void)configurePlots {
     // 1 - Get graph and plot space
+
     CPTGraph *graph = self.hostView.hostedGraph;
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     // 2 - Create the plot
@@ -835,7 +836,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     ///plotSpace.yRange = yRange;
     // 4 - Create styles and symbols
     CPTMutableLineStyle *aaplLineStyle = [aaplPlot.dataLineStyle mutableCopy];
-    aaplLineStyle.lineWidth = 2.5;
+    aaplLineStyle.lineWidth = 3;
     aaplLineStyle.lineColor = aaplColor;
     aaplPlot.dataLineStyle = aaplLineStyle;
     CPTMutableLineStyle *aaplSymbolLineStyle = [CPTMutableLineStyle lineStyle];
@@ -845,7 +846,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     aaplSymbol.fill = [CPTFill fillWithColor:aaplColor];
     aaplSymbol.lineStyle = aaplSymbolLineStyle;
     aaplSymbol.size = CGSizeMake(2.0f, 2.0f);
-    aaplPlot.plotSymbol = aaplSymbol;
+    aaplPlot.plotSymbol = nil;
 }
 
 -(void)configureAxes {
@@ -937,19 +938,19 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx {
     // TODO
-    NSInteger valueCount = 150;
+    //NSInteger valueCount = 900;
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
-            if (idx < valueCount) {
+            //if (idx < valueCount) {
                 return [NSNumber numberWithUnsignedInteger:idx];
-            }
+            //}
             break;
             
         case CPTScatterPlotFieldY:
             return [NSNumber numberWithDouble:[[self.plotData objectAtIndex:idx] doubleValue]];
             break;
     }
-    return [NSDecimalNumber zero];
+    //return [NSDecimalNumber zero];
 }
 
 @end
