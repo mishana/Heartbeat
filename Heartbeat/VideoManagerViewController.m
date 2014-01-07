@@ -14,7 +14,7 @@
 #import "Result.h"
 #import "UILabel+FSHIghlightAnimationAdditions.h"
 #import "TKProgressCircleView.h"
-#include "CorePlot-CocoaTouch.h"
+#import "CorePlot-CocoaTouch.h"
 
 @interface VideoManagerViewController () <CPTPlotDataSource , CPTScatterPlotDelegate>
 // CorePlot
