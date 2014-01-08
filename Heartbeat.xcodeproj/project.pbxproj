@@ -769,8 +769,8 @@
 		394F4E6617DF62E5001C5049 = {
 			isa = PBXGroup;
 			children = (
-				2C989006187C979600435C36 /* CorePlotHeaders */,
 				2C988FFC187C977100435C36 /* CorePlot-CocoaTouch.xcodeproj */,
+				2C989006187C979600435C36 /* CorePlotHeaders */,
 				394F4E7817DF62E5001C5049 /* Heartbeat */,
 				394F4E7117DF62E5001C5049 /* Frameworks */,
 				394F4E7017DF62E5001C5049 /* Products */,
