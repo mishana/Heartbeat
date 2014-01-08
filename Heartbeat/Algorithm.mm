@@ -116,14 +116,50 @@
     return _isPeak;
 }
 
-#define FILTER_ORDER 3
+#define FILTER_ORDER 5
 #define FILTER_LOWER_BAND 0.04 //36
 #define FILTER_UPPER_BAND 0.2 //180
+
+// butterworth
+/* order 7 , lower_band 0.04 , upper_band 0.2
+ NumC - {-7.030405, -0.000000, 49.212837, -0.000000, -147.638512, -0.000000, 246.064187, -0.000000, -246.064187, -0.000000, 147.638512, -0.000000, -49.212837, -0.000000}
+ DenC - {1.000000, -11.273712, 59.457459, -194.486686, 440.890860, -732.860474, 921.241477, -889.738035, 663.479760, -380.165762, 164.768303, -52.381755, 11.547385, -1.580078}
+ */
+/* order 5 , lower_band 0.04 , upper_band 0.2
+ NumC - {0.000489, 0.000000, -0.002447, 0.000000, 0.004894, 0.000000, -0.004894, 0.000000, 0.002447, 0.000000}
+ DenC - {1.000000, -8.042343, 29.422400, -64.519483, 93.955411, -94.965248, 67.480986, -33.290005, 10.912253, -2.146359}
+ */
+/* order 3 , lower_band 0.04 , upper_band 0.2
+ NumC - {0.010183, 0.000000, -0.030548, 0.000000, 0.030548, 0.000000}
+ DenC - {1.000000, -4.803318, 9.794540, -10.882236, 6.960506, -2.430979}
+ */
+/* order 5 , lower_band 0.05 , upper_band 0.2
+ NumC - {0.000369, 0.000000, -0.001844, 0.000000, 0.003688, 0.000000, -0.003688, 0.000000, 0.001844, 0.000000}
+ DenC - {1.000000, -8.056065, 29.591305, -65.287145, 95.838208, -97.823134, 70.319337, -35.154425, 11.698483, -2.340356}
+ */
+/* order 3 , lower_band 0.05 , upper_band 0.2
+ NumC - {0.008599, 0.000000, -0.025796, 0.000000, 0.025796, 0.000000}
+ DenC - {1.000000, -4.812550, 9.874176, -11.076649, 7.174203, -2.544626}
+ */
 
 - (double**)buttterworthValues{
     if (!_buttterworthValues) {
         double frequencyBands[2] = {FILTER_LOWER_BAND , FILTER_UPPER_BAND};
         _buttterworthValues = butter(frequencyBands, FILTER_ORDER);
+        /*
+        NSLog(@"NumC");
+        NSString *s = @"";
+        for (int i = 0; i<FILTER_ORDER*2; i++) {
+            s = [s stringByAppendingString:[NSString stringWithFormat:@"%f, " , _buttterworthValues[0][i]]];
+        }
+        NSLog(s);
+        s = @"";
+        NSLog(@"DenC");
+        for (int i = 0; i<FILTER_ORDER*2; i++) {
+            s = [s stringByAppendingString:[NSString stringWithFormat:@"%f, " , _buttterworthValues[1][i]]];
+        }
+        NSLog(s);
+         */
     }
     return _buttterworthValues;
 }
@@ -259,7 +295,7 @@
     double excpectedFramesSinceLastPeak = 1/(self.bpmLatestResult/(60*self.frameRate));
     double marginFactor = 0.5;
     if (self.framesCounter - self.windowSize - 1 - self.lastPeakPlace > (1+marginFactor)*excpectedFramesSinceLastPeak) {
-        printf("missed peak\n");
+        NSLog(@"missed peak");
         return YES;
     }
     return NO;
@@ -380,7 +416,7 @@
 
 - (NSArray *)getPlotData {
     //filtered version
-    if ([self.points count] <= self.filterWindowSize) {
+    if ([self.points count] < WINDOW_SIZE_FOR_FILTER_CALCULATION) {
         return nil;// continue, nothing to be done yet
     }
     int dynamicwindowSize = [self.points count] < 150 ? [self.points count] : 150;

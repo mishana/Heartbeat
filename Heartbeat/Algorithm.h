@@ -17,7 +17,7 @@
 @property (nonatomic , readwrite) NSUInteger calibrationDuration;// duration in frames
 @property (nonatomic , readwrite) NSUInteger windowSizeForAverageCalculation;// size must be <= calibrationDuration
 
-#warning we should care of releasing this array - need to verify that dealoc do that
+#warning still some memory leaks even with the dealoc, maybe we should use static values
 @property (nonatomic , readwrite) double ** buttterworthValues;
 
 //

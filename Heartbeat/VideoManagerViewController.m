@@ -937,20 +937,18 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 }
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx {
-    // TODO
-    //NSInteger valueCount = 900;
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
-            //if (idx < valueCount) {
                 return [NSNumber numberWithUnsignedInteger:idx];
-            //}
             break;
             
         case CPTScatterPlotFieldY:
-            return [NSNumber numberWithDouble:[[self.plotData objectAtIndex:idx] doubleValue]];
+            if (idx < [self.plotData count]) {
+                return [NSNumber numberWithDouble:[[self.plotData objectAtIndex:idx] doubleValue]];
+            }
             break;
     }
-    //return [NSDecimalNumber zero];
+    return [NSDecimalNumber zero];
 }
 
 @end
