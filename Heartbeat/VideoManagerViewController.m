@@ -120,7 +120,8 @@
         //_algorithm2.windowSize = 9;
         _algorithm2.filterWindowSize = 60;
     }
-    return _algorithm2;
+    //return _algorithm2;
+    return nil;
 }
 
 - (Result *)result

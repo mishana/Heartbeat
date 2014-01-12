@@ -117,7 +117,7 @@
 }
 
 #define FILTER_ORDER 5
-#define FILTER_LOWER_BAND 0.04 //36
+#define FILTER_LOWER_BAND 0.0444 //40
 #define FILTER_UPPER_BAND 0.2 //180
 
 // butterworth
@@ -167,7 +167,7 @@
 #pragma mark - public methods
 
 - (BOOL)isCalibrationOver{
-    if ((self.framesCounter > self.calibrationDuration + self.filterWindowSize) && (self.framesCounter > (self.calibrationDuration + self.firstPeakPlace + self.windowSize))) {
+    if ((self.framesCounter > self.calibrationDuration + self.filterWindowSize) && ((self.framesCounter > (self.calibrationDuration + self.firstPeakPlace + self.windowSize)) && (self.firstPeakPlace != 0))) {
         _isCalibrationOver = YES;
     }
     else {
@@ -286,7 +286,7 @@
 {
     for (int i=0 ; i<n ; i++) {
         points[i] -= num;
-        points[i] *= -1;//*
+        //points[i] *= -1;// should be commented when the filter order value is 5 or higher
     }
 }
 
@@ -416,10 +416,11 @@
 
 - (NSArray *)getPlotData {
     //filtered version
-    if ([self.points count] < WINDOW_SIZE_FOR_FILTER_CALCULATION) {
+    if ([self.points count] < self.filterWindowSize+1) {
         return nil;// continue, nothing to be done yet
     }
     int dynamicwindowSize = [self.points count] < 150 ? [self.points count] : 150;
+    //dynamicwindowSize = self.filterWindowSize+1;
     double x[dynamicwindowSize] , y[dynamicwindowSize];
     [self getLatestPoints:dynamicwindowSize andSetIntoDoubleArray:x];
     [self Substract:[self mean:x withSize:dynamicwindowSize] fromArray:x withSize:dynamicwindowSize];
