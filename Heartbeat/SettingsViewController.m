@@ -332,6 +332,17 @@
         return cell;
     }
     
+    else if (indexPath.section != 0) {
+        UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        /*
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        CGAffineTransform rotationTransform = CGAffineTransformIdentity;
+        rotationTransform = CGAffineTransformRotate(rotationTransform, M_PI);
+        button.transform = rotationTransform;
+        cell.accessoryView = button;
+         */
+        return cell;
+    }
     else {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
