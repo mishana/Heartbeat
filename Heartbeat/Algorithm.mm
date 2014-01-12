@@ -270,6 +270,17 @@
             return NO;
         }
     }
+    
+    //check if we found extra peak
+    if (self.isCalibrationOver && !self.isMissedTheLastPeak) {
+        double expectedFramesSinceLastPeak = 1/(self.bpmLatestResult/(60*self.frameRate));
+        double marginFactor = 0.5;
+        if (self.framesCounter - self.windowSize - 1 - self.lastPeakPlace < (1-marginFactor)*expectedFramesSinceLastPeak) {
+            NSLog([NSString stringWithFormat:@"found extra peak: %d" , self.framesCounter-self.windowSize-1]);
+            return NO;
+        }
+    }
+    
     return YES;
 }
 
@@ -292,9 +303,9 @@
 
 - (BOOL)isMissedPeak
 {
-    double excpectedFramesSinceLastPeak = 1/(self.bpmLatestResult/(60*self.frameRate));
+    double expectedFramesSinceLastPeak = 1/(self.bpmLatestResult/(60*self.frameRate));
     double marginFactor = 0.5;
-    if (self.framesCounter - self.windowSize - 1 - self.lastPeakPlace > (1+marginFactor)*excpectedFramesSinceLastPeak) {
+    if (self.framesCounter - self.windowSize - 1 - self.lastPeakPlace > (1+marginFactor)*expectedFramesSinceLastPeak) {
         NSLog(@"missed peak");
         return YES;
     }
@@ -379,8 +390,19 @@
         if (i < calib + (self.firstPeakPlace + w + 1) + 2.5*30){
             self.isPeak[i-w-1] = @([self isPeak:z :w]);
         } else {
-            self.isPeak[i-w-1] = @([self isMissedPeak] ? 1 : [self isPeak:z :w]);//*
-            self.isMissedTheLastPeak = [self isMissedPeak];
+            if ([self isPeak:z :w]) {
+                self.isPeak[i-w-1] = @(1);
+                self.isMissedTheLastPeak = NO;
+            }
+            else {
+                if ([self isMissedPeak]) {
+                    self.isPeak[i-w-1] = @(1);
+                    self.isMissedTheLastPeak = YES;
+                }
+                else {
+                    self.isPeak[i-w-1] = @(0);
+                }
+            }
         }
         
         self.numOfPeaks += [self.isPeak[i-w-1] integerValue] - [self.isPeak[i-w-1-calib] integerValue];
