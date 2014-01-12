@@ -11,6 +11,9 @@
 
 @protocol PulseObject<FBGraphObject>
 
+//@property (retain, nonatomic) NSDate *date;
+//@property (nonatomic) NSUInteger bpm;
+
 @end
 
 @protocol MeaasurePulseAction<FBOpenGraphAction>

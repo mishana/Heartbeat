@@ -105,6 +105,7 @@
     UIFont *labelFont =  [UIFont systemFontOfSize:[UIFont systemFontSize]];
     
     NSString *date = [self.dateFormatter stringFromDate:self.date];
+    self.localDate = date;
     //
     self.dateLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date] attributes:@{NSParagraphStyleAttributeName : paragraphStyle, NSFontAttributeName : labelFont, NSForegroundColorAttributeName : [UIColor grayColor] }];
     

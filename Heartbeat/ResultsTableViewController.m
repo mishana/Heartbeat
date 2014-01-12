@@ -339,18 +339,19 @@ typedef void (^CompletionBlock)(void);
     // Give it a URL that will echo back the name of the meal as its title,
     // description, and body.
     //result.url = @"http://samples.ogp.me/1382050005353225";
-    
-    NSUInteger bpmResult = ((ResultTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectedIndex]).bpm;// should be the bpm result
-    NSDate *date = ((ResultTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectedIndex]).date;
+    ResultTableViewCell *cell = (ResultTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectedIndex];
+    NSUInteger bpmResult = cell.bpm;// should be the bpm result
+    NSDate *date = cell.date;
+    NSString *localDate = cell.localDate;
     
     result[@"type"] = @"heartbeat_ios:pulse";
-    result[@"title"] = @"Pulse";
-    result[@"description"] = [NSString stringWithFormat:@"Pulse BPM: %d, Date: %@" , bpmResult , date];
+    result[@"title"] = [NSString stringWithFormat:@"Pulse BPM: %d" , bpmResult];
+    result[@"description"] = [NSString stringWithFormat:@"Date: %@" , localDate];
     result[@"fbsdk:create_object"] = @YES;
     result[@"locale"] = @"he_IL";//*
     result[@"data"][@"bpm"] = @(bpmResult);//*
     result[@"data"][@"date"] = date;//*
-    //result[@"url"] = @"";
+    //result[@"url"] = @"";/ should put here our app link
     //result[@"image"] = @"";
     
     return result;
@@ -449,10 +450,10 @@ typedef void (^CompletionBlock)(void);
         // We also retry on a throttling error message. A more sophisticated app
         // should consider a back-off period.
         //if (_retryCount < 2) {
-        NSLog(@"Retrying open graph post");
-        [self postOpenGraphAction];
+        //NSLog(@"Retrying open graph post");
+        //[self postOpenGraphAction];
         return;
-#warning we shouldn't try to publish again and again
+#warning we don't try to publish again and again
         //} else {
         NSLog(@"Retry count exceeded.");
         //}

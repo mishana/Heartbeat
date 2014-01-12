@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic) NSUInteger bpm;
+@property (nonatomic, strong) NSString *localDate;// the date in string in the local locale format
 
 + (CGFloat)desiredCellHeight;
 
