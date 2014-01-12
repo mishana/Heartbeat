@@ -476,17 +476,21 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
         
         [self.algorithm newFrameDetectedWithAverageColor:dominantColor];
         [self.algorithm2 newFrameDetectedWithAverageColor:dominantColor];
+        static bool tag = YES;
 
         dispatch_sync(dispatch_get_main_queue(), ^{
             self.plotData = [self.algorithm getPlotData];// neccesery
-            CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) self.hostView.hostedGraph.defaultPlotSpace;
-            [plotSpace scaleToFitPlots:[self.hostView.hostedGraph allPlots]];
-            //CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
-            //[xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
-            //plotSpace.xRange = xRange;
-            CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
-            [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.75f)];
-            plotSpace.yRange = yRange;
+            if (tag || self.algorithm.framesCounter < 150) {
+                CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) self.hostView.hostedGraph.defaultPlotSpace;
+                [plotSpace scaleToFitPlots:[self.hostView.hostedGraph allPlots]];
+                //CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
+                //[xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
+                //plotSpace.xRange = xRange;
+                CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+                [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.75f)];
+                plotSpace.yRange = yRange;
+            }
+            tag = !tag;
             [self.hostView.hostedGraph reloadData];
             
             if (self.algorithm.isFinalResultDetermined) {
@@ -827,6 +831,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
     aaplPlot.identifier = @"AAPL";
     CPTColor *aaplColor = [CPTColor colorWithComponentRed:0.972 green:0.949 blue:0.78 alpha:1];
     [graph addPlot:aaplPlot toPlotSpace:plotSpace];
+    CPTPlotRange *globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-5.0f)
+                                                              length:CPTDecimalFromFloat(10.0f)];
+    //plotSpace.globalYRange = globalYRange;
     // 3 - Set up plot space
     [plotSpace scaleToFitPlots:[graph allPlots]];
     //CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];

@@ -116,7 +116,7 @@
     return _isPeak;
 }
 
-#define FILTER_ORDER 5
+#define FILTER_ORDER 3
 #define FILTER_LOWER_BAND 0.0444 //40
 #define FILTER_UPPER_BAND 0.2 //180
 
@@ -297,7 +297,7 @@
 {
     for (int i=0 ; i<n ; i++) {
         points[i] -= num;
-        //points[i] *= -1;// should be commented when the filter order value is 5 or higher
+        points[i] *= -1;// should be commented when the filter order value is 5 or higher
     }
 }
 
@@ -315,7 +315,7 @@
 //
 
 #define DEFAULT_BPM_VALUE 72
-#define MIN_BPM_VALUE 36
+#define MIN_BPM_VALUE 40
 #define MAX_BPM_VALUE 180
 
 - (void)newFrameDetectedWithAverageColor:(UIColor *)color
