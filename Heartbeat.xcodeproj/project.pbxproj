@@ -195,18 +195,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2C989002187C977100435C36 /* PBXContainerItemProxy */ = {
+		39D422F6188D458E00F80661 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2C988FFC187C977100435C36 /* CorePlot-CocoaTouch.xcodeproj */;
+			containerPortal = 39D422F0188D458D00F80661 /* CorePlot-CocoaTouch.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
-			remoteInfo = "CorePlot-CocoaTouch";
-		};
-		2C989004187C977800435C36 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2C988FFC187C977100435C36 /* CorePlot-CocoaTouch.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
 			remoteInfo = "CorePlot-CocoaTouch";
 		};
 /* End PBXContainerItemProxy section */
@@ -226,7 +219,6 @@
 		2C98821318495BBC0071B387 /* FacebookProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookProfileTableViewCell.h; sourceTree = "<group>"; };
 		2C98821418495BBC0071B387 /* FacebookProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookProfileTableViewCell.m; sourceTree = "<group>"; };
 		2C988FC7187B60B400435C36 /* Mask2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mask2@2x.png"; sourceTree = "<group>"; };
-		2C988FFC187C977100435C36 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../Downloads/CorePlot_1.4/Source/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		2C989007187C979600435C36 /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
 		2C989008187C979600435C36 /* CPTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimation.h; sourceTree = "<group>"; };
 		2C989009187C979600435C36 /* CPTAnimationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimationOperation.h; sourceTree = "<group>"; };
@@ -492,6 +484,7 @@
 		39C055E718691678009FAF1D /* face_book_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon@2x.png"; sourceTree = "<group>"; };
 		39C055E918691775009FAF1D /* face_book_icon_200@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_200@2x.png"; sourceTree = "<group>"; };
 		39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_144@2x.png"; sourceTree = "<group>"; };
+		39D422F0188D458D00F80661 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../Downloads/core-plot-release_1.4/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FSHIghlightAnimationAdditions.h"; sourceTree = "<group>"; };
 		39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FSHIghlightAnimationAdditions.m"; sourceTree = "<group>"; };
 		39F6C0391811FF5B00CC7F01 /* Mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mask@2x.png"; sourceTree = "<group>"; };
@@ -551,14 +544,6 @@
 				39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */,
 			);
 			name = Categories;
-			sourceTree = "<group>";
-		};
-		2C988FFD187C977100435C36 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2C989003187C977100435C36 /* libCorePlot-CocoaTouch.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		2C989006187C979600435C36 /* CorePlotHeaders */ = {
@@ -769,7 +754,7 @@
 		394F4E6617DF62E5001C5049 = {
 			isa = PBXGroup;
 			children = (
-				2C988FFC187C977100435C36 /* CorePlot-CocoaTouch.xcodeproj */,
+				39D422F0188D458D00F80661 /* CorePlot-CocoaTouch.xcodeproj */,
 				2C989006187C979600435C36 /* CorePlotHeaders */,
 				394F4E7817DF62E5001C5049 /* Heartbeat */,
 				394F4E7117DF62E5001C5049 /* Frameworks */,
@@ -919,6 +904,14 @@
 			name = "Background images";
 			sourceTree = "<group>";
 		};
+		39D422F1188D458D00F80661 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				39D422F7188D458E00F80661 /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -933,7 +926,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				2C989005187C977800435C36 /* PBXTargetDependency */,
 			);
 			name = Heartbeat;
 			productName = Heartbeat;
@@ -963,8 +955,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2C988FFD187C977100435C36 /* Products */;
-					ProjectRef = 2C988FFC187C977100435C36 /* CorePlot-CocoaTouch.xcodeproj */;
+					ProductGroup = 39D422F1188D458D00F80661 /* Products */;
+					ProjectRef = 39D422F0188D458D00F80661 /* CorePlot-CocoaTouch.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -975,11 +967,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2C989003187C977100435C36 /* libCorePlot-CocoaTouch.a */ = {
+		39D422F7188D458E00F80661 /* libCorePlot-CocoaTouch.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libCorePlot-CocoaTouch.a";
-			remoteRef = 2C989002187C977100435C36 /* PBXContainerItemProxy */;
+			remoteRef = 39D422F6188D458E00F80661 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1180,14 +1172,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2C989005187C977800435C36 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CorePlot-CocoaTouch";
-			targetProxy = 2C989004187C977800435C36 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		394F4E7B17DF62E5001C5049 /* InfoPlist.strings */ = {
