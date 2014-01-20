@@ -188,6 +188,7 @@
 		39C055E818691678009FAF1D /* face_book_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E718691678009FAF1D /* face_book_icon@2x.png */; };
 		39C055EA18691775009FAF1D /* face_book_icon_200@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055E918691775009FAF1D /* face_book_icon_200@2x.png */; };
 		39C055EC18691902009FAF1D /* face_book_icon_144@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */; };
+		39D4230C188D4ECD00F80661 /* icon_120x120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D4230B188D4ECD00F80661 /* icon_120x120@2x.png */; };
 		39F6C0381811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */; };
 		39F6C03A1811FF5B00CC7F01 /* Mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F6C0391811FF5B00CC7F01 /* Mask@2x.png */; };
 		39F6C03C1812065A00CC7F01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F6C03B1812065A00CC7F01 /* QuartzCore.framework */; };
@@ -485,6 +486,7 @@
 		39C055E918691775009FAF1D /* face_book_icon_200@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_200@2x.png"; sourceTree = "<group>"; };
 		39C055EB18691902009FAF1D /* face_book_icon_144@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_book_icon_144@2x.png"; sourceTree = "<group>"; };
 		39D422F0188D458D00F80661 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../Downloads/core-plot-release_1.4/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		39D4230B188D4ECD00F80661 /* icon_120x120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_120x120@2x.png"; sourceTree = "<group>"; };
 		39F6C0361811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FSHIghlightAnimationAdditions.h"; sourceTree = "<group>"; };
 		39F6C0371811FEF500CC7F01 /* UILabel+FSHIghlightAnimationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FSHIghlightAnimationAdditions.m"; sourceTree = "<group>"; };
 		39F6C0391811FF5B00CC7F01 /* Mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mask@2x.png"; sourceTree = "<group>"; };
@@ -829,6 +831,7 @@
 				397F5F2F184D5FAB00FF7C88 /* Sounds */,
 				39B96D19180A9323004651F8 /* default_bg.png */,
 				394F4E7E17DF62E5001C5049 /* main.m */,
+				39D42302188D4D5C00F80661 /* App Icons */,
 				394F4E8017DF62E5001C5049 /* Heartbeat-Prefix.pch */,
 				394F4E8417DF62E5001C5049 /* Default.png */,
 				394F4E8617DF62E5001C5049 /* Default@2x.png */,
@@ -910,6 +913,14 @@
 				39D422F7188D458E00F80661 /* libCorePlot-CocoaTouch.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		39D42302188D4D5C00F80661 /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				39D4230B188D4ECD00F80661 /* icon_120x120@2x.png */,
+			);
+			name = "App Icons";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1131,6 +1142,7 @@
 				3986F1371804273A000537CE /* Settings_Line@2x.png in Resources */,
 				2CC6552F1854B72600FF14EF /* h5_121@2x.png in Resources */,
 				2CC655711854B72600FF14EF /* h5_74@2x.png in Resources */,
+				39D4230C188D4ECD00F80661 /* icon_120x120@2x.png in Resources */,
 				39C055EA18691775009FAF1D /* face_book_icon_200@2x.png in Resources */,
 				397A383017F2493B00BA69F3 /* heart +@2x.png in Resources */,
 				397A383E17F336EE00BA69F3 /* ios-7-green-fade@2x.png in Resources */,
