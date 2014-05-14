@@ -491,6 +491,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 plotSpace.yRange = yRange;
             }
             tag = !tag;
+            //self.hostView.hostedGraph.plotAreaFrame.fill = [CPTFill fillWithImage:[CPTImage imageWithCGImage:image.CGImage]];
             [self.hostView.hostedGraph reloadData];
             
             if (self.algorithm.isFinalResultDetermined) {
@@ -527,7 +528,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
                 #warning - incomplete implementation
             }
             
-            if (red < 210) {
+            if (red < 215) {
                 //finger isn't on camera
                 
                 if (self.settings.autoStopAfter) {
@@ -656,6 +657,10 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 - (void)playBeepSound
 {
     if (self.settings.beepWithPulse){
+        // dont play sound until calibration is over
+        if (!self.algorithm.isCalibrationOver) {
+            return;
+        }
         if (self.algorithm.isPeakInLastFrame && !self.algorithm.isMissedTheLastPeak) {
             [self.BeepSound play];
         }

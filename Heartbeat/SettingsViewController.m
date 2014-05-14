@@ -39,7 +39,6 @@
         //NSArray *permissions = @[@"basic_info",@"user_birthday"];
         _loginView = [[FBLoginView alloc] initWithReadPermissions:nil];
         _loginView.delegate = self;
-        _loginView.loginBehavior = FBSessionLoginBehaviorUseSystemAccountIfPresent;//
     }
     return _loginView;
 }

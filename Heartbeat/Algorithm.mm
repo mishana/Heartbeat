@@ -141,6 +141,11 @@
  NumC - {0.008599, 0.000000, -0.025796, 0.000000, 0.025796, 0.000000}
  DenC - {1.000000, -4.812550, 9.874176, -11.076649, 7.174203, -2.544626}
  */
+/* order 3 , lower_band 0.04444 , upper_band 0.2
+ NumC - {0.009460, 0.000000, -0.028381, 0.000000, 0.028381, 0.000000}
+ DenC - {1.000000, -4.807499, 9.830069, -10.968538, 7.054920, -2.480913}
+ */
+
 
 - (double**)buttterworthValues{
     if (!_buttterworthValues) {
@@ -349,6 +354,7 @@
     [self getLatestPoints:dynamicwindowSize andSetIntoDoubleArray:x];
     [self Substract:[self mean:x withSize:dynamicwindowSize] fromArray:x withSize:dynamicwindowSize];
     filter(2*FILTER_ORDER, self.buttterworthValues[1], self.buttterworthValues[0], dynamicwindowSize, x, y);
+    //filter(2*FILTER_ORDER, [self buttterworthDenC], [self buttterworthNumC], dynamicwindowSize, x, y);
     double *z = y+dynamicwindowSize-2*w-1;
     
     //
